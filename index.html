@@ -170,7 +170,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
 </div>
 <!-- Menú sidebar -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-large" style="display:none" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Cerrar ×</a>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-smallw3-padding-16">Cerrar ×</a>
   <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button">Home</a>
   <a href="#company" onclick="w3_close()" class="w3-bar-item w3-button">Nuestra compañía</a>
   <a href="#productos" onclick="w3_close()" class="w3-bar-item w3-button">Productos</a>
@@ -211,13 +211,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
 
 <div class="w3-container"  id="equipo">
   <div class="w3-row-padding w3-center" style="margin-top:0px">
-    <div class="w3-half">
-      <p class="w3-large"><b>Nuestro equipo</b></p>
+    <div class="w3-half" >
+      <p class="w3-large" style="width: 250px"><b>Nuestro equipo</b></p>
     </div>
   </div>
 </div>
-
-
 
 
 <!-- Equipo -->
@@ -227,7 +225,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
       <div class="w3-container" style="height:250px" onclick="document.getElementById('gabriel').style.display='block'">
           <img src="img/gabriel.png" alt="Gabriel" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
           <h3 class="titulo"><b>Gabriel Heinze</b></h3>
-          <p class="miembro">Head of Leadership and Organizational Development</p>
+          <p class="miembro" style="margin-left: 140px">Head of Leadership and Organizational Development</p>
       </div>
     </div>
   </div>   
@@ -236,7 +234,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
       <div class="w3-container" style="height:250px" onclick="document.getElementById('juan').style.display='block'">
         <img src="img/juan.png" alt="Juan" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
         <h3 class="titulo"><b>Juan Pugni</b></h3>
-        <p class="miembro">Head of Organization and Process Optimization</p>
+        <p class="miembro" style="margin-left: 140px">Head of Organization and Process Optimization</p>
       </div>
     </div>
   </div>  
@@ -245,7 +243,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
       <div class="w3-container" style="height:250px" onclick="document.getElementById('marcela').style.display='block'" >
         <img src="img/marcela.jpg" alt="marcela" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
         <h3 class="titulo"><b>Marcela Miel</b></h3>
-        <p class="miembro">Consultora Senior</p>
+        <p class="miembro" style="margin-left: 140px">Consultora Senior</p>
       </div>
     </div>
   </div> 
@@ -254,7 +252,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
       <div class="w3-container" style="height:250px " onclick="document.getElementById('patricia').style.display='block'">
         <img src="img/patricia.jpg" alt="Patricia" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
         <h3 class="titulo"><b>Patricia Díaz</b></h3>
-        <p class="miembro">Consultor</p>
+        <p class="miembro" style="margin-left: 140px">Consultor</p>
       </div>
     </div>
   </div>
@@ -283,7 +281,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
       <div class="w3-card w3-hover-opacity" onclick="document.getElementById('lideres').style.display='block'" style="padding:20px; height:250px">  
         <img src="img/talento.png" alt="lideres" style="height:100px">
         <div class="container">
-          <h4>Atracción de Talento e Inducción/Onboarding  </h4> 
+          <h4>Atracción de Talento e Inducción / Onboarding  </h4> 
         </div>
       </div>
     </div>
@@ -357,11 +355,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00001d', end
       </form>
     </div>
     <div class="w3-half">
-      <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> 6075 W Commercial Blvd, Fort Lauderdale, FL33319, USA</p>
-      <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> USA: +1 (954) 900-9765 / ARG: +54 911 4448-5799</p>
-      <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> info@insightsbeacon.com</p>
-      <p><i class="fa fa-facebook-official fa-fw w3-xxlarge w3-margin-right"> </i> /insightsbeacon.argentina</p>
-      <br>
+
+
+      <div class="w3-container w3-padding-16">
+          <i class="w3-left fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> 
+          <p style="margin-left: 40px;margin-top: 0px;margin-bottom: 0px;">T6075 W Commercial Blvd, Fort Lauderdale, FL33319, USA</p>
+      </div>
+
+      <div class="w3-container w3-padding-16">
+          <i class="w3-left fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> 
+          <p style="margin-left: 40px;margin-top: 0px;margin-bottom: 0px;">USA: +1 (954) 900-9765 <br>ARG: +54 911 4448-5799</p>
+      </div>
+
+     <div class="w3-container w3-padding-16">
+          <i class="w3-left fa fa-envelope fa-fw w3-xxlarge w3-margin-right"></i> 
+          <p style="margin-left: 40px;margin-top: 0px;margin-bottom: 0px;">info@insightsbeacon.com</p>
+      </div>
+
+     <div class="w3-container w3-padding-16">
+          <i class="w3-left fa fa-facebook-official fa-fw w3-xxlarge w3-margin-right"></i> 
+          <p style="margin-left: 40px;margin-top: 0px;margin-bottom: 0px;">/insightsbeacon.argentina</p>
+      </div>
+
+
     </div>
   </div>
 </div>
