@@ -57,6 +57,15 @@ body, html {
     height: 22%;
 }  
 
+.bgprograma {
+    background-image: url("../img/neuron.png");
+
+    background-position: center;
+    background-size: cover;
+    min-height: 100%;
+ 
+}  
+
 .w3-logo {
     background-position: center;
     background-image: url("../img/overlays/logo-white.png");
