@@ -108,6 +108,12 @@ body, html {
 }
 
 
+
+.w3-container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
 .w3-animate-titulo{animation:opac1 3s} 
 @keyframes opac1{0%     { opacity:0; }
                 100%   { opacity:1; }}
