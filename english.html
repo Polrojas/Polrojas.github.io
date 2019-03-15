@@ -35,8 +35,9 @@ $(document).ready(function(){
 </script>
 
 <style>
-
+.mySlides {display:none;}
 </style>
+
 
 <body>
 <div class="w3-top">
@@ -176,15 +177,15 @@ $(document).ready(function(){
 
 <div class="w3-container w3-row w3-center" id="partners">
       <p class="w3-large"><b>Partners & Alliances</b></p>
-<h3 style="padding: 40px">Insights beacon expands its reach to Europe through strategic alliances with Epic Consulting (US and Austria) and Synergy (Greece)</h3> 
+<h3 style="padding: 40px">Insights beacon expands its reach to Europe through the establishment of strategic collaboration with Epic Consulting (US and Austria) and Synergy (Greece) leveraging the portfolio of products and services offered by the three companies in the field of organizational and leadership development</h3> 
 
 
 
  <div class="w3-half" >
     <div class="w3-card-4 w3-center" >
-      <img src="img/SYNERGY_Logo.jpg" style="width:90%" alt="Norway" >
+      <img src="img/SYNERGY_Logo.jpg" style="width:50%" alt="Synergy" >
       <div class="w3-container w3-center">
-       <a href="https://www.synergy-rhodes.com" target="_blank">Enter site</a>
+       <a href="https://www.synergy-rhodes.com" target="_blank">Website</a>
       </div>
     </div>
   </div>
@@ -193,9 +194,9 @@ $(document).ready(function(){
 
   <div class="w3-half" >
     <div class="w3-card-4 w3-center">
-      <img src="img/EPIConsulting_RGB.png" style="width:90%" alt="Norway">
+      <img src="img/EPIConsulting_RGB.png" style="width:50%" alt="Epic Consulting">
       <div class="w3-container w3-center">
-      <a href="http://www.epiconsulting.org" target="_blank">Enter site</a>
+      <a href="http://www.epiconsulting.org" target="_blank">Website</a>
       </div>
     </div>
   </div>
@@ -207,8 +208,20 @@ $(document).ready(function(){
 </div>
 
 
+<div class="w3-container w3-row w3-center" id="retreat">
+      <p class="w3-large"><b>Rhodes Retreat</b></p>
+<h3 style="padding: 40px">LEADING FROM WITHIN: Acknowledging and releasing your potential</h3> 
 
 
+
+<div class="w3-content w3-section" style="max-width:50%">
+  <img class="mySlides" src="img/slideshow/1.jpg" style="width:100%">
+  <img class="mySlides" src="img/slideshow/2.jpg" style="width:100%">
+  <img class="mySlides" src="img/slideshow/3.jpg" style="width:100%">
+</div>
+
+
+</div>
 
 <!-- Contactos  -->
 <div class="w3-container" style="padding:80px 16px" id="contact">
@@ -539,6 +552,23 @@ His main strengths include team development, achievement of aggressive goals in 
     </div>
   </div>
 
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
 
 
 
