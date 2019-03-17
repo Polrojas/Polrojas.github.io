@@ -168,7 +168,18 @@ img {vertical-align: middle;}
       <a href="#company" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Our Company</a>
       <a href="#productos" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Products</a>
       <a href="#partners" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Partners & Alliances</a>
-    <a href="#retreat" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Rhodes Retreat</a>
+
+
+  <div class="w3-dropdown-hover">
+    <button href="#retreat" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Rhodes Retreat <i class="fa fa-caret-down"></i></button>
+    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+      <a href="#retreat" class="w3-bar-item w3-button w3-text-black w3-hover-orange">The purpose</a>
+      <a href="#framework" class="w3-bar-item w3-button w3-text-black w3-hover-orange">The framework</a>
+      <a href="#hostingteam" class="w3-bar-item w3-button w3-text-black w3-hover-orange">The hosting team</a>
+    </div>
+  </div>
+
+
       <a href="#contact" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Contact</a>
       <a href="index.html" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Language</a>
     </div>
@@ -184,7 +195,17 @@ img {vertical-align: middle;}
   <a href="#company" onclick="w3_close()" class="w3-bar-item w3-button">Our Company</a>
   <a href="#productos" onclick="w3_close()" class="w3-bar-item w3-button">Products</a>
   <a href="#partners" onclick="w3_close()" class="w3-bar-item w3-button">Partners & Alliances</a>
-    <a href="#retreat" onclick="w3_close()" class="w3-bar-item w3-button">Rhodes Retreat</a> 
+
+
+    <div class="w3-dropdown-hover w3-mobile">
+      <button class="w3-button">Rhodes Retreat <i class="fa fa-caret-down"></i></button>
+      <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
+        <a href="#retreat" onclick="w3_close()" class="w3-bar-item w3-button">The purpose</a> 
+        <a href="#framework" onclick="w3_close()" class="w3-bar-item w3-button">The framework</a> 
+        <a href="#hostingteam" onclick="w3_close()" class="w3-bar-item w3-button">The hosting team</a> 
+      </div>
+    </div>
+
   <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a>
   <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button">Language</a>
 </nav>
@@ -326,31 +347,11 @@ img {vertical-align: middle;}
 
 
 <!-- Rhodes Retreat -->
-<div class="slideshow-container" id="retreat">
-  <div class="mySlides fade">
-    <img src="img/slideshow/1.jpg" style="width:100%">
-    <div class="text">Rhodes Retreat </div>
-
-  </div>
-  <div class="mySlides fade">
-    <img src="img/slideshow/2.jpg" style="width:100%">
-
-    <div class="text">Rhodes Retreat </div>
-
-
-  </div>
-  <div class="mySlides fade">
-    <img src="img/slideshow/3.jpg" style="width:100%">
-
-    <div class="text">Rhodes Retreat </div>
-  </div>
+<div class="w3-display-container fade w3-padding-24" id="retreat">
+  <img src="img/slideshow/1.jpg" style="width:100%">
+  <div class="text">Rhodes Retreat</div>
 </div>
 
-<div style="text-align:center">
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-</div>
 
 <div class="w3-container w3-row w3-row-padding" >
 <p class="w3-large"><b>The purpose</b></p>
@@ -383,8 +384,8 @@ Team leaders, managers, entrepreneurs, project managers, people in leadership ro
 </div>
 
 
-<div class="w3-display-container fade w3-padding-24">
-  <img src="img/slideshow/3.jpg" style="width:100%">
+<div class="w3-display-container fade w3-padding-24" id="framework">
+  <img src="img/slideshow/2.jpg" style="width:100%">
   <div class="text">The framework</div>
 </div>
 
@@ -410,13 +411,13 @@ Team leaders, managers, entrepreneurs, project managers, people in leadership ro
 
 
 
-<div class="w3-display-container fade w3-padding-24">
+<div class="w3-display-container fade w3-padding-24 " id="hostingteam">
   <img src="img/slideshow/3.jpg" style="width:100%">
   <div class="text">Hosting team</div>
 </div>
 
 
-  <div class="w3-third">
+  <div class="w3-third ">
     <div class="w3-card-4" >
       <div class="w3-container w3-padding-16" style="max-width: 300px">
           <img src="img/gabriel.png" alt="Gabriel" class="w3-margin-right w3-grayscale" style="width:100%;padding-top: 10px;padding-bottom: 10px;">
@@ -448,11 +449,45 @@ Team leaders, managers, entrepreneurs, project managers, people in leadership ro
 
 
 <div class="w3-display-container fade w3-padding-24">
-  <img src="img/slideshow/2.jpg" style="width:100%">
+  <img src="img/slideshow/1.jpg" style="width:100%">
   <div class="text">The Place</div>
 </div>
 
 
+<div class = "w3-half">
+
+<p>“Everything in Greece, mountains, rivers, seas, valleys get humanised… and speak to the human in an almost human language. They don’t cover or smash him/her, they don’t suppress they become friends and collaborators. The blurry, bending cry when transiting the light of Greece gets crystallised, humanised it becomes logos…<br>
+Greece is the filter that sculptures the animal into human, the slavery into freedom and the drunkness into sober pondering…Giving person to the impersonal, measure to the immeasurable…balancing the conflicting blind forces… this is the mission of the much-tortured land and sea that is called Greece.” ~ Nikos Kazantzakis, Greek Author  <br>
+
+The words above by Nikos Kazanzakis, although written a few decades ago, reflect the timeless quality of Greece, that of friendliness, hospitality, living and embracing the human scale, honouring the human. The land herself and Rhodes as well consists  of a geographical and psychological crossroad between East and West and as such hospitality, embrace of diversity and reconciliation has been a core part of her journey in history. Rhodes has  literally been a place for hosting pilgrims of the three main religions of the Middle East, a place where this meeting has been natural, warm and fully embraced. It is this hospitality, the ancient core value and principle of “Philoxenia”, being friendly to the stranger, the guest, the diverse that is both inspiring and stimulating our gathering for this Global Leadership Retreat. 
+</p>
+
+
+</div>
+<div class = "w3-half">
+  <div class="slideshow-container" id="retreat">
+  <div class="mySlides fade"><img src="img/slideshow/a.jpg" style="width:100%"></div>
+  <div class="mySlides fade"><img src="img/slideshow/b.jpg" style="width:100%"></div>
+  <div class="mySlides fade"><img src="img/slideshow/c.jpg" style="width:100%"></div>
+  <div class="mySlides fade"><img src="img/slideshow/d.jpg" style="width:100%"></div>
+  <div class="mySlides fade"><img src="img/slideshow/e.jpg" style="width:100%"></div>
+  <div class="mySlides fade"><img src="img/slideshow/f.jpg" style="width:100%"></div>
+  <div class="mySlides fade"><img src="img/slideshow/g.jpg" style="width:100%"></div>
+
+</div>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+    <span class="dot"></span>
+      <span class="dot"></span>
+        <span class="dot"></span>
+          <span class="dot"></span>
+            <span class="dot"></span>
+              <span class="dot"></span>
+</div>
+</div>
 <!-- Contactos  -->
 <div class="w3-container" style="padding:80px 16px" id="contact">
   <p class="w3-large w3-center"><b>Contact us</b></p>
@@ -801,7 +836,7 @@ function showSlides() {
   }
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 10000); // Change image every 2 seconds
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
 }
 </script>
 
