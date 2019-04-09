@@ -41,14 +41,24 @@ body, html {
     background-image: url("../img/menu.png");
 
 }  
+.bgimg-retreat {
+    background-position: center;
+    background-size: cover;
+    background-image: url("../img/menu-retreat.png");
 
+}  
 .bgimg-3 {
     background-position: center;
     background-size: cover;
     background-image: url("../img/footer.png");
     height: 100px;
 }  
-
+.bgimg-footer-retreat {
+    background-position: center;
+    background-size: cover;
+    background-image: url("../img/footer-retreat.png");
+    height: 100px;
+}  
 .bgimg-4 {
     background-position: right;
     background-size: cover;
