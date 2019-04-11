@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<title>Insights Beacon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style/w3.css">
+<link rel="stylesheet" href="style/style-site.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Caudex" rel="stylesheet">
+<link rel="icon" href="icon.png">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 300, function(){
+           window.location.hash = hash;
+      });
+    } 
+  });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#home").fadeIn();
+    });
+});
+</script>
+
+<style>
+
+* {box-sizing: border-box;}
+
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 48px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: left;
+}
+
+/* Caption text */
+.text-titulo {
+  color: #f2f2f2;
+  font-size: 58px;
+  bottom: 8px;
+  width: 100%;
+  text-align: left;
+
+}
+
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 5px;
+  width: 5px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.quote{
+  font-family: 'Caudex', serif;
+  font-size: 20px;
+
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 5px;
+  margin-left: : 5px;
+  background-color: #00000012;
+  padding: 5px;
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 5px ;
+
+  font-size: 16px;
+}
+
+.item2{
+  background-color: #56a34e;
+}
+.item3 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  background-color: #676996;
+}
+.item4 {
+  grid-column-start: 5;
+  grid-column-end: 6;
+    background-color: #4eb9c6;
+}
+
+.item9{
+    height: 150px;
+    background-color: #ffffff;
+}
+
+
+
+.mySlides {display:none;}
+
+
+</style>
+
+
+<body>
+
+
+<div class="w3-top">
+<!-- Menú -->
+  <div class="w3-card-2 bgimg-retreat w3-padding-12"  id="myNavbar">
+    <img href="#retreat" src="img/logo-retreat.png" alt="INSIGHTS BEACON" style="padding-top: 10px; margin-left:30px;width:100px">
+    <div class="w3-right w3-hide-small w3-hide-medium w3-padding-24">
+      <a href="#retreat" class="w3-bar-item w3-button w3-text-white w3-hover-orange">The Retreat</a>
+      <a href="#framework" class="w3-bar-item w3-button w3-text-white w3-hover-orange">The framework</a>
+      <a href="#hostingteam" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Hosting Team</a>
+      <a href="#venue" class="w3-bar-item w3-button w3-text-white w3-hover-orange">The Venue</a>
+      <a href="#fees" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Fees & Payments</a>
+
+      <a href="#register" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Register</a>
+    </div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-text-white w3-button w3-right w3-hide-large w3-hover-orange" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+<!-- Menú sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-smallw3-padding-16">Close ×</a>
+  <a href="#retreat" onclick="w3_close()" class="w3-bar-item w3-button">The Retreat</a>
+  <a href="#hostingteam" onclick="w3_close()" class="w3-bar-item w3-button">Hosting Team</a>
+  <a href="#venue" onclick="w3_close()" class="w3-bar-item w3-button">The Venue</a>
+  <a href="#fees" onclick="w3_close()" class="w3-bar-item w3-button">Fees & Payments</a>
+
+  <a href="#register" onclick="w3_close()" class="w3-bar-item w3-button">Register</a>
+</nav>
+
+
+<!-- Rhodes Retreat -->
+<div class="w3-display-container fade w3-padding-24" id="retreat">
+  <img src="img/slideshow/1.jpg" style="width:100%;min-height: 300px">
+  <div class="text">Rhodes Global <br>Leadership Retreat</div>
+</div>
+
+
+<div class="w3-container w3-row w3-row-padding" >
+  <p style="font-size:40pt;">Leading from Within</p>
+  <p style="font-size:30pt;">"Acknowledging and Releasing your Potential"</p>
+  <p>Leadership inspires performance. How can you continue improving your ability to motivate groups and individuals to achieve tangible results? In an increasingly complex and rapidly-moving world, grounding and connecting to self is essential in order to build leadership capacities.
+  <br><br>  A key factor in successful leadership lies in your ability to know yourself and be aware of the impact that your behaviors and attitudes have on your team and other key stakeholders. By knowing your patterns, empathizing with others, and being aware of your environment, you enhance your sense of responsibility (the ability to respond). The goal of this leadership retreat is to uncover and release your innate potential by examining the following basic human principles of being a leader: <br>
+
+  <li>Our personality (values, preferences, and temperament)</li>
+  <li> What drives us to act (motivation)</li>
+  <li>Our capacity to influence others (persuasion and ability to inspire)</li>
+  <li>Our emotional intelligence (self regulation, social skills, empathy)</li>
+  <li>How and with whom we communicate (information sharing)</li>
+  <li>How we deal with conflict (fight - freeze - flight)</li>
+  </p>
+
+
+  <div class="w3-half" style="padding-left: 0px;">
+  <p class="w3-large"><b>Why should I attend?</b></p>
+  <p>With practical tools, coping skills, techniques, and inner knowledge you will leave with greater appreciation of yourself and insight into your next developmental step towards becoming the leader you are meant to be. Fun and curiosity will lead you to new perspectives and widen your personal and professional horizons.<br><br>
+
+  We all have the resources to motivate and inspire others. Working collectively on leadership skills can trigger feelings, thoughts, and behaviors that sit more deeply within than we realize. Practice and patience are needed to allow new ‘modus operandi’ to become habits. This retreat is a significant step in supporting you on your journey.
+  </p>
+  </div>
+  <div class="w3-half" style="padding-left: 0px;">
+
+  <p class="w3-large"><b>Who would most benefit from this?</b></p>
+  <p>Team leaders, managers, entrepreneurs, project managers, people in leadership roles regardless of organizations, as well as any person committed to becoming a more inspirational leader, a catalyst for change.<br><br>
+
+  If you feel inspired by the retreat, but are not sure if it is for you, get in touch with one of our hosts. We will be happy to talk to you to provide more clarity around your decision. <br><br>
+
+  Contact us: info@insightsbeacon.com</p>
+  </div>
+</div>
+
+
+<div class="w3-display-container fade w3-padding-24" id="framework">
+  <img src="img/slideshow/3.jpg" style="width:100%;min-height: 300px">
+  <div class="text">The framework</div>
+</div>
+
+
+<div class="w3-container w3-row w3-row-padding" >
+<p>The focus of this retreat is clearly in the power of self awareness, leadership and influencing change. Paramount in achieving this goal is to work as a team and co-create a safe space where we can speak openly and tap into our collective wisdom. To this end, the framework will be a combination of Art of Hosting, Participatory Leadership methods, and experiential learning consisting of open dialogue, personal assessments, sharing stories, hands-on learning, and self-reflection.
+</p>
+<center>
+  <img src="img/Framework.png" alt="Fondation" style="width:95%; max-width: 800px ">
+</center>
+
+
+</div>
+    
+
+<div class="w3-display-container fade w3-padding-24 " id="hostingteam">
+  <img src="img/slideshow/4.jpg" style="width:100%;min-height: 300px">
+  <div class="text">Hosting team</div>
+</div>
+
+
+<div class="w3-container w3-padding-64">
+  <div class="w3-container w3-row w3-row-padding w3-center">
+    <div class="w3-third" style="min-width: 300px">
+      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('gabriel').style.display='block'" style="padding:20px; min-width:200px">  
+        <img src="img/gabriel.png" alt="Gabriel" class="w3-margin-right w3-grayscale w3-circle" style="width:50%;padding-top: 10px;padding-bottom: 10px;" >
+        <div class="container">
+          <h3 class="titulo" ><b>Gabriel Heinze</b></h3>
+                   <button class="w3-button w3-medium">View Bio</button>
+          <p class="quote">"Life is 10% of what happens to you, and 90% of how you react to it"</p>
+ 
+
+        </div> 
+      </div>
+    </div>
+
+
+
+    <div class="w3-third" style="min-width: 300px">
+      <div class="w3-card w3-hover-opacity" onclick="window.open('https://www.synergy-rhodes.com/who.html')" style="padding:20px; min-width:200px">  
+        <img src="img/SYNERGYRHODES.jpg" alt="María Bakari" class="w3-margin-right w3-grayscale w3-circle" style="width:50%;padding-top: 10px;padding-bottom: 10px;" >
+        <div class="container">
+          <h3 class="titulo" ><b>Maria Bakari</b></h3>
+                   <button class="w3-button w3-medium">View Bio</button>
+          <p class="quote">"Only together we can be wise"</p>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+   <div class="w3-third" style="min-width: 300px">
+      <div class="w3-card w3-hover-opacity" onclick="window.open('http://www.epiconsulting.org/kallanian')" style="padding:20px; min-width:200px">  
+        <img src="img/EPICCONSULTING.png" alt="Jean-Pierre" class="w3-margin-right w3-grayscale w3-circle" style="width:50%;padding-top: 10px;padding-bottom: 10px;" >
+        <div class="container">
+          <h3 class="titulo" ><b>Jean-Pierre Kallanian</b></h3>
+                   <button class="w3-button w3-medium">View Bio</button>
+          <p class="quote">"Everything you need is around you!"</p>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+  <div class="w3-center">
+  <h3 class="w3-padding-16 ">With the support and hospitality of the “Fondation Marc de Montalembert"</h3>
+<img src="img/fondation.jpg" alt="Fondation" class="w3-margin-right" style="max-width: 400px; width:50%;padding-top: 10px;padding-bottom: 10px; margin-left: 16px;   "  >
+<br>
+<button class="w3-button w3-medium w3-center" onclick="window.open('http://www.fondationmdm.com/en/')">Visit website</button>
+</div>
+</div>
+
+
+
+
+<div class="w3-display-container fade w3-padding-24" id="venue" >
+  <img src="img/slideshow/5.jpg" style="width:100%;min-height: 300px">
+  <div class="text" >The Venue</div>
+</div>
+
+
+<div class="w3-container w3-row w3-row-padding" >
+<p class="w3-large"><b>Why Rhodes and Greece?</b></p>
+
+  <div class = "w3-half">
+
+  <p>
+   <i> “Everything in Greece, mountains, rivers, seas, valleys get humanised… and speak to the human in an almost human language. They don’t cover or smash him/her, they don’t suppress they become friends and collaborators. The blurry, bending cry when transiting the light of Greece gets crystallised, humanised it becomes logos…<br><br>
+  Greece is the filter that sculptures the animal into human, the slavery into freedom and the drunkness into sober pondering…Giving person to the impersonal, measure to the immeasurable…balancing the conflicting blind forces… this is the mission of the much-tortured land and sea that is called Greece.”</i> ~ Nikos Kazantzakis, Greek Author<br><br>
+  The words above by Nikos Kazantzakis, while written a few decades ago, reflect the timeless quality of Greece, one that exudes the humanness of friendliness and hospitality. Greece (and Rhodes in particular) is a geographical and psychological crossroad between East and West. Rhodes has been a place for hosting pilgrims of the three main religions of the Middle East. It has become a natural and warm meeting place where diversity and reconciliation have been a core part of her journey. It is precisely this hospitable spirit, this ancient core principle of “Philoxenia”–being friendly to the guest–that sets the stage as our framework for this Global Leadership Retreat.
+
+  </p>
+
+  </div>
+  <div class = "w3-half">
+  <div class="w3-content w3-display-container">
+    <img class="mySlides" src="img/slideshow/venue1.jpg" style="width:100%">
+    <img class="mySlides" src="img/slideshow/venue2.jpg" style="width:100%">
+    <img class="mySlides" src="img/slideshow/venue3.jpg" style="width:100%">
+    <img class="mySlides" src="img/slideshow/venue4.jpg" style="width:100%">
+    <img class="mySlides" src="img/slideshow/venue5.jpg" style="width:100%">
+    <img class="mySlides" src="img/slideshow/venue6.jpg" style="width:100%">
+    <img class="mySlides" src="img/slideshow/venue7.jpg" style="width:100%">
+
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+  </div>
+  </div>
+</div>
+
+
+
+
+<div class="w3-container w3-row w3-row-padding" >
+<p class="w3-large"><b>Fondation Marc de Montalembert</b></p>
+<div class = "w3-half">
+
+<p>
+Fondation Marc de Montalembert will be hosting us for this Leadership Retreat. It is a unique and special place nestled and hidden in the Medieval Town of Rhodes. Dedicated in the memory of Marc de Montalembert and his vision of a peaceful world rich in cross-cultural dialogue and understanding, the setting offers a window to the various ancient Greek cultures, from the Hellenistic period to the medieval and Ottoman. <br><br>
+Tucked away and protected from the hustle and bustle of the old town, the venue offers an open and inspiring space for supporting young people, as well as for hosting gatherings on diversity, human evolution, open dialogue, creativity, and peace. With a big open space, the ottoman “hayat”, and smaller open-air and in-house artfully created corners, the Foundation provides ideal and very special facilities and atmosphere, for this international retreat. The Foundation’s jewel though is its garden: the home of native plants, herbs, trees and flowers from the Mediterranean region. A place for serenity, connection, and wholeness, its beauty supports our collective intention of Leading from Within.
+
+</p>
+
+
+<h3>Menandrou 25, Old Town, 851 31 Rhodes</h3>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3209.538382204695!2d28.220687915279864!3d36.444543380023305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x149561eeae2cb119%3A0x293e61a24443de0f!2sMarc+de+Montalembert+Foundation!5e0!3m2!1ses!2sar!4v1554776661048!5m2!1ses!2sar" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+
+
+
+
+<div class = "w3-half">
+
+<div class="w3-content w3-display-container">
+  <img class="mySlides2" src="img/slideshow/f1.jpg" style="width:100%">
+  <img class="mySlides2" src="img/slideshow/f2.jpg" style="width:100%">
+  <img class="mySlides2" src="img/slideshow/f3.jpg" style="width:100%">
+  <img class="mySlides2" src="img/slideshow/f4.jpg" style="width:100%">
+  <img class="mySlides2" src="img/slideshow/f5.jpg" style="width:100%">
+  <img class="mySlides2" src="img/slideshow/f6.jpg" style="width:100%">
+  <img class="mySlides2" src="img/slideshow/f7.jpg" style="width:100%">
+  <img class="mySlides2" src="img/slideshow/f8.jpg" style="width:100%">
+
+  <button class="w3-button w3-black w3-display-left" onclick="plusDivs2(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs2(1)">&#10095;</button>
+</div>
+
+
+</div>
+</div>
+
+
+<div class="w3-display-container fade w3-padding-24" id="fees">
+  <img src="img/slideshow/6.jpg" style="width:100%;min-height: 300px">
+  <div class="text">Fees and payment</div>
+</div>
+
+
+<div class=" w3-container" style="max-width: 100%" >
+  <div class="w3-third">
+    <div class="w3-card-4" >
+      <div class="w3-container w3-padding-16 w3-light-gray" style="max-width: 400px;height: 300px">
+          <h3 class="titulo"><b>General Enrollment</b></h3>
+          <li>€1200</li>
+          <p>Price includes tuition, a welcome dinner on October 15th and daily coffee breaks.
+          <br>Other meals, travel and lodging are not included in the fee.</p>
+          
+          
+      </div>
+    </div>
+  </div>   
+
+  <div class="w3-third ">
+    <div class="w3-card-4 " >
+      <div class="w3-container w3-padding-16 w3-light-gray"  style="max-width: 400px;height: 300px">
+          <h3 class="titulo "><b>Discounts & Offers</b></h3>
+          <b>Early bird special</b>
+          <li>€960 if enrolled by June 30, 2019</li>
+          <br>
+          <b>Group discounts</b>
+          <li>20% discount for groups of 2 or more</li>
+      </div>
+    </div>
+  </div>   
+  <div class="w3-third ">
+    <div class="w3-card-4" >
+      <div class="w3-container w3-padding-16 w3-light-gray"  style="max-width: 400px;height: 300px">
+          <h3 class="titulo "><b>Special Considerations</b></h3>
+
+<p>Feeling inspired by the retreat, but budget may be an issue?  <button onclick="document.getElementById('contacto').style.display='block'" class="w3-button w3-light-grey w3-medium" style="
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;"><u>Please get in touch with us</u></button></p>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<div class="w3-container w3-row w3-row-padding" >
+<p class="w3-large"><b>Secure your enrollment</b></p>
+<p>
+<li>Through a Bank transfer</li>
+<li>With your Debit and/or credit cards</li>
+<li>Getting your tickets through Eventbrite</li>
+</p>
+
+
+
+</div>
+
+<div class="w3-display-container fade w3-padding-24" id="accommodation">
+  <img src="img/slideshow/8.jpg" style="width:100%;min-height: 300px">
+  <div class="text">Accommodation & Meals</div>
+</div>
+
+
+<div class="w3-container w3-row w3-row-padding" >
+<p>
+Close to the venue there are plenty of alternatives for all preferences in terms of lodging and food. <br>
+There are many options for accommodation within the city for all budgets. Any place in the city will be at a 10/15-minute walking distance from the venue. As for meals, very near our venue there are traditional Greek ‘tavernas’ and a variety of local and Mediterranean cuisine. You can find even more variety in the newer part of town, which is also a great place to stroll around and be closer to the Aegean.
+</p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="w3-display-container fade w3-padding-24" id="register">
+  <img src="img/slideshow/7.jpg" style="width:100%;min-height: 300px">
+  <div class="text">Register</div>
+</div>
+
+
+<div class="w3-container w3-row w3-row-padding" >
+<p class="w3-large"><b>Coming soon</b></p>
+<p>
+We are opening registrations very soon
+</p>
+
+</div>
+
+<footer class="w3-center bgimg-footer-retreat">
+
+      <img href="#retreat" src="img/logo-3.png" alt="INSIGHTS BEACON" style="padding-top: 10px; margin-left:0px;width:300px">
+</footer>
+
+ 
+
+<script>
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+    } else {
+        mySidebar.style.display = 'block';
+    }
+}
+
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+
+
+var slideIndex = 1;
+var slideIndex2 = 1;
+showDivs(slideIndex);
+showDivs2(slideIndex2);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function plusDivs2(n) {
+  showDivs2(slideIndex2 += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+
+
+function showDivs2(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides2");
+  if (n > x.length) {slideIndex2 = 1}
+  if (n < 1) {slideIndex2 = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex2-1].style.display = "block";  
+}
+
+</script>
+
+
+
+
+
+
+<!-- Modal Gabriel -->
+<div id="gabriel" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('gabriel').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Gabriel Heinze</h2>
+    </header>
+    <div class="w3-container">
+Gabriel is the <b>President and Head of OD and LD </b> at Insights Beacon. Accountant (from UBA), Coach with NLP, Gestalt training and Certified MBTI Practitioner. He has led international teams in planning, financial analysis and project management for over 18 years in multinational companies, like American Express, mainly in FL and NY, USA. He possesses solid experience in OD consulting and training, as well as in teaching at university in subjects of Management, as well as Finance.<br>
+
+His strengths include driving results, training, creative analysis, rapport and leadership, and development of multicultural teams. He is based both in the US and Argentina, and provides consulting and training services across the Americas.<br>
+Languages: English and Spanish
+
+    </div>
+    <footer class="w3-container w3-indigo w3-large">
+      <a href="https://www.linkedin.com/in/gabriel-heinze-27230440/ " target="_blank"  class=" w3-button w3-hover-opacity fa fa-linkedin"></a>
+    </footer>
+  </div>
+</div>
+
+
+
+<!-- Modal Contactos -->
+<div id="contacto" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('contacto').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Contact us</h2>
+    </header>
+    <div class="w3-container">
+<li>Mail to info@insightsbeacon.com</li>
+<br>
+<li>+ 1 954-900-9765 (Gabriel) (landline)</li>
+<li>+ 54 911-4448-5799 (Gabriel) *</li>
+<li>+ 43 664 9708218 (Jean-Pierre) *</li>
+<li>+ 30 693 710 7443 (María) *</li>
+<p>* Mobile and Whatsapp</p>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
