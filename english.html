@@ -176,17 +176,12 @@ img {vertical-align: middle;}
     <img href="index.html" src="img/overlays/logo-white.png" alt="INSIGHTS BEACON" style="padding-top: 10px; margin-left:30px;width:100px">
     <div class="w3-right w3-hide-small w3-hide-medium w3-padding-24">
       <a href="#index" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Home</a>
-      <a href="#company" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Our Company</a>
-      <a href="#productos" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Products</a>
-      <a href="#partners" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Partners & Alliances</a>
-      <a href="#retreat" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Rhodes Retreat</a>
-
-
-
-
-
-      <a href="#contact" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Contact</a>
-      <a href="index.html" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Language</a>
+      <a href="#company" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Our Company</a>
+      <a href="#productos" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Products</a>
+      <a href="#partners" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Partners & Alliances</a>
+      <a href="#retreat" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Rhodes Retreat</a>
+      <a href="#contact" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Contact</a>
+      <a href="index.html" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Language</a>
     </div>
     <a href="javascript:void(0)" class="w3-bar-item w3-text-white w3-button w3-right w3-hide-large w3-hover-orange" onclick="w3_open()">
       <i class="fa fa-bars"></i>
@@ -343,7 +338,7 @@ This strategic collaboration will allow all companies to provide a more diversif
 
 
 <!-- Rhodes Retreat -->
-<div>
+<div id="retreat">
 <video autoplay muted loop id="myVideo">
   <source src="media/Greece-low.mp4" type="video/mp4">
 </video>
@@ -450,6 +445,25 @@ function w3_open() {
 function w3_close() {
     mySidebar.style.display = "none";
 }
+
+// Get the video
+var video = document.getElementById("myVideo");
+
+// Get the button
+var btn = document.getElementById("myBtn");
+
+// Pause and play the video, and change the button text
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+
+
 </script>
 
 <!-- Modal Gabriel -->
