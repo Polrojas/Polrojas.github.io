@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html>
+<title>Insights Beacon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style/w3.css">
+<link rel="stylesheet" href="style/style-site.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
+<link rel="icon" href="icon.png">
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+
+
+
+
+<style type="text/css">
+  #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 300, function(){
+           window.location.hash = hash;
+      });
+    } 
+  });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#home").fadeIn();
+    });
+});
+</script>
+
+<style>
+
+</style>
+
+<body>
+<div class="w3-top">
+<!-- Menú -->
+  <div class="w3-card-2 bgimg-2 w3-padding-12"  id="myNavbar">
+      <img href="index.html" src="img/logo-white.png" alt="INSIGHTS BEACON" style="padding-top: 10px; margin-left:30px;height: 70%">
+    <div class="w3-right w3-hide-small w3-hide-medium w3-padding-24">
+      <a href="#home" class="w3-bar-item w3-button w3-text-black w3-hover-orange">Inicio</a>
+      <a href="#company" class="w3-bar-item w3-button w3-text-black w3-hover-orange">Conocenos</a>
+      <a href="#productos" class="w3-bar-item w3-button w3-text-black w3-hover-orange">Nuestros programas</a>
+       <a href="#autoliderazgo" class="w3-bar-item w3-button w3-text-black w3-hover-orange">Como participar</a>
+      <a href="#novedades" class="w3-bar-item w3-button w3-text-black w3-hover-orange">Historias</a>
+      <a href="#contact" class="w3-bar-item w3-button w3-text-black w3-hover-orange">Contactos</a>
+      <a href="index.html" class="w3-bar-item w3-button w3-text-black w3-hover-orange">Language</a>
+    </div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-text-white w3-button w3-right w3-hide-large w3-hover-orange" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+<!-- Menú sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-smallw3-padding-16">Cerrar ×</a>
+  <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button">Inicio</a>
+  <a href="#company" onclick="w3_close()" class="w3-bar-item w3-button">Conocenos</a>
+  <a href="#productos" onclick="w3_close()" class="w3-bar-item w3-button">Nuestros programas</a>
+  <a href="#autoliderazgo" onclick="w3_close()" class="w3-bar-item w3-button">Como participar</a>
+  <a href="#novedades" onclick="w3_close()" class="w3-bar-item w3-button">Historias</a>
+  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contactos</a>
+  <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button">Language</a>
+
+</nav>
+
+<!-- Home -->
+<header class="bgimg-1 w3-display-container w3-background" id="home">
+  <div class="w3-display-middle w3-text-white w3-center " style="width:70%">
+ 
+ 
+  </div>
+</header>
+
+<!-- Nuestra Compañía -->
+<div class="w3-container" style="padding:130px 16px" id="company">
+  <div class="w3-row-padding w3-center" style="margin-top:0px">
+    <div class="w3-half">
+      <p class="w3-large"><b>Misión</b></p>
+      <p>Ayudar a nuestros clientes a lograr sus objetivos, encontrar soluciones, potenciar sus habilidades, construir equipos y alcanzar una mejor calidad de vida, aclarando sus caminos con ideas ingeniosas e innovadoras.</p>
+    </div>
+    <div class="w3-half">
+      <p class="w3-large"><b>Servicios</b></p>
+      <p>Nos especializamos en la consultoría y capacitación en Desarrollo Organizacional y de Liderazgo, con un foco en el desarrollo y la eficiencia de equipos.
+      Con presencia en Florida (EEUU) y Buenos Aires (Argentina) prestamos servicios a nivel internacional.</p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Equipo -->
+<div class="w3-container w3-row w3-center">
+	    <p class="w3-large"><b>Nuestro equipo</b></p>
+
+  <div class="w3-half" style="min-width: 300px; min-height: 300px">
+    <div class="w3-card" style="min-width: 300px">
+      <div class="w3-container" onclick="document.getElementById('gabriel').style.display='block'">
+          <img src="img/gabriel.png" alt="Gabriel" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
+          <h3 class="titulo"><b>Gabriel Heinze</b></h3>
+          <p class="miembro" style="margin-left: 140px">Head of Leadership and Organizational Development</p>
+      </div>
+    </div>
+  </div>   
+  <div class="w3-half" style="min-width: 300px; min-height: 300px">
+    <div class="w3-card" style="min-width: 300px">
+      <div class="w3-container" onclick="document.getElementById('juan').style.display='block'">
+        <img src="img/juan.png" alt="Juan" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
+        <h3 class="titulo"><b>Juan Pugni</b></h3>
+        <p class="miembro" style="margin-left: 140px">Head of Organization and Process Optimization</p>
+      </div>
+    </div>
+  </div>  
+
+  <div class="w3-half" style="min-width: 300px; min-height: 300px">
+    <div class="w3-card" style="min-width: 300px">
+      <div class="w3-container" onclick="document.getElementById('eberbach').style.display='block'" >
+        <img src="img/eberbach.png" alt="Patricia" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
+        <h3 class="titulo"><b>Patricia A. García Eberbach</b></h3>
+        <p class="miembro" style="margin-left: 140px">Consultora y Facilitadora</p>
+      </div>
+    </div>
+  </div> 
+
+
+
+
+  <div class="w3-half" style="min-width: 300px; min-height: 300px">
+    <div class="w3-card" style="min-width: 300px">
+      <div class="w3-container" onclick="document.getElementById('patricia').style.display='block'">
+        <img src="img/patricia.jpg" alt="Patricia" class="w3-left w3-circle w3-margin-right w3-grayscale" style="width:120px;padding-top: 10px;padding-bottom: 10px;">
+        <h3 class="titulo"><b>Patricia Díaz</b></h3>
+        <p class="miembro" style="margin-left: 140px">Consultora</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Productos -->
+<div class="w3-container w3-padding-64" id="productos">
+  <div class="w3-container w3-row w3-row-padding w3-center">
+    <p class="w3-large"><b>¿Cómo lo hacemos?</b></p>
+
+
+    <div class="w3-quarter" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('clima').style.display='block'" style="padding:20px; height:250px; min-width: 200px">
+        <img src="img/clima.png" alt="clima" style="height:100px;" >
+        <div class="container">
+          <h4>Diagnóstico y Desarrollo de Equipos de Liderazgo </h4>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="w3-quarter" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('lideres').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/talento.png" alt="lideres" style="height:100px">
+        <div class="container">
+          <h4>Atracción de Talento e Inducción / Onboarding  </h4> 
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-quarter" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('ciclo').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/capacitacion.png" alt="ciclo" style="height:100px">
+        <div class="container">
+          <h4>Programas de Capacitación para Lideres y Equipos</h4> 
+        </div>
+      </div>
+    </div>
+    <div class="w3-quarter" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('eficiencia').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/coaching.png" alt="eficiencia" style="height:100px">
+        <div class="container">
+          <h4>Coaching Focalizado</h4> 
+        </div>
+      </div>
+    </div>
+
+  <div class="w3-quarter" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('excelencia').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/operacional.png" alt="eficiencia" style="height:100px">
+        <div class="container">
+          <h4>Excelencia Operacional</h4> 
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+</div>
+
+
+
+<!-- Autoliderazgo -->
+<div class="w3-container w3-padding-64 w3-background w3-center bgprograma" id="autoliderazgo">
+  <div class="w3-container w3-row w3-row-padding w3-text-white" style="padding:40px">
+
+
+
+
+    <h1 style="margin-bottom: 50px;">Auto Liderazgo para el Cambio</h1>
+    <h2 style="margin-bottom: 10px;">Un programa que combina el Liderazgo Personal con las Neurociencias</h2>
+        <h3>Programa Abierto Presencial</h3>
+
+ 	<div class="w3-left-align" style="margin-left: 30px;">
+     <p>El liderazgo inspira el desempeño. Entonces, ¿cómo puedo mejorar mi habilidad para motivar un equipo para obtener el nivel de desempeño necesario para lograr excelentes resultados visibles tanto para los líderes como para el mismo equipo?
+</p>
+<p>En las organizaciones los resultados se logran por el esfuerzo de las personas y los equipos. Creemos que los nuevos descubrimientos de las ciencias, especialmente en neurociencias, y otras herramientas afines referidas al conocimiento de la conducta humana son necesarias para todas aquellas personas que desean desarrollar y profundizar habilidades de liderazgo personal, y que buscan generar espacios de trabajo donde las necesidades referidas al bienestar de cada persona y la expresión de su máximo potencial sean una prioridad.  </p>
+
+<p>Un factor clave en el liderazgo exitoso es el autoconocimiento y el estar consciente del impacto que mis conductas y actitudes tienen en los demás. Al conocer mis patrones de comportamiento y entender su raíz, podré empatizar con los otros y con mi entorno y potenciar así mi sentido de responsabilidad, es decir, mi “habilidad para responder”, en lugar de reaccionar.</p>
+
+
+
+</div>
+        <div class="w3-half">
+      
+ <p>En el caso de las habilidades para liderar, nuestro objetivo es potenciar los recursos que cada uno posee. El liderazgo está basado en una serie de principios humanos que son de práctica habitual, ya desde los primeros años de vida: 
+</p>
+<li>Cómo y hacia quién nos comunicamos (compartir información)</li>
+<li>Qué hacemos frente a las situaciones de conflicto (fight – flight - freeze)</li>
+<li>Nuestro carácter (valores, personalidad, temperamento)</li>
+<li>Lo que nos mueve a actuar (motivación)</li>
+<li>La capacidad de influir en otros (habilidades de persuasión)</li>
+<li>El manejo de nuestras emociones (autorregulación, empatía, destreza social)</li>
+
+<h2>Beneficios y resultados del programa</h2>
+
+<p>En este programa, los participantes se llevarán un conjunto de herramientas, habilidades y técnicas que les permitan autoconocerse como líderes y lograr cambios efectivos, así como una mayor confianza en sí mismos y una visión más clara sobre los próximos pasos en el desarrollo hacia el líder que quieren ser.</p>
+<p>Todos contamos con recursos que podemos utilizar para motivar e inspirar a un equipo. Cuando trabajamos sobre herramientas para un liderazgo efectivo vamos a poner en movimiento sentimientos, pensamientos y comportamientos que llevamos mucho más arraigados de lo que suponemos. La práctica y la paciencia son necesarias para permitir que los nuevos “modus operandi” se transformen en hábitos. Este programa es el puntapié inicial para acompañarte en este proceso.</p>
+
+<h2>Sinopsis del programa </h2>  
+  <a><button class="w3-button w3-white w3-round-xxlarge" onclick="document.getElementById('Sinopsis').style.display='block'" >Ver detalle</button></a>
+<p></p>
+
+<li>Módulo 1: ¿Cómo estoy liderando mi vida hoy? ¿Cómo influye mi personalidad?</li>
+<li>Módulo 2: El efecto de mis creencias y pensamientos</li>
+<li>Módulo 3: Mis emociones y el trabajo en equipo</li>
+<li>Módulo 4: Mis conductas y los resultados que obtengo</li>
+<li>Módulo 5: Creando mi visión para el futuro: el/la Líder que quiero ser</li>
+
+
+    </div>
+    <div class="w3-half">
+
+    <div class="w3-half" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity w3-center" onclick="document.getElementById('programa-quien').style.display='block'" style="padding:20px; height:250px; min-width: 200px">
+        <img src="img/programa-quien.png" alt="a quien va dirigido" style="height:100px;" >
+        <div class="container">
+          <h4>A quiénes está dirigido </h4>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="w3-half" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity w3-center" onclick="document.getElementById('programa-fundamentos').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/programa-fundamentos.png" alt="fundamentos del programa" style="height:100px">
+        <div class="container">
+          <h4>Metodología del programa</h4> 
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-half" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity w3-center" onclick="document.getElementById('programa-lugar').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/programa-fecha.png" alt="lugar y fecha" style="height:100px">
+        <div class="container">
+          <h4>Lugar y fecha</h4> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="w3-half" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity w3-center" onclick="document.getElementById('programa-inversion').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/programa-inversion.png" alt="inversion" style="height:100px">
+        <div class="container">
+          <h4>Inversión y formas de pago</h4> 
+        </div>
+      </div>
+    </div>
+    
+
+ <h2>Facilitadores</h2>   
+
+
+   <div class="w3-half" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity w3-center" onclick="document.getElementById('gabriel').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/gabriel.png" alt="Gabriel" class="w3-circle w3-grayscale" style="height:100px">
+        <div class="container">
+          <h4>Gabriel Heinze</h4> 
+        </div>
+      </div>
+    </div>
+
+   <div class="w3-half" style="min-width: 200px">
+      <div class="w3-card w3-hover-opacity w3-center" onclick="document.getElementById('eberbach').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
+        <img src="img/eberbach.png" alt="Gabriel" class="w3-circle w3-grayscale" style="height:100px">
+        <div class="container">
+          <h4>Patricia A. García Eberbach</h4> 
+        </div>
+      </div>
+    </div>
+ 
+ 
+
+
+
+  </div>
+
+
+
+   
+
+    </div>
+
+
+ <p class="w3-text-white" ><b>Se entregará Certificado de Asistencia al finalizar el programa.</b></p>
+ <p class="w3-text-white" ><b><u>En todos los casos </u>la inscripción es previa y se formaliza abonando el total de la actividad y completando el formulario de inscripción. El cierre de inscripción se produce cuando se completan las vacantes o en la fecha establecida de cierre. Dichas vacantes son limitadas.</b></p>
+ <p class="w3-text-white"> <b>En caso de no reunirse el cupo mínimo de participantes, el programa podrá suspenderse o reprogramarse.</b></p>
+
+
+
+<a href="https://mailchi.mp/1678cf571e01/auto-liderazgo-para-el-cambio" target="_blank" class="w3-button w3-white w3-round-xxlarge">Quiero inscribirme</a>
+
+
+
+
+
+
+</div>
+
+
+
+
+<!-- Novedades -->
+<div class="w3-container w3-center w3-padding-64" id="novedades">
+  <p class="w3-large"><b>Novedades</b></p>
+  <div class="w3-row-padding" style="margin-top:64px; text-align:left" >
+
+     <div class="w3-col w3-section w3-card w3-light-grey w3-padding-16 " onclick="document.getElementById('partners').style.display='block'">
+        <h4>Alianzas estratégicas</h4>
+        <p class="miembro">17 de marzo de 2019</p>
+    </div>
+
+
+  	 <div class="w3-col w3-section w3-card w3-light-grey w3-padding-16 " onclick="document.getElementById('auto-liderazgo').style.display='block'">
+        <h4>Programa presencial de auto liderazgo</h4>
+        <p class="miembro">31 de enero de 2019</p>
+    </div>
+    <div class="w3-col w3-section w3-card w3-light-grey w3-padding-16 " onclick="document.getElementById('modelo-control').style.display='block'">
+        <h4>Desarrollo de tableros de control</h4>
+        <p class="miembro">25 de septiembre de 2017</p>
+    </div>
+    <div class="w3-col w3-section w3-card w3-light-grey w3-padding-16 " onclick="document.getElementById('mbti').style.display='block'">
+        <h4>Experiencia MBTI</h4>
+        <p class="miembro">25 de abril de 2017</p>
+    </div>
+  </div>
+</div>
+
+<!-- Contactos  -->
+<div class="w3-container" style="padding:80px 16px" id="contact">
+  <p class="w3-large w3-center"><b>Contáctanos</b></p>
+  <div class="w3-row-padding">
+<!--    <div class="w3-half">
+      <form action="/action_page.php" target="_blank">
+        <p><input class="w3-input " type="text" placeholder="Nombre" required name="Nombre"></p>
+        <p><input class="w3-input " type="text" placeholder="Empresa" required name="Empresa"></p>
+        <p><input class="w3-input " type="text" placeholder="Email" required name="Email"></p>
+        <p><input class="w3-input " type="text" placeholder="Mensaje" required name="Mensaje"></p>
+        <p>
+        <button class="w3-button w3-black" type="submit">
+          <i class="fa fa-paper-plane"></i> Enviar
+        </button>
+        </p>
+      </form>
+    </div>
+-->
+
+
+    <div class="w3-half" style="
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 16px;
+    padding-top: 24px;">
+
+
+      <div class="w3-container" style="
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 16px;
+    padding-top: 16px;">
+          <i class="w3-left fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> 
+          <p style="margin-left: 66px;margin-top: 0px;margin-bottom: 0px;">6075 W Commercial Blvd, Fort Lauderdale, FL33319, USA</p>
+      </div>
+
+      <div class="w3-container" style="
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 16px;
+    padding-top: 16px;">
+          <i class="w3-left fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> 
+          <p style="margin-left: 66px;margin-top: 0px;margin-bottom: 0px;">USA: +1 (954) 900-9765 <br>ARG: +54 911 4157-5831<br>ARG: +54 911 4448-5799</p>
+      </div>
+
+     <div class="w3-container" style="
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 16px;
+    padding-top: 16px;">
+          <i class="w3-left fa fa-envelope fa-fw w3-xxlarge w3-margin-right"></i> 
+          <a href="mailto:info@insightsbeacon.com?Subject=Contacto%20desde%20web" style="margin-left: 0px;margin-top: 0px;margin-bottom: 0px;">info@insightsbeacon.com</a>
+      </div>
+
+     <div class="w3-container" style="
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 16px;
+    padding-top: 16px;">
+          <i class="w3-left fa fa-facebook-official fa-fw w3-xxlarge w3-margin-right"></i> 
+          <a href="https://www.facebook.com/insightsbeacon.argentina?fref=ts" target="_blank"   style="margin-left: 0px;margin-top: 0px;margin-bottom: 0px;">/insightsbeacon.argentina</a>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center bgimg-3">
+  <a href="#home" class=" w3-white"><i class="fa fa-arrow-up w3-margin-right"></i>Inicio</a>
+</footer>
+ 
+
+<script>
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+    } else {
+        mySidebar.style.display = 'block';
+    }
+}
+
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+<!-- Modal Gabriel -->
+<div id="gabriel" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('gabriel').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Gabriel Heinze</h2>
+    </header>
+    <div class="w3-container">
+        <p>Es el Presidente y Head of Leadership and Organizational Development de Insights Beacon. Contador (UBA), Coach con PNL, Gestalt y Practitioner certificado en MBTI. Ha liderado equipos internacionales en planeamiento, análisis financiero y manejo de proyectos por más de 18 años en compañías multinacionales (principalmente en American Express en Florida y Nueva York, USA). Posee sólida experiencia en consultoría en desarrollo organizacional y capacitación, y en actividad docente en cátedras de gestión organizacional y financiera (UBA, USAL, UCES, EAN).</p>
+        <p>Sus fortalezas incluyen la maximización de resultados, la capacitación, el análisis creativo, rapport y el liderazgo y desarrollo de equipos multiculturales. Con base en Argentina y USA, brinda servicios de capacitación y consultoría en toda América. </p>
+        <p>Idiomas: español e inglés.</p>
+    </div>
+    <footer class="w3-container w3-indigo w3-large">
+      <a href="https://www.linkedin.com/in/gabriel-heinze-27230440/ " target="_blank"  class=" w3-button w3-hover-opacity fa fa-linkedin"></a>
+    </footer>
+  </div>
+</div>
+
+<!-- Modal Juan -->
+<div id="juan" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('juan').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Juan Pugni</h2>
+    </header>
+    <div class="w3-container">
+        <p>Es el Head of Organization and Process Optimization de Insights Beacon. Master en Dirección de Empresas (UCEMA), con amplia experiencia en funciones directivas, adquirida en 20 años de trayectoria en empresas multinacionales, como American Express, y en consultoría enfocada en lograr eficiencia organizacional. Ha liderado equipos locales e internacionales, en la gestión de cambios de procesos, reestructuraciones y reingenierías.</p>
+        <p>Sus principales fortalezas incluyen el desarrollo de equipos en la consecución de metas agresivas bajo escenarios complejos. Implementación de proyectos en distintos países y culturas, con alto impacto en los empleados y sus actividades. </p>
+        <p>Idiomas: español, inglés y portugués.</p>
+    </div>
+    <footer class="w3-container w3-indigo w3-large">
+      <a href="https://www.linkedin.com/in/juan-pugni-095685/" target="_blank"  class=" w3-button w3-hover-opacity fa fa-linkedin"></a>
+    </footer>
+  </div>
+</div>
+
+<!-- Modal Patricia -->
+<div id="patricia" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('patricia').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Patricia Díaz</h2>
+    </header>
+    <div class="w3-container">
+      <p>Lic. En Psicología (UBA), Especialista en Empleos y Desarrollo de RRHH, Consultora Organizacional y Coach Ontológica Profesional, con más de quince años de experiencia en RRHH adquirida en Empresas Nacionales y Multinacionales y en consultoría organizacional en el ámbito público y privado.</p>
+      <p>Sus principales fortalezas incluyen el trabajo interdisciplinario con equipos de alto rendimiento, la evaluación y el desarrollo de competencias claves para un desempeño exitoso en el ámbito laboral y una mirada estratégica sobre los equipos dentro de las organizaciones, con miras a impulsar el máximo potencial de cada uno de ellos.</p>
+    </div>
+    <footer class="w3-container w3-indigo w3-large">
+      <a href="https://www.linkedin.com/in/patricia-diaz-1368249/ " target="_blank"  class=" w3-button w3-hover-opacity fa fa-linkedin"></a>
+    </footer>
+  </div>
+</div>
+
+
+<!-- Modal Marcela -->
+
+<div id="marcela" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('marcela').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Marcela Miel</h2>
+    </header>
+    <div class="w3-container">
+      <p>Capacitadora Internacional Senior. Traductora Literaria en idioma Inglés, es una profesional con amplia trayectoria gerenciando áreas de Entrenamiento, Capacitación y Desarrollo, con  veinte años de experiencia en el ámbito corporativo (principalmente American Express), en áreas de Recursos Humanos y de Servicios Globales. Se ha especializado también en liderar procesos de Selección y Reclutamiento, y en Clima Organizacional.</p>
+<p>Sus principales fortalezas incluyen el generar y facilitar contenidos de Desarrollo del Liderazgo, orientado a diversos niveles en la organización, así como la mejora de la calidad y eficiencia de los procesos de entrenamiento y experiencia de los empleados.  Tiene amplia experiencia trabajando con equipos multiculturales.</p> 
+<p>Idiomas: español e inglés</p>
+    </div>
+    <footer class="w3-container w3-indigo w3-large">
+      <a href="https://www.linkedin.com/in/marcela-miel/" target="_blank"  class=" w3-button w3-hover-opacity fa fa-linkedin"></a>
+    </footer>
+  </div>
+</div>
+
+<!-- Modal Eberbach -->
+
+<div id="eberbach" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('eberbach').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Patricia A. García Eberbach</h2>
+    </header>
+    <div class="w3-container">
+      <p>Consultora y Capacitadora. Contadora Pública (UBA), Coach Ontólogico, Neurosicoeducadora, Postítulo en Neurociencias para Coaches Ontológicos Profesionales Certificados, Diplomatura en Psicología Cognitiva y Conductual TREC (Instituto CATREC Albert Ellis USA). Tiene amplia trayectoria como consultora en empresas medianas y Pymes, tanto en el área de Administración y Finanzas, como en Recursos Humanos, facilitando procesos de aprendizaje para expandir la capacidad de acción, y acompañando el desarrollo de los clientes, tanto a nivel profesional como personal con un foco en la mejora de la calidad de vida.</p>
+<p>Sus fortalezas incluyen las neurociencias y el coaching, lo cual se traduce en el conocimiento del  funcionamiento de nuestro sistema nervioso y el valor de cuidarlo en la vida personal y laboral, favoreciendo de esta manera el desarrollo de funciones ejecutivas relacionadas con habilidades emocionales y sociales. </p> 
+
+    </div>
+    <footer class="w3-container w3-indigo w3-large">
+    </footer>
+  </div>
+</div>
+
+<!-- Modal Clima -->
+
+  <div id="clima" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('clima').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Diagnóstico y Desarrollo de Equipos de Liderazgo</h2>
+      </header>
+      <div class="w3-container">
+        <p><b>¿Qué hacemos?</b></p>
+        <p>Realizamos diagnósticos del ambiente y la efectividad de equipos de liderazgo, a través de elementos existentes y/o distintos métodos probados, enfocados en una diversidad de aspectos, como son la comunicación, el liderazgo, el trabajo en equipo, la toma de decisiones, entre otros. Los acompañamos en el diseño de planes de acción que impacten positivamente en su liderazgo y en el clima organizacional, y de esa manera enfocarse en los aspectos clave a potenciar y las áreas a mejorar.
+</p>
+        <p><b>Entregable</b></p>
+        <p>Un informe que refleja la situación actual de la organización o equipo, destacando fortalezas y áreas de oportunidad respecto de diversos aspectos fundamentales en la experiencia del equipo.   Se lleva a cabo una sesión de devolución y trabajo con su equipo directivo, para el armado de planes de acción que den como resultado un  impacto positivo en el clima interno y en la productividad y rentabilidad de la organización.
+</p>
+        <p><b>Objetivos y Beneficios</b></p> 
+        <p>Conocer el estado de situación actual de la efectividad del equipo, permitiendo fundamentalmente identificar las áreas de prioridad sobre las cuales basar un plan de acción efectivo. Eso posibilita identificar acciones concretas que impactarán positivamente en el clima interno del equipo y la organización, minimizando inversiones en aquellas áreas que no requieran foco prioritario. Asimismo, desde el punto de vista de los empleados, el ser escuchados y considerados como generadores de cambio en la organización, incrementa el grado de compromiso y lealtad a la compañía.</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Innovación -->
+
+  <div id="innovacion" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('innovacion').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Innovación y Colaboración</h2>
+      </header>
+      <div class="w3-container">
+        <p><b>¿Qué hacemos?</b></p>
+        <p>Establecemos un proceso de innovación y mejora continua en la organización o equipo, a través de workshops y labs, y la implementación de una plataforma colaborativa de generación de ideas que contempla el proceso completo desde la ideación, hasta la selección, la planificación y el seguimiento de su implementación.</p>
+        <p><b>Entregable</b></p>
+        <p>Sesiones de concientización y trabajo sobre innovación en la era de la transformación digital. Implementación de la plataforma TEAM® de ideación y colaboración.
+</p>
+        <p><b>Objetivos y Beneficios</b></p> 
+        <p>La implementación de ideas innovadoras que ayudan a la organización en la reducción de costos, incremento del negocio y/o mejora en el servicio al cliente. Este proceso también estimula la colaboración entre equipos de trabajo y el compartir mejores prácticas dentro de la organización, de manera de replicar aquellas ideas que funcionaron bien en un área a otra.</p>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal Líderes -->
+
+
+  <div id="lideres" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('lideres').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Atracción de Talento e Inducción/Onboarding</h2>
+      </header>
+      <div class="w3-container">
+        <p><b>¿Qué hacemos?</b></p>
+        <p>Brindamos asesoramiento y recomendaciones para optimizar el proceso de Atracción de Talento e Inducción de nuevos empleados a la organización. Entendemos que son procesos clave en la organización, y el gestionarlos de la manera adecuada contribuye en gran medida a mejorar indicadores como attrition, rotación y desempeño de equipos. 
+</p>
+        <p><b>Entregable</b></p>
+        <p>Revisión de descripciones de puestos, revisión del proceso actual de selección de talento en todas sus instancias. Recomendaciones para optimizar la efectividad del proceso. Capacitación a los líderes para realizar entrevistas por competencias. Asesoramiento en el diseño de un proceso efectivo de inducción de los nuevos empleados, acorde a las necesidades de la organización.
+</p>
+        <p><b>Beneficios</b></p> 
+        <p>Claridad en los roles y responsabilidades, y alcance de los puestos de trabajo. Identificación de las fuentes adecuadas para atraer al talento necesario y optimizar el proceso de selección en todas sus etapas, estableciendo indicadores que ayuden a conocer la calidad de las contrataciones, de manera de reducir los costos de rotación, re-selección y re-entrenamiento. Desarrollar un fuerte compromiso del nuevo empleado que se une a la organización, desde el día 1 en su rol. 
+
+</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Clima -->
+
+  <div id="coaching" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('coaching').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Optimización del Entrenamiento Técnico</h2>
+      </header>
+      <div class="w3-container">
+        <p><b>¿Qué hacemos?</b></p>
+        <p>Relevamos el proceso y contenido existente del entrenamiento técnico, y brindamos asesoramiento y recomendaciones para optimizarlo.
+
+</p>
+        <p><b>Entregable</b></p>
+        <p>Proceso actualizado y eficiente de entrenamiento técnico. Brindamos talleres para desarrollar habilidades fundamentales en los instructores internos de la organización (Train-the-Trainer).  
+</p>
+        <p><b>Beneficios</b></p> 
+        <p>Mejorar la experiencia del empleado que asiste a entrenamientos internos de la organización, y mejorar la efectividad de los entrenamientos impartidos, logrando mayor motivación, compromiso y efectividad de los instructores internos. Establecimiento de métricas de efectividad en los entrenamientos.
+
+</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Ciclo -->
+
+  <div id="ciclo" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('ciclo').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Programas de Capacitación para Lideres y Equipos
+</h2>
+      </header>
+      <div class="w3-container">
+        <p><b>¿Qué hacemos?</b></p>
+        <p>Contamos con diferentes estrategias para desarrollar el talento, a través de talleres y workshops que abarcan diversos temas clave en el liderazgo, enfocados a los diferentes niveles de la organización, incluyendo un programa de desarrollo de nuevos líderes. Utilizamos dinámicas innovadoras que permiten adquirir recursos nuevos y desarrollar los ya existentes y/o no identificados. Para ello, utilizamos tests, indicadores y herramientas como MBTI®, TKI®, la PNL, el Coaching y la técnica del PISH, entre otros.   
+</p>
+        <p><b>Entregable</b></p>
+        <p>Incluyen herramientas y prácticas para lograr una comunicación más efectiva, mayor inteligencia emocional, un liderazgo más efectivo, mayor apertura y confianza, una toma de decisiones más equilibrada, un manejo ágil del cambio y un adecuado manejo de conflictos, entre otros.
+
+ </p>
+        <p><b>Beneficios</b></p> 
+        <p>Mediante estos programas se desarrollan habilidades y se modifican actitudes mejorando el rendimiento individual y grupal. Todo líder debe: generar y compartir una visión, liberar el poder interior de los miembros de su equipo, fomentar el desarrollo individual, facilitar el mejor desempeño y generar la emocionalidad adecuada.
+</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Eficiencia -->
+
+  <div id="eficiencia" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('eficiencia').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Coaching Focalizado</h2>
+      </header>
+      <div class="w3-container">
+        <p><b>¿Qué hacemos?</b></p>
+        <p>Desarrollo individual de líderes y altos potenciales de las organizaciones mediante un proceso de coaching y feedback periódico. 
+ </p>
+        <p><b>Entregable</b></p>
+        <p>Sesiones pautadas de coaching, informe de feedback y progreso con respecto a objetivos planteados.
+
+ </p>
+        <p><b>Beneficios</b></p> 
+        <p>Autoconocimiento de fortalezas, áreas de mejora, habilidades no descubiertas y el impacto de nuestras acciones en otros. Un líder con mayor conciencia de sí mismo es más efectivo, y logra desarrollar mejores relaciones y resultados individuales y de equipo.
+
+ </p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="excelencia" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('excelencia').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Excelencia Operacional</h2>
+      </header>
+      <div class="w3-container">
+        <p><b>¿Qué hacemos?</b></p>
+        <p>Realizamos el diseño y mejora de la estructura de las organizaciones, mejorando los flujos de los procesos operativos, recomendando soluciones tecnológicas y gestionando su implementación. Estudiamos la capacidad de las áreas, identificando sub y sobrecapacidad, recomendando cambios para balancear el volumen de trabajo, evitando cuellos de botella y acumulación de stock.
+También lideramos procesos de outsourcing, insourcing y migración de volúmenes entre distintas localizaciones.
+
+
+ </p>
+        <p><b>Entregable</b></p>
+        <p>Organigramas detallados con descripción de las responsabilidades de cada posición. Flujos de procesos optimizados. Estudios de dotación de las áreas. Recomendaciones de soluciones tecnologías disponibles para la automatización y/o  digitalización  de los procesos. <br>
+Planificación y gerenciamiento de implementación de iniciativas de outsourcing, insourcing y migración de volúmenes.
+
+ </p>
+        <p><b>Beneficios</b></p> 
+        <p>Estructuras organizacionales con responsabilidades claramente establecidas, pensadas para cumplir los requerimientos de los clientes internos y externos, que contienen los controles por oposición necesarios y que contribuyen a un mejor flujo de los procesos. Procesos operativos sólidos y ágiles, que brinden el mejor servicio o producto para el cliente, utilizando tecnología adecuada a cada organización. <br>
+Gerenciamiento de proyectos end-to-end, asegurando el seguimiento de las actividades y removiendo obstáculos para el cumplimiento del objetivo propuesto.
+
+
+ </p>
+      </div>
+    </div>
+  </div>
+
+<div id="modelo-control" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('modelo-control').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+      <h2>Desarrollo de Tableros de Control</h2>
+    </header>
+  <div class="w3-container">
+
+<p>En la actualidad las empresas utilizan los tableros de control o ‘dashboards’ para llevar a cabo procesos de gestión decisivos como son:</p>
+
+<li>Clarificar y traducir la visión y la estrategia</li>
+<li>Comunicar y vincular los objetivos e indicadores estratégicos</li>
+<li>Establecer objetivos y medir su cumplimiento</li>
+<li>Medir los resultados de las iniciativas</li>
+<p>Los mismos deben medir las siguientes perspectivas: Financiera, Del Cliente, Procesos Internos, Aprendizaje y Crecimiento.<p>
+<img src="img/Perspectivas.jpg" alt="Perspectivas" style="width:60%">
+<p>Estos permiten equilibrar los resultados a corto y a largo plazo y alinearlos a la estrategia. Sin embargo, un buen tablero de control no sólo debe incluir medidas de resultados sino también de indicadores de desempeño (drivers).</p>
+
+<p>Los tableros pueden ser: Operativos (para el seguimiento diario de un sector o proceso), Directivos (para monitorear los resultados de las áreas clave) y/o Estratégicos (si se quiere medir la evolución de la empresa en el mercado).</p>
+
+<p>La buena noticia es que para confeccionar un tablero no se necesita una inversión significativa en software especializado.</p>
+
+<p>En <b>Insights Beacon </b>te podemos ayudar en:</p>
+
+<li>Identificar las estrategias de tu empresa</li>
+<li>Definir los objetivos y metas</li>
+<li>Determinar los indicadores de desempeño</li>
+<li>Diseñar un tablero en un formato amigable a las necesidades de cada cliente</li>
+
+<br>
+<br>
+
+      </div>
+    </div>
+  </div>
+
+
+<div id="partners" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('partners').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Alianzas estratégicas</h2>
+    </header>
+  <div class="w3-container">
+
+<h3 style="padding: 40px">Insights Beacon se expande a Europa mediante una alianza de colaboración estratégica con EPIConsulting (Estados Unidos y Austria) y Synergy Rhodes (Grecia) beneficiando así a sus clientes con la suma de productos y servicios de las tres compañías en el área de desarrollo organizacional y de liderazgo</h3> 
+
+
+
+ <div class="w3-half" >
+    <div class="w3-card-4 w3-center" >
+      <img src="img/SYNERGY_Logo.jpg" style="width:50%" alt="Synergy" >
+      <div class="w3-container w3-center">
+       <a href="https://www.synergy-rhodes.com" target="_blank">Website</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="w3-half" >
+    <div class="w3-card-4 w3-center">
+      <img src="img/EPIConsulting_RGB.png" style="width:50%" alt="Epic Consulting">
+      <div class="w3-container w3-center">
+      <a href="http://www.epiconsulting.org" target="_blank">Website</a>
+      </div>
+    </div>
+  </div>
+  <img src="img/map.png" style="width:100%" alt="Map">
+</div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+<div id="auto-liderazgo" class="w3-modal w3-animate-opacity">
+  <div class="w3-modal-content w3-card-4">
+    <header class="w3-container w3-white"> 
+      <span onclick="document.getElementById('auto-liderazgo').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+
+    </header>
+  <div class="w3-container">
+
+<img src="img/flyer.png" alt="Auto Liderazgo" style="width:100%"> 
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="mbti" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('mbti').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>La experiencia MBTI</h2>
+      </header>
+      <div class="w3-container">
+<img src="img/mbti.jpg" alt="Perspectivas" style="width:80%">
+
+<p>Basado en las Teorías de Personalidad de Carl Jung, el Indicador de Tipo MyersBriggs (MBTI®) es la herramienta de personalidad más confiable y respetada en el mundo con más de 70 años de investigación y desarrollo, y se administra anualmente a más de cuatro millones de personas en el mundo.</p>
+
+<p>Entender mis preferencias y cómo ellas impactan mis acciones, elecciones, relacionamiento y toma de decisiones, entre otras, así también como el entendimiento de las preferencias de los demás, me ayudará a mejorar mi comunicación y la forma de llegar al otro.</p>
+<p>No existen tipologías buenas ni malas, cada Tipo tiene sus fortalezas y sus puntos ciegos. Estar consciente de ambos, me servirán para ser más efectivo.</p>
+
+<p>El MBTI ayuda a equipos y sus integrantes a entender sus diferencias, y a utilizar esa diversidad para mejorar la comunicación, la consecución de objetivos, la toma de decisiones más efectivas, los estilos de liderazgo, la resolución de conflictos, el manejo de relaciones y del cambio, y los disparadores de stress.</p>
+
+<p>Se administra a través de un test online y una sesión de aprendizaje y aplicación con un facilitador certificado.</p>
+
+<p>Desde <b>Insights Beacon</b>, te ofrecemos ‘La experiencia MBTI’, que incluye:</p>
+
+<li>La administración del Indicador, online, en forma individual o para un grupo o equipo.</li>
+<li>Una sesión de aprendizaje sobre tu Tipo según tus preferencias, y las de tu equipo/grupo, si fuera grupal.</li>
+<li>Una sesión de aplicación del Tipo a la toma de decisiones, la comunicación y planificación, y los posibles disparadores de stress. En una sesión grupal, también se harán dinámicas para entender las fortalezas y posibles ‘puntos ciegos’ del equipo, así como la optimización de la toma de decisiones, comunicación y expectativas.</li>
+<li>Sesiones de coaching individual, o grupal, para trabajar aquellas áreas en las que el cliente quiere profundizar.</li>
+
+<br>
+<br>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div id="programa-quien" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('programa-quien').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>A quiénes está dirigido</h2>
+      </header>
+      <div class="w3-container">
+        <p>A jefes de equipo, gerentes, líderes de proyectos y cualquier persona que ocupe una posición de liderazgo en todo tipo de organizaciones, así también como participantes que deseen desarrollar sus capacidades de autoconocimiento y liderazgo.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="programa-fundamentos" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('programa-fundamentos').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Metodología del programa</h2>
+      </header>
+      <div class="w3-container">
+<p>El programa que Insights Beacon propone se basa en:</p>
+<li>Lograr una autoconciencia en los participantes acerca del modo en que sus habilidades para liderar vienen siendo ejercitadas, a través de evaluaciones, indicadores, compartiendo experiencias, actividades grupales e individuales de diálogo abierto y autoexploración</li>
+<li>Trabajar sobre la mejor manera de “reinventarse”, logrando un estilo propio de liderazgo, de modo de utilizar nuestros recursos internos como líderes</li>
+<li>Comenzar el camino para que las nuevas conductas se transformen en hábitos, a través de un plan de desarrollo</li>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div id="Sinopsis" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('Sinopsis').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Detalle del programa</h2>
+      </header>
+      <div class="w3-container">
+
+
+
+
+<p><b>Módulo 1: ¿Cómo estoy liderando mi vida hoy en todo sentido? ¿Cómo influye mi personalidad?</b></p>
+<li>Análisis de situación actual vs Mi expectativa del futuro</li>
+<li>Tipos de personalidad (MBTI) y su influencia en la comunicación, en la toma de decisiones y en la necesidad o falta de estructura</li>
+<li>Zona de seguridad y resistencia al cambio</li>
+
+<p><b>Módulo 2: El efecto de mis creencias y pensamientos</b></p>
+<li>Nuestras creencias primarias</li>
+<li>Creencias potenciadoras y limitantes</li>
+<li>Distorsiones cognitivas</li>
+<li>Nuestro cerebro</li>
+<li>El Poder de nuestras conversaciones privadas</li>
+
+<p><b>Módulo 3: Mis emociones y el trabajo en equipo</b></p>
+<li>Evolución y Supervivencia: El otro No es un enemigo</li>
+<li>Neuronas en espejo – Empatía</li>
+<li>Neurobiología de las emociones</li>
+<li>Ciclo de la emoción. Impactos en su interrupción</li>
+<li>¿Cómo aumentar la confianza y el compromiso? Neurobiología de la motivación</li>
+
+<p><b>Módulo 4: Mis conductas y los resultados que obtengo</b></p>
+<li>Reaccionar vs. Responder</li>
+<li>Modelo del observador</li>
+<li>El Proceso: Creencias -> Pensamientos -> Emociones -> Conductas -> Resultados</li>
+<li>Triángulo del Drama de Karpman, y su solución</li>
+
+<p><b>Módulo 5: Visión para el futuro: el/la Líder que quiero ser</b></p>
+<li>Habilidades cognitivas ejecutivas, intrapersonales e interpersonales</li>
+<li>Bienestar, eficacia y productividad</li>
+<li>Aprendizaje y cambio: Neuroplasticidad positiva y negativa</li>
+<li>Mi visión y objetivos para el futuro</li>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="programa-lugar" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('programa-lugar').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+                <h2 style="margin-left: 15px;">Fecha y hora</h2>
+                <h3 style="margin-left: 15px;">5 encuentros</h3>
+
+                <h3 style="margin-left: 15px;">Miércoles 8, 15, 22, 29 de mayo y 5 de junio 2019, de 18:30 a 22:00 hs</h3>
+
+      </header>
+      <div class="w3-container w3-half">
+        <h2>Lugar</h2>
+<h3>HIT Cañitas </h3>
+<h3>Av. Luis María Campos 877 - Belgrano - C.A.B.A.</h3>
+<p>(A metros del Solar de la Abadia)</p>
+		
+
+
+      </div>
+      <div class="w3-container w3-half">
+<div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=av.%20Luis%20Mar%C3%ADa%20Campos%20877&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="10"></iframe></div></div>
+
+
+
+      </div>
+
+
+      <header class="w3-container w3-white"> 
+
+
+      </header>
+
+    </div>
+  </div>
+
+
+
+
+  <div id="programa-inversion" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-white"> 
+        <span onclick="document.getElementById('programa-inversion').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Inversión</h2>
+          <h3>$12.500, o $10.000 abonando antes del 31/3/2019</h3>
+          <h3>Se puede abonar en hasta 3 cuotas. Consultar</h3>
+          <h3>Descuento de 20% para grupos de 2 o más participantes, reservando juntos</h3>
+        <h2>Formas de pago</h2>
+            <h3><li>Transferencia bancaria</li></h3>
+            <h3><li>Cheque</li></h3>
+            <h3><li>Tarjetas de Débito o Crédito</li></h3>
+
+      </header>
+
+    </div>
+  </div>
+</body>
+</html>
