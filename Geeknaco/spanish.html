@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<title>Insights Beacon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style/w3.css">
+<link rel="stylesheet" href="style/style-site.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
+<link rel="icon" href="icon.png">
+<!-- Begin Mailchimp Signup Form -->
+
+
+
+
+
+
+
+<style type="text/css">
+  #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 300, function(){
+           window.location.hash = hash;
+      });
+    } 
+  });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#home").fadeIn();
+    });
+});
+</script>
+
+<style>
+.bgimg-2 {
+    background-position: center;
+    background-size: cover;
+    
+}  
+
+#background-orange-start{
+    position: fixed;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    z-index: -2;
+}
+
+#background-gradient{
+    position: fixed;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+}
+
+#logo-center{
+    position: fixed;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+</style>
+
+<body>
+
+
+
+  <div id="background-gradient"> </div>
+  <div id="background-orange-start"> </div>
+  <div id="logo-center"> </div>
+  
+  <!-- Scripts -->
+  <script src="bodymovin.js"></script>
+  <script src="index.js"></script>
+
+
+
+<div class="w3-top">
+<!-- Menú -->
+  <div class="w3-card-2 bgimg-2 w3-padding-12"  id="myNavbar">
+      <img href="index.html" style="padding-top: 10px; margin-left:30px;width:100px">
+    <div class="w3-right w3-hide-small w3-hide-medium w3-padding-24">
+      <a href="#home" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Inicio</a>
+      <a href="#company" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Qué hacemos</a>
+      <a href="#productos" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Cómo lo hacemos</a>
+       <a href="#autoliderazgo" class="w3-bar-item w3-button w3-text-white w3-hover-orange"> Quiénes somos</a>
+
+    </div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-text-white w3-button w3-right w3-hide-large w3-hover-orange" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+<!-- Menú sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-smallw3-padding-16">Cerrar ×</a>
+  <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button">Home</a>
+  <a href="#company" onclick="w3_close()" class="w3-bar-item w3-button">Qué hacemos</a>
+  <a href="#productos" onclick="w3_close()" class="w3-bar-item w3-button">Cómo lo hacemos</a>
+  <a href="#autoliderazgo" onclick="w3_close()" class="w3-bar-item w3-button">Quiénes somos</a>
+
+
+</nav>
+
+<!-- Home -->
+<header class="bgimg-1 w3-display-container " id="home">
+<div class="w3-display-middle w3-text-white w3-center " style="width:70%">
+
+ 
+  </div>
+</header>
+
+
+
+</body>
+</html>
