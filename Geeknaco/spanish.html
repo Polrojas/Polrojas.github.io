@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="style/w3.css">
 <link rel="stylesheet" href="style/style-site.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Caudex" rel="stylesheet">
 <link rel="icon" href="icon.png">
@@ -176,6 +177,8 @@ $(document).ready(function(){
                 });
             });
         });
+
+
         $(function() {
             $('.bodymovin-loop').each(function() {
                 var element = $(this);
@@ -183,8 +186,6 @@ $(document).ready(function(){
                     container: element[0],
                     renderer: 'svg',
                     rendererSettings: {preserveAspectRatio: 'none' },
-
-
                     loop: true,
                     autoplay: true,
                     path: element.data('icon')
@@ -192,6 +193,41 @@ $(document).ready(function(){
             });
         });
     </script>
+
+
+<!-- Scroll into view illustration 1 -->
+<script>
+// sets default vlaue of surrounding div to none so it doesnt appear
+let animationDiv = document.getElementById('scrollingArea')
+animationDiv.style.display = "none"
+‍
+// need to pass in the div where you want the item to load and the file location
+function loader(div, pathLocation) {
+   let animation = bodymovin.loadAnimation({
+       container: div,
+       renderer: "svg",
+       loop: 1,
+       autoplay: true,
+       path: pathLocation
+   });
+   animation.play();
+}
+window.addEventListener('scroll', () => {
+   // can set scroll height by changing the number
+   let scrollHeightPercent = document.documentElement.scrollHeight * 0.08
+   let currentPOS = document.documentElement.scrollTop || document.body.scrollTop
+       // once the scroll height has gone past the % stated abvoe it will make the style appear
+   if (currentPOS >= scrollHeightPercent) {
+       let animationDiv = document.getElementById('scrollingArea');
+       if (animationDiv.style.display == 'none') {
+           // stuff here
+           animationDiv.style.display= ""
+           let bodyMotion1 = document.getElementById('lottie-scroll-1');
+           loader(bodyMotion1, "logo.json")
+       };
+   };
+});
+</script>
 
 
 
@@ -235,11 +271,10 @@ $(document).ready(function(){
 <div class="w3-container w3-padding-64" id="productos">
   <div class="w3-container w3-row w3-row-padding w3-center">
     <p class="w3-large"><b>Qué hacemos</b></p>
-
-
+    
     <div class="w3-quarter" style="min-width: 200px">
-      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('clima').style.display='block'" style="padding:20px; height:250px; min-width: 200px">
-        <img src="img/clima.png" alt="clima" style="height:100px;" >
+      <div class="w3-card" style="padding:20px; ">  
+<div class="bodymovin-loop" data-icon="https://assets10.lottiefiles.com/temp/lf20_qw577C.json" style="width:100%;"></div>
         <div class="container">
           <h4>Leadership Teams Development </h4>
         </div>
@@ -249,16 +284,18 @@ $(document).ready(function(){
 
 
     <div class="w3-quarter" style="min-width: 200px">
-      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('ciclo').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
-        <img src="img/capacitacion.png" alt="ciclo" style="height:100px">
+      <div class="w3-card" style="padding:20px; ">  
+<div class="bodymovin-loop" data-icon="https://assets10.lottiefiles.com/temp/lf20_qeyVQd.json" style="width:100%;"></div>
+
         <div class="container">
           <h4>Workshops and training for Leaders and Teams</h4> 
         </div>
       </div>
     </div>
     <div class="w3-quarter" style="min-width: 200px">
-      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('eficiencia').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
-        <img src="img/coaching.png" alt="eficiencia" style="height:100px">
+      <div class="w3-card" style="padding:20px; ">  
+<div class="bodymovin-loop" data-icon="https://assets2.lottiefiles.com/temp/lf20_csjVxr.json" style="width:100%;"></div>
+
         <div class="container">
           <h4>Focused Coaching</h4> 
         </div>
@@ -266,9 +303,10 @@ $(document).ready(function(){
     </div>
 
   <div class="w3-quarter" style="min-width: 200px">
-      <div class="w3-card w3-hover-opacity" onclick="document.getElementById('excelencia').style.display='block'" style="padding:20px; height:250px; min-width:200px">  
-        <img src="img/operacional.png" alt="eficiencia" style="height:100px">
-        <div class="container">
+      <div class="w3-card" style="padding:20px; ">  
+ <div class="bodymovin-loop" data-icon="https://assets8.lottiefiles.com/packages/lf20_w0cYJr.json" style="width:100%;"></div>
+
+         <div class="container">
           <h4>Operational Excellence</h4> 
         </div>
       </div>
