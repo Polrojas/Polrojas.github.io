@@ -170,30 +170,30 @@ $(document).ready(function(){
 <body>
 <div class="w3-top" >
 <!-- Menú -->
-  <div class="w3-card-2 bgimg-2 w3-padding-12 w3-black "  id="myNavbar" >
-    <img href="index.html" src="icon.png" alt="The Sandbox" style="padding-top: 30px; margin-left:30px;height:60px; position:fixed;">
-    <a href="javascript:void(0)" class="w3-bar-item w3-black w3-text-white w3-button w3-right w3-hover-orange" onclick="w3_open()">
+  <div class="w3-card-2  w3-black " style="height: 50px" id="myNavbar" >
+    <a href="javascript:void(0)" class="w3-bar-item w3-black w3-text-white w3-button w3-left w3-hover-orange" onmouseenter="w3_open()" onclick ="w3_open()" >
       <i class="fa fa-bars"></i>
     </a>
   </div>
 </div>
 <!-- Menú sidebar -->
-<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left" style="display:none; z-index: -4" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-smallw3-padding-16">Close ×</a>
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left" style="display:none; z-index: 1" id="mySidebar" onmouseleave="w3_close()">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-small w3-padding-16">Cerrar ×</a>
   <a href="#index" onclick="w3_close()" class="w3-bar-item w3-button">Home</a>
-  <a href="#company" onclick="w3_close()" class="w3-bar-item w3-button">Qué hacemos</a>
-  <a href="#productos" onclick="w3_close()" class="w3-bar-item w3-button">Cómo lo hacemos</a>
-  <a href="#partners" onclick="w3_close()" class="w3-bar-item w3-button">Quienes somos</a>
+  <a href="#objetivos" onclick="w3_close()" class="w3-bar-item w3-button">Objetivos</a>
+  <a href="#soluciones" onclick="w3_close()" class="w3-bar-item w3-button">Soluciones</a>
+  <a href="#enfoque" onclick="w3_close()" class="w3-bar-item w3-button">Enfoque</a>
+  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contacto</a>
 </nav>
 
 <!-- Home -->
 <header class="bgimg-1 w3-display-container " id="index">
 
-<div class="bodymovin-loop" data-icon="background-gradient.json" style="position: absolute;z-index: 1;height: 100%;width: 100%">
+<div class="bodymovin-loop" data-icon="background-gradient.json" style="position: absolute;z-index: 0;height: 100%;width: 100%">
 
 </div>
 
-<div class="w3-display-middle w3-text-white" style="position:absolute; z-index: 3; width: 100%">
+<div class="w3-display-middle w3-text-white" style="position:absolute; z-index: 0; width: 100%">
   
   <div class="w3-row-padding w3-center">
 
@@ -206,8 +206,6 @@ $(document).ready(function(){
 
 <div>
 
-
-
   </div>
 
 
@@ -218,43 +216,64 @@ $(document).ready(function(){
 
 
 
+<div class="w3-container w3-padding-64 bgimg-1" id="enfoque">
+  <div class="w3-container w3-row w3-row-padding w3-center w3-display-container">
+  
+
+</div>
+</div>
+
+
+
+
 <!-- Productos -->
-<div class="w3-container w3-padding-64" id="productos">
+<div class="w3-container w3-padding-64 w3-gray" id="objetivos">
   <div class="w3-container w3-row w3-row-padding w3-center">
     <h2>Ayudamos a las organizaciones a alcanzar sus objetivos de negocios:</h2>
+
+
+<div class="w3-row">
+  <div class="w3-container w3-half">
+    <h2>Ventas</h2>  
+    		<li>Análisis y posicionamiento comercial</li>
+			<li>Lanzamiento de canales</li>
+			<li>Onboarding de clientes</li>
+			<li>Alianzas y competidores no tradicionales</li>
+  </div>
+  <div class="w3-container w3-half">
+    <h2>imagen</h2>  
+  </div>
+</div>
+
+
+<div class="w3-row">
+  <div class="w3-container w3-half">
+    	<h2>imagen</h2> 
+  </div>
+  <div class="w3-container w3-half">
     
-    <div class="w3-third" style="min-width: 200px">
-      <div class="w3-card" style="padding:20px; ">  
-<div class="bodymovin-loop" data-icon="https://assets10.lottiefiles.com/temp/lf20_qw577C.json" style="width:100%;"></div>
-        <div class="container">
-          <h4>Ventas </h4>
-        </div>
-      </div>
-    </div>
- 
-
-
-    <div class="w3-third" style="min-width: 200px">
-      <div class="w3-card" style="padding:20px; ">  
-<div class="bodymovin-loop" data-icon="https://assets10.lottiefiles.com/temp/lf20_qeyVQd.json" style="width:100%;"></div>
-
-        <div class="container">
-          <h4>Eficiencia</h4> 
-        </div>
-      </div>
-    </div>
-    <div class="w3-third" style="min-width: 200px">
-      <div class="w3-card" style="padding:20px; ">  
-<div class="bodymovin-loop" data-icon="https://assets2.lottiefiles.com/temp/lf20_csjVxr.json" style="width:100%;"></div>
-
-        <div class="container">
-          <h4>Cultura</h4> 
-        </div>
-      </div>
-    </div>
-
+    <h2>Eficiencia</h2>  
+    		<li>Productividad comercial y de marketing</li>
+			<li>Rediseño de procesos y cadenas de valor</li>
+			<li>Aplicación de tecnología</li>
 
   </div>
+</div>
+
+<div class="w3-row">
+  <div class="w3-container w3-half">
+    <h2>Cultura</h2>  
+    		<li>Transformación cultural y de las personas</li>
+			<li>Gestión del cambio</li>
+			<li>Perspectiva exponencial</li>
+  </div>
+  <div class="w3-container w3-half">
+    <h2>imagen</h2>  
+  </div>
+</div>
+
+
+</div>
 </div>
 
 
@@ -262,73 +281,52 @@ $(document).ready(function(){
 
 
 
-<!-- Contactos  -->
-<div class="w3-container" style="padding:80px 16px" id="contact">
-  <p class="w3-large w3-center"><b>Contact us</b></p>
-  <div class="w3-row-padding">
-
-<!--
-    <div class="w3-half">
-      <form action="/action_page.php" target="_blank">
-        <p><input class="w3-input " type="text" placeholder="Name" required name="Nombre"></p>
-        <p><input class="w3-input " type="text" placeholder="Company" required name="Empresa"></p>
-        <p><input class="w3-input " type="text" placeholder="Email" required name="Email"></p>
-        <p><input class="w3-input " type="text" placeholder="Message" required name="Mensaje"></p>
-        <p>
-        <button class="w3-button w3-black" type="submit">
-          <i class="fa fa-paper-plane"></i> Send
-        </button>
-        </p>
-      </form>
-    </div>
--->
-    <div class="w3-half" style="
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 16px;
-    padding-top: 24px;">
+<!-- Productos -->
+<div class="w3-container w3-padding-64 w3-light-blue" id="soluciones">
+  <div class="w3-container w3-row w3-row-padding w3-center">
+    <h2>Tenemos un equipo de especialistas apasionados por trabajar en equipo para brindar soluciones excepcionales en:</h2>
 
 
-      <div class="w3-container" style="
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 16px;
-    padding-top: 16px;">
-          <i class="w3-left fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> 
-          <p style="margin-left: 66px;margin-top: 0px;margin-bottom: 0px;">6075 W Commercial Blvd, Fort Lauderdale, FL33319, USA</p>
-      </div>
-
-      <div class="w3-container" style="
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 16px;
-    padding-top: 16px;">
-          <i class="w3-left fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> 
-          <p style="margin-left: 66px;margin-top: 0px;margin-bottom: 0px;">USA: +1 (954) 900-9765 <br>ARG: +54 911 4157-5831<br>ARG: +54 911 4448-5799</p>
-      </div>
-
-     <div class="w3-container" style="
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 16px;
-    padding-top: 16px;">
-          <i class="w3-left fa fa-envelope fa-fw w3-xxlarge w3-margin-right"></i> 
-          <a href="mailto:info@insightsbeacon.com?Subject=Contacto%20desde%20web" style="margin-left: 0px;margin-top: 0px;margin-bottom: 0px;">info@insightsbeacon.com</a>
-      </div>
-
-     <div class="w3-container" style="
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 16px;
-    padding-top: 16px;">
-          <i class="w3-left fa fa-facebook-official fa-fw w3-xxlarge w3-margin-right"></i> 
-          <a href="https://www.facebook.com/insightsbeacon.argentina?fref=ts" target="_blank"   style="margin-left: 0px;margin-top: 0px;margin-bottom: 0px;">/insightsbeacon.argentina</a>
-      </div>
-
-
-    </div>
+<div class="w3-row">
+  <div class="w3-container w3-half">
+    
+    		<li>Business Strategy</li>
+			<li>Service Design</li>
+			<li>UX/UI</li>
+			<li>Data Analytics & Data Science</li>
+    		<li>Content Development</li>
+			<li>Software Development</li>
+			<li>Culture Readiness & Hacking</li>
+			<li>Exponential technologies</li>
+  </div>
+  <div class="w3-container w3-half">
+    <h2>imagen</h2>  
   </div>
 </div>
+</div>
+</div>
+
+
+<!-- Productos -->
+<div class="w3-container w3-padding-64" id="enfoque">
+  <div class="w3-container w3-row w3-row-padding w3-center">
+    <h2>Nuestro enfoque de la Transformación Digital</h2>
+
+
+<div class="w3-row">
+  <div class="w3-container w3-third">
+    <h3>Una nueva perspectiva...</h3>  
+  </div>
+  <div class="w3-container w3-third">
+    <h3>...desde los zapatos del usuario...</h3>  
+  </div>
+  <div class="w3-container w3-third">
+    <h3>...con una implementación ágil</h3>  
+  </div>
+</div>
+</div>
+</div>
+
 
 <!-- Footer -->
 <footer class="w3-center">
