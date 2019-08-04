@@ -1,29 +1,170 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Insights Beacon</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/w3.css">
-    <link rel="stylesheet" href="style/style-site.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Caudex" rel="stylesheet">
-    <link rel="icon" href="icon.png">
-    <link rel="stylesheet" href="" class="rel">
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
-    <script src="bodymovin.js"></script>
-    <script src="index.js"></script>
-</head>
+<title>Geeknaco</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style/w3.css">
+<link rel="stylesheet" href="style/style-site.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Caudex" rel="stylesheet">
+<link rel="icon" href="icon.png">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 300, function(){
+           window.location.hash = hash;
+      });
+    } 
+  });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#home").fadeIn();
+    });
+});
+</script>
+
+<style>
+
+* {box-sizing: border-box;}
+
+
+
+.quote{
+  font-family: 'Caudex', serif;
+  font-size: 28px;
+
+}
+
+body{
+  background-color: #ffffff;
+}
+
+.bodymovin-logo{
+  position: absolute;
+  z-index: -1;
+  height:100%;
+}
+
+@media only screen and (orientation: landscape) {
+
+.bodymovin-logo{
+  position: absolute;
+  z-index: -1;
+  width:100%;
+
+}
+
+
+</style>
+
+
+<script src="bodymovin.js"></script>
+<script src="index.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('.bodymovin').each(function() {
+                var element = $(this);
+                var animation = bodymovin.loadAnimation({
+                    container: element[0],
+                    renderer: 'svg',
+                    rendererSettings: {preserveAspectRatio: 'none' },
+                    loop: false,
+                    autoplay: true,
+                    path: element.data('icon')
+                });
+            });
+        });
+
+
+        $(function() {
+            $('.bodymovin-loop').each(function() {
+                var element = $(this);
+                var animation = bodymovin.loadAnimation({
+                    container: element[0],
+                    renderer: 'svg',
+                    rendererSettings: {preserveAspectRatio: 'none' },
+                    loop: true,
+                    autoplay: true,
+                    path: element.data('icon')
+                });
+            });
+        });
+
+
+        $(function() {
+            $('.bodymovin-logo').each(function() {
+                var element = $(this);
+                var animation = bodymovin.loadAnimation({
+                    container: element[0],
+                    rendererSettings: {preserveAspectRatio: 'xMidYMid slice' },
+
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: true,
+                    path: element.data('icon')
+                });
+            });
+        });
+
+
+    </script>
+
+
+<!-- Scroll into view illustration 1 -->
+<script>
+// sets default vlaue of surrounding div to none so it doesnt appear
+let animationDiv = document.getElementById('scrollingArea')
+animationDiv.style.display = "none"
+‍
+// need to pass in the div where you want the item to load and the file location
+function loader(div, pathLocation) {
+   let animation = bodymovin.loadAnimation({
+       container: div,
+       renderer: "svg",
+       loop: 1,
+       autoplay: true,
+       path: pathLocation
+   });
+   animation.play();
+}
+window.addEventListener('scroll', () => {
+   // can set scroll height by changing the number
+   let scrollHeightPercent = document.documentElement.scrollHeight * 0.08
+   let currentPOS = document.documentElement.scrollTop || document.body.scrollTop
+       // once the scroll height has gone past the % stated abvoe it will make the style appear
+   if (currentPOS >= scrollHeightPercent) {
+       let animationDiv = document.getElementById('scrollingArea');
+       if (animationDiv.style.display == 'none') {
+           // stuff here
+           animationDiv.style.display= ""
+           let bodyMotion1 = document.getElementById('lottie-scroll-1');
+           loader(bodyMotion1, "logo.json")
+       };
+   };
+});
+</script>
+
+
 
 <body>
 <div class="w3-top">
 <!-- Menú -->
   <div class="w3-card-2 bgimg-2 w3-padding-12"  id="myNavbar">
     <img href="index.html" src="icon.png" alt="INSIGHTS BEACON" style="padding-top: 30px; margin-left:30px;height:60px; position:fixed;">
-    <div class="bodymovin" data-icon="menu.json" style="position: absolute;z-index: -10;height: 100%;width:100%"></div>
 
     <div class="w3-right w3-hide-small w3-hide-medium w3-padding-24">
       <a href="#index" class="w3-bar-item w3-button w3-text-white w3-hover-orange">Home</a>
@@ -47,24 +188,22 @@
 
 <!-- Home -->
 <header class="bgimg-1 w3-display-container " id="index">
-<div class="bodymovin" data-icon="background-orange-start.json" style="position: absolute;z-index: -2;height: 100%;width:100%"></div>
-<div class="bodymovin-loop" data-icon="background-gradient.json" style="position: absolute;z-index: -3;height: 100%;width:100%"></div>
-<div class="bodymovin" data-icon="logo.json" style="position: absolute;z-index: -1;width:100%;"></div>
+
+<div class="bodymovin-logo" data-icon="intro-horizontal.json" style=""></div>
 </header>
 
 
 
 <!-- Productos -->
 <div class="w3-container w3-padding-64" id="productos">
-
   <div class="w3-container w3-row w3-row-padding w3-center">
-    <p class="w3-large"><b>Servicios</b></p>
+    <p class="w3-large"><b>Qué hacemos</b></p>
     
     <div class="w3-quarter" style="min-width: 200px">
       <div class="w3-card" style="padding:20px; ">  
-<div class="bodymovin-loop" data-icon="/animations/animation-w1500-h1500.json" style="width:100%;"></div>
+<div class="bodymovin-loop" data-icon="https://assets10.lottiefiles.com/temp/lf20_qw577C.json" style="width:100%;"></div>
         <div class="container">
-          <h4>Reingeniería de procesos</h4>
+          <h4>Leadership Teams Development </h4>
         </div>
       </div>
     </div>
@@ -76,7 +215,7 @@
 <div class="bodymovin-loop" data-icon="https://assets10.lottiefiles.com/temp/lf20_qeyVQd.json" style="width:100%;"></div>
 
         <div class="container">
-          <h4>Optimización de sistemas</h4> 
+          <h4>Workshops and training for Leaders and Teams</h4> 
         </div>
       </div>
     </div>
