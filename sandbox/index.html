@@ -9,87 +9,46 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Dekko&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet"> 
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+
 <link rel="icon" href="icon.png">
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 
-<script>
-$(document).ready(function(){
-  $("a").on('click', function(event) {
-    if (this.hash !== "") {
-      event.preventDefault();
-      var hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 300, function(){
-           window.location.hash = hash;
+
+	
+
+
+
+<script src="js/bodymovin.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
+  $(function() {
+      $('.bodymovin').each(function() {
+          var element = $(this);
+          var animation = bodymovin.loadAnimation({
+              container: element[0],
+              renderer: 'svg',
+              rendererSettings: {preserveAspectRatio: 'none' },
+              loop: false,
+              autoplay: true,
+              path: element.data('icon')
+          });
       });
-    } 
   });
-});
+  $(function() {
+      $('.bodymovin-loop').each(function() {
+          var element = $(this);
+          var animation = bodymovin.loadAnimation({
+              container: element[0],
+              renderer: 'svg',
+              rendererSettings: {preserveAspectRatio: 'none' },
+              loop: true,
+              autoplay: true,
+              path: element.data('icon')
+          });
+      });
+  });
 </script>
-
-<script>
-$(document).ready(function(){
-    $("button").click(function(){
-        $("#home").fadeIn();
-    });
-});
-</script>
-
-<style>
-* {box-sizing: border-box;}
-.logo-size {
-  width:30%; 
-  padding:20px; 
-  margin-left:35%;
-}
-.tagline {
-  width:60%;
-}
-@media only screen and (max-width: 600px) {
-  .logo-size {
-    width:50%; 
-    padding:30px; 
-    margin-left:25%;
-  }
-  .tagline {
-  width:90%;
-}
-}
-</style>
-
-
-<script src="bodymovin.js"></script>
-<script src="index.js"></script>
-
-    <script type="text/javascript">
-        $(function() {
-            $('.bodymovin').each(function() {
-                var element = $(this);
-                var animation = bodymovin.loadAnimation({
-                    container: element[0],
-                    renderer: 'svg',
-                    rendererSettings: {preserveAspectRatio: 'none' },
-                    loop: false,
-                    autoplay: true,
-                    path: element.data('icon')
-                });
-            });
-        });
-        $(function() {
-            $('.bodymovin-loop').each(function() {
-                var element = $(this);
-                var animation = bodymovin.loadAnimation({
-                    container: element[0],
-                    renderer: 'svg',
-                    rendererSettings: {preserveAspectRatio: 'none' },
-                    loop: true,
-                    autoplay: true,
-                    path: element.data('icon')
-                });
-            });
-        });
-    </script>
 
 
 
@@ -116,30 +75,27 @@ $(document).ready(function(){
 </nav>
 
 <!-- Home -->
-<header class="bgimg-1 w3-display-container sombra-seccion" id="index">
-  <div class="bodymovin-loop" data-icon="background-gradient.json" style="position: absolute;z-index: 0;height: 100%;width: 100%"></div>
-  <div class="w3-display-middle w3-text-white" style="position:absolute; z-index: 0; width: 100%">  
-    <div class="w3-row-padding w3-center">
-      <div class="logo-size">
-        <div class="bodymovin" data-icon="sandbox-logo.json" style="z-index: 0"></div>
-      </div>
-      <div style="padding-left: 20%;padding-right: 20%">
-        <h3>Nos especializamos en consultoría en transformación digital para ayudar a empresas a potenciar las interacciones con sus clientes.</h3>
-      </div>
-    </div>
+<header class="pantalla-completa" id="index">
+  <div class="bodymovin-loop background-inicio" data-icon="json/background-gradient.json"></div>
+  <div class="w3-display-middle tamaño-seccion">  
+      <div class="logo-size bodymovin" data-icon="json/sandbox-logo.json"></div>
+      <div class="tagline w3-text-white">Nos especializamos en consultoría en transformación digital para ayudar a empresas a potenciar las interacciones con sus clientes.</div>
   </div>
 </header>
 
-<div class="bgimg-1 w3-display-container sombra-seccion" style="background:#222222;  background-image: url('chalk.svg'); background-size: cover">
-<div class="w3-display-middle w3-text-white" style=" z-index: 0; width: 100%">  
-  <div class="w3-row-padding w3-center" >
+
+
+
+<div class="pantalla-completa pantalla-pizarra">
+<div class="w3-display-middle ">  
+  <div class="w3-row-padding w3-center w3-text-white" >
 
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">Desarrollo Comercial</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">+</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">Tecnología</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">+</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">Innovación</div>
-    <div class="pizarra" data-aos="flip-up" data-aos-duration="600">_______________</div>
+    <div class="pizarra" data-aos="flip-up" data-aos-duration="600">=</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600"><b>Nuevos negocios digitales</b></div>
 
   </div>
@@ -151,62 +107,47 @@ $(document).ready(function(){
   
 
 <!-- Productos -->
-<div class="w3-container w3-padding-64 sombra-seccion" id="objetivos" style="background: #7cccbe; background-image: url('tech-background.svg'); background-size: cover">
-  <div class="w3-container w3-row w3-row-padding w3-center "  >
-    <div class="seccion" data-aos="fade-up" data-aos-duration="600">Ayudamos a las organizaciones a alcanzar sus objetivos de negocios:</div>
-
-
-
-  
+<div class="w3-container" id="objetivos" style="background: #327a6e; background-image: url('svg/tech-background.svg'); background-size: cover">
+  <div class="w3-container w3-row w3-center tamaño-seccion">
+    <h1 class="titulo-seccion" data-aos="fade-up" data-aos-duration="600">Ayudamos a las organizaciones a alcanzar sus objetivos de negocios</h1>
       
-      <div class="w3-row-padding" style="width:90%; padding-left: 10%" >
-      
-      <div class="w3-third w3-section" style="padding: 2%">
-      <div class="w3-card-4 sombra-seccion" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" >
-      <div class="w3-container" style="background: #4a8178; min-height:400px">
-          <div class="titulo" >Ventas</div> 
-          <img src="ventas.svg">
-          <div class="subtitulo" >Análisis y posicionamiento comercial</div>
-          <div class="subtitulo" >Lanzamiento de canales</div>
-          <div class="subtitulo" >Onboarding de clientes</div>
-          <div class="subtitulo" >Alianzas y competidores no tradicionales</div>
-      </div>
-      </div>
+
+      <div class="w3-third w3-section " data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" >
+        <div class="w3-card-4 seccion" >
+          <div class="w3-container">
+              <h2 class="titulo" >Ventas</h2> 
+              <img alt="ventas" src="svg/ventas.svg" style="width:80%">
+              <p class="subtitulo" >Análisis y posicionamiento comercial</p>
+              <p class="subtitulo" >Lanzamiento de canales</p>
+              <p class="subtitulo" >Onboarding de clientes</p>
+              <p class="subtitulo" >Alianzas y competidores no tradicionales</p>
+          </div>
+        </div>
       </div>
       
-      <div class="w3-third w3-section" style="padding: 2%">
-      <div class="w3-card-4 sombra-seccion" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
-      <div class="w3-container" style="background: #4a8178; min-height:400px " >
-          <div class="titulo" >Eficiencia</div> 
-                    <img src="eficiencia.svg">
-
-          <div class="subtitulo" >Productividad comercial y de marketing</div>
-          <div class="subtitulo" >Rediseño de procesos y cadenas de valor</div>
-          <div class="subtitulo" >Aplicación de tecnología</div>
-      </div>
-      </div>
+      <div class="w3-third w3-section" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+        <div class="w3-card-4 seccion" >
+          <div class="w3-container" >
+              <h2 class="titulo" >Eficiencia</h2> 
+              <img alt="Eficiencia" src="svg/eficiencia.svg" style="width:80%">
+              <p class="subtitulo" >Productividad comercial y de marketing</p>
+              <p class="subtitulo" >Rediseño de procesos y cadenas de valor</p>
+              <p class="subtitulo" >Aplicación de tecnología</p>
+          </div>
+        </div>
       </div>
       
-      <div class="w3-third w3-section" style="padding: 2%; " >
-      <div class="w3-card-4 sombra-seccion" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
-      <div class="w3-container " style="background: #4a8178; min-height:400px;" >
-          <div class="titulo" >Cultura</div> 
-                              <img src="cultura.svg">
-
-          <div class="subtitulo" >Transformación cultural y de las personas</div>
-          <div class="subtitulo" >Gestión del cambio</div>
-          <div class="subtitulo" >Perspectiva exponencial</div>
+      <div class="w3-third w3-section" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+        <div class="w3-card-4 seccion" >
+          <div class="w3-container" >
+              <h2 class="titulo" >Cultura</h2> 
+              <img alt="Cultura" src="svg/cultura.svg" style="width:80%">
+              <p class="subtitulo" >Transformación cultural y de las personas</p>
+              <p class="subtitulo" >Gestión del cambio</p>
+              <p class="subtitulo" >Perspectiva exponencial</p>
+          </div>
+        </div>
       </div>
-      </div>
-      </div>
-      </div>
- 
-
-
-
-
-
-
 </div>
 </div>
 
@@ -214,107 +155,116 @@ $(document).ready(function(){
 
 
 <!-- Productos -->
-<div class="w3-container w3-padding-64 " id="soluciones" style="background: #403d66; background-image: url('tech-background.svg'); background-size: cover">
-  <div class="w3-container w3-row w3-row-padding w3-center">
-
-    <div class="seccion" data-aos="fade-up" data-aos-duration="600">Tenemos un equipo de especialistas apasionados por trabajar en equipo para brindar soluciones excepcionales en:</div>
-
-
-<div class="w3-row-padding" style="width:90%; padding-left: 10%" >
-      
-      <div class="w3-third w3-section" style="padding: 2%">
-      <div class="w3-card-4 " data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" >
-      <div class="w3-container" >
-        <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="100">Business Strategy</div>
-      <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="150">Service Design</div>
-      <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="200">UX/UI</div>
-      <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="250">Data Analytics & Data Science</div>
+<div class="w3-container" id="soluciones" style="background: #403d66; background-image: url('svg/tech-background.svg'); background-size: cover">
+  <div class="w3-container w3-row w3-center tamaño-seccion">
+    <div class="titulo-seccion" data-aos="fade-up" data-aos-duration="600">Tenemos un equipo de especialistas apasionados por trabajar en equipo para brindar soluciones excepcionales</div>
+    <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" >
+      <div class="w3-card-4 seccion-solucion" >
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="100">Business Strategy</p>
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="150">Service Design</p>
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="200">UX/UI</p>
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="250">Data Analytics & Data Science</p>
       </div>
+    </div>
+    <div class="w3-third " data-aos="fade-up" data-aos-duration="600" data-aos-delay="200"> 
+      <div class="w3-card-4 seccion-solucion" >
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="300">Content Development</p>
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="350">Software Development</p>
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">Culture Readiness & Hacking</p>
+        <p class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="450">Exponential technologies</p>
       </div>
+    </div>
+    <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+      <div class="w3-card-4 seccion-solucion" >
+        <div class="bodymovin-loop" data-icon="json/idea.json" style="height: 200%"></div>
       </div>
-      
-      <div class="w3-third w3-section" style="padding: 2%">
-      <div class="w3-card-4 " data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
-      <div class="w3-container"  >
-
-        <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="300">Content Development</div>
-      <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="350">Software Development</div>
-      <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">Culture Readiness & Hacking</div>
-      <div class="subtitulo" data-aos="fade-right" data-aos-duration="600" data-aos-delay="450">Exponential technologies</div>
-
-      </div>
-      </div>
-      </div>
-      
-      <div class="w3-third w3-section" style="padding: 2%; " >
-      <div class="w3-card-4 " data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
-      <div class="w3-container "  >
-
-<div class="bodymovin-loop" data-icon="idea.json" style="height: 200%"></div>
-        
-      </div>
-      </div>
-      </div>
-      </div>
-
-
-
-</div>
+    </div>
+  </div>
 </div>
 
 
 
 
 <!-- Productos -->
-<div class="w3-container w3-padding-64" id="enfoque" style="background-color: #4d61bd;background-image: url('tech-background.svg'); background-size: cover">
-  <div class="w3-container w3-row  w3-center">
+<div class="w3-container" id="enfoque" style="background-color: #4d61bd;background-image: url('svg/tech-background.svg'); background-size: cover">
+  <div class="w3-container w3-row  w3-center tamaño-seccion">
     <div class="titulo">Nuestro enfoque de la Transformación Digital</div>
-
-
     <div class="w3-row-padding" >
       
-        <div class="w3-third w3-section" >
-        <div class="w3-card-4 " data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" >
-        <div class="w3-container">
-                    <div class="bodymovin-loop" data-icon="ojo.json" ></div>
+      <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+        <div class="w3-card-4 seccion-solucion"  >
+            <div class="bodymovin-loop" data-icon="json/ojo.json" ></div>
+        </div>
+      </div>
+      
+      <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+        <div class="w3-card-4 seccion-solucion" >
+            <div class="bodymovin-loop" data-icon="json/zapato.json" ></div>
+        </div>
+      </div>
 
-    
+      <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+        <div class="w3-card-4 seccion-solucion" >
+            <div class="bodymovin-loop" data-icon="json/agil.json" ></div>
         </div>
-        </div>
-        </div>
-        
-        <div class="w3-third w3-section" >
-        <div class="w3-card-4 " data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
-        <div class="w3-container" >
-                    <div class="bodymovin-loop" data-icon="zapato.json" ></div>
-    
-        </div>
-        </div>
-        </div>
-        
-        <div class="w3-third w3-section">
-        <div class="w3-card-4 " data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
-        <div class="w3-container ">
-                    <div class="bodymovin-loop" data-icon="agil.json" ></div>
-    
-        </div>
-        </div>
-        </div>
-        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
 
 
+  
+
+<div class="w3-container w3-text-white" id="contacto" style="background: #403d66; background-image: url('svg/tech-background.svg'); background-size: cover">
+
+
+<div id="mc_embed_signup">
+<form action="https://facebook.us20.list-manage.com/subscribe/post?u=928fbfcfa20db1ee491891cff&amp;id=a6c27e30f5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  <h2>Contactanos</h2>
+<div class="indicates-required"><span class="asterisk">*</span> Campo requerido</div>
+<div class="mc-field-group">
+  <label for="mce-EMAIL">Correo electrónico  <span class="asterisk">*</span>
+</label>
+  <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+<div class="mc-field-group">
+  <label for="mce-FNAME">Nombre </label>
+  <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+</div>
+<div class="mc-field-group">
+  <label for="mce-LNAME">Apellido </label>
+  <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+</div>
+<div class="mc-field-group ">
+  <label for="mce-PHONE">Teléfono de contacto </label>
+  <input type="text" name="PHONE" class="" value="" id="mce-PHONE">
+</div>
+<div class="mc-field-group">
+  <label for="mce-COMPANY">Empresa </label>
+  <input type="text" value="" name="COMPANY" class="" id="mce-COMPANY">
+</div>
+<div class="mc-field-group">
+  <label for="mce-COMMENTS">Comentarios </label>
+  <input type="text" value="" name="COMMENTS" class="" id="mce-COMMENTS">
+</div>
+  <div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+  </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_928fbfcfa20db1ee491891cff_a6c27e30f5" tabindex="-1" value=""></div>
+    <div class="clear w3-center"><input type="submit" value="Enviar" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
 
 </div>
-</div>
 
 
-  
 
-  
-  
-  
-  
-  
 <!-- Footer -->
 <footer class="w3-center">
 </footer>
@@ -333,19 +283,7 @@ function w3_close() {
     mySidebar.style.display = "none";
 }
 // Get the video
-var video = document.getElementById("myVideo");
-// Get the button
-var btn = document.getElementById("myBtn");
-// Pause and play the video, and change the button text
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
+
 </script>
 
 

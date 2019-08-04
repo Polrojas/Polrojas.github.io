@@ -1,47 +1,188 @@
+@font-face{
+    font-family: "Chalk";
+    src: url('../font/chalk.ttf'),
+    url('../font/chalk.ttf'); /* IE */
+}
+
 body,h1,h2,h3,h4,h5,h6 {
   font-family: 'PT Sans', sans-serif;
+}
+
+body, html {
+    height: 100%;
+    font-size:18px;
+}
+
+.mc_embed_signup{
+  background:rgba(0,0,0,.4); 
+  clear:left;
+  padding: 30px;
+  border-radius: 5px;
+}
+.mc-field-group{
+  margin:20px;
+}
+/*pantalla pequeña*/
+.logo-size {
+  padding-left:10%;
+  padding-right: 10%; 
+}
+.tagline {
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: center;
+  font-size:20px;
+}
+.pizarra{
+  font-family: 'Chalk', cursive;
+  font-size: 40px;
+  color: #ffffff;
+}
+
+.background-inicio{
+  position: absolute; 
+  width:100%;
+  height: 100%;
+}
+
+.pantalla-completa {
+    background-position: center;
+    background-size: cover;
+    min-height: 100%;
+    position: relative;
+}  
+
+.pantalla-pizarra{
+  background:#222222;  
+  background-image: url('../svg/chalk.svg'); 
+  background-size: cover;
+
 }
 
 .titulo{
   color:#ffffff;
   font-family: 'PT Sans', sans-serif;
   font-size: 30px;
-  padding-top:30px;
-  padding-bottom:30px;
 }
 
-.pizarra{
-  font-family: 'Dekko', cursive;
-  font-size: 40px;
-  color: #ffffff;
+.titulo-seccion{
+  color:#FFFFFF;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 30px;
+  padding-bottom: 30px;
 }
 
 .subtitulo{
   color:#ffffff;
   font-family: 'PT Sans', sans-serif;
   font-size: 15px;
-  padding-bottom: 15px;
-  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
+
 
 .seccion{
-  color:#ffffff;
-  font-family: 'PT Sans', sans-serif;
-  font-size: 25px;
-  padding:10px;
+  -webkit-box-shadow: 0px 10px 28px -10px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 10px 28px -10px rgba(0,0,0,0.75);
+  box-shadow: 0px 10px 28px -10px rgba(0,0,0,0.75);
+  margin:10px;
+  background: rgba(0,0,0,.4);
+  border-radius: 5px;
+
 }
 
-.sombra-seccion{
--webkit-box-shadow: 0px 10px 28px -10px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 10px 28px -10px rgba(0,0,0,0.75);
-box-shadow: 0px 10px 28px -10px rgba(0,0,0,0.75);
+.seccion-solucion{
+
+  margin:0px;
+  padding: 0px;
+  z-index: 1;
 }
 
-body, html {
+
+.tamaño-seccion{
+  max-width:900px;
+  margin: 0 auto !important;
+  float: none !important;
+
+}
+
+
+/*pantalla mediana*/
+
+@media screen and (min-width: 400px) {
+  .logo-size {
+  padding-left:20%;
+  padding-right: 20%; 
+  }
+  .tagline {
+    padding-left: 20%;
+    padding-right: 20%;
+    text-align: center;
+    font-size: 25px;
+}
+.background-inicio{
+  position: absolute; 
+  width:100%;
+  height: 100%;
+}
+
+
+}
+/*pantalla grande*/
+
+@media screen and (min-width: 800px) {
+  .logo-size {
+    padding-left:30%; 
+    padding-right:30%;
+  }
+  .tagline {
+    padding-left: 40%;
+    padding-right: 40%;
+    text-align: center;
+    font-size: 30px
+}
+.background-inicio{
+  position: absolute; 
+  width:100%;
+  height: 100%;
+}
+
+
+
+
+}
+
+@media only screen and (orientation: landscape) {
+  .logo-size {
+    padding-left: 40%;
+    padding-right: 40%;
+    padding-top: 50px;
+  }
+
+  .tagline {
+    padding-left: 25%;
+    padding-right: 25%;
+    text-align: center;
+    font-size:20px;
+}
+
+  .pizarra{
+    font-family: 'Chalk', cursive;
+    font-size: 30px;
+    color: #ffffff;
+  }
+
+  .background-inicio{
+    position: absolute; 
+    width:100%;
     height: 100%;
-    font-size:18px;
+  }
+
 
 }
+
+
+
 
 .miembro{
     color:orange;
@@ -49,11 +190,7 @@ body, html {
 
 
 
-.bgimg-1 {
-    background-position: center;
-    background-size: cover;
-    min-height: 100%;
-}  
+
 
 .w3-background {
     background-position: center;
