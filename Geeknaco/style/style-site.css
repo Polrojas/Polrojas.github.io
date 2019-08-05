@@ -209,5 +209,6 @@ body{
 .cambio-menu{
     background: #000000ab;
     transition: all 1s ease;
+    box-shadow: 2px 2px 1px #d8d8d8;
 
 }
