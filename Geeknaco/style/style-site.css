@@ -174,3 +174,39 @@ body, html {
 }
 
 
+
+* {box-sizing: border-box;}
+
+
+
+.quote{
+  font-family: 'Caudex', serif;
+  font-size: 28px;
+
+}
+
+body{
+  background-color: #ffffff;
+}
+
+.bodymovin-logo{
+  position: absolute;
+  z-index: -1;
+  height:100%;
+  width:100%;
+}
+
+@media only screen and (orientation: landscape) {
+
+.bodymovin-logo{
+  position: absolute;
+  z-index: -1;
+  width:100%;
+
+}
+}
+
+.cambio-menu{
+    background: #000000ab;
+
+}
