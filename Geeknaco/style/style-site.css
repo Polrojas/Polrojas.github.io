@@ -208,5 +208,6 @@ body{
 
 .cambio-menu{
     background: #000000ab;
+    transition: all 1s ease;
 
 }
