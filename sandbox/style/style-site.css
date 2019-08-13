@@ -1,8 +1,3 @@
-@font-face{
-    font-family: "Chalk";
-    src: url('../font/chalk.ttf'),
-    url('../font/chalk.ttf'); /* IE */
-}
 
 body,h1,h2,h3,h4,h5,h6 {
   font-family: 'PT Sans', sans-serif;
@@ -54,7 +49,6 @@ body, html {
 
 .pantalla-pizarra{
   background:#222222;  
-  
   background-size: cover;
 
 }
@@ -146,7 +140,7 @@ body, html {
 }
 
   .pizarra{
-    font-family: 'Chalk', cursive;
+    font-family: 'PT Sans', cursive;
     font-size: 30px;
     color: #ffffff;
   }
@@ -183,7 +177,7 @@ body, html {
 }
 
   .pizarra{
-    font-family: 'Chalk', cursive;
+    font-family: 'PT Sans', cursive;
     font-size: 50px;
     color: #ffffff;
   }
