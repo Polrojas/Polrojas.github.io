@@ -54,7 +54,7 @@ body, html {
 
 .pantalla-pizarra{
   background:#222222;  
-  background-image: url('../svg/chalk.svg'); 
+  
   background-size: cover;
 
 }
