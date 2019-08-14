@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bodymin-animation.min.js" type="text/javascript"></script>
+
 
 
 <script src="js/bodymovin.js"></script>
@@ -33,8 +35,8 @@
               container: element[0],
               renderer: 'svg',
               rendererSettings: {preserveAspectRatio: 'none' },
-              loop: true,
-              autoplay: true,
+              loop: element.data('apl'),
+              autoplay: element.data('apl'),
               path: element.data('icon')
           });
       });
@@ -70,17 +72,14 @@
   <div class="bodymovin background-inicio" data-icon="json/background-gradient.json"></div>
   <div class="w3-display-middle tamaño-seccion">  
       <div class="logo-size bodymovin" data-icon="json/sandbox-logo.json"></div>
-      <div class="tagline w3-text-white">Nos especializamos en consultoría en transformación digital para potenciar las interacciones con los clientes</div>
+      <div class="tagline w3-text-white">Consultoría en transformación digital para potenciar las interacciones con clientes</div>
   </div>
 </header>
-
-
 
 
 <div class="pantalla-completa pantalla-pizarra">
 <div class="w3-display-middle ">  
   <div class="w3-row-padding w3-center w3-text-white" >
-
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">Desarrollo Comercial</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">+</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">Tecnología</div>
@@ -88,20 +87,15 @@
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">Innovación</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600">=</div>
     <div class="pizarra" data-aos="flip-up" data-aos-duration="600"><b>Nuevos negocios digitales</b></div>
-
   </div>
 </div>
 </div>
-
-
-
-  
+ 
 
 <!-- Productos -->
 <div class="w3-container" id="objetivos" style="background: #327a6e; background-image: url('svg/tech-background.svg'); background-size: cover">
   <div class="w3-container w3-row w3-center tamaño-seccion">
     <h1 class="titulo-seccion" data-aos="fade-up" data-aos-duration="600">Ayudamos a las organizaciones a alcanzar sus objetivos de negocios</h1>
-      
 
       <div class="w3-third w3-section " data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" >
         <div class="w3-card-4 seccion" >
@@ -143,8 +137,6 @@
 </div>
 
 
-
-
 <!-- Productos -->
 <div class="w3-container" id="soluciones" style="background: #403d66; background-image: url('svg/tech-background1.svg'); background-size: cover">
   <div class="w3-container w3-row w3-center tamaño-seccion">
@@ -171,10 +163,8 @@
       </div>
     </div>
   </div>
+
 </div>
-
-
-
 
 <!-- Productos -->
 <div class="w3-container" id="enfoque" style="background-color: #4d61bd;background-image: url('svg/tech-background.svg'); background-size: cover">
@@ -184,29 +174,24 @@
       
       <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
         <div class="w3-card-4 seccion-solucion"  >
-            <div class="bodymovin-loop" data-icon="json/ojo.json" ></div>
+            <div class="animation" src="json/ojo.json" ></div>
         </div>
       </div>
       
       <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
         <div class="w3-card-4 seccion-solucion" >
-            <div class="bodymovin-loop" data-icon="json/zapato.json" ></div>
+            <div class="animation" src="json/zapato.json" ></div>
         </div>
       </div>
 
       <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
         <div class="w3-card-4 seccion-solucion" >
-            <div class="bodymovin-loop" data-icon="json/agil.json" ></div>
+            <div class="animation" src="json/agil.json" ></div>
         </div>
       </div>
     </div>
   </div>
 </div>
-  
-
-
-  
-
 
 <!-- Footer -->
 <footer class="w3-container w3-padding-64 w3-center w3-black w3-xlarge">
@@ -216,6 +201,7 @@
   <p class="w3-small">Paraguay 716, 1º piso - Buenos Aires - Argentina</p>
     <a href="mailto:info@thesandbox.com.ar"><i class="fa fa-envelope"></i> info@thesandbox.com.ar</a>
 </footer>
+
 
 <script>
 var mySidebar = document.getElementById("mySidebar");
@@ -229,7 +215,6 @@ function w3_open() {
 function w3_close() {
     mySidebar.style.display = "none";
 }
-// Get the video
 
 </script>
 
@@ -259,7 +244,41 @@ function w3_close() {
 </script>
 
 
+<script>
+  function bodymovinAnimation() {
+    var scrollTop = $(document).scrollTop(),
+        windowHeight = $(window).height(),
+        indexList = [];
 
+    animations.each(function (index) {
+        var o = $(this);
+        if (o) {
+            var top = o.position().top;
+            if (scrollTop < top && scrollTop + windowHeight > top + (o.height() * 0.7)) {
+                var anim = bodymovin.loadAnimation({
+                    container: this,
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: true,
+                    path: o.attr('src')
+                });
+                indexList.push(index);
+            }
+        }
+    })
+
+    for (var i = indexList.length - 1; i >= 0; i--)
+        animations.splice(indexList[i], 1);
+}
+
+$(document).ready(function () {
+    // run
+    animations = $('.animation');
+
+    $(document).bind('scroll', bodymovinAnimation);
+    bodymovinAnimation();
+});
+</script>
 
 
 <script type="text/javascript" src="js/aos.js"></script>
