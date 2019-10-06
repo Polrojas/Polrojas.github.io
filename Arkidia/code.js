@@ -1,9 +1,11 @@
 var app = new Vue({
     el: '#app',
     data: {
-      message: 'Hello Vue!',
+      deleteHijo:'',
       categorias: [
-        { id:1, nombre: "Pintura", imagen: "json/pintura.json", styleObject:{ backgroundColor: "#FE693F" }},
+        { id:1, nombre: "Pintura", imagen: "json/pintura.json", styleObject:{ 
+                                                                    backgroundColor: "#FE693F",
+                                                                  }},
         { id:2, nombre: "Cocina", imagen: "json/cocina.json", styleObject:{ backgroundColor: "#E22B71"}},
         { id:3, nombre: "Dibujo", imagen: "json/dibujo.json", styleObject:{ backgroundColor: "#F2517D" }},
         { id:4, nombre: "Construcción", imagen: "json/construccion.json", styleObject:{ backgroundColor: "#FFCF0B" }},
@@ -11,13 +13,18 @@ var app = new Vue({
         { id:6, nombre: "Danza", imagen: "json/danza.json", styleObject:{ backgroundColor: "#0099C0" }},
         { id:7, nombre: "Ciencia", imagen: "json/ciencia.json", styleObject:{ backgroundColor: "#00C0B3" }},
         { id:8, nombre: "Fotografía", imagen: "json/fotografia.json", styleObject:{ backgroundColor: "#7E52A9"}}
+
+    ],
+
+    hijos: [
+      { id:0, nombre: "Pabloarkid", nickname: "Polito", password: "1231231", edad: 4, avatar:"images/arkidians/ark1.svg"},
+      { id:1, nombre: "Silvia422", nickname: "Solita", password: "33221221", edad: 6, avatar:"images/arkidians/ark2.svg"},
+      { id:2, nombre: "Maru11221", nickname: "Maria", password: "33221221", edad: 6, avatar:"images/arkidians/ark3.svg"}
     ]
+
+
     }
   })
-
-
-
-
 
 
   function bodymovinAnimation() {

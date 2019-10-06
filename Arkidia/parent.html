@@ -17,7 +17,7 @@
 <div id="app">
 
   <header class="pantalla-completa" id="index"> 
-    <nav class="navbar navbar-expand-lg navbar-light menu-style">
+    <nav class="navbar navbar-expand-lg navbar-light menu-style fixed-top">
       <a class="navbar-brand" href="#">
           <img src="./images/logo.png" width="150px" alt="Arkidia">
       </a>
@@ -45,12 +45,12 @@
         <div class="logo-size bodymovin" data-icon="json/logo.json"></div>
   </section>
 
-  <section>
+  <section > 
       <h1 class="titulo">Categorías</h1>
       <div class="container">
           <div class="row" style="justify-content: center">
               <div v-for="categoria in categorias" :key="categoria.nombre">
-                  <div class="card categoria" :style="categoria.styleObject">
+                  <div class="card categoria" :style="[categoria.styleObject]">
                       <div class="logo-size bodymovin" v-bind:data-icon="categoria.imagen"></div>
                       <div class="card-body">
                           <p class="texto-car-categoria">{{categoria.nombre}}</p>
@@ -61,7 +61,7 @@
       </div>
   </section>
 
-  <section>
+  <section >
       <h1 class="titulo">Últimos cursos</h1>
   </section>
   <div class="animation" src="json/cocina.json" ></div>

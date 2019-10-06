@@ -6,6 +6,10 @@
   padding-bottom: 30px;
 }
 
+.logo-size {
+  width: 80%;
+}
+
 .login-background{
   border-radius: 10px;
 }
@@ -36,12 +40,19 @@ h2 {
 
 
 .menu-style{
-  background: linear-gradient(45deg, #00b9ff8f, #5100859c);
+  background: linear-gradient(30deg,#ffffff, #FC5C7D,#b02894a8);
+
 }
 
 
 .welcome-style{
-  background-image: "../images/background-top.svg"
+  background-image: url("../images/background-top.svg");
+  background-repeat: no-repeat;
+  background-color: #B02894;
+  text-align: -webkit-center;
+  padding-top: 20%;
+  padding-bottom: 20%;
+
 }
 
 
@@ -50,20 +61,31 @@ h2 {
   border-radius: 15px !important; 
   border: 0px;
   width: 15rem;
+  align-items: center;
 
+}
+
+.card-hijo{
+  border-radius: 15px;
+  margin: 10px
 }
 
 .titulo{
   font-family: 'Patua One', cursive;
   text-align: center;
-  margin: 40px;
+  margin-top: 70px;
   font-size: 60px;
+}
+
+.subtitulo{
+  font-family: 'Patua One', cursive;
+  text-align: center;
+  font-size: 40px;
 }
 
 .texto-car-categoria{
   font-family: 'Patua One', cursive;
   text-align: center;
-  margin: 10px;
   font-size: 30px;
   color:white;
 
