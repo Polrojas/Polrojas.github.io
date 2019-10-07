@@ -42,7 +42,7 @@
 
 
   <section class="welcome-style">
-        <div class="logo-size bodymovin" data-icon="json/logo.json"></div>
+        <div class="logo-size bodymovin" data-icon="json/logo.json" data-aplay = "true" data-loop="false" ></div>
   </section>
 
 
@@ -85,7 +85,7 @@
           <div class="row" style="justify-content: center">
               <div v-for="categoria in categorias" :key="categoria.nombre">
                   <div class="card categoria" :style="[categoria.styleObject]">
-                      <div class="logo-size bodymovin" v-bind:data-icon="categoria.imagen"></div>
+                      <div class="logo-size bodymovin" v-bind:data-icon="categoria.imagen" data-aplay = "true" data-loop="false"></div>
                       <div class="card-body">
                           <p class="texto-car-categoria">{{categoria.nombre}}</p>
                       </div>

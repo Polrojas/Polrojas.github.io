@@ -82,8 +82,8 @@ $(function() {
           container: element[0],
           renderer: 'svg',
           rendererSettings: {preserveAspectRatio: 'none' },
-          loop: false,
-          autoplay: true,
+          loop: element.data('loop'),
+          autoplay: element.data('aplay'),
           path: element.data('icon')
       });
   });
