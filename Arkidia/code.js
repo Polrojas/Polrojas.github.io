@@ -20,6 +20,21 @@ var app = new Vue({
       { id:0, nombre: "Pabloarkid", nickname: "Polito", password: "1231231", edad: 4, avatar:"images/arkidians/ark1.svg"},
       { id:1, nombre: "Silvia422", nickname: "Solita", password: "33221221", edad: 6, avatar:"images/arkidians/ark2.svg"},
       { id:2, nombre: "Maru11221", nickname: "Maria", password: "33221221", edad: 6, avatar:"images/arkidians/ark3.svg"}
+    ],
+
+    resumenHijos:[
+        {   id:0, 
+            nickname: "Polito", 
+            avatar:"images/arkidians/ark1.svg",
+            badges:[{nombre:"pintura",nivel:"3"},{nombre:"cocina",nivel:"1"}],
+            ultCursos:[{nombre:"Como dibujar un león",porcentaje:"40%"},{nombre:"Como dibujar un dinosaurio",porcentaje:"70%"}]
+        },
+        {   id:1, 
+            nickname: "Solita", 
+            avatar:"images/arkidians/ark2.svg",
+            badges:[{nombre:"pintura",nivel:"5"},{nombre:"cocina",nivel:"2"}],
+            ultCursos:[{nombre:"Cocina una chocotorta",porcentaje:"30%"},{nombre:"Como dibujar un dinosaurio",porcentaje:"100%"}]
+        }
     ]
 
 
