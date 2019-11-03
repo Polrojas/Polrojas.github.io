@@ -114,8 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$_SESSION['username'] = $input['mail'];	
 		$evento = "REGISTRACION DE USUARIO PADRE";	
 		
-		$fecha = new DateTime();
-		$fecha_formateada = $fecha->format('Y-m-d H:i:s') . "\n";		
+		date_default_timezone_set('America/Argentina/Buenos_Aires');
+		$fecha_formateada = date("Y-m-d H:i:s",time());		
 		//Graba registro en tabla Log
 		$sql_padre = $dbConn->prepare("SELECT * FROM usuario_padre where mail=:mail");
 		$sql_padre->bindParam(':mail', $input['mail']);	

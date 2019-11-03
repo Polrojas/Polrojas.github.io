@@ -35,18 +35,19 @@ var app = new Vue({
         },
         buscarCategorias(){
             var requestCategorias = new XMLHttpRequest()
-            requestCategorias.open('GET', 'ApiRes/categorias.php', true)
+            requestCategorias.open('GET', 'ApiRes/categorias.php?usuario='+sessionStorage.loggedUser, true)
             requestCategorias.onload = function() {
                 var data = JSON.parse(this.response)
-
                 if (requestCategorias.status >= 200 && requestCategorias.status < 400) {
                     data.forEach(element => {
-                        app.apiCategorias.push({
-                            id: element.id_categoria,
-                            nombre: element.descripcion, 
-                            imagen: element.imagen_categoria, 
-                            styleObject:{ backgroundColor: element.color}}
+                        if(element.estado ==="P"){
+                            app.apiCategorias.push({
+                                id: element.id_categoria,
+                                nombre: element.descripcion, 
+                                imagen: element.imagen_categoria, 
+                                styleObject:{ backgroundColor: element.color}}
                             )
+                        }
                       })
                   } else {
                     console.log('error')

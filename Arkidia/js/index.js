@@ -38,6 +38,9 @@ var app = new Vue({
                             sessionStorage.typeUser = result.page
                         }
                         if (result.page==="ADMINISTRADOR"){
+                            sessionStorage.loggedUser = login.usuario
+                            sessionStorage.loggedName = result.user
+                            sessionStorage.typeUser = result.page
                             window.location.href = "admin/index.html";
                         }
                         if (result.page==="NINGUNA"){
@@ -82,17 +85,19 @@ var app = new Vue({
              })
         },
         buscarCategorias(){
-            fetch("ApiRes/categorias.php")
+            fetch("ApiRes/categorias.php?usuario=aplicacion")
            .then(response => response.json() )
           .then((data)=>{
                 data.forEach(element => {
-                    app.apiCategorias.push({
-                        id: element.id_categoria,
-                        nombre: element.descripcion, 
-                        imagen: element.imagen_categoria, 
-                        styleObject:{ backgroundColor: element.color}}
-                       )
-                  })
+                    if(element.estado ==="P"){
+                        app.apiCategorias.push({
+                            id: element.id_categoria,
+                            nombre: element.descripcion, 
+                            imagen: element.imagen_categoria, 
+                            styleObject:{ backgroundColor: element.color}}
+                        )
+                    }
+                    })
             })
         },
     },

@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $input['page'] = "HIJO";
     $input['user'] = $_SESSION['username'];
     echo json_encode($input);
-    exit();
+    
   }
   elseif(isset($fila_padre['nombre']))
   {
@@ -56,8 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $_SESSION['username'] = $fila_padre['nombre'];    
     $input['page'] = "PADRE";
     $input['user'] = $_SESSION['username']; 
-    echo json_encode($input);
-    exit();
+    echo json_encode($input);    
   }
   elseif(isset($fila_administrador['nombre']))
   {
@@ -66,16 +65,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $_SESSION['username'] = $fila_administrador['nombre'];
     $input['page'] = "ADMINISTRADOR";
     $input['user'] = $_SESSION['username'];
-    echo json_encode($input);
-    exit();
+    echo json_encode($input);    
   }
   else
   {
     $input['page'] = "NINGUNA";
-    echo json_encode($input);
-    exit();
-  } 
-  
+    echo json_encode($input);    
+  }
+  $evento = "INGRESO AL SISTEMA: ";    
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
+  $fecha_formateada = date("Y-m-d H:i:s",time());    
+  //Graba registro en tabla Log
+  $sql = "INSERT INTO log 
+        (fecha, evento, usuario)
+        VALUES
+        (:fecha, :evento, :usuario)";
+  $statement = $dbConn->prepare($sql);     
+  $statement->bindParam(':fecha', $fecha_formateada);
+  $statement->bindParam(':evento', $evento);
+  $statement->bindParam(':usuario', $_SESSION['username']);          
+  $statement->execute();
+  exit();
 }
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado

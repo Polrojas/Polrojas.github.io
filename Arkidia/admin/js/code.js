@@ -1,6 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        logged:false,
         ascending: false,
         sortColumn_curso: '',
         currentPage_curso: 1,
@@ -102,6 +103,23 @@ var app = new Vue({
             return Object.keys(this.hijos[0])
           }
       },
+
+      mounted: function(){
+        console.log(sessionStorage.typeUser)
+        console.log(sessionStorage.loggedUser)
+        console.log(sessionStorage.loggedName)
+        sessionStorage.logged = false
+        if(sessionStorage.loggedUser==null){
+            this.logged = false
+        }else{
+            if(sessionStorage.typeUser=="ADMINISTRADOR"){
+                sessionStorage.logged=true
+                this.logged = true
+            }else{
+              this.logged = false
+            }
+        }
+    }
 
     
       

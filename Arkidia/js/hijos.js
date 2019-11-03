@@ -12,7 +12,8 @@ var app = new Vue({
             usuario_padre: "",
             fecha: "",
             password: "",
-            avatar: ""
+            avatar: "",
+            edad:null
         },
         alterHijo: {
             usuario: "",
@@ -39,20 +40,21 @@ var app = new Vue({
             fetch("ApiRes/hijos.php?usuario_padre=" + usuarioPadre)
                 .then(response => response.json())
                 .then((data) => {
+                    console.log(data)
+
                     data.forEach(element => {
-                        console.log(element)
                         app.hijos.push({
                             usuario: element.usuario,
                             alias: element.alias,
                             password: element.password,
                             fecha: element.fecha_nacimiento,
                             avatar: element.avatar,
+                            edad: element.edad
                         })
                     })
                 })
         },
         eliminarHijo(hijo) {
-            console.log(hijo.usuario)
             fetch("ApiRes/hijos.php?usuario=" + hijo.usuario, {
                 method: "DELETE"
             })

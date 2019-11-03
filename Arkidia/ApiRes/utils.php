@@ -7,10 +7,16 @@
           $conn = new PDO("mysql:host={$db['host']};dbname={$db['db']}", $db['username'], $db['password']);
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
           return $conn;
       } catch (PDOException $exception) {
           exit($exception->getMessage());
       }
+  }
+
+  function obtenerHijos(){
+    $query = $this->connect()->query('SELECT * FROM usuario_hijo');
+    return $query;
   }
  //Obtener parámetros para updates
  function getParams($input)
@@ -112,19 +118,12 @@ function comprobar_email($email){
       return 0;
 }
 
-function graba_log($evento,$id){ 
 
-  $fecha = new DateTime();
-  $fecha_formateada = $fecha->format('Y-m-d H:i:s') . "\n"; 
-  //Graba registro en el log
-  $sql_log = "INSERT INTO log 
-            (fecha, evento, usuario)
-            VALUES
-            (:fecha, :evento, :usuario)";
-  $state = $dbConn->prepare($sql_log);
-  $state->bindValue(':fecha', $fecha);
-  $state->bindValue(':evento', $evento);
-  $state->bindValue(':usuario', $id);       
-  $state->execute();
+
+function calculaEdad($nacimiento){
+  $cumpleanos = new DateTime($nacimiento);
+  $hoy = new DateTime();
+  $annos = $hoy->diff($cumpleanos);
+  return $annos->y; 
 }
- ?>
+?>
