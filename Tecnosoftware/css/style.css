@@ -1860,7 +1860,7 @@ img.author-box-image {
 /*-----------------------------------------------------------------------------------*/
 
 .divider-section {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
 
     position: relative;
     overflow: hidden;
@@ -1871,6 +1871,7 @@ img.author-box-image {
 
 .logoTecno {
 
+background: url(../images/logo/logo.png) no-repeat fixed right;
 
 }
 
