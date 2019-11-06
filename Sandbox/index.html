@@ -9,8 +9,6 @@
 <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-
-
 <script src="js/bodymin-animation.min.js" type="text/javascript"></script>
 <script src="js/bodymovin.js"></script>
 <script type="text/javascript">
@@ -45,9 +43,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 
-
-
-
 <body>
 <div class="w3-top" >
 <!-- Menú -->
@@ -69,13 +64,13 @@
 <!-- Home -->
 <header class="pantalla-completa" id="index">
 
-  <div class="bodymovin background-inicio" data-icon="json/background-gradient.json"></div>
-  <div class="w3-display-middle tamaño-seccion">  
-      <div class="logo-size bodymovin" data-icon="json/sandbox-logo.json"></div>
-      <div class="tagline w3-text-white">Consultoría en transformación digital para potenciar las interacciones con clientes</div>
-  </div>
-</header>
+    <div class="bodymovin background-inicio" data-icon="json/background-gradient.json"></div>
+    <div class="w3-display-middle tamaño-seccion">  
+        <div class="logo-size animation" src="json/sandbox-logo.json" ></div>
 
+        <div class="tagline w3-text-white">Consultoría en transformación digital para potenciar las interacciones con clientes</div>
+    </div>
+  </header>
 
 <div class="w3-container pantalla-pizarra pantalla-completa"  style="background-size: cover">
 
@@ -91,7 +86,7 @@
       <div class="w3-third" >
 
         <div class="w3-card-4 "  >
-              <img class="lazy image-size" alt="ventas" src="gif/loader.gif" data-src="svg/desarrollo.svg" >
+              <img class=" image-size" alt="ventas" src="svg/desarrollo.svg" >
 
               <p class="pizarra">Desarrollo comercial</p>
         </div>
@@ -101,7 +96,7 @@
 
       <div class="w3-third" >
         <div class="w3-card-4 " >
-              <img class=" lazy image-size" alt="ventas" src="gif/loader.gif" data-src="svg/tecnologia.svg" >
+              <img class="  image-size" alt="ventas" src="svg/tecnologia.svg"  >
               <p class="pizarra">Tecnología</p>
 
         </div>
@@ -109,7 +104,7 @@
 
       <div class="w3-third">
         <div class="w3-card-4 " >
-              <img class="lazy image-size" alt="ventas" src="gif/loader.gif" data-src="svg/innovacion.svg" >
+              <img class=" image-size" alt="ventas"  src="svg/innovacion.svg" >
               <p class="pizarra">Innovación</p>
 
         </div>
@@ -127,7 +122,7 @@
         </div>
 
             <div class="w3-card-4 " >
-            <img class="lazy image-size" alt="ventas" src="gif/loader.gif" data-src="svg/digitales.svg" >
+            <img class=" image-size" alt="ventas" src="svg/digitales.svg" >
 
               <p class="pizarra">Nuevos negocios digitales</p>
 
@@ -141,9 +136,6 @@
 </div>
 
 
-
-
-
 <!-- Productos -->
 <div class="w3-container" id="objetivos" style="background: #327a6e; background-image: url('svg/tech-background.svg'); background-size: cover">
   <div class="w3-container w3-row w3-center tamaño-seccion">
@@ -153,7 +145,7 @@
         <div class="w3-card-4 seccion" >
           <div class="w3-container">
               <h2 class="titulo" >Ventas</h2> 
-              <img class="lazy" alt="ventas" src="gif/loader.gif" data-src="svg/ventas.svg" style="width:80%">
+              <img alt="ventas" src="svg/ventas.svg" style="width:80%">
               <p class="subtitulo" >Análisis y posicionamiento comercial</p>
               <p class="subtitulo" >Lanzamiento de canales</p>
               <p class="subtitulo" >Onboarding de clientes</p>
@@ -166,7 +158,7 @@
         <div class="w3-card-4 seccion" >
           <div class="w3-container" >
               <h2 class="titulo" >Eficiencia</h2> 
-              <img class="lazy" alt="Eficiencia" src="gif/loader.gif" data-src="svg/eficiencia.svg" style="width:80%">
+              <img  alt="Eficiencia" src="svg/eficiencia.svg" style="width:80%">
               <p class="subtitulo" >Productividad comercial y de marketing</p>
               <p class="subtitulo" >Rediseño de procesos y cadenas de valor</p>
               <p class="subtitulo" >Aplicación de tecnología</p>
@@ -178,7 +170,7 @@
         <div class="w3-card-4 seccion" >
           <div class="w3-container" >
               <h2 class="titulo" >Cultura</h2> 
-              <img class="lazy" alt="Cultura" src="gif/loader.gif" data-src="svg/cultura.svg" style="width:80%">
+              <img alt="Cultura" src="svg/cultura.svg" style="width:80%">
               <p class="subtitulo" >Transformación cultural y de las personas</p>
               <p class="subtitulo" >Gestión del cambio</p>
               <p class="subtitulo" >Perspectiva exponencial</p>
@@ -211,7 +203,7 @@
     </div>
     <div class="w3-third" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
       <div class="w3-card-4 seccion-solucion" >
-        <div class="bodymovin-loop" data-icon="json/idea.json" style="height: 200%"></div>
+          <div class="animation" src="json/idea.json" style="height: 200%"></div>
       </div>
     </div>
   </div>
@@ -266,40 +258,50 @@
 
 
 
-
+    
 <script>
-  function bodymovinAnimation() {
-    var scrollTop = $(document).scrollTop(),
-        windowHeight = $(window).height(),
-        indexList = [];
+    function bodymovinAnimation() {
+      var scrollTop = $(document).scrollTop(),
+          windowHeight = $(window).height(),
+          indexList = [];
+  
+      animations.each(function (index) {
+          var o = $(this);
+          if (o) {
+              var top = o.offset().top;
+              console.log((scrollTop < top)&&(scrollTop+windowHeight>top))
 
-    animations.each(function (index) {
-        var o = $(this);
-        if (o) {
-            var top = o.position().top;
-            if (scrollTop < top && scrollTop + windowHeight > top + (o.height() * 2)) {
-                var anim = bodymovin.loadAnimation({
-                    container: this,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: o.attr('src')
-                });
-                indexList.push(index);
-            }
+              if ((scrollTop < top)&&(scrollTop+windowHeight>top)) {
+                  var anim = bodymovin.loadAnimation({
+                      container: this,
+                      renderer: 'svg',
+                      loop: false,
+                      autoplay: true,
 
-        }
-    })
+                      path: o.attr('src')
+                  });
+                  indexList.push(index);
+              }
+  
+          }
+      })
+  
+      for (var i = indexList.length - 1; i >= 0; i--)
+          animations.splice(indexList[i], 1);
+  }
+  
+  $(document).ready(function () {
+      animations = $('.animation-json');
+      $(document).bind('scroll', bodymovinAnimation);
+      bodymovinAnimation();
+  });
 
-    for (var i = indexList.length - 1; i >= 0; i--)
-        animations.splice(indexList[i], 1);
-}
 
-$(document).ready(function () {
-    animations = $('.animation');
-    $(document).bind('scroll', bodymovinAnimation);
-    bodymovinAnimation();
-});
+  </script>
+
+<script type="text/javascript" src="js/aos.js"></script>
+<script type="text/javascript">
+  AOS.init();
 </script>
 
 
