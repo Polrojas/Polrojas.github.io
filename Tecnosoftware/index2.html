@@ -13,14 +13,10 @@
     <link href="css/animate.css" rel="stylesheet"  media="(prefers-reduced-motion: no-preference)">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
+    <!--PRO-->
     <script src="js/bodymovin.js"></script>
 
 
-
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon" sizes="144x144" href="images/ico/apple-touch-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/ico/apple-touch-icon-114x114.png">
@@ -39,7 +35,10 @@
 </head><!--/head-->
 <body>
 <div id="preloader">
-        <div class="animation" style="width:200px; margin-top:10px" src="animation/loader.json" ></div>
+
+    <div class="bodymovin-loop" data-icon="animation/loader.json" data-aplay="true" data-loop="true" style="width:100px"></div>
+
+
 </div>
     <header class="navbar navbar-inverse navbar-fixed-top " role="banner">
         <div class="container">
@@ -53,8 +52,9 @@
                 <a class="navbar-brand" href="index.html">
                     <div class="hidden-xs">
                         
-                            <div class="animation" style="width:200px; margin-top:10px" src="animation/logo.json" ></div>
-                        </div>
+            <div class="navbar-brand">                                    <div class="bodymovin" data-icon="animation/logo.json" data-aplay="true" data-loop="false" style="width:200px;margin-top: 5%"></div>
+        </div>
+                    </div>
         </a>
 
          
@@ -62,8 +62,8 @@
          <a class="navbar-brand" href="index.html">
                     <div class="visible-xs">
                         
-                            <div class="animation" style="width:200px" src="animation/logo.json" ></div>
-                        </div>
+            <div class="navbar-brand" style="margin-top: 5px;"><img src="images/logo/logo-blanco.png" width="25%"></div>
+                    </div>
         </a>
 
             </div>
@@ -85,16 +85,22 @@
         </div>
     </header><!--/header-->
 
-    <section id="main-slider" class="no-margin">
+    <section id="main-slider" class="no-margin" style="    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;">
         <div class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="carousel-content center centered">
-                                        <div class="animation" style="width:80%;margin-left: 10%;margin-right: 10%" src="animation/logo.json" ></div>
-                                        <p class="boxed animation animated-item-2 fade-up">Construimos software para crear el futuro.</p>
+                                <div class="carousel-content center centered" >
+                                    <div class="animation" style="width:80%;margin-left: 10%;margin-right: 10%" src="animation/logo-start.json" ></div>
+
+                                    <p class="boxed animation animated-item-2 fade-up">Construimos software para crear el futuro.</p>
                                     <br>
                                     <a class="btn btn-md animation bounce-in" href="#somosempresa">VER MÁS</a>
                                 </div>
@@ -120,6 +126,13 @@
                         </div>
                     </div>
                 </div>
+                
+               
+
+               
+                
+
+                 
             </div>
         </section>
         <section id="services" class="white">
@@ -134,44 +147,85 @@
                     </div>
                 </div>
 
+
                 <div class="row">
-                    <div class="col-md-4 col-sm-6" id="deve">
-                        <div class="service-block">
-                            <div class="pull-left bounce-in">
-                                <i class=" fa fa-md3">
-                                        <div class="animation"  src="animation/development.json" ></div>
-                                    </i>
+                        <div class="col-sm-4">
+                          <div class="card">
+
+                            <div class="card-body">
+                                <div class="animation" style="width:200px" src="animation/development.json" ></div>
+
+                              <h3 class="media-heading">Development Solutions</h3>
+                              <p>Soluciones de desarrollo de software, a medida.</p>
+                              <a class="btn btn-md  bounce-in" href="devsolutions.html">VER MÁS</a>
                             </div>
-                            <div class="media-body fade-up">
-                                <h3 class="media-heading">Development Solutions</h3>
-                                <p>Soluciones de desarrollo de software, a medida.</p>
-                                <a class="btn btn-md animation bounce-in" href="devsolutions.html">VER MÁS</a>
-                            </div>
+                            <a class="btn btn-md  bounce-in" href="devsolutions.html">VER MÁS</a>
+
+                          </div>
                         </div>
-                    </div><!--/.col-md-4-->
+                        <div class="col-sm-4">
+                          <div class="card">
+                            <div class="card-body">
+                                    <div class="animation" style="width:200px" src="animation/professional.json" ></div>
+
+                              <h3 class="media-heading">IT Professionals</h3>
+                              <p>Profesionales altamente capacitados al servicio de tu empresa.</p>
+                              <a class="btn btn-md  bounce-in" href="itprofessionals.html">VER MÁS</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                                <div class="card">
+                                  <div class="card-body">
+                                        <div class="animation" style="width:200px" src="animation/solutions.json" ></div>
+                                    <h3 class="media-heading">Product Solutions</h3>
+                                    <p>Productos del ecosistema para potenciar tus proyectos.</p>
+                                    <a class="btn btn-md  bounce-in" href="products.html">VER MÁS</a>
+                                  </div>
+                                </div>
+                              </div>
+                      </div>
+
+
+
+
+
+
+
+                <div class="row" >
+
+
+
+
+                            <div class="media-body fade-up">
+
+                                <h3 class="media-heading">Development Solutions</h3>
+
+                                <p>Soluciones de desarrollo de software, a medida.</p>
+                                <a class="btn btn-md  bounce-in" href="devsolutions.html">VER MÁS</a>
+                            </div>
+
                     <div class="col-md-4 col-sm-6" id="prof">
                         <div class="service-block">
                             <div class="pull-left bounce-in">
-                                <i class="fa fa-md1">
-                                        <div class="animation"  src="animation/professional.json" ></div>                                </i>
-                            </div>
+
+                                </div>
                             <div class="media-body fade-up">
                                 <h3 class="media-heading">IT Professionals</h3>
                                 <p>Profesionales altamente capacitados al servicio de tu empresa.</p>
-                                <a class="btn btn-md animation bounce-in" href="itprofessionals.html">VER MÁS</a>
+                                <a class="btn btn-md  bounce-in" href="itprofessionals.html">VER MÁS</a>
                             </div>
                         </div>
                     </div><!--/.col-md-4-->
                     <div class="col-md-4 col-sm-6" id="prod">
                         <div class="service-block">
                             <div class="pull-left bounce-in">
-                                <i class="fa fa-md2">
-                                        <div class="animation"  src="animation/solutions.json" ></div>                                </i>
+
                             </div>
                             <div class="media-body fade-up">
                                 <h3 class="media-heading">Product Solutions</h3>
                                 <p>Productos del ecosistema para potenciar tus proyectos.</p>
-                                <a class="btn btn-md animation bounce-in" href="products.html">VER MÁS</a>
+                                <a class="btn btn-md  bounce-in" href="products.html">VER MÁS</a>
                             </div>
                         </div>
                     </div><!--/.col-md-4-->
@@ -179,6 +233,9 @@
                 <div class="gap"></div>
                 <!--/.row-->
             </div>
+
+
+
 
             <section id="single-quote" class="divider-section">
                 <div class="container">
@@ -212,11 +269,8 @@
                         <h2 class="main-title">SOBRE NOSOTROS</h2>
                         <hr>
                     </div>
-
-
-
                     <div class="gap"></div>
-                    <div id="pricing-table" class="row">
+                    <div id="pricing-table" class="row  bounce-left">
                         <div class="col-md-4 col-md-6">
                             <ul class="plan plan1">
                                 <li class="plan-name">
@@ -224,7 +278,8 @@
                                 </li>
                                
                                <li>
-                                    <div class="animation" style="width:80%;margin-left:10%" src="animation/certificate.json" ></div>                                </li>
+
+                                </li>
                                 
                             </ul>
                         </div><!--/.col-md-3-->
@@ -234,7 +289,7 @@
                                     <h4 style="color: black;">SOCIOS Y DIRECTIVOS INVOLUCRADOS EN CADA PROYECTO</h4>
                                 </li>
                                  <li>
-                                        <div class="animation" style="width:80%;margin-left:10%"  src="animation/involved.json" ></div>                                </li>
+
                                     </li>
                                
                             </ul>
@@ -245,7 +300,8 @@
                                     <h4 style="color: black;">INVERSIÓN SOSTENIDA <p> EN I+D</h4>
                                 </li>
                                  <li>
-                                        <div class="animation" style="width:80%;margin-left:10%"  src="animation/investment.json" ></div>                                </li>
+
+                                    <div class="bodymovin-loop" data-icon="animation/investment.json" data-aplay="true" data-loop="false" style="width: 150px">
                                     </li>
                             </ul>
                         </div><!--/.col-md-3-->
@@ -264,24 +320,67 @@
                         <hr style="border-top: 1px solid #fff;">
                     </div>
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 center">
-                                <div class="animation" style="width:80%;margin-left:10%" src="animation/cont100.json" ></div> 
+                    <div class="col-md-3 col-sm-6">
+                        <div class="center bounce-in">
+                            <div class="progress blue">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">+100</div>
+                            </div>
+                             <p>
                             <h3>CLIENTES SATISFECHOS</h3>
+                        </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 center">
-                                <div class="animation" style="width:80%;margin-left:10%" src="animation/cont400.json" ></div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="center bounce-in">
+                            <div class="progress blue">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">+400</div>
+                            </div>
+                             <p>
                             <h3>PROFESIONALES</h3>
+                        </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 center">
-                                    <div class="animation" style="width:80%;margin-left:10%" src="animation/cont300.json" ></div>
-                                <h3>PROYECTOS EN 3 AÑOS</h3>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="center bounce-in">
+                            <div class="progress blue">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">+300</div>
+                            </div>
+                             <p>
+                            <h3>proyectos en 3 años</h3>
+                        </div>
                     </div>
-
-                    <div class="col-md-3 col-sm-6 center">
-                            <div class="animation" style="width:80%;margin-left:10%" src="animation/cont34.json" ></div>
-                        <h3>AÑOS ACOMPAÑANDO A LAS EMPRESAS LÍDERES</h3>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="center bounce-in">
+                            <div class="progress blue">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">+34</div>
+                            </div>
+                             <p>
+                            <h3>años acompañando a las empresas líderes</h3>
+                        </div>
                     </div>
-                    </div>
+                </div>
             </div>
             <div class="gap"></div>
         </section>
@@ -482,9 +581,6 @@
         </footer><!--/#footer-->
     </div>
 
-    
-
-
     <script src="js/plugins.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
@@ -494,48 +590,54 @@
 
 
 
-        
-        
-    <script>
-            function bodymovinAnimation() {
-              var scrollTop = $(document).scrollTop(),
-                  windowHeight = $(window).height(),
-                  indexList = [];
-          
-              animations.each(function (index) {
-                  var o = $(this);
-                  if (o) {
-                      var top = o.offset().top;
-  
-  
-                      if ((scrollTop < top)&&(scrollTop+windowHeight>top)) {
-                          var anim = bodymovin.loadAnimation({
-                              container: this,
-                              renderer: 'svg',
-                              loop: true,
-                              autoplay: true,
-                              path: o.attr('src')
-                          });
-                          indexList.push(index);
-                      }
-          
-                  }
-              })
-          
-              for (var i = indexList.length - 1; i >= 0; i--)
-                  animations.splice(indexList[i], 1);
-          }
-          
-          $(document).ready(function () {
-              animations = $('.animation');
-              $(document).bind('scroll', bodymovinAnimation);
-              bodymovinAnimation();
-          });
 
 
-          </script>
-          
-  
+
+
+
+        
+        
+
+        
+        
+        <script>
+          function bodymovinAnimation() {
+            var scrollTop = $(document).scrollTop(),
+                windowHeight = $(window).height(),
+                indexList = [];
+        
+            animations.each(function (index) {
+                var o = $(this);
+                if (o) {
+                    var top = o.offset().top;
+
+
+                    if ((scrollTop < top)&&(scrollTop+windowHeight>top)) {
+                        var anim = bodymovin.loadAnimation({
+                            container: this,
+                            renderer: 'svg',
+                            loop: true,
+                            autoplay: true,
+                            path: o.attr('src')
+                        });
+                        indexList.push(index);
+                    }
+        
+                }
+            })
+        
+            for (var i = indexList.length - 1; i >= 0; i--)
+                animations.splice(indexList[i], 1);
+        }
+        
+        $(document).ready(function () {
+            animations = $('.animation');
+            $(document).bind('scroll', bodymovinAnimation);
+            bodymovinAnimation();
+        });
+        </script>
+        
+
 
 
 
