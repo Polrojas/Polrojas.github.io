@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+    }
+
+    @media only screen and (orientation: portrait) {
+
+    .bg {
+        background-image: url("images/site/lungs.png");
+        height: 100%; 
+        width:100%;
+        background-position: top left;
+        background-repeat: no-repeat;
+        background-size: 90%;
+    }
+    titulo {
+        font-size: 15px;
+        display:block;
+        }
+    subtitulo {
+        font-size: 25px;
+        display:block;
+        }
+    .portada{
+        padding-top: 65%; 
+        width:60%;
+        padding-left:20%;
+
+    }
+    }
+
+
+    @media only screen and (orientation: landscape) {
+
+.bg {
+    background-image: url("images/site/lungs.png");
+    height: 100%; 
+    width:50%;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+titulo {
+    font-size: 30px;
+    display:block;
+    }
+subtitulo {
+    font-size: 40px;
+    display:block;
+    }
+.portada{
+    padding-top: 25%; 
+    width:50%;
+    padding-left:18%;
+
+}
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg">
+    <div class="portada">
+    <titulo>Curso de actualizacion</titulo>
+    <subtitulo>Manejo y tratamiento de la EPOC</subtitulo>
+</div>
+
+</div>
+
+<p>This example creates a full page background image. Try to resize the browser window to see how it always will cover the full screen (when scrolled to top), and that it scales nicely on all screen sizes.</p>
+
+</body>
+</html>

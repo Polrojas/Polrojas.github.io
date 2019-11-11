@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         if(!empty($_GET['id_curso'])) // Si el campo no está vacío
         {
           try{
-            $sql = $dbConn->prepare("SELECT * FROM challenges_cursos where id_curso = :id_curso");
+            $sql = $dbConn->prepare("SELECT * FROM challenges_cursos where id_curso = :id_curso order by orden_challenge");
             $sql->bindValue(':id_curso', $_GET['id_curso']);
             $sql->execute();
             $sql->setFetchMode(PDO::FETCH_ASSOC);

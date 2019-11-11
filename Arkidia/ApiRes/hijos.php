@@ -53,13 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         //$sql->setFetchMode(PDO::FETCH_ASSOC);
         $set_datos = $sql->fetchAll();
         //FetchAll(PDO::FETCH_COLUMN);
-        if (count($set_datos) == 0)
+        /*if (count($set_datos) == 0)
         {
             $respuesta['resultado']="ERROR";
             $respuesta['mensaje']="El usuario NO tiene hijos asociados en la tabla.";
             echo json_encode(  $respuesta  );
             exit();          
-        }          
+        }  */        
         $fila_hijo['usuario_padre']=$_GET['usuario_padre'];
         
 
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
           $sql->execute();
           //$sql->setFetchMode(PDO::FETCH_ASSOC);          
           $fila_hijo=$sql->fetchAll();
-          if (count($set_datos) == 0)
+          if (count($fila_hijo) == 0)
           {
               $respuesta['resultado']="OK";
               $respuesta['mensaje']="";
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         header("HTTP/1.1 200 OK");        
         echo json_encode( $respuesta );
         $evento = "CONSULTA TODOS LOS USUARIOS HIJOS";
-        $fila_hijo['usuario_padre']=$_GET['administrador'];
+        $fila_hijo['usuario_padre'] = $_GET['administrador'];
       }catch(Exception $e)
       {
         $e->getMessage();          

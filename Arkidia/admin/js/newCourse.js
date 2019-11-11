@@ -300,6 +300,10 @@ var app = new Vue({
           window.location.href = "admCursos.html";
 
         },
+        previsualizar(){
+          window.location.href = "preview-curso.html";
+
+        },
         buscarCurso(idCurso){
           console.log(idCurso)
 

@@ -9,23 +9,100 @@
 }
 #welcome{
   background: url("../images/site/background-welcome.svg") no-repeat 50% 50%;
-  background-color: #0cb9c9;
 
   display: table;
   height: 100%;
   width: 100%;
-  background-position-y: bottom;
+  background-position: left;
+  background-position-y: top;
   background-size: cover
 }
+#welcome2{
+  background: url("../images/site/background-welcome2.svg") no-repeat 50% 50%;
 
-#noArkidians{
-  background: url("../images/site/background-no-arkidians.svg") no-repeat 50% 50%;
   display: table;
   height: 100%;
   width: 100%;
-  background-position-y: bottom;
-  background-size: cover
+  background-position: left;
+  background-position-y: top;
+  background-size: 100%;
 }
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bg {
+  background-image: url("/images/site/lungs.png");
+  height: 100%; 
+  width:100%;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: 70%;
+}
+
+h1{
+  font-family: 'Abel', sans-serif;}
+
+h3{
+  font-family: 'Abel', sans-serif;
+  margin-bottom: 30px !important;
+}
+
+.item{
+    font-family: 'Lato', sans-serif;
+    margin:15px;
+
+  }
+  
+
+  ul{
+    list-style-type:none;
+    margin:1em 0;
+    
+}
+
+.container{
+    padding:3em;
+}
+
+.hashtag li, .star li, .triangle li, .heart li {
+  padding-left: 1.3em ;
+  line-height: 2;
+}
+
+.hashtag li:before,
+.star li:before,
+.triangle li:before,
+.heart li:before {
+  color:#000b6d;
+  font-family:FontAwesome;
+  display: inline-block;
+  margin-left: -1.3em;
+  width: 1.3em;
+}
+
+.hashtag li:before {
+  content: "\f292";
+}
+.star li:before {
+  content: "\f069";
+}
+.triangle li:before {
+  content: "\f0da";
+}
+.heart li:before {
+  content: "\f004";
+}
+
+
+
+
+.menu-item{
+  font-family: 'Abel', sans-serif;}
+
+
+
 .logo {
   padding-bottom: 30px;
 }
@@ -38,10 +115,6 @@
   border-radius: 4px;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-}
 
 a {
   color: #92badd;
@@ -90,13 +163,11 @@ h2 {
 
 
 .menu-style{
-  background: linear-gradient(30deg,#00C0B3, #0099C0,#00C0B3);
+  background: linear-gradient(400deg,#ffffff,#eeeeee, #eeeeee52);
 }
 
-.menu-admin-style{
-  background: linear-gradient(30deg,rgb(59, 59, 59), rgb(114, 4, 187),#ff7315);
 
-}
+
 
 
 #restricted{

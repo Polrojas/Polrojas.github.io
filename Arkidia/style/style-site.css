@@ -1,4 +1,83 @@
 /* BASIC */
+@import url('https://fonts.googleapis.com/css?family=Patua+One|Raleway&display=swap');
+
+
+main {
+  min-width: 300px;
+  max-width: 500px;
+  margin: auto;
+  padding-top:50px;
+
+
+}
+.cont {
+  font-family: 'Raleway', sans-serif;
+  text-align: -webkit-center;
+  font-size: 25px;
+  line-height: 1.75em;
+  border-top: 30px solid;
+  /*border-image: linear-gradient(to left, #743ad5 0%, #d53a9d 100%) round;*/
+  border-image-slice: 1;
+  border-width: 30px;
+  margin: 0;
+  padding: 80px;
+  position: relative;
+  color: #999999;
+}
+.cont:before {
+  font-family: 'Patua One', cursive;
+
+  position: absolute;
+  border-radius: 15px;
+  height: 50px;
+  width: 50px;
+  background-color: #34435e;
+  text-align: center;
+
+  color: #fff;
+  font-size: 30px;
+}
+.cont:nth-child(even) {
+  border-right: 30px solid;
+  padding-left: 0;
+  border-radius: 0 15px 15px 0;
+  margin-left:30px;
+  margin-top:-30px;
+
+}
+.cont:nth-child(even):before {
+  left: 100%;
+  margin-left: -10px;
+
+}
+.cont:nth-child(odd) {
+  border-left: 30px solid;
+  padding-right: 0;
+  border-radius:15px 0 15px 15px;
+  margin-top: -30px;
+  margin-right: 30px;
+
+}
+.cont:nth-child(odd):before {
+  right: 100%;
+  margin-right: -10px;
+
+}
+.cont:first-child {
+  border-top: 0;
+  stroke-linecap: round;
+  border-radius: 15 15px;
+
+
+}
+.cont:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+
+}
+
+
+
 
 #notLogged{
   background: url("../images/site/background-stop.svg") no-repeat ;
@@ -176,6 +255,11 @@ h2 {
 .titulo{
   font-family: 'Patua One', cursive;
   text-align: center;
+  font-size: 40px;
+}
+
+h1{
+  font-family: 'Patua One', cursive;
   font-size: 40px;
 }
 
@@ -463,4 +547,5 @@ input[type=password]:placeholder {
 .number:hover, .number.active {
   background: #717699;
 }
+
 

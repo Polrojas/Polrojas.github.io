@@ -302,7 +302,7 @@
 
     <div style="text-align: center"> 
         <button  type="button" class="btn btn-secondary" @click="volver()">Volver a Administración de cursos</button>
-        <button v-if="curso.creado" type="button" class="btn btn-primary" >Previsualizar curso</button>
+        <button v-if="curso.creado" type="button" class="btn btn-primary" @click="previsualizar()">Previsualizar curso</button>
     </div>
    
 </div>

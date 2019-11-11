@@ -1,0 +1,132 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+    .bg {
+        background-image: url("images/site/lungs.png");
+        height: 100%; 
+        width:100%;
+        background-position: top left;
+        background-repeat: no-repeat;
+        background-size: 350px;
+    }
+    titulo {
+        font-size: 15px;
+        display:block;
+        padding-left:80px;
+    }
+    subtitulo {
+        font-size: 25px;
+        display:block;
+        padding-left:80px;
+    }
+    .portada{
+        padding-top:290px; 
+        width:300px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+    .bg {
+        background-image: url("images/site/lungs.png");
+        background:deepskyblue;
+        height: 100%; 
+        width:100%;
+        background-position: top left;
+        background-repeat: no-repeat;
+    background-size: 500px;
+    }
+    titulo {
+        font-size: 25px;
+        display:block;
+        padding-left:130px;
+        }
+    subtitulo {
+        font-size: 30px;
+        display:block;
+        padding-left:130px;
+        }
+    .portada{
+        padding-top: 400px; 
+        width:400px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (orientation: landscape) {
+    .bg {
+        background-image: url("images/site/lungs.png");
+        height: 100%; 
+        width:100%;
+        background-position: bottom left;
+        background-repeat: no-repeat;
+    background-size: 500px;
+    }
+    titulo {
+        font-size: 25px;
+        display:block;
+        padding-left:120px;
+        }
+    subtitulo {
+        font-size: 30px;
+        display:block;
+        padding-left:120px;
+        }
+    .portada{
+        padding-top: 160px; 
+        width:470px;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .bg {
+        background-image: url("images/site/lungs.png");
+        height: 100%; 
+        width:100%;
+        background-position: top left;
+        background-repeat: no-repeat;
+    background-size: 500px;
+    }
+    titulo {
+        font-size: 25px;
+        display:block;
+        padding-left:130px;
+        }
+    subtitulo {
+        font-size: 30px;
+        display:block;
+        padding-left:130px;
+        }
+    .portada{
+        padding-top: 400px; 
+        width:400px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .bg {
+  background-image: url("images/site/lungs.png");
+  background:lightseagreen;
+
+  height: 100%; 
+  width:100%;
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: 500px;
+}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .bg {
+  background-image: url("images/site/lungs.png");
+  background:lightcoral;
+  height: 100%; 
+  width:100%;
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: 500px;
+}
+}
