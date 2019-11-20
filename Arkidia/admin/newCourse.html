@@ -89,14 +89,12 @@
                         </div>
                         <div class="card-body">
                             <form>
-                                    <h6 v-if="errorCurso" style="color: darkred">
-                                            {{msgErrorCurso}}
-                                            </h6>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Categoría</label>
-                                            <select v-model="curso.categoria" type="text" class="form-control">
+                                            <select v-on:click = "iniciarBoton()" v-model="curso.categoria" type="text" class="form-control">
                                                 <option v-for="categoria in categorias" :value="categoria">{{categoria.nombre}}</option>
                                             </select>
                                         </div>
@@ -106,7 +104,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Nombre del curso</label>
-                                            <input v-model="curso.nombre" type="text" class="form-control"  placeholder="Ingresá el nombre del curso " required>
+                                            <input v-on:click = "iniciarBoton()" v-model="curso.nombre" type="text" class="form-control"  placeholder="Ingresá el nombre del curso " required>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +112,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Qué se va a aprender</label>
-                                            <textarea v-model="curso.detalle" type="text" class="form-control"  placeholder="Qué va a aprender el Arkidian" ></textarea>
+                                            <textarea v-on:click = "iniciarBoton()" v-model="curso.detalle" type="text" class="form-control"  placeholder="Qué va a aprender el Arkidian" ></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -125,13 +123,13 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>desde</label>
-                                                    <input v-model="curso.edadDesde" type="number" class="form-control" max="15" min="3" >
+                                                    <input v-on:click = "iniciarBoton()" v-model="curso.edadDesde" type="number" class="form-control" max="15" min="3" >
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>hasta</label>
-                                                    <input  v-model="curso.edadHasta" type="number" class="form-control" max="15" min="3" >
+                                                    <input v-on:click = "iniciarBoton()" v-model="curso.edadHasta" type="number" class="form-control" max="15" min="3" >
                                                 </div>
                                             </div>
                                         </div>
@@ -142,15 +140,17 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Proveedor</label>
-                                            <select v-model="curso.proveedor" type="text" class="form-control">
+                                            <select v-on:click = "iniciarBoton()" v-model="curso.proveedor" type="text" class="form-control">
                                                 <option v-for="proveedor in proveedores" :value="proveedor">{{proveedor.nombre}}</option>
                                             </select>
                                         </div>  
                                     </div>
                                 </div>
-
+                                <h6 v-if="errorCurso" style="color: darkred">
+                                        {{msgErrorCurso}}
+                                        </h6>
                                 <button v-if="!curso.creado && curso.categoria && curso.detalle && curso.nombre && curso.edadDesde && curso.edadHasta && curso.proveedor" type="button" class="btn btn-primary" @click="crearCurso(curso)">Crear Curso</button>
-                                <button v-if="curso.creado" type="button" class="btn btn-primary" @click="grabarCurso(curso)">Grabar curso</button>
+                                <button id="btnGrabarCurso" v-if="curso.creado" type="button" class="btn btn-primary" @click="grabarCurso(curso)">Grabar curso</button>
 
                             </form>
                         </div>
@@ -175,19 +175,19 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Nombre del contenido</label>
-                                                <input v-model="contenido.nombre" type="text" class="form-control"  placeholder="Ingresá el nombre del contenido del curso ">
+                                                <input v-on:click="errorContenido=null" v-model="contenido.nombre" type="text" class="form-control"  placeholder="Ingresá el nombre del contenido del curso ">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Orden</label>
-                                                    <input v-model="contenido.orden" type="number" min = 1 class="form-control" >
+                                                    <input v-on:click="errorContenido=null" v-model="contenido.orden" type="number" min = 1 class="form-control" >
                                                 </div>
                                             </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>URL del contenido</label>
-                                                <input v-model="contenido.URLContenido" type="text" class="form-control"  v-on:keyup.enter="insertarContenido(contenido)" placeholder="Ingresá la URL del contenido ">
+                                                <input v-on:click="errorContenido=null" v-model="contenido.URLContenido" type="text" class="form-control"  v-on:keyup.enter="insertarContenido(contenido)" placeholder="Ingresá la URL del contenido ">
                                             </div>
                                         </div>
                                     </div>
@@ -246,19 +246,19 @@
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label>Nombre del Challenge</label>
-                                            <input v-model="challenge.nombre" type="text" class="form-control"  placeholder="Ingresá el challenge ">
+                                            <input v-on:click="errorChallenge=null" v-model="challenge.nombre" type="text" class="form-control"  placeholder="Ingresá el challenge ">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Orden</label>
-                                            <input v-model="challenge.orden" type="number" min = 1 class="form-control" >
+                                            <input v-on:click="errorChallenge=null" v-model="challenge.orden" type="number" min = 1 class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Explicación del challenge</label>
-                                            <textarea v-model="challenge.explicacion" type="text" class="form-control"  placeholder="Explicá de qué se trata el challenge" ></textarea>
+                                            <textarea v-on:click="errorChallenge=null" v-model="challenge.explicacion" type="text" class="form-control"  placeholder="Explicá de qué se trata el challenge" ></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -301,8 +301,11 @@
     </section>
 
     <div style="text-align: center"> 
-        <button  type="button" class="btn btn-secondary" @click="volver()">Volver a Administración de cursos</button>
+        <button  type="button" class="btn btn-secondary" @click="volver()">Volver</button>
         <button v-if="curso.creado" type="button" class="btn btn-primary" @click="previsualizar()">Previsualizar curso</button>
+        <button v-if="curso.estado==='B'" type="button" class="btn btn-success" @click="publicar(curso)">Publicar</button>
+        <button v-if="curso.estado==='P'" type="button" class="btn btn-danger" @click="anularPublicacion(curso)">Anular Publicación</button>
+
     </div>
    
 </div>

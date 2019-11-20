@@ -2,6 +2,8 @@
 var app = new Vue({
     el: '#app',
     data: {
+      btnGrabarCurso:null,
+
         proveedores: [{
             id:1,
             nombre:"Proov1"
@@ -142,6 +144,7 @@ var app = new Vue({
         },
 
         grabarCurso(curso){
+          app.btnGrabarCurso = document.getElementById("btnGrabarCurso");
           bodyApi = "id_curso=" + curso.id + 
                     "&usuario=" + sessionStorage.loggedUser + 
                     "&id_categoria=" + curso.categoria.id + 
@@ -167,8 +170,13 @@ var app = new Vue({
                           app.errorCurso=true
                           app.msgErrorCurso = result.mensaje
                           console.log(result.mensaje)
+                          app.btnGrabarCurso.style.background = "#444444";
+                          app.btnGrabarCurso.innerText = "No fue posible grabar"
                       }else{
                         console.log("Curso modificado")
+                        app.btnGrabarCurso.style.background = "#39a82f";
+                        app.btnGrabarCurso.innerText = "Grabado"
+
 
                       }
                   })
@@ -176,6 +184,22 @@ var app = new Vue({
                   throw "Error en la llamada Ajax"
               }
            })
+        },
+        publicar(curso){
+          curso.estado = "P"
+          this.grabarCurso(curso)
+        },
+        anularPublicacion(curso){
+          curso.estado = "B"
+          this.grabarCurso(curso)
+
+        },
+        iniciarBoton(){
+          app.btnGrabarCurso = document.getElementById("btnGrabarCurso");
+
+          app.btnGrabarCurso.style.background = "#9c27b0";
+          app.btnGrabarCurso.innerText = "Grabar Curso"
+
         },
 
         insertarContenido(contenido){
@@ -362,11 +386,12 @@ var app = new Vue({
       },
       mounted: function(){
         this.buscarCategorias()
-        console.log(sessionStorage.idCurso)
         if(sessionStorage.idCurso){
+
           this.buscarCurso(sessionStorage.idCurso)
           this.buscarContenido(sessionStorage.idCurso)
           this.buscarChallenge(sessionStorage.idCurso)
+
         }
 
 

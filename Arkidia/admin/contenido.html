@@ -15,7 +15,7 @@ div#video_player_box{
 video#my_video{border-radius:15px; width:800px; }
 div#video_controls_bar{ background: #333; border-radius: 15px; padding:10px; color:#CCC; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;position:absolute; width:780px}
 button#playpausebtn{
-	background:url(images/play.svg);
+	background:url(images/pause.svg);
     background-repeat: no-repeat;
 	border:none;
 	width:30px;
@@ -73,8 +73,15 @@ input[type='range']::-webkit-slider-thumb {
 	cursor:pointer;
 }
 </style>
+
+
+
+
+
+
+
 <script>
-var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn;
+var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, grabar, timer;
 function intializePlayer(){
 	// Set object references
 	vid = document.getElementById("my_video");
@@ -92,6 +99,8 @@ function intializePlayer(){
 	mutebtn.addEventListener("click",vidmute,false);
 	volumeslider.addEventListener("change",setvolume,false);
 	fullscreenbtn.addEventListener("click",toggleFullScreen,false);
+	grabar = false;
+	timer = 2;
 }
 window.onload = intializePlayer;
 function playPause(){
@@ -109,8 +118,11 @@ function vidSeek(){
     vid.play();
 
 	vid.currentTime = seekto;
+	timer = vid.currentTime * (100 / vid.duration);
+
 }
 function seektimeupdate(){
+
 	var nt = vid.currentTime * (100 / vid.duration);
 	seekslider.value = nt;
 	var curmins = Math.floor(vid.currentTime / 60);
@@ -123,8 +135,45 @@ function seektimeupdate(){
 	if(durmins < 10){ durmins = "0"+durmins; }
 	curtimetext.innerHTML = curmins+":"+cursecs;
 	durtimetext.innerHTML = durmins+":"+dursecs;
+	console.log(nt +" - " + timer);
+	if(grabar){
+		grabarAvance(timer);
+		timer += 5;
+		grabar = false;
+	}else{
+		if(nt>timer){
+			grabar = true;
+		}
+	}
+	if(nt==100){
+		grabarAvance(100)
+	}
+
 }
+
+function grabarAvance(avance){
+    bodyApi = 	"id_contenido=" + sessionStorage.contenido + 
+				"&usuario=" + sessionStorage.loggedUser + 
+				"&porcentaje_avance=" + avance 
+    console.log(bodyApi)
+    fetch("../ApiRes/contenido_alumno.php?"+bodyApi, {
+              method: 'PUT',
+              body: bodyApi,
+              headers: new Headers({
+            	'Content-Type': 'application/x-www-form-urlencoded'
+              })
+          })
+          .then(function(response) {
+              if(response.ok) {
+                console.log(response)
+              } else {
+                  throw "Error en la llamada Ajax"
+              }
+           })
+}
+
 function vidmute(){
+	vid.source = sessionStorage.video;
 	if(vid.muted){
 		vid.muted = false;
         mutebtn.style.background = "url(images/sound.svg)";
@@ -147,16 +196,18 @@ function toggleFullScreen(){
 	}
 }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
 </head>
 <body>
- 
+ <div id="app">
     <div id="video_player_box">
 
-
-
-
         <video id="my_video"  autoplay >
-            <source src="http://arkidia.s3-website-us-east-1.amazonaws.com/videos/DibujoElefante.mp4">
+            <source :src="videoCurso">
         </video>
 
 
@@ -168,6 +219,10 @@ function toggleFullScreen(){
                 <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
                 <button id="fullscreenbtn"></button>
               </div>
-    </div>
+	</div>
+</div>
+
+<script src="js/contenido.js" type="text/javascript"></script>
+
 </body>
 </html>

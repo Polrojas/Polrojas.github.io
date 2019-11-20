@@ -2,6 +2,7 @@
 var app = new Vue({
   el: '#app',
   data: {
+
       categorias: [],
       contenido:{
           id:"",
@@ -17,6 +18,7 @@ var app = new Vue({
       },
       nombreCategoria:"",
       styleObject:"",
+      colorObject:"",
       imagenCategoria:"",
 
       contenidos:[],
@@ -47,6 +49,12 @@ var app = new Vue({
       cont11:"",
       cont12:"",
       cont13:"",
+      chal0:"",
+      chal1:"",
+      chal2:"",
+      chal3:"",
+      chal4:"",
+      chal5:"",
 
 
   },
@@ -63,7 +71,7 @@ var app = new Vue({
                       video: element.link_video,
                       imagen: element.imagen_categoria,
                       styleObject: { backgroundColor: element.color},
-                      
+                      colorObject: { color: element.color}
                     }
                      )
                 })
@@ -73,25 +81,9 @@ var app = new Vue({
         fetch("../ApiRes/contenido_curso.php?usuario=" + sessionStorage.loggedUser+"&id_curso="+id_curso)
        .then(response => response.json() )
       .then((data)=>{
-            i=0
-            data.forEach(element => {
-              if(i==0){app.cont0 = element.nombre_contenido}
-              if(i==1){app.cont1 = element.nombre_contenido}
-              if(i==2){app.cont2 = element.nombre_contenido}
-              if(i==3){app.cont3 = element.nombre_contenido}
-              if(i==4){app.cont4 = element.nombre_contenido}
-              if(i==5){app.cont5 = element.nombre_contenido}
-              if(i==6){app.cont6 = element.nombre_contenido}
-              if(i==7){app.cont7 = element.nombre_contenido}
-              if(i==8){app.cont8 = element.nombre_contenido}
-              if(i==9){app.cont9 = element.nombre_contenido}
-              if(i==10){app.cont10 = element.nombre_contenido}
-              if(i==11){app.cont11 = element.nombre_contenido}
-
-              i++
+            app.contenidos = data
 
 
-              })
         })
     },
     completarContenido(){
@@ -102,14 +94,8 @@ var app = new Vue({
       fetch("../ApiRes/challenges_cursos.php?usuario=" + sessionStorage.loggedUser+"&id_curso="+id_curso)
      .then(response => response.json() )
     .then((data)=>{
-          data.forEach(element => {
-            app.challenges.push({
-              nombre:element.nombre_challenge,
-              orden:element.orden_challenge,
-              explicacion:element.detalle_challenge,
-              id:element.id_challenge
-          })
-            })
+      app.challenges = data
+     
       })
   },
 
@@ -117,8 +103,31 @@ var app = new Vue({
         window.location.href = "admCursos.html";
 
       },
-      empezarCurso(){
-        window.location.href = "curso.html";
+      empezarCurso(curso){
+        bodyApi = "usuario=" + sessionStorage.loggedUser + 
+                    "&id_curso=" + curso.id
+          console.log(bodyApi)
+          fetch("../ApiRes/inscripcion.php", {
+              method: 'POST',
+              body: bodyApi,
+              headers: new Headers({
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              })
+          })
+          .then(function(response) {
+              if(response.ok) {
+                  loginResponse = response.json()
+                  loginResponse.then(function(result) {
+                      if (result.resultado==="ERROR"){
+                          console.log(result.mensaje)
+                      }else{
+                        window.location.href = "curso.html";
+                      }
+                  })
+              } else {
+                  throw "Error en la llamada Ajax"
+              }
+           })
 
       },
       buscarCurso(idCurso){
@@ -145,6 +154,7 @@ var app = new Vue({
             console.log("categoria " + app.categorias[i])
             app.nombreCategoria = app.categorias[i].nombre
             app.styleObject = app.categorias[i].styleObject
+            app.colorObject = app.categorias[i].colorObject
             app.imagenCategoria = "../"+app.categorias[i].imagen
             return(app.categorias[i])
           }
@@ -163,6 +173,7 @@ var app = new Vue({
         this.buscarContenido(sessionStorage.idCurso)
         this.completarContenido()
         this.buscarChallenge(sessionStorage.idCurso)
+
       }
 
 

@@ -1,7 +1,7 @@
 <?php
-include "config.php";
-include "utils.php";
-
+require_once "config.php";
+require_once "utils.php";
+require_once "SegCla.php";
 $dbConn =  connect($db);
 //Consulta para perfil del padre
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
@@ -98,17 +98,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	}			
 	else
 	{
+		//$password=password_hash($input['password'], PASSWORD_DEFAULT, array("cost"=>12));
+		$password = encriptar($input['password']);
 	    $sql = "INSERT INTO usuario_padre 
 	          (nombre, apellido, mail, password)
 	          VALUES
 	          (:nombre, :apellido, :mail, :password)";
 	    $statement = $dbConn->prepare($sql);
-	    $nombre=strtoupper($input['nombre']);
-	    $apellido=strtoupper($input['apellido']);
-	    $statement->bindParam(':nombre', $nombre);
-	    $statement->bindParam(':apellido', $apellido);
+	    $statement->bindParam(':nombre', $input['nombre']);
+	    $statement->bindParam(':apellido', $input['apellido']);
 	    $statement->bindParam(':mail', $input['mail']);
-	    $statement->bindParam(':password', $input['password']);	    
+	    $statement->bindParam(':password', $password);	    
 	    $statement->execute();
 		session_start();//Inicia la sesión
 		$_SESSION['username'] = $input['mail'];	

@@ -1,130 +1,214 @@
 <!DOCTYPE html>
 <html>
-<title>Administración del sitio</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../style/style-site.css">
+  <title>Administración del sitio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../style/style-site.css" />
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Patua+One&display=swap" rel="stylesheet">
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-<script src="../js/bodymin-animation.min.js" type="text/javascript"></script>
-<script src="../js/bodymovin.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Patua+One&display=swap"
+    rel="stylesheet"
+  />
+  <script
+    type="text/javascript"
+    src="http://code.jquery.com/jquery-latest.min.js"
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+  <script src="../js/bodymin-animation.min.js" type="text/javascript"></script>
+  <script src="../js/bodymovin.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
 
-<body>
+  <body>
     <div class="loader">
-        <div
+      <div
         class="logo-size bodymovin"
         data-icon="../json/ciencia.json"
         data-aplay="true"
         data-loop="false"
         style="width:100px"
-        ></div>
+      ></div>
     </div>
 
     <div id="menu">
-        <header class="pantalla-completa" id="index"> 
-            <nav class="navbar navbar-expand-lg navbar-dark menu-admin-style fixed-top">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                        <img src="images/logo.svg" height="30" class="d-inline-block align-top" alt="">  
-                </a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <div v-for="opcion in opciones">
-                            <li class="nav-item active">
-                                <a class="nav-link" :href="opcion.link">{{opcion.etiqueta}}</a>
-                            </li>
-                        </div>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="../index.html" @click="logOut()" >Salir</a>
-                            </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+      <header class="pantalla-completa" id="index">
+        <nav
+          class="navbar navbar-expand-lg navbar-dark menu-admin-style fixed-top"
+        >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">
+            <img
+              src="images/logo.svg"
+              height="30"
+              class="d-inline-block align-top"
+              alt=""
+            />
+          </a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <div v-for="opcion in opciones">
+                <li class="nav-item active">
+                  <a class="nav-link" :href="opcion.link"
+                    >{{opcion.etiqueta}}</a
+                  >
+                </li>
+              </div>
+              <li class="nav-item active">
+                <a class="nav-link" href="../index.html" @click="logOut()"
+                  >Salir</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
-        <div id="restricted" v-if="!logged" id="notLogged">
-            <div class="padding">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <img src="../images/site/stop.svg" style="width:80%" alt="STOP"/>
-                        </div>
-                        <div class="col-sm-6" style="align-self: center">
-                            <h1 class="titulo">Acceso restringido a Administradores</h1>
-                            <p>Para acceder este contenido necesitás <a class="link" href="../index.html">iniciar sesión</a></p>  
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-   
-<div id="app" >
-    <section >
-
-        <div class="card mb-3" :style="[styleObject]">
-            <div class="row no-gutters" style="height: 120px">
-              <div class="col-md-2">
-                  <img :src="imagenCategoria" style="margin:10px" width="200px" alt="Arkidia" />
-                </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  </div>
+      <div id="restricted" v-if="!logged" id="notLogged">
+        <div class="padding">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <img
+                  src="../images/site/stop.svg"
+                  style="width:80%"
+                  alt="STOP"
+                />
+              </div>
+              <div class="col-sm-6" style="align-self: center">
+                <h1 class="titulo">Acceso restringido a Administradores</h1>
+                <p>
+                  Para acceder este contenido necesitás
+                  <a class="link" href="../index.html">iniciar sesión</a>
+                </p>
               </div>
             </div>
           </div>
-
-      <div >
-         
-
-
-
+        </div>
       </div>
-    </section >
-    <section style="padding: 40px 8%" >
+    </div>
 
+    <div id="app">
+      <section>
+        <div class="card mb-3" :style="[styleObject]">
+          <div class="row no-gutters" style="height: 120px">
+            <div class="col-md-2">
+              <img
+                :src="imagenCategoria"
+                style="margin:10px"
+                width="200px"
+                alt="Arkidia"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body"></div>
+            </div>
+          </div>
+        </div>
+
+        <div></div>
+      </section>
+      <section style="padding: 40px 8%">
         <h1 class="titulo" style="margin-top:60px">{{curso.nombre}}</h1>
-        <h3>{{curso.detalle}}</h3>
-        <div v-for="contenido in contenidos">
+        <h3 class="subtitulo">{{curso.detalle}}</h3>
+        <main>
+          <p
+            v-for="(contenido,index) in contenidos"
+            :key="index"
+            class="cont"
+            :style="[contenido.styleObject]"
+          >
+            <img
+              src="images/vervideo.svg"
+              width="300px"
+              :style="[styleObject]"
+              @click="verVideo(contenido)"
+              style="cursor: pointer;display:block; margin:auto; border-radius: 10px;     -webkit-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+                    -moz-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+                    box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68); margin:30px "
+              alt="Arkidia"
+            />
+            <img
+              v-if="index%2 == 0"
+              :src="'images/contenido'+index+'.svg'"
+              width="100px"
+              style="margin-left: -150px; position:absolute;z-index: 99;margin-top:-80px;"
+              alt="Arkidia"
+            />
+            <a style="color:slategray">{{contenido.nombre_contenido}}</a>
+            <a>{{contenido.porcentaje_avance}}%</a>
+            <img
+              v-if="index%2 != 0"
+              :src="'images/contenido'+index+'.svg'"
+              width="100px"
+              style="margin-left: 70px; position:absolute;z-index: 99;margin-top:-80px;"
+              alt="Arkidia"
+            />
+          </p>
+        </main>
 
-        <div class="card" style="width: 100%; padding:10px; margin:10px">
-                <video :src="contenido.URLContenido" controls controlsList=”nodownload”>
-                    Tu navegador no implementa el elemento <code>video</code>.
-                  </video>
-
-
-                <h5 class="card-text" style="margin:10px">{{contenido.nombre}}</h5>
-    
-            </div>
-              </div>
-            </div>
-    </section>
-
-
-
-
-
-
-
-</div>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="js/curso.js" type="text/javascript"></script>
-<script src="js/menu.js" type="text/javascript"></script>
-<script src="../js/animaciones.js" type="text/javascript"></script>
-
-
-
-
-
-</body>
+        <div style="padding:40px">
+          <img
+            src="images/challenge.svg"
+            width="200px"
+            :style="[styleObject]"
+            style="display:block; margin:auto; border-radius: 100%;     -webkit-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+            -moz-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+            box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68); "
+            alt="Arkidia"
+          />
+        </div>
+        <h3 class="subtitulo">Completá estos desafíos</h3>
+        <main>
+          <p
+            v-for="challenge in challenges"
+            class="cont"
+            :style="[colorObject]"
+          >
+            <a style="color:slategray"
+              >{{challenge.nombre_challenge}} -
+              {{challenge.detalle_challenge}}</a
+            >
+          </p>
+        </main>
+      </section>
+    </div>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/curso.js" type="text/javascript"></script>
+    <script src="js/menu.js" type="text/javascript"></script>
+    <script src="../js/animaciones.js" type="text/javascript"></script>
+  </body>
 </html>

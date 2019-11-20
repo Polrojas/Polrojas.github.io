@@ -71,7 +71,6 @@
 <section style="margin:10px"> 
         <h1 class="titulo">Administración de cursos</h1>
         <a href="newCourse.html" class="btn btn-primary btn-round" role="button">Nuevo curso</a>
-
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -97,14 +96,11 @@
                                                 <td v-for="col in columns_curso">{{curso[col]}}</td>
 
                                                 <td>
-                                                    <button class="btn" data-toggle="modal"
+                                                    <button class="btn btn-danger" data-toggle="modal"
                                                     data-target="#eliminarCurso" @click="cursoDelete = curso"><span>Eliminar</span></button> 
-
-
-
-
-
                                                     <button class="btn" @click="editarCurso(curso)"><span>Editar</span></button>
+                                                    <button class="btn" @click="previsualizarCurso(curso)"><span>Previsualizar</span></button>
+                                                    
                                             </tr>
                                         </tbody>
                                     </table>

@@ -30,9 +30,7 @@ var menu = new Vue({
       },
 
       mounted: function(){
-        console.log(sessionStorage.typeUser)
-        console.log(sessionStorage.loggedUser)
-        console.log(sessionStorage.loggedName)
+
         sessionStorage.logged = false
         if(sessionStorage.loggedUser==null){
             this.logged = false

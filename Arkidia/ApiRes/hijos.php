@@ -1,7 +1,7 @@
 <?php
-include "config.php";
-include "utils.php";
-
+require_once "config.php";
+require_once "utils.php";
+require_once "SegCla.php";
 $dbConn =  connect($db);
 //Muestra el contenido de la tabla hijos
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
@@ -23,13 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
             $respuesta['mensaje']="El usuario NO existe en la tabla.";
             echo json_encode(  $respuesta  );
             exit();
-          }else{           
+          }else{
+ 
             $respuesta['usuario']          = $fila_hijo['usuario'];
             $respuesta['alias']            = $fila_hijo['alias'];
             $respuesta['usuario_padre']    = $fila_hijo['usuario_padre'];
             $respuesta['fecha_nacimiento'] = $fila_hijo['fecha_nacimiento'];
             $respuesta['edad']             = calculaEdad($fila_hijo['fecha_nacimiento']);
-            $respuesta['password']         = $fila_hijo['password'];
+            $respuesta['password']         = desencriptar($fila_hijo['password']);
             $respuesta['avatar']           = $fila_hijo['avatar'];
             echo json_encode(  $respuesta  );
             $evento = "CONSULTA DEL HIJO: " . $_GET['usuario'];
@@ -49,34 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
       try{
         $sql = $dbConn->prepare("SELECT * FROM usuario_hijo where usuario_padre=:usuario_padre");
         $sql->bindValue(':usuario_padre', $_GET['usuario_padre']);
-        $sql->execute();      
-        //$sql->setFetchMode(PDO::FETCH_ASSOC);
-        $set_datos = $sql->fetchAll();
-        //FetchAll(PDO::FETCH_COLUMN);
-        /*if (count($set_datos) == 0)
+        $sql->execute();  
+        $set_datos = $sql->fetchAll();  
+        $fila_hijo['usuario_padre']=$_GET['usuario_padre']; 
+        $respuesta=array();
+        foreach($set_datos as $row)
         {
-            $respuesta['resultado']="ERROR";
-            $respuesta['mensaje']="El usuario NO tiene hijos asociados en la tabla.";
-            echo json_encode(  $respuesta  );
-            exit();          
-        }  */        
-        $fila_hijo['usuario_padre']=$_GET['usuario_padre'];
-        
-
-          $respuesta=array();
-            foreach($set_datos as $row)
-            {
-                $item = array(
-                'usuario'          => $row['usuario'],
-                'alias'            => $row['alias'],
-                'usuario_padre'    => $row['usuario_padre'],
-                'fecha_nacimiento' => $row['fecha_nacimiento'],
-                'edad'             => calculaEdad($row['fecha_nacimiento']),
-                'password'         => $row['password'],
-                'avatar'           => $row['avatar']          
-              );
-              array_push($respuesta, $item);
-            }
+            $item = array(
+            'usuario'          => $row['usuario'],
+            'alias'            => $row['alias'],
+            'usuario_padre'    => $row['usuario_padre'],
+            'fecha_nacimiento' => $row['fecha_nacimiento'],
+            'edad'             => calculaEdad($row['fecha_nacimiento']),
+            'password'         => desencriptar($row['password']),
+            'avatar'           => $row['avatar']          
+          );
+          array_push($respuesta, $item);
+        }
         
         
         header("HTTP/1.1 200 OK");
@@ -118,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
               'usuario_padre'    => $row['usuario_padre'],
               'fecha_nacimiento' => $row['fecha_nacimiento'],
               'edad'             => calculaEdad($row['fecha_nacimiento']),
-              'password'         => $row['password'],
+              'password'         => desencriptar($row['password']),
               'avatar'           => $row['avatar']          
             );
             array_push($respuesta, $item);
@@ -228,7 +218,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }    
     else
     { 
-
+      //$password=password_hash($input['password'], PASSWORD_DEFAULT, array("cost"=>12));
+      $password = encriptar($input['password']);
       $sql = "INSERT INTO usuario_hijo
             (usuario, alias, usuario_padre, fecha_nacimiento, password, avatar)
             VALUES
@@ -238,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $statement->bindParam(':alias', $input['alias']);
       $statement->bindParam(':usuario_padre', $input['usuario_padre']);
       $statement->bindParam(':fecha_nacimiento', $input['fecha']);
-      $statement->bindParam(':password', $input['password']);
+      $statement->bindParam(':password', $password);
       $statement->bindParam(':avatar', $input['avatar']); 
       $statement->execute();
       //graba_log("SE REGISTRO EN EL SISTEMA",$usuario)
@@ -298,21 +289,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT')
 {
     $input = $_GET;
     $usuario = $input['usuario'];
+    $clave=encriptar($input['password']);
     //Se busca si existe el usuario
     $sql_hijo = $dbConn->prepare("SELECT * FROM usuario_hijo where usuario=:usuario");
     $sql_hijo->bindParam(':usuario', $input['usuario']); 
     $sql_hijo->setFetchMode(PDO::FETCH_ASSOC);
     $sql_hijo->execute();
     $fila_hijo= $sql_hijo->fetch();
-
-    $fields = getParams($input);
-    $sql = "
-          UPDATE usuario_hijo SET $fields WHERE usuario='$usuario'";
-    $statement = $dbConn->prepare($sql);
-    bindAllValues($statement, $input);
-    $statement->execute();
-
-    $evento = "MODIFICO LOS DATOS DEL HIJO: " . $usuario;    
+    try{
+      $input['password']=$clave;
+      $fields = getParams($input);
+/*      $data=[
+        'usuario' => $input['usuario'],
+        'alias' => $input['alias'],      
+        'fecha_nacimiento' => $input['fecha'],
+        'password' => encriptar($input['password']),
+        'avatar' => $input['avatar'],
+      ];
+      $sql = "UPDATE usuario_hijo 
+            SET alias = :alias, fecha_nacimiento = :fecha_nacimiento, password = :password, avatar = :avatar
+            WHERE usuario=:usuario";*/
+      $sql = "UPDATE usuario_hijo SET $fields WHERE usuario='$usuario'";
+      $statement = $dbConn->prepare($sql);
+      bindAllValues($statement, $input);
+          
+      $statement->execute();      
+    }catch(Exception $e)
+    {
+      $e->getMessage();          
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']=$e;
+      echo json_encode(  $respuesta  );
+      exit();
+    } 
+    $evento = "MODIFICO LOS DATOS DEL HIJO: " . $input['usuario'];    
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     $fecha_formateada = date("Y-m-d H:i:s",time());    
     //Graba registro en tabla Log

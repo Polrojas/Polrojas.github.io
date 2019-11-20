@@ -49,6 +49,13 @@ var app = new Vue({
 
         },
 
+        previsualizarCurso(curso){
+          sessionStorage.idCurso = curso.id
+          window.location.href = "preview-curso.html";
+        },
+
+
+
         eliminarCurso(curso){
           fetch("../ApiRes/cursos.php?id_curso=" + curso.id + "&usuario=" + sessionStorage.loggedUser, {
             method: "DELETE"

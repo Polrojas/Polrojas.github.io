@@ -6,22 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="style/style-site.css" />
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous"
-  />
-  <link href="https://fonts.googleapis.com/css?family=Abel|Lato&display=swap" rel="stylesheet">
-      <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script src="js/bodymin-animation.min.js" type="text/javascript"></script>
   <script src="js/bodymovin.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+  <link href="https://fonts.googleapis.com/css?family=Lato|Raleway&display=swap" rel="stylesheet">
+
+  
   <body>
-
       <div class="loader">
           <div
           class="logo-size bodymovin"
@@ -30,15 +25,13 @@
           data-loop="false"
           style="width:100px"
         ></div>
-        </div>
-
+      </div>
 
     <div id="app">
       <header class="pantalla-completa" id="index">
-
           <nav class="navbar navbar-expand-lg navbar-light menu-style fixed-top">
               <a class="navbar-brand" href="SitioPadre.html">
-                  <img src="images/logo.svg" width="200px" alt="Boehringer Ingelheim">
+                  <img src="images/logo.svg" width="300px" alt="Boehringer Ingelheim">
               </a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -66,12 +59,6 @@
                 </ul>
               </div>
             </nav>
-
-
-            
-
-
-
       </header>
 
       <section id="welcome" style="height: 400px; padding: 40px 16%" >
@@ -83,15 +70,60 @@
           </div>
       </section>
 
-      <section style="margin:30px; padding: 40px 16%">
-        <h3>Objetivos del curso</h3>
-        <ul class="triangle" v-for="objetivo in curso.objetivos">
-        <li >{{objetivo}}</li>
-      </div>
+      <section style="margin:30px; padding: 20px 8%">
+        <h2>Objetivos del curso</h2>
+        <ul class="triangle" >
+        <li v-for="objetivo in curso.objetivos">{{objetivo}}</li>
+        </ul>
       </section>
 
+      <section style="margin:30px; padding: 20px 8%">
+        <h2>Modalidad del curso</h2>
+        <ul class="triangle" v-for="elemento in curso.modalidad">
+        <li >{{elemento}}</li>
+      </section>
+      
 
+      <section style="margin:30px; padding: 20px 8%">
+        <h2>Certificación</h2>
+        <div class="detalle">{{curso.certificacion}}</div>
+      </section>
 
+      <section style="margin:30px; padding: 20px 8%">
+        <h2>Certificado</h2>
+        <div class="detalle">{{curso.certificado}}</div>
+      </section>
+
+      <section style="margin:30px; padding: 20px 8%">
+        <h2>Docentes</h2>
+        <div class="card-group">
+          <div class="card" v-for="docente in curso.docentes" style="padding:20px; min-width:300px; max-width:300px; align-items: center; text-align: center">
+            <img :src="docente.imagen" class="card-img-top" :alt="docente.nombre" style="width:80px"> 
+            <div class="card-body">
+              <h5 class="card-title">{{docente.nombre}}</h5>
+              <p class="card-text">{{docente.nacionalidad}}</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section style="margin:30px; padding: 20px 8%">
+        <h2>Desarrollo del curso</h2>
+
+      <div v-for="desarrollo in curso.desarrollos" class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">{{desarrollo.titulo}} - {{desarrollo.subtitulo}}</h5>
+          <p class="card-text docente">{{desarrollo.docente}} - {{desarrollo.nacionalidad}}</p>
+
+        </div>
+        <ul class="list-group list-group-flush" v-for="contenido in desarrollo.contenidos">
+          <li class="list-group-item detalle">{{contenido}}</li>
+
+        </ul>
+
+      </div>
+      </section>
 
 
 

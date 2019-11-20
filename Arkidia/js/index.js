@@ -8,7 +8,8 @@ var app = new Vue({
       register:{nombre:"",apellido:"",correo:"",password:"",confirm:""},
       loginError: false,
       registerError:false,
-      registerMsg:""
+      registerMsg:"",
+      mensajeErrorLogin:"",
 
     },
     methods:{
@@ -23,6 +24,13 @@ var app = new Vue({
                 if(response.ok) {
                     loginResponse = response.json()
                     loginResponse.then(function(result) {
+                        if (result.resultado ==="ERROR"){
+                            sessionStorage.removeItem("typeUser")
+                            sessionStorage.removeItem("loggedUser")
+                            app.mensajeErrorLogin = result.mensaje
+                            app.loginError = true
+                            return
+                        }
 
 
                         if (result.page==="PADRE"){
@@ -30,25 +38,23 @@ var app = new Vue({
                             sessionStorage.loggedUser = login.usuario
                             sessionStorage.loggedName = result.user
                             sessionStorage.typeUser = result.page
+                            return
                         }
                         if (result.page==="HIJO"){
                             window.location.href = "SitioHijo.html";
                             sessionStorage.loggedUser = login.usuario
                             sessionStorage.loggedName = result.user
                             sessionStorage.typeUser = result.page
+                            return
                         }
                         if (result.page==="ADMINISTRADOR"){
                             sessionStorage.loggedUser = login.usuario
                             sessionStorage.loggedName = result.user
                             sessionStorage.typeUser = result.page
-                            window.location.href = "admin/index.html";
+                            window.location.href = "admin/index.html"
+                            return
                         }
-                        if (result.page==="NINGUNA"){
-                            app.loginError = true;
-                            sessionStorage.removeItem("typeUser");
-                            sessionStorage.removeItem("loggedUser");
-                        }
-                        
+
                     })
                 } else {
                     throw "Error en la llamada Ajax"

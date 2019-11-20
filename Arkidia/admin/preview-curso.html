@@ -69,11 +69,6 @@
    
 <div id="app" >
     <section >
-
-
-
-
-        
         <div class="card mb-3" :style="[styleObject]">
             <div class="row no-gutters" style="height: 120px">
               <div class="col-md-2">
@@ -86,59 +81,39 @@
             </div>
           </div>
 
-
-
-
       <div >
          
-
-
-
       </div>
     </section >
     <section style="padding: 40px 8%" >
         <h1 class="titulo" style="margin-top:60px">{{curso.nombre}}</h1>
         <h3 class="subtitulo">{{curso.detalle}}</h3>
-        <main>
-            <p v-if="cont0" class="cont">
-                    <img src="images/contenido0.svg"  width="100px" style="margin-left: -150px; position:absolute;z-index: 99;margin-top:-80px;" alt="Arkidia" />
-                    {{cont0}}
-            </p>
-            <p v-if="cont1" class="cont">
-                    {{cont1}}
-                    <img src="images/contenido1.svg"  width="100px" style="margin-left: 70px; position:absolute;z-index: 99;margin-top:-80px;" alt="Arkidia" />
+        <main >
+            <p v-for="(contenido,index) in contenidos" :key="index" class="cont" :style="[colorObject]">
+                <img v-if="index%2 == 0" :src="'images/contenido'+index+'.svg'"  width="100px" style="margin-left: -150px; position:absolute;z-index: 99;margin-top:-80px;" alt="Arkidia" />
+                <a style="color:slategray">{{contenido.nombre_contenido}}</a>
+                <img v-if="index%2 != 0" :src="'images/contenido'+index+'.svg'"  width="100px" style="margin-left: 70px; position:absolute;z-index: 99;margin-top:-80px;" alt="Arkidia" />
 
             </p>
-            <p v-if="cont2" class="cont">
-                    <img src="images/contenido2.svg"  width="100px" style="margin-left: -150px; position:absolute;z-index: 99;margin-top:-80px;" alt="Arkidia" />
-                    {{cont2}}
-            </p>
-            <p v-if="cont3" class="cont">
-                    {{cont3}}
-                    <img src="images/contenido3.svg"  width="100px" style="margin-left: 70px; position:absolute;z-index: 99;margin-top:-80px;" alt="Arkidia" />
-
-                </p>
-            <p v-if="cont4" class="cont">
-                    <img src="images/contenido4.svg" width="100px" style="display:block" alt="Arkidia" />
-                    {{cont4}}</p>
-            <p v-if="cont5" class="cont">
-                    <img src="images/contenido5.svg" width="100px" style="display:block" alt="Arkidia" />
-                    {{cont5}}</p>
-            <p v-if="cont6" class="cont">
-                    <img src="images/contenido6.svg" width="100px" style="display:block" alt="Arkidia" />
-                    {{cont6}}</p>
-            <p v-if="cont7" class="cont">
-                    <img src="images/contenido7.svg" width="100px" style="display:block" alt="Arkidia" />
-                    {{cont7}}</p>
-
-
         </main>
+
+        <div style="padding:40px">
+        <img src="images/challenge.svg" width="200px" :style="[styleObject]" style="display:block; margin:auto; border-radius: 100%;     -webkit-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+        -moz-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+        box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68); " alt="Arkidia" />
+        </div>
         <h3 class="subtitulo">Te esperan los siguientes desafíos</h3>
-        <main v-for="challenge in challenges">
-            <p class="cont">{{challenge.explicacion}}</p>
-        </main>
-        <button v-if="curso.creado" type="button" class="btn btn-primary" @click="empezarCurso()">¡Quiero empezar!</button>
 
+        <main>
+            <p v-for="challenge in challenges" class="cont" :style="[colorObject]">
+                <a style="color:slategray">{{challenge.nombre_challenge}}</a>
+                <a>{{challenge.detalle_challenge}}</a>
+            </p>
+        </main>
+
+        <img src="images/empezar.svg" width="300px" :style="[styleObject]" @click="empezarCurso(curso)" style="cursor: pointer;display:block; margin:auto; border-radius: 10px;     -webkit-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+        -moz-box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68);
+        box-shadow: 1px 3px 26px -10px rgba(0,0,0,0.68); " alt="Arkidia" />
     </section>
 
 

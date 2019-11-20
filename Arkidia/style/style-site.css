@@ -4,7 +4,7 @@
 
 main {
   min-width: 300px;
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
   padding-top:50px;
 
@@ -14,7 +14,7 @@ main {
   font-family: 'Raleway', sans-serif;
   text-align: -webkit-center;
   font-size: 25px;
-  line-height: 1.75em;
+  line-height: 25px;
   border-top: 30px solid;
   /*border-image: linear-gradient(to left, #743ad5 0%, #d53a9d 100%) round;*/
   border-image-slice: 1;
@@ -22,20 +22,23 @@ main {
   margin: 0;
   padding: 80px;
   position: relative;
+  counter-increment: section;
+
   color: #999999;
 }
 .cont:before {
   font-family: 'Patua One', cursive;
+  content: counter(section);
+  line-height: 80px;
 
   position: absolute;
-  border-radius: 15px;
-  height: 50px;
-  width: 50px;
-  background-color: #34435e;
+  border-radius: 100px;
+  height: 100px;
+  width: 100px;
+  background-color: #585858;
   text-align: center;
-
   color: #fff;
-  font-size: 30px;
+  font-size: 80px;
 }
 .cont:nth-child(even) {
   border-right: 30px solid;
@@ -46,9 +49,8 @@ main {
 
 }
 .cont:nth-child(even):before {
-  left: 100%;
-  margin-left: -10px;
-
+  left: 94%;
+top:0%;
 }
 .cont:nth-child(odd) {
   border-left: 30px solid;
@@ -59,8 +61,8 @@ main {
 
 }
 .cont:nth-child(odd):before {
-  right: 100%;
-  margin-right: -10px;
+  right: 94%;
+  top: 0%;
 
 }
 .cont:first-child {

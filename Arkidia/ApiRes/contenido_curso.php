@@ -5,76 +5,102 @@ $dbConn =  connect($db);
 ////////////////////////////////////
 //  CONSULTA DE TABLA CATEGORIA  //
 /////////////////////////////////// 
-if ($_SERVER['REQUEST_METHOD'] == 'GET')
+if ($_SERVER['REQUEST_METHOD'] == 'GET')  
 {
+  $marca= "";
   if(isset($_GET['usuario']))
   {   $evento="";
       if (isset($_GET['id_curso'])) // Si el campo categoría existe es una búsqueda puntual
       {
+        $marca= "S";
           //Mostrar una categoría particular
         if(!empty($_GET['id_curso'])) // Si el campo no está vacío
         {
           try{
-          $sql = $dbConn->prepare("SELECT * FROM contenido_curso where id_curso=:id_curso order by orden");
-          $sql->bindValue(':id_curso', $_GET['id_curso']);
-          $sql->execute();            
-          $sql->setFetchMode(PDO::FETCH_ASSOC);
-          header("HTTP/1.1 200 OK");          
+            $sql = $dbConn->prepare("SELECT * FROM contenido_curso where id_curso=:id_curso order by orden");
+            $sql->bindValue(':id_curso', $_GET['id_curso']);
+            $sql->execute();            
+            $sql->setFetchMode(PDO::FETCH_ASSOC);                      
             if(empty($sql)){
               $respuesta['resultado']="ERROR";
               $respuesta['mensaje']="La categoría NO existe en la tabla.";
-              echo json_encode(  $respuesta  );            
+              echo json_encode(  $respuesta  );
+              exit();          
             }else{ 
               $evento = "Consulta el contenido del curso" ;
               header("HTTP/1.1 200 OK");
-              echo json_encode(  $sql->fetchAll()  );          
+              echo json_encode(  $sql->fetchAll()  ); 
+              date_default_timezone_set('America/Argentina/Buenos_Aires');
+              $fecha_formateada = date("Y-m-d H:i:s",time());
+              $usuario=$_GET['usuario'];  
+              //Graba registro en tabla Log
+              $sql = "INSERT INTO log 
+              (fecha, evento, usuario)
+              VALUES
+              (:fecha, :evento, :usuario)";
+              $statement = $dbConn->prepare($sql);     
+              $statement->bindParam(':fecha', $fecha_formateada);
+              $statement->bindParam(':evento', $evento);
+              $statement->bindParam(':usuario', $usuario);          
+              $statement->execute();
+              exit();                      
             }
           }catch (Exception $e){
             $e->getMessage();          
             $respuesta['resultado']="ERROR";
             $respuesta['mensaje']=$e;
-            echo json_encode(  $respuesta  );      
+            echo json_encode(  $respuesta  );
+            exit();    
           }
         }else{
           $respuesta['resultado']="ERROR";
           $respuesta['mensaje']="Debe completar el id_curso";
-          echo json_encode(  $respuesta  );               
+          echo json_encode(  $respuesta  );
+          exit();               
         }
       }else {
 
           $respuesta['resultado']="ERROR";
           $respuesta['mensaje']="Debe enviar por POST el id_curso.";
-          echo json_encode(  $respuesta  );      
-              
-
+          echo json_encode(  $respuesta  );
+          exit();
       }
-      //Se registrará cuando exsita un evento ejecutado por un usuario
-      if($evento != "") { 
-        if($_GET['usuario'] != "aplicacion")
-        {
-            date_default_timezone_set('America/Argentina/Buenos_Aires');
-            $fecha_formateada = date("Y-m-d H:i:s",time());
-            $usuario=$_GET['usuario'];  
-            //Graba registro en tabla Log
-            $sql = "INSERT INTO log 
-            (fecha, evento, usuario)
-            VALUES
-            (:fecha, :evento, :usuario)";
-            $statement = $dbConn->prepare($sql);     
-            $statement->bindParam(':fecha', $fecha_formateada);
-            $statement->bindParam(':evento', $evento);
-            $statement->bindParam(':usuario', $usuario);          
-            $statement->execute();
+  }elseif(isset($_GET['id_contenido'])){
+      $usuario="aplicacion";
+      if(!empty($_GET['id_contenido'])) // Si el campo no está vacío
+      {
+        try{
+        $sql = $dbConn->prepare("SELECT * FROM contenido_curso where id_contenido=:id_contenido");
+        $sql->bindValue(':id_contenido', $_GET['id_contenido']);
+        $sql->execute();            
+        $sql->setFetchMode(PDO::FETCH_ASSOC);
+        header("HTTP/1.1 200 OK");          
+          if(empty($sql)){
+            $respuesta['resultado']="ERROR";
+            $respuesta['mensaje']="El contenido NO existe en la tabla.";
+            echo json_encode(  $respuesta  );
+            exit();      
+          }else{ 
+            $evento = "Consulta un registro de contenido puntual" ;
+            header("HTTP/1.1 200 OK");
+            echo json_encode(  $sql->fetchAll()  );
+            exit();         
+          }
+        }catch (Exception $e){
+          $e->getMessage();          
+          $respuesta['resultado']="ERROR";
+          $respuesta['mensaje']=$e;
+          echo json_encode(  $respuesta  );
+          exit();   
         }
-      }   
-      exit();
-  }else{
+      }else{
         $respuesta['resultado']="ERROR";
-        $respuesta['mensaje']="Debe indicar el mail del administrador.";
-        echo json_encode(  $respuesta  );   
+        $respuesta['mensaje']="Debe completar el id_contenido";
+        echo json_encode(  $respuesta  );
+        exit();              
+      }
   }
 }
-
 
 ///////////////////////
 // ALTA DE CONTENIDO //
