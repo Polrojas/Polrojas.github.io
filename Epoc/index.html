@@ -71,6 +71,8 @@
       </section>
 
       <section style="margin:30px; padding: 20px 8%">
+        <img src="images/objetivos.svg" class="card-img-top" alt="objetivos" style="width:80px"> 
+
         <h2>Objetivos del curso</h2>
         <ul class="triangle" >
         <li v-for="objetivo in curso.objetivos">{{objetivo}}</li>
@@ -78,6 +80,8 @@
       </section>
 
       <section style="margin:30px; padding: 20px 8%">
+        <img src="images/modalidad.svg" class="card-img-top" alt="objetivos" style="width:80px"> 
+
         <h2>Modalidad del curso</h2>
         <ul class="triangle" v-for="elemento in curso.modalidad">
         <li >{{elemento}}</li>
@@ -85,20 +89,26 @@
       
 
       <section style="margin:30px; padding: 20px 8%">
+        <img src="images/certificacion.svg" class="card-img-top" alt="objetivos" style="width:80px"> 
+
         <h2>Certificación</h2>
         <div class="detalle">{{curso.certificacion}}</div>
       </section>
 
       <section style="margin:30px; padding: 20px 8%">
+        <img src="images/certificado.svg" class="card-img-top" alt="objetivos" style="width:80px"> 
+
         <h2>Certificado</h2>
         <div class="detalle">{{curso.certificado}}</div>
       </section>
 
       <section style="margin:30px; padding: 20px 8%">
+        <img src="images/docentes.svg" class="card-img-top" alt="objetivos" style="width:80px"> 
+
         <h2>Docentes</h2>
         <div class="card-group">
           <div class="card" v-for="docente in curso.docentes" style="padding:20px; min-width:300px; max-width:300px; align-items: center; text-align: center">
-            <img :src="docente.imagen" class="card-img-top" :alt="docente.nombre" style="width:80px"> 
+            <img src="images/docente.svg" class="card-img-top" :alt="docente.nombre" style="width:80px"> 
             <div class="card-body">
               <h5 class="card-title">{{docente.nombre}}</h5>
               <p class="card-text">{{docente.nacionalidad}}</p>
@@ -109,6 +119,8 @@
       </section>
 
       <section style="margin:30px; padding: 20px 8%">
+        <img src="images/contenido.svg" class="card-img-top" alt="objetivos" style="width:80px"> 
+
         <h2>Desarrollo del curso</h2>
 
       <div v-for="desarrollo in curso.desarrollos" class="card" style="width: 100%;">
