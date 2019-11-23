@@ -10,6 +10,10 @@
   background-position-y: top;
   background-size: cover
 }
+
+
+
+
 #welcome2{
   background: url("../images/site/background-welcome2.svg") no-repeat 50% 50%;
 
@@ -93,9 +97,23 @@ li:before {
   background-image: url("./images/site/lungs.png");
 }
 
+.btn-success{
+  border-radius: 10px;
+  background-color: #6ec7dc !important;
+}
 
+.bgimg-2 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("../images/menu.svg");
 
+}  
 
+.w3-card-2 {
+  box-shadow: 0 0px 0px 0 rgba(0,0,0,0);
+  height: 100px;
+
+}
 .menu-item{
   font-family: 'Lato', sans-serif;}
 
@@ -201,7 +219,7 @@ h4 {
 
 
 .menu-style{
-  background: linear-gradient(400deg,#ffffff,#eeeeee, #eeeeee52);
+  background: linear-gradient(400deg,#ffffff,#eeeeee, #eeeeee);
 }
 
 
@@ -561,5 +579,14 @@ input[type=password]:placeholder {
 }
 .number:hover, .number.active {
   background: #717699;
+}
+
+section{
+  padding: 100px 8% 0px;     
+  margin: -20px 0px 0px 0px;
+
+
+
+
 }
 

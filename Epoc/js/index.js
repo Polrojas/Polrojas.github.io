@@ -1,5 +1,8 @@
+
 var app = new Vue({
+  
   el: "#app",
+  
   data: {
     curso: {
       titulo: "Curso de actualización ",
@@ -118,32 +121,38 @@ var app = new Vue({
         {
           nombre: "Prof. Dr. Gustavo E Zabert",
           nacionalidad: "Argentina",
-          imagen: "docente.png"
+          imagen: "docente.png",
+          bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
           nombre: "Prof. Dra. Maria Montes de Oca",
           nacionalidad: "Venezuela",
-          imagen: "docente.png"
+          imagen: "docente.png",
+          bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
           nombre: "Dr. Alejandro Casas",
           nacionalidad: "Colombia",
-          imagen: "docente.png"
+          imagen: "docente.png",
+          bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
           nombre: "Dr. Ricardo del Olmo",
           nacionalidad: "Argentina",
-          imagen: "docente.png"
+          imagen: "docente.png",
+          bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
           nombre: "Dra. Ana López",
           nacionalidad: "Argentina",
-          imagen: "docente.png"
+          imagen: "docente.png",
+          bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
           nombre: "Dr. Alfredo Guerrero",
           nacionalidad: "Perú",
-          imagen: "docente.png"
+          imagen: "docente.png",
+          bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         }
       ],
       certificacion: "Con aval y certificación otorgado por ALAT",
@@ -151,5 +160,14 @@ var app = new Vue({
         "Será enviado a todos los participantes que hayan completado todo los módulos y hayan aprobado la evaluación final."
     }
   },
-  methods: {}
+  methods: {
+    myFunction(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else { 
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+  }
 });
