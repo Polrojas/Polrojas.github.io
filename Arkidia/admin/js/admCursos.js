@@ -51,7 +51,7 @@ var app = new Vue({
 
         previsualizarCurso(curso){
           sessionStorage.idCurso = curso.id
-          window.location.href = "preview-curso.html";
+          window.location.href = "curso.html";
         },
 
 
@@ -126,6 +126,11 @@ var app = new Vue({
               this.logged = false
             }
         }
+        window.addEventListener("load",function (){
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden";
+        })
+  
 
 
     }

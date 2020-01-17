@@ -126,6 +126,12 @@ var app = new Vue({
             this.logged=true
             this.buscarHijos(this.usuarioPadre)
         }
+        window.addEventListener("load",function (){
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden";
+          })
+        
+
 
     }
 })

@@ -19,7 +19,6 @@ var app = new Vue({
             requestCategorias.open('GET', 'ApiRes/categorias.php?usuario='+sessionStorage.loggedUser, true)
             requestCategorias.onload = function() {
                 var data = JSON.parse(this.response)
-                console.log(element)
 
                 if (requestCategorias.status >= 200 && requestCategorias.status < 400) {
                     data.forEach(element => {
@@ -38,6 +37,10 @@ var app = new Vue({
             }
             requestCategorias.send()
         },
+        accederCategoria(idCategoria){
+            sessionStorage.idCategoria = idCategoria
+            window.location.href = "categoria.html"
+        },
         logOut(){
             sessionStorage.removeItem("typeUser");
             sessionStorage.removeItem("loggedUser");
@@ -51,7 +54,8 @@ var app = new Vue({
         }
         if(n>13 && n<20){
             this.saludo = "Buenas tardes"
-        }else{
+        }
+        if(n>=20 && n<3){
             this.saludo = "Buenas noches"
         }
 
@@ -59,7 +63,7 @@ var app = new Vue({
             this.logged=false
         }else{
             if(sessionStorage.typeUser=="HIJO"){
-                this.usuarioHijo = sessionStorage.loggedUser
+                this.usuarioHijo = sessionStorage.loggedName
                 this.logged=true
                 this.buscarCategorias()
             }else{
@@ -67,6 +71,10 @@ var app = new Vue({
             }
 
         }
+        window.addEventListener("load",function (){
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden";
+          })
 
 
     }

@@ -3,7 +3,7 @@ include "config.php";
 include "utils.php";
 $dbConn =  connect($db);
 ///////////////////////////
-//  CONSULTA DE CURSOS  //
+//  CONSULTA DE CURSOS  // 
 ////////////////////////// 
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
           $evento = "Consulta el curso " . $fila_curso['nombre_curso'];
           header("HTTP/1.1 200 OK");
           echo json_encode(  $fila_curso);
-
         }
       }catch (Exception $e){
         $e->getMessage();          
@@ -39,11 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
       $respuesta['mensaje']="Debe ingresar un valor para la identificación de curso.";
       echo json_encode(  $respuesta  );               
     }
-  }else {
-    //Mostrar lista de cursos completa
-    try{
-      if(isset($_GET['usuario']))
-      {
+  //Consulta toda la tabla de cursos para mostrar al admistrador
+  }elseif(isset($_GET['usuario']) && !isset($_GET['id_categoria']))
+  {
+    if(!empty($_GET['usuario']))
+    {
+      try{
         $evento = "Consulta todos los cursos.";
         $sql = $dbConn->prepare("SELECT `cursos`.*, `categorias`.`descripcion`, `proveedores`.`nombre_proveedor`
               FROM `cursos`
@@ -51,29 +51,161 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
               , `proveedores`
             WHERE `cursos`.`id_categoria` = `categorias`.`id_categoria` 
             AND  `cursos`.`id_proveedor` = `proveedores`.`id_proveedor`");
-        
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
         header("HTTP/1.1 200 OK");
         echo json_encode( $sql->fetchAll()  );
-      }else
-      {
+      }catch (Exception $e){
+        $e->getMessage();        
+        $evento = "";  
         $respuesta['resultado']="ERROR";
-        $respuesta['mensaje']="Debe ingresar el usuario.";
-        echo json_encode(  $respuesta  );           
-      }
-    }catch (Exception $e){
-      $e->getMessage();        
-      $evento = "";  
+        $respuesta['mensaje']=$e;
+        echo json_encode(  $respuesta  );
+        exit();   
+      } 
+    }else
+    {
       $respuesta['resultado']="ERROR";
-      $respuesta['mensaje']=$e;
-      echo json_encode(  $respuesta  );      
-    }      
+      $respuesta['mensaje']="Debe ingresar el usuario.";
+      echo json_encode(  $respuesta  );
+      exit();   
+    }
+  }elseif(isset($_GET['usuario']) && isset($_GET['id_categoria']))
+  {
+    //Consuta por categorías dependiendo el usuario
+    $sql_hijo = $dbConn->prepare("SELECT * FROM usuario_hijo where usuario=:usuario");
+    $sql_hijo->bindParam(':usuario',$_GET['usuario']);  
+    $sql_hijo->setFetchMode(PDO::FETCH_ASSOC);
+    $sql_hijo->execute();
+    $fila_hijo= $sql_hijo->fetchAll();
+    $datos=$sql_hijo->setFetchMode(PDO::FETCH_ASSOC);
 
+    $sql_padre = $dbConn->prepare("SELECT * FROM usuario_padre where mail=:mail");
+    $sql_padre->bindParam(':mail', $_GET['usuario']);  
+    $sql_padre->setFetchMode(PDO::FETCH_ASSOC);
+    $sql_padre->execute();
+    $fila_padre= $sql_padre->fetchAll();    
+
+    if(!empty($fila_hijo))
+    {
+        $estado="P";
+        $sql = $dbConn->prepare("SELECT *
+            FROM cursos
+            WHERE id_categoria = :id_categoria AND (edad_desde >= :edad OR edad_hasta <= :edad)
+            AND estado_curso = :estado_curso");
+        $sql->bindValue(':id_categoria', $_GET['id_categoria']);
+        $sql->bindValue(':edad', calculaEdad($datos['fecha_nacimiento']));
+        $sql->bindValue(':estado_curso', $estado);
+        $sql->execute();        
+        $cursos = $sql->fetchAll();
+
+        $respuesta=array();
+
+        foreach($cursos as $row)
+        {   
+                  $sql = $dbConn->prepare("SELECT orden, url_imagen
+                        FROM contenido_curso
+                        WHERE id_curso = :id_curso");
+                  $sql->bindValue(':id_curso', $row['id_curso']);        
+                  $sql->execute();
+                  $sql->setFetchMode(PDO::FETCH_ASSOC);               
+                  $contenido = $sql->fetchAll();
+                  $item = array(
+                  'id_curso'      => $row['id_curso'],
+                  'nombre_curso'  => $row['nombre_curso'],
+                  'detalle_curso' => $row['detalle_curso'],
+                  'edad_desde'    => $row['edad_desde'],
+                  'edad_hasta'    => $row['edad_hasta'],
+                  'likes'         => "0",
+                  'comentarios'   => "0",
+
+                  'contenido'     => $contenido             
+                  );
+                  array_push($respuesta, $item);
+        }
+        header("HTTP/1.1 200 OK");
+        echo json_encode( $respuesta  );
+    }
+    elseif ($fila_padre) {
+        $estado="P";
+        $sql = $dbConn->prepare("SELECT *
+            FROM cursos
+            WHERE id_categoria = :id_categoria AND estado_curso = :estado_curso");
+        $sql->bindValue(':id_categoria', $_GET['id_categoria']);        
+        $sql->bindValue(':estado_curso', $estado);
+        $sql->execute();
+        $cursos = $sql->fetchAll();
+
+        $respuesta=array();
+        foreach($cursos as $row)
+        {
+                  $sql = $dbConn->prepare("SELECT orden, url_imagen
+                        FROM contenido_curso
+                        WHERE id_curso = :id_curso");
+                  $sql->bindValue(':id_curso', $row['id_curso']);        
+                  $sql->execute();
+                  $sql->setFetchMode(PDO::FETCH_ASSOC);
+                  $contenido = $sql->fetchAll();          
+                  $item = array(
+                  'id_curso'      => $row['id_curso'],
+                  'nombre_curso'  => $row['nombre_curso'],
+                  'detalle_curso' => $row['detalle_curso'],
+                  'edad_desde'    => $row['edad_desde'],
+                  'edad_hasta'    => $row['edad_hasta'],
+                  'likes'         => "0",
+                  'comentarios'   => "0",
+                  'contenido'     => $contenido
+                  );
+                  array_push($respuesta, $item);
+        }
+        header("HTTP/1.1 200 OK");
+        echo json_encode( $respuesta  );
+    }else{
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="El usuario no es ni hijo ni padre.";
+      echo json_encode(  $respuesta  );
+      exit();      
+    }
+  //Muestra todo pero sin el ingreso de usuario para la página principal    
+  }elseif(!isset($_GET['usuario']) && isset($_GET['id_categoria']))
+  {
+        $estado="P";
+        $sql = $dbConn->prepare("SELECT *
+            FROM cursos
+            WHERE id_categoria = :id_categoria AND estado_curso = :estado_curso");
+        $sql->bindValue(':id_categoria', $_GET['id_categoria']);        
+        $sql->bindValue(':estado_curso', $estado);
+        $sql->execute();
+        $cursos = $sql->fetchAll();
+
+        $respuesta=array();
+        foreach($cursos as $row)
+        {
+                  $sql = $dbConn->prepare("SELECT orden, url_imagen
+                        FROM contenido_curso
+                        WHERE id_curso = :id_curso");
+                  $sql->bindValue(':id_curso', $row['id_curso']);        
+                  $sql->execute();
+                  $sql->setFetchMode(PDO::FETCH_ASSOC);
+                  $contenido = $sql->fetchAll();          
+                  $item = array(
+                  'id_curso'      => $row['id_curso'],
+                  'nombre_curso'  => $row['nombre_curso'],
+                  'detalle_curso' => $row['detalle_curso'],
+                  'edad_desde'    => $row['edad_desde'],
+                  'edad_hasta'    => $row['edad_hasta'],
+                  'likes'         => "0",
+                  'comentarios'   => "0",
+                  'contenido'     => $contenido
+                  );
+                  array_push($respuesta, $item);
+        }
+        header("HTTP/1.1 200 OK");
+        echo json_encode( $respuesta  );    
   }
-  //Se registrará cuando exsita un evento ejecutado por un usuario
+  //Se registrará cuando exista un evento ejecutado por un usuario
   if($evento != "") { 
-    if($_GET['usuario'] != "aplicacion")
+    if(isset($_GET['usuario']) && $_GET['usuario'] != "" )
     {
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $fecha_formateada = date("Y-m-d H:i:s",time());

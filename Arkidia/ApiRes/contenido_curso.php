@@ -140,6 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $respuesta['mensaje']="Debe enviar el campo url_contenido por POST.";    
     echo json_encode($respuesta);
     exit();
+  }elseif(!isset($input['url_imagen']))
+  {
+    $respuesta['resultado']="ERROR";
+    $respuesta['mensaje']="Debe enviar el campo url_imagen por POST.";    
+    echo json_encode($respuesta);
+    exit();    
   }else
   {
     if(empty($input['id_curso']))
@@ -165,7 +171,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $respuesta['resultado']="ERROR";
       $respuesta['mensaje']="Debe indicar la URL del video.";    
       echo json_encode($respuesta);
-      exit();   
+      exit();
+    }elseif(empty($input['url_imagen']))
+    {
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="Debe indicar la URL de la imagen.";    
+      echo json_encode($respuesta);
+      exit();      
     }else
     {
       //Busca la descripción en la tabla
@@ -184,14 +196,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       {
         try{
           $sql = "INSERT INTO contenido_curso
-                (orden, id_curso, nombre_contenido, url_contenido)
+                (orden, id_curso, nombre_contenido, url_contenido, url_imagen)
                 VALUES
-                (:orden, :id_curso, :nombre_contenido, :url_contenido)";          
+                (:orden, :id_curso, :nombre_contenido, :url_contenido, :url_imagen)";          
           $statement = $dbConn->prepare($sql);          
           $statement->bindParam(':orden', $input['orden']);
           $statement->bindParam(':id_curso', $input['id_curso']);
           $statement->bindParam(':nombre_contenido', $input['nombre_contenido']);
           $statement->bindParam(':url_contenido', $input['url_contenido']);
+          $statement->bindParam(':url_imagen', $input['url_imagen']);
           $statement->execute();
         }catch(Exception $e)
         {

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<title>onEducation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="icon.png">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/bodymin-animation.min.js" type="text/javascript"></script>
+<script src="js/bodymovin.js"></script>
+
+<link rel="icon" href="icon.png">
+
+<style>
+    html,body {
+  height:100%;
+  margin:0;
+}
+  .content {
+  height:90%;
+  min-height:90%;/*for mozilla*/
+  padding-top:5%;
+  padding-bottom:5%;
+}
+
+html>body .content {
+  height:auto;
+}
+
+#one {
+  background: linear-gradient(180deg,#ff7e00 0%, #de2fa1 100%);
+}
+#two {
+  background: linear-gradient(180deg, #de2fa1 0%,#9f23c0 100%);
+}
+#three {
+  background: linear-gradient(180deg, #9f23c0 0%, #172fdf 100%);
+}
+#four {
+  background: linear-gradient(180deg, #172fdf 0%, #5f17df 100%);
+}
+#five {
+  background: linear-gradient(180deg, #5f17df 0%,#4834e8 100%);
+}
+#six {
+  background: linear-gradient(180deg, #4834e8 0%,#2f55f1 100%);
+}
+#seven {
+  background: linear-gradient(180deg, #2f55f1 0%,#119ae8 100%);
+}
+#eight {
+  background: linear-gradient(180deg, #119ae8 0%,#7a4df4 100%);
+}
+#nine {
+  background: linear-gradient(180deg, #7a4df4 0%,#cb00ff 100%);
+}
+#ten {
+  background: linear-gradient(180deg, #cb00ff 0%,#ff7100 100%);
+}
+
+h1{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 70px;
+}
+
+h2{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+}
+
+h3{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+} 
+
+h4{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+h6{
+  margin-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  color:white
+}
+.imageSection {
+  width:600px; 
+  padding:0px; 
+  margin-top: -200px
+  } 
+
+.card-deck{  
+  max-width:800px; 
+  place-content: center;
+  flex-flow: wrap
+}
+
+.imagen-logo{
+  width:200px
+}
+
+.card {
+  min-width:300px;
+  max-width:300px;
+  margin:20px;
+  background: linear-gradient(180deg, #a4f4ff31, #ffffff00);
+  border: 0px;
+  text-align:left;
+  
+}
+
+.card-logo {
+  width:200px
+}
+
+.threeD {
+  font-family: 'Raleway', sans-serif;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+  transition: 1s;
+  text-shadow: 1px 2px #00000005, 2px 4px #00000005, 3px 6px #00000005, 4px 8px #00000005, 5px 10px #00000005, 6px 12px #00000005, 7px 14px #00000005, 8px 16px #00000005, 9px 18px #00000005, 10px 20px #00000005;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 15px;
+  }
+  h6 {
+    font-size: 12px;
+  }
+  .imageSection{
+    width:300px;
+    margin-top:-100px
+  }
+  .card {
+  min-width:300px;
+  max-width:300px;
+  margin:20px;
+  background: linear-gradient(180deg, #a4f4ff31, #ffffff00);
+  border: 0px;
+  text-align:left;
+  
+}
+.card-logo {
+  width:100px
+}
+.imagen-logo{
+  width:100px
+}
+}
+
+.subrayado{
+  background-color: #ffffff44
+}
+.blurry {
+  position: relative;
+  transition: opacity 2s, filter 3s;
+  opacity: 0;
+  filter: blur(18px);
+}
+
+.come-in-blurry {
+  animation: come-in 1.8s ease forwards;
+  opacity: 1;
+  filter: blur(0px);
+
+}
+
+.already-visible-blurry {
+  animation-duration: 2.6s;
+}
+
+@keyframes come-in-blurry {
+
+}
+
+
+.module {
+  position: relative;
+  -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+  transition: opacity 2s;
+  opacity: 0;
+}
+
+
+
+
+.come-in {
+  transform: translateY(350px);
+  animation: come-in 0.8s ease forwards;
+  opacity: 1;
+
+}
+
+
+
+.already-visible {
+  transform: translateY(350px);
+  animation-duration: 0.6s;
+}
+
+@keyframes come-in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+</style>
+
+
+
+
+<body>
+
+    <div class='content' style="text-align:center" id='one'>
+      <img style="width:60%; padding: 200px 0px" src="images/logo.svg">
+    </div>
+
+    <div class='content' id='two' style="text-align: center">
+        <h3 class="module threeD">Construimos una solución</h3>
+        <h1 class="module threeD">end to end </h1>
+        <h3 class="module threeD">a la medida de cada necesidad</h3>
+    </div>
+
+    <div class='content' id='three' style="text-align: center">
+        <h1 class="blurry threeD">Nuestro foco</h1>
+        <h3 class="blurry">Estamos enfocados en poner al </h3>
+        <h3 class="blurry"><b class="subrayado">cliente en el centro</b></h3> 
+        <h3 class="blurry">de tu negocio.</h3>
+    </div>
+
+    <div class='content' id='four' style="text-align: center">
+      <h1 class="module threeD">Learning</h1>
+      <h3 class="module">Cursos para clientes</h3>
+      <h3 class="module">Programas de inducción</h3>
+      <h3 class="module">Webinars en vivo </h3>
+      <h3 class="module">Transmisión de eventos</h3>
+      <img class="module imageSection" src="images/tablet.svg">
+    </div>
+
+    <div class='content' id='five' style="text-align: center">
+      <h1 class="module threeD">Digital Transformation</h1>
+      <h3 class="module">Consutoría</h3>
+      <h3 class="module">Estrategia</h3>
+      <h3 class="module">Experiencia de usuario</h3>
+      <h3 class="module">Análisis de datos</h3>
+      <img class="module imageSection" src="images/digital.svg">
+    </div>
+
+
+    <div class='content' id='six' style="text-align: center">
+      <h1 class="module threeD">Omnichannel</h1>
+      <h3 class="module">Apps</h3>
+      <h3 class="module">Sitios web</h3>
+      <h3 class="module">e-mail Marketing</h3>
+      <h3 class="module" >Redes sociales</h3>
+      <h3 class="module">Piezas impresas</h3>
+      <h3 class="module">Piezas digitales</h2>
+      <img class="module imageSection" src="images/omnicanal.svg">
+    </div>
+
+    <div class="content" id='seven' style="text-align: -webkit-center">
+        <div class="card-deck">
+            <div class="card module" >
+              <div class="card-body" style="text-align:left">
+                <h4 class="card-title">Proyecto y estrategia</h4>
+                <h6>Consultoría comercial y estratégica</h6>
+                <h6>Diseño conceptual del programa</h6>
+                <h6>Entendimiento de la experiencia de usuario (UX)</h6>
+              </div>
+            </div>
+            <div class="card module" >
+              <div class="card-body">
+                <h4 class="card-title">Plataforma tecnológica</h4>
+                <h6>Desarrollo de apps y sitios web</h6>
+                <h6>Sistema de Gestión de Aprendizaje (Learning Management System)</h6>
+                <h6>Transmisión en vivo</h6>
+              </div>
+            </div>
+            <div class="card module " >
+                <div class="card-body">
+                  <h4>Generación de contenido</h4>
+                  <h6>Elaboración de guión audiovisual</h6>
+                  <h6>Filmación en estudio propio</h6>
+                  <h6>Edición audiovisual</h6>
+                  <h6>Diseño, desarrollo y hosting de webs</h6>
+                </div>
+              </div>
+              <div class="card module" >
+                  <div class="card-body">
+                      <h4>Consultoría Pedagógica</h4>
+                      <h6>Búsqueda de docentes</h6>
+                      <h6>Filmación en estudio propio</h6>
+                      <h6>Gestión de auspicios de sociedades médicas y cámaras</h6>
+                      <h6>Adaptación pedagógica de contenidos</h6>
+                    </div>
+                </div>
+                <div class="card module" >
+                    <div class="card-body">
+                        <h4>Difusión y Comunicación</h4>
+                        <h6>Diseño de flyers, invitaciones y certificados</h6>
+                        <h6>Campañas de e-mails a base de datos propia o del Cliente</h6>
+                        <h6>Envío de certificados de asistencia</h6>
+                        <h6>Encuestas de satisfacción</h6>
+                    </div>
+                  </div>
+                  <div class="card module" >
+                      <div class="card-body">
+                          <h4>Gestión y Operación</h4>
+                          <h6>Help desk 24/7</h6>
+                          <h6>Gateway de pagos con Mercadopago y Paypal</h6>
+                          <h6>Gestión de premios a participantes</h6>
+                          <h6>Reportes y métricas</h6>                        
+                      </div>
+                    </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <div class='content' id='eight' style="text-align: -webkit-center">
+        <h1 class="module threeD">¿Por qué elegirnos?</h1>
+        <h2 class="module">+ de <a id="counter" class="counter-value" data-count="20">0</a> años</h2>
+        <h3 class="module">de experiencia en la industria</h3>
+        <h2 class="module">+ de <a id="counter" class="counter-value" data-count="50">0</a></h2>
+        <h3 class="module" >proyectos implementados</h3>
+        <h2 class="module">+ de <a id="counter" class="counter-value" data-count="96">0</a>%</h2>
+        <h3 class="module">de satisfacción de cliente</h3>
+      </div> 
+
+      <div class='content' id='nine' style="text-align: -webkit-center">
+          <h1 class="module threeD">Nuestros clientes</h1>
+
+          <div class="card-deck" >
+              <div class="module card-logo">
+                <img class="imagen-logo" src="images/Logo-Andromaco.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Bausch-Lomb.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Bayer.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Boehringer-Ingelheim.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Calsa.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Clear.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Eurofarma.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Sadip.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Sanofi-Pasteur.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Sanofi.svg">
+              </div>
+              <div class="module card-logo" >
+                <img class="imagen-logo" src="images/Logo-Sociedad-Argentina-de-Diabetes.svg">
+              </div>
+          </div>
+        </div> 
+  
+        <div class='content' id='ten' style="text-align: center">
+            <h1 class="module threeD">¿Quiénes somos?</h1>
+  
+          </div> 
+    
+
+
+
+
+
+<script src="js/animaciones.js" type="text/javascript"></script>
+
+
+<script>
+(function($) {
+
+
+$.fn.visible = function(partial) {
+  
+    var $t            = $(this),
+        $w            = $(window),
+        viewTop       = $w.scrollTop(),
+        viewBottom    = viewTop + $w.height(),
+        _top          = $t.offset().top,
+        _bottom       = _top + $t.height(),
+        compareTop    = partial === true ? _bottom : _top,
+        compareBottom = partial === true ? _top : _bottom;
+
+  
+  return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+
+};
+  
+})(jQuery);
+
+var win = $(window);
+var indCount = true;
+var allMods = $(".module");
+var allBlurry = $(".blurry");
+var count = $(".counter");
+
+
+
+
+
+allMods.each(function(i, el) {
+var el = $(el);
+if (el.visible(true)) {
+  el.addClass("already-visible"); 
+} 
+});
+
+allBlurry.each(function(i,el){
+  var el = $(el);
+  if (el.visible(true)){
+    el.addClass("already-visible-blurry")
+  }
+})
+
+win.scroll(function(event) {
+
+allMods.each(function(i, el) {
+  var el = $(el);
+  if (el.visible(true)) {
+    el.addClass("come-in"); 
+  } 
+});
+
+allBlurry.each(function(i, el) {
+  var el = $(el);
+  if (el.visible(true)) {
+    el.addClass("come-in-blurry"); 
+  } 
+});
+
+
+});
+
+
+var a = 0;
+$(window).scroll(function() {
+
+  var oTop = $('#counter').offset().top - window.innerHeight;
+  if (a == 0 && $(window).scrollTop() > oTop) {
+    $('.counter-value').each(function() {
+      var $this = $(this),
+        countTo = $this.attr('data-count');
+      $({
+        countNum: $this.text()
+      }).animate({
+          countNum: countTo
+        },
+
+        {
+
+          duration: 2000,
+          easing: 'swing',
+          step: function() {
+            $this.text(Math.floor(this.countNum));
+          },
+          complete: function() {
+            $this.text(this.countNum);
+          }
+
+        });
+    });
+    a = 1;
+  }
+
+});
+
+</script>
+
+
+</body>
+</html>

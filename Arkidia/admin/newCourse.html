@@ -187,7 +187,13 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>URL del contenido</label>
-                                                <input v-on:click="errorContenido=null" v-model="contenido.URLContenido" type="text" class="form-control"  v-on:keyup.enter="insertarContenido(contenido)" placeholder="Ingresá la URL del contenido ">
+                                                <input v-on:click="errorContenido=null" v-model="contenido.URLContenido" type="text" class="form-control"   placeholder="Ingresá la URL del contenido ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>URL de la imagen (thumbnail)</label>
+                                                <input v-on:click="errorContenido=null" v-model="contenido.URLImagen" type="text" class="form-control"   placeholder="Ingresá la URL de la imagen del contenido ">
                                             </div>
                                         </div>
                                     </div>

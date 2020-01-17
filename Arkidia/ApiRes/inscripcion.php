@@ -53,15 +53,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				if($fila_curso)
 				{
 					//Verifica si ya estaba inscripto
-					$consulta = $dbConn->prepare("SELECT * FROM curso_alumno where id_curso = :id_curso");
+					$consulta = $dbConn->prepare("SELECT * FROM curso_alumno 
+						where id_curso = :id_curso and usuario = :usuario");
 					$consulta->bindValue(':id_curso', $input['id_curso']);
+					$consulta->bindValue(':usuario', $input['usuario']);					
 					$consulta->execute();
 					$fila_curso_alumno = $consulta->fetchAll();
 					if($fila_curso_alumno)
 					{
-						$respuesta['resultado']="ERROR";
-						$respuesta['mensaje']="Ya te encuentras inscripto en el curso " . 
-												$fila_curso['nombre_curso'];	
+						$respuesta['resultado']="OK";
+						$respuesta['mensaje']="";	
 						echo json_encode($respuesta);
 						exit();			
 					}
@@ -138,10 +139,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 					foreach($fila_challenge as $row)
 					{				
 						$sql = "INSERT INTO challenge_alumno
-						    (id_curso, id_challenge, usuario, ind_completo, tipo_archivo, url_contenido, ind_aprobado, aprobador)
+						    (id_curso, id_challenge, usuario, ind_completo, tipo_archivo, url_contenido, ind_aprobado, aprobador, total_likes, total_comentarios)
 						    VALUES
-						    (:id_curso, :id_challenge, :usuario, :ind_completo, :tipo_archivo, :url_contenido, :ind_aprobado, :aprobador)";
-						$tipo_archivo = "0";
+						    (:id_curso, :id_challenge, :usuario, :ind_completo, :tipo_archivo, :url_contenido, :ind_aprobado, :aprobador, :total_likes,
+						    	:total_comentarios)";
+						$cero = "0";
 						$url_contenido="";
 						$ind_aprobado="";
 						$aprobador="";
@@ -150,10 +152,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 						$statement->bindParam(':id_challenge', $row['id_challenge']);
 						$statement->bindParam(':usuario', $input['usuario']);
 						$statement->bindParam(':ind_completo', $ind_completo);   
-						$statement->bindParam('tipo_archivo', $tipo_archivo);
+						$statement->bindParam('tipo_archivo', $cero);
 						$statement->bindParam('url_contenido', $url_contenido);
 						$statement->bindParam('ind_aprobado', $ind_aprobado);
 						$statement->bindParam('aprobador', $ind_aprobado);
+						$statement->bindParam('total_likes', $cero);
+						$statement->bindParam('total_comentarios', $cero);
 						$statement->execute();
 					}
 				}else
@@ -167,10 +171,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
 				$e->getMessage();          
 				$respuesta['resultado']="ERROR";
-				$respuesta['mensaje']= "challenge".$e;
+				$respuesta['mensaje']= "challenge ".$e;
 				echo json_encode(  $respuesta  );
 				exit();
-			} 		    
+			}
+			//Alta de puntaje inicial en cero
+			try{
+				$sql = "INSERT INTO puntaje_alumno
+				    (usuario, puntaje)
+				    VALUES
+				    (:usuario, :puntaje)";
+				$cero = "0";
+				$statement = $dbConn->prepare($sql);
+				$statement->bindParam(':usuario', $input['usuario']);
+				$statement->bindParam('puntaje', $cero);
+				$statement->execute();
+			}catch(Exception $e)
+			{
+				$e->getMessage();          
+				$respuesta['resultado']="ERROR";
+				$respuesta['mensaje']= "puntaje_alumno".$e;
+				echo json_encode(  $respuesta  );
+				exit();
+			}
 			$evento = "Se inscribió en el curso ".$fila_curso['nombre_curso'];
 			date_default_timezone_set('America/Argentina/Buenos_Aires');
 			$fecha_formateada = date("Y-m-d H:i:s",time());    
@@ -243,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			try{
 				//Prepara el array contenido para informar contenido_alumno
 				$sql = $dbConn->prepare("SELECT cont.id_contenido, cont.orden, cont.nombre_contenido, 
-										cont.url_contenido,
+										cont.url_contenido, cont.url_imagen,
 										 contAl.id_curso, contAl.id_contenido, contAl.usuario, 
 										 contAl.porcentaje_avance 
 										FROM contenido_alumno contAl
@@ -261,6 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	                'id_orden'          => $row['orden'],
 	                'nombre_contenido'  => $row['nombre_contenido'],
 	                'url_contenido'     => $row['url_contenido'],
+	                'url_imagen'		=> $row['url_imagen'],
 	                'id_contenido'      => $row['id_contenido'],
 	                'usuario'           => ($row['usuario']),
 	                'porcentaje_avance' => $row['porcentaje_avance']	                       
@@ -271,7 +295,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 				$sql = $dbConn->prepare("SELECT cha.id_challenge, cha.orden_challenge, cha.nombre_challenge,
 										cha.detalle_challenge, chaAl.id_challenge, chaAl.usuario, 
 										chaAl.ind_completo, chaAl.tipo_archivo, chaAl.url_contenido, 
-										chaAl.ind_aprobado, chaAl.aprobador
+										chaAl.ind_aprobado, chaAl.aprobador, chaAl.total_likes, 
+										chaAl.total_comentarios
 										FROM challenge_alumno chaAl
 										INNER JOIN challenges_cursos cha
 										ON chaAl.id_challenge = cha.id_challenge
@@ -292,7 +317,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	                'tipo_archivo'       => $row['tipo_archivo'],
 	                'url_contenido'      => $row['url_contenido'],
 	                'ind_aprobado'       => $row['ind_aprobado'],
-	                'aprobador'          => $row['aprobador']
+	                'aprobador'          => $row['aprobador'],
+	                'total_likes'        => $row['total_likes'],
+	                'total_comentarios'  => $row['total_comentarios']
 	              	);
 	              	array_push($challenge, $item);
 				}
@@ -320,7 +347,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 					$respuesta['detalle_curso']   = $fila_curso_alumno['detalle_curso'];
 					$respuesta['contenido']       = $contenido;
 					$respuesta['challenge']       = $challenge;
-					echo json_encode(  $respuesta  );					
+					echo json_encode(  $respuesta  );
+					exit();				
 				}else{
 					$respuesta['resultado']="ERROR";
 					$respuesta['mensaje']="El usuario NO existe en la tabla.";
@@ -331,9 +359,150 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 				$e->getMessage();          
 				$respuesta['resultado']="ERROR";
 				$respuesta['mensaje']=$e;
-				echo json_encode(  $respuesta  );      
+				echo json_encode(  $respuesta  ); 
+				exit();    
 			}
 		}
 	}
 }
+
+///////////////////////////
+// ELIMINAR INSCRIPCION //
+//////////////////////////
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
+{
+    if(!isset($_GET['usuario']))
+    {
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="Debe enviar el usuario por POST.";
+      echo json_encode(  $respuesta  );
+      exit();         
+    }elseif(!isset($_GET['id_curso']))
+    {
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="Debe enviar el id_curso por POST.";
+      echo json_encode(  $respuesta  );
+      exit();        
+    }elseif(empty($_GET['usuario']))
+    {
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="Debe enviar el usuario para eliminar.";
+      echo json_encode(  $respuesta  );
+      exit();                 
+    }elseif(empty($_GET['id_curso']))
+    {
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="Debe informar el id_curso que realiza la acción.";
+      echo json_encode(  $respuesta  );
+      exit();            
+    }else
+    {        
+      try{
+        $input = $_GET;
+        //
+        $consulta = $dbConn->prepare("SELECT * FROM curso_alumno
+        										WHERE id_curso = :id_curso AND usuario = :usuario");
+        $consulta->bindValue(':id_curso', $input['id_curso']);
+        $consulta->bindValue(':usuario', $input['usuario']);
+        $consulta->execute();
+        $fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
+        if (!empty($fila_consulta)) 
+        {
+        	//Elimina el curso del alumno
+			$statement = $dbConn->prepare("DELETE FROM curso_alumno 
+													WHERE id_curso = :id_curso AND usuario = :usuario");
+			$statement->bindValue(':id_curso', $input['id_curso']);  
+        	$statement->bindValue(':usuario', $input['usuario']);			        
+			$statement->execute();
+
+			//Consulta si tiene contenido del alumno
+			$consulta = $dbConn->prepare("SELECT * FROM contenido_alumno
+													WHERE id_curso = :id_curso AND usuario = :usuario");
+			$consulta->bindValue(':id_curso', $input['id_curso']);
+			$consulta->bindValue(':usuario', $input['usuario']);
+			$consulta->execute();
+			$fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
+			if (!empty($fila_consulta))
+			{
+				//Elimina el contenido del alumno
+				$statement = $dbConn->prepare("DELETE FROM contenido_alumno 
+														WHERE id_curso = :id_curso AND usuario = :usuario");
+				$statement->bindValue(':id_curso', $input['id_curso']);  
+	        	$statement->bindValue(':usuario', $input['usuario']);	          
+				$statement->execute();				
+			}
+			//Consulta si tiene challenge de alumno
+			$consulta = $dbConn->prepare("SELECT * FROM challenge_alumno
+													WHERE id_curso = :id_curso AND usuario = :usuario");
+			$consulta->bindValue(':id_curso', $input['id_curso']);
+			$consulta->bindValue(':usuario', $input['usuario']);
+			$consulta->execute();
+			$fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
+			if (!empty($fila_consulta))
+			{
+				//Elimina el challenge del alumno
+				$statement = $dbConn->prepare("DELETE FROM challenge_alumno 
+														WHERE id_curso = :id_curso AND usuario = :usuario");
+				$statement->bindValue(':id_curso', $input['id_curso']);  
+	        	$statement->bindValue(':usuario', $input['usuario']);          
+				$statement->execute();				
+			}
+			//Consulta si tiene puntaje de alumno
+			$consulta = $dbConn->prepare("SELECT * FROM puntaje_alumno
+													WHERE usuario = :usuario");
+			$consulta->bindValue(':usuario', $input['usuario']);
+			$consulta->execute();
+			$fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
+			if (!empty($fila_consulta))
+			{
+				//Elimina el puntaje del alumno
+				$statement = $dbConn->prepare("DELETE FROM puntaje_alumno WHERE usuario = :usuario");	  
+	        	$statement->bindValue(':usuario', $input['usuario']);          
+				$statement->execute();				
+			}
+
+			//Graba registro en tabla Log
+			$consulta = $dbConn->prepare("SELECT * FROM cursos
+										WHERE id_curso = :id_curso");
+			$consulta->bindValue(':id_curso', $input['id_curso']);
+			$consulta->execute();
+			$fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
+			$evento = "Eliminó la inscripción del curso ".$fila_consulta['nombre_curso'];
+			//Agrega el registro en el log de eventos    
+			date_default_timezone_set('America/Argentina/Buenos_Aires');
+			$fecha_formateada = date("Y-m-d H:i:s",time());		
+			$sql = "INSERT INTO log 
+			      (fecha, evento, usuario)
+			      VALUES
+			      (:fecha, :evento, :usuario)";
+			$statement = $dbConn->prepare($sql);  
+			$statement->bindParam(':fecha', $fecha_formateada);
+			$statement->bindParam(':evento', $evento);
+			$statement->bindParam(':usuario', $_GET['usuario']);          
+			$statement->execute();
+			//Envía respuesta
+			$respuesta['resultado']="OK";
+			$respuesta['mensaje']="";    
+			echo json_encode($respuesta);
+			header("HTTP/1.1 200 OK");
+			exit();
+        }else
+        {
+          $respuesta['resultado']="ERROR";
+          $respuesta['mensaje']="El curso no existe en la tabla.";    
+          echo json_encode($respuesta);
+          exit();      
+        }
+      }catch(Exception $e)
+      {
+        $e->getMessage();          
+        $respuesta['resultado']="ERROR";
+        $respuesta['mensaje']=$e;
+        echo json_encode(  $respuesta  );
+        exit();
+      } 
+    }    
+}
+
+header("HTTP/1.1 400 Bad Request");
 ?>

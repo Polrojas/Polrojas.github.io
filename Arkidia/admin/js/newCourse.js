@@ -25,7 +25,8 @@ var app = new Vue({
             id:"",
             nombre:"",
             orden: "",
-            URLContenido:""
+            URLContenido:"",
+            URLImagen:""
         },
         challenge:{
           id:"",
@@ -80,6 +81,7 @@ var app = new Vue({
                   nombre:element.nombre_contenido,
                   orden:element.orden,
                   URLContenido:element.url_contenido,
+                  URLImagen:element.url_imagen,
                   id:element.id_contenido
               })
                 })
@@ -208,6 +210,7 @@ var app = new Vue({
                     "&id_curso=" + app.curso.id + 
                     "&nombre_contenido=" + contenido.nombre + 
                     "&url_contenido=" + contenido.URLContenido + 
+                    "&url_imagen=" + contenido.URLImagen + 
                     "&usuario=" + sessionStorage.loggedUser
           fetch("../ApiRes/contenido_curso.php", {
               method: 'POST',
@@ -230,11 +233,13 @@ var app = new Vue({
                           nombre:contenido.nombre,
                           orden:contenido.orden,
                           URLContenido:contenido.URLContenido,
+                          URLImagen: contenido.URLImagen,
                           id:result.id_contenido
                       })
                       app.contenido.nombre = ""
                       app.contenido.URLContenido = ""
                       app.contenido.orden = ""
+                      app.contenido.URLImagen = ""
                       }
                   })
               } else {
@@ -325,7 +330,56 @@ var app = new Vue({
 
         },
         previsualizar(){
-          window.location.href = "preview-curso.html";
+          console.log("voy a desinscribir")
+          this.desinscribir()
+        //  console.log("voy a inscribir")
+        //  this.inscribir()
+
+        },
+        desinscribir() {
+          fetch("../ApiRes/inscripcion.php?usuario=" + sessionStorage.loggedUser + "&id_curso=" + app.curso.id, {
+              method: "DELETE"
+          })
+              .then(() => {
+
+                  console.log("Ya borré")
+                  console.log("voy a inscribir")
+                  this.inscribir()
+
+
+              })
+      },
+        inscribir(){
+          sessionStorage.idCurso = app.curso.id
+
+            bodyApi = "usuario=" + sessionStorage.loggedUser + 
+                        "&id_curso=" + app.curso.id
+              console.log(bodyApi)
+              fetch("../ApiRes/inscripcion.php", {
+                  method: 'POST',
+                  body: bodyApi,
+                  headers: new Headers({
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                  })
+              })
+              .then(function(response) {
+                  if(response.ok) {
+                      loginResponse = response.json()
+                      loginResponse.then(function(result) {
+                        console.log(result)
+                          if (result.resultado==="ERROR"){
+                              console.log("ERROR")
+                              console.log(result.mensaje)
+                          }else{
+                            console.log("inscripto")
+                            window.location.href = "curso.html";
+                          }
+                      })
+                  } else {
+                      throw "Error en la llamada Ajax"
+                  }
+               })
+    
 
         },
         buscarCurso(idCurso){
@@ -393,6 +447,11 @@ var app = new Vue({
           this.buscarChallenge(sessionStorage.idCurso)
 
         }
+        window.addEventListener("load",function (){
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden";
+        })
+  
 
 
       }

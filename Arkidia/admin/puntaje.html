@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<title>Administración del sitio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../style/style-site.css">
+<link rel="stylesheet" href="style/material-dashboard.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Patua+One&display=swap" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+<script src="../js/bodymin-animation.min.js" type="text/javascript"></script>
+<script src="../js/bodymovin.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+        <div class="loader">
+                <div
+                class="logo-size bodymovin"
+                data-icon="../json/ciencia.json"
+                data-aplay="true"
+                data-loop="false"
+                style="width:100px"
+                ></div>
+            </div>
+        
+            <div id="menu">
+                <header class="pantalla-completa" id="index"> 
+                    <nav class="navbar navbar-expand-lg navbar-dark menu-admin-style fixed-top">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">
+                                <img src="images/logo.svg" height="30" class="d-inline-block align-top" alt="">  
+                        </a>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <div v-for="opcion in opciones">
+                                <li class="nav-item active">
+                                    <a class="nav-link" :href="opcion.link">{{opcion.etiqueta}}</a>
+                                </li>
+                            </div>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="../index.html" @click="logOut()" >Salir</a>
+                                </li>
+                        </ul>
+                        </div>
+                    </nav>
+                </header>
+        
+                <div id="restricted" v-if="!logged" id="notLogged">
+                    <div class="padding">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <img src="../images/site/stop.svg" style="width:80%" alt="STOP"/>
+                                </div>
+                                <div class="col-sm-6" style="align-self: center">
+                                    <h1 class="titulo">Acceso restringido a Administradores</h1>
+                                    <p>Para acceder este contenido necesitás <a class="link" href="../index.html">iniciar sesión</a></p>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<div id="app" v-if="logged">
+<section style="margin:10px"> 
+        <h1 class="titulo">Administración de puntaje por evento</h1>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                            <th v-for="col in columns_puntaje" v-on:click="sortTablepuntaje(col)">{{col}}
+                                                <div class="arrow" v-if="col == sortColumn_puntaje" v-bind:class="ascending ? 'arrow_up' : 'arrow_down'">
+                                            </th>
+                                            <th>Acciones</th>
+                                            </tr>
+                                            
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="puntaje in get_rows_puntaje()">
+                                                <td v-for="col in columns_puntaje">{{puntaje[col]}}</td>
+
+                                                <td>
+                                                    <button class="btn" @click="alterPuntaje = puntaje" data-toggle="modal" data-target="#modificarPuntaje"><span>Editar</span></button>                                                    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </section>
+
+
+
+
+<!-- Modal Modificar puntaje -->
+<div class="modal fade" id="modificarPuntaje" tabindex="-1" role="dialog" aria-labelledby="modificarPuntajeCenterTitle"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="crearPuntajeCenterTitle">
+        Modificar Puntaje
+      </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+        <h5>
+          {{alterPuntaje.evento}}
+        </h5>      
+        <div class="form-group">
+            <label>Puntaje</label>
+            <input type="number" class="form-control" v-model="alterPuntaje.puntaje" placeholder="Ingresá el puntaje">
+        </div>
+
+
+    </div>
+
+
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cerrar
+      </button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" @click="modificarPuntaje(alterPuntaje)">
+        Modificar puntaje
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="js/puntaje.js" type="text/javascript"></script>
+<script src="js/menu.js" type="text/javascript"></script>
+<script src="../js/animaciones.js" type="text/javascript"></script>
+
+
+
+
+</body>
+</html>

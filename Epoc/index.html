@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Insights Beacon</title>
+<title>Curso de actualización: Epoc</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style/w3.css">
@@ -12,8 +12,10 @@
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Lato|Raleway&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/bodymin-animation.min.js" type="text/javascript"></script>
+<script src="js/bodymovin.js"></script>
 
-
+<link rel="icon" href="icon.png">
 
 <script>
 $(document).ready(function(){
@@ -47,7 +49,8 @@ $(document).ready(function(){
 <div class="w3-top">
 <!-- Menú -->
   <div class="w3-card-2 bgimg-2 w3-padding-12"  id="myNavbar">
-      <img href="index.html" src="images/logo.svg" alt="INSIGHTS BEACON" style="padding-top: 10px; margin-left:10px;width:270px">
+    
+      <img href="index.html" src="images/logo.svg" alt="Respiratory Xchange" style="padding-top: 10px; margin-left:10px;width:270px">
     <div class="w3-right w3-hide-small w3-hide-medium w3-padding-24">
       <a href="#welcome" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Home</a>
       <a href="#Objetivo" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Objetivo</a>
@@ -55,7 +58,8 @@ $(document).ready(function(){
       <a href="#Certificacion" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Certificación</a>
       <a href="#Docentes" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Docentes</a>
       <a href="#Desarrollo" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Contenido</a>
-      <a href="#Inscripcion" class="w3-bar-item w3-button w3-text-grey w3-light-blue w3-hover-blue">Inscripción</a>
+      <a href="#Inscripcion" class="w3-bar-item w3-button w3-text-grey w3-white w3-hover-blue" style="border-radius: 10px">Inscripción</a>
+      <a href="https://campus.on-education.com.ar/" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Campus</a>
 
 
     </div>
@@ -73,12 +77,25 @@ $(document).ready(function(){
   <a href="#Certificacion" onclick="w3_close()" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Certificación</a>
   <a href="#Docentes" onclick="w3_close()" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Docentes</a>
   <a href="#Desarrollo" onclick="w3_close()" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Contenido</a>
-  <a href="#Inscripcion" onclick="w3_close()" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Inscripción</a>
+  <a href="#Inscripcion" onclick="w3_close()" class="w3-bar-item w3-button w3-text-white w3-hover-blue w3-dark-grey">Inscripción</a>
+  <a href="https://campus.on-education.com.ar/" onclick="w3_close()" class="w3-bar-item w3-button w3-text-grey w3-hover-blue">Campus</a>
 
 </nav>
  
 
 <div id="app">
+
+    <div class="loader">
+        <div
+        class="bodymovin"
+        data-icon="json/ciencia.json"
+        data-aplay="true"
+        data-loop="true"
+        style="width:100px"
+      ></div>
+      </div>
+
+
     <section id="welcome" style="height: 500px; padding: 40px 16% 0px">
       <div style="display:table-cell; vertical-align: middle; text-align: left">
         <div style="margin:30px">
@@ -92,7 +109,7 @@ $(document).ready(function(){
       <img src="images/objetivos.svg" class="card-img-top" alt="objetivos" style="width:80px">
 
       <h2>Objetivos del curso</h2>
-      <ul class="triangle">
+      <ul class="triangle padding-left-responsive">
         <li v-for="objetivo in curso.objetivos">{{objetivo}}</li>
       </ul>
     </section>
@@ -101,7 +118,7 @@ $(document).ready(function(){
       <img src="images/modalidad.svg" class="card-img-top" alt="objetivos" style="width:80px">
 
       <h2>Modalidad del curso</h2>
-      <ul class="triangle" v-for="elemento in curso.modalidad">
+      <ul class="triangle padding-left-responsive" v-for="elemento in curso.modalidad">
         <li>{{elemento}}</li>
     </section>
 
@@ -125,24 +142,20 @@ $(document).ready(function(){
 
       <h2>Docentes</h2>
       <div class="card-group">
-        <div class="card" v-on:click="myFunction(docente.nombre)" v-for="docente in curso.docentes"
+        <div class="card underlineHover" v-on:click="myFunction(docente.nombre)" v-for="docente in curso.docentes"
           style="padding:20px; min-width:300px; max-width:300px; align-items: center; text-align: center; cursor: pointer">
           <img src="images/docente.svg" class="card-img-top" :alt="docente.nombre" style="width:80px">
           <div class="card-body">
             <h5 class="card-title">{{docente.nombre}}</h5>
             <p class="card-text">{{docente.nacionalidad}}</p>
+            <p  style="font-size: 10px">Ver Biografía</p>
             <div :id="docente.nombre" class="w3-container w3-hide">
               <p>{{docente.bio}}</p>
             </div>
-
           </div>
         </div>
       </div>
-
     </section>
-
- 
-
     
     <section id="Desarrollo">
       <img src="images/contenido.svg" class="card-img-top" alt="contenido" style="width:80px">
@@ -155,6 +168,16 @@ $(document).ready(function(){
         <ul class="list-group list-group-flush" v-for="contenido in desarrollo.contenidos">
           <li class="list-group-item detalle">{{contenido}}</li>
         </ul>
+        <div style="padding-left:15px">
+        <p v-if="desarrollo.objetivos.length>0" v-on:click="myFunction(desarrollo.titulo)"  class="objetivos">Ver objetivos del curso</p>
+        <div :id="desarrollo.titulo" class="w3-container w3-hide">
+            <ul class="list-group list-group-flush" v-for="objetivo in desarrollo.objetivos">
+                <li class="list-group-item detalle">{{objetivo}}</li>
+            </ul>
+        </div>
+
+      </div>
+
       </div>
     </section>
 
@@ -163,56 +186,92 @@ $(document).ready(function(){
       <h2>Inscripción</h2>
       <form>
         <div class="form-group">
-          <label for="inputNombre">Nombre y Apellido</label>
-          <input type="nombre" class="form-control" id="inputNombre" aria-describedby="nombre" placeholder="">
+          <label for="inputNombre" required>Nombre y Apellido <a v-if="error.nombre" style="color: darkred">Debés ingresar tu nombre y apellido</a></label>
+          <input v-model="inscripcion.nombre" @click="error.nombre=false" type="nombre" class="form-control" id="inputNombre" aria-describedby="nombre" placeholder="">
         </div>
         <div class="form-group">
-          <label for="inputMail">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+          <label for="inputMail">Correo electrónico <a v-if="error.mail" style="color: darkred">Debés ingresar tu dirección de correo electrónico</a></label>
+          <input v-model="inscripcion.mail"  @click="error.mail=false"maxlength="50" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
           <small id="emailHelp" class="form-text text-muted">Sólo usaremos esta dirección de correo electrónico para la
             inscripción</small>
         </div>
         <div class="form-group">
-          <label for="inputTelefono">Teléfono</label>
-          <input type="phone" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
+          <label for="inputTelefono">Teléfono <a v-if="error.telefono" style="color: darkred">Debés ingresar tu número de teléfono</a></label>
+          <input v-model="inscripcion.telefono" @click="error.telefono=false" maxlength="30" type="phone" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
         </div>
         <div class="form-group">
-          <label for="inputCiudad">Ciudad</label>
-          <input type="city" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
+          <label for="inputCiudad">Ciudad <a v-if="error.ciudad" style="color: darkred">Debés ingresar la ciudad donde vives</a></label>
+          <input v-model="inscripcion.ciudad" @click="error.ciudad=false" maxlength="50" type="city" class="form-control" id="inputCiudad" aria-describedby="city" placeholder="">
         </div>
         <div class="form-group">
-          <label for="inputPais">País</label>
-          <input type="country" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
+          <label for="inputPais">País <a v-if="error.pais" style="color: darkred">Debés ingresar tu nacionalidad</a></label>
+          <input v-model="inscripcion.pais" @click="error.pais=false" maxlength="50" type="country" class="form-control" id="inputCountry" aria-describedby="country" placeholder="">
         </div>
         <div class="form-group">
-          <label for="inputEspecialidad">Especialidad</label>
-          <input type="especialidad" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
+          <label for="inputEspecialidad">Especialidad <a v-if="error.especialidad"  style="color: darkred">Debés ingresar tu especialidad</a></label>
+          <input v-model="inscripcion.especialidad" @click="error.especialidad=false" maxlength="50" type="especialidad" class="form-control" id="inputEspecialidad" aria-describedby="especialidad" placeholder="">
         </div>
         <div class="form-group">
-          <label for="inputMatricula">Número de Matrícula</label>
-          <input type="matricula" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
+          <label for="inputMatricula">Número de Matrícula <a v-if="error.matricula" style="color: darkred">Debés ingresar tu número de matrícula</a></label>
+          <input v-model="inscripcion.matricula" @click="error.matricula=false" maxlength="50" type="matricula" class="form-control" id="inputMatricula" aria-describedby="matricula" placeholder="">
         </div>
-        <div class="form-group">
-          <label for="inputNombre">Beca</label>
-          <input type="especialidad" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
+        <label for="inputMatricula">Tengo una Beca</label>
+        <label class="switch">
+          <input @click="switchBeca()" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <div v-if="beca" class="form-group">
+          <label for="inputBeca">Beca</label>
+          <input v-model="inscripcion.beca" maxlength="20" type="beca" class="form-control" id="inputBeca" aria-describedby="beca" placeholder="">
         </div>
-
-        <button type="submit" class="btn btn-primary">Inscribir</button>
-        <button type="submit" class="btn btn-primary">Solicitar Beca</button>
-
       </form>
-
+      <p v-if="errorForm" style="color: firebrick">Hubo un error, verificá los datos e intentá nuevamente</p>
+      <div v-if="inscripcionOk" style="text-align: center">
+        <img src="images/inscripcion-ok.svg" class="card-img-top" alt="inscripcion" style="width:80px">
+        <h2 style="margin-right: 0px !important; text-align: center;">¡Muchas gracias! Ya registramos tu solicitud</h2>
+      </div>
+      <div v-if="inscripcionDuplicada" style="text-align: center">
+          <img src="images/inscripcion-ok.svg" class="card-img-top" alt="inscripcion" style="width:80px">
+          <h2 style="margin-right: 0px !important; text-align: center;">Ya tenemos registrada una inscripción con esa dirección de correo electrónico.</h2>
+        </div>
+      <button v-if="!inscripcionOk && !inscripcionDuplicada" @click="solicitarBeca(inscripcion)"  class="btn btn-primary">{{accionForm}}</button>
     </section>
-
   </div>
 
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4" style="color: white; background-color:#004587 ;
+; margin-top:100px">
 
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+  
+      <!-- Grid row -->
+      <div class="row" style="justify-content: center">
+          <div class="col-md-2">
+              <img href="index.html" src="images/alat.png" alt="Respiratory Xchange" style="padding-top: 10px; margin-left:10px;height:60px">
 
+          </div>
+          <div class="col-md-2">
+              <img href="index.html" src="images/boehringer.png" alt="Respiratory Xchange" style="padding-top: 10px; margin-left:10px;height:60px">
+
+          </div>
+      </div>
+  
+    </div>
+  
+    <div class="footer-copyright text-center" style="color: white; font-size: 12px; padding:30px">Desarrollado por
+      <a href="http://www.on-education.com.ar/" style="color: white; font-size: 12px"> On-Education</a>
+    </div>
+  
+  </footer>
+  <!-- Footer -->
 
 
 
 
 <script src="js/index.js" type="text/javascript"></script>
+<script src="js/animaciones.js" type="text/javascript"></script>
+
 
 <script>
 var mySidebar = document.getElementById("mySidebar");
@@ -229,6 +288,8 @@ function w3_close() {
 }
 
 </script>
+
+
 
 
 </body>

@@ -119,6 +119,11 @@ var app = new Vue({
               this.logged = false
             }
         }
+        window.addEventListener("load",function (){
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden";
+        })
+  
     }
 
     

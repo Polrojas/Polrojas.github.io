@@ -118,6 +118,7 @@ var app = new Vue({
               if(response.ok) {
                   loginResponse = response.json()
                   loginResponse.then(function(result) {
+                    console.log(result)
                       if (result.resultado==="ERROR"){
                           console.log(result.mensaje)
                       }else{
@@ -173,6 +174,11 @@ var app = new Vue({
         this.buscarContenido(sessionStorage.idCurso)
         this.completarContenido()
         this.buscarChallenge(sessionStorage.idCurso)
+        window.addEventListener("load",function (){
+          const loader = document.querySelector(".loader");
+          loader.className += " hidden";
+        })
+  
 
       }
 
