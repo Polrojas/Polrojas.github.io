@@ -20,8 +20,8 @@
   margin:0;
 }
   .content {
-  height:90%;
-  min-height:90%;/*for mozilla*/
+  height:100%;
+  min-height:100%;/*for mozilla*/
   padding-top:5%;
   padding-bottom:5%;
 }
@@ -60,7 +60,9 @@ html>body .content {
 #ten {
   background: linear-gradient(180deg, #cb00ff 0%,#ff7100 100%);
 }
-
+#eleven {
+  background: linear-gradient(180deg, #ff7100 0%,#cb00ff 100%);
+}
 h1{
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
@@ -139,7 +141,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 30px;
   }
   h2 {
-    font-size: 20px;
+    font-size: 25px;
   }
   h3 {
     font-size: 18px;
@@ -178,20 +180,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blurry {
   position: relative;
-  transition: opacity 2s, filter 3s;
-  opacity: 0;
+  transition:  filter 3s;
   filter: blur(18px);
 }
 
 .come-in-blurry {
   animation: come-in 1.8s ease forwards;
-  opacity: 1;
   filter: blur(0px);
-
 }
 
 .already-visible-blurry {
-  animation-duration: 2.6s;
+  animation-duration: 4.6s;
 }
 
 @keyframes come-in-blurry {
@@ -253,13 +252,21 @@ h1, h2, h3, h4, h5, h6 {
     </div>
 
     <div class='content' id='three' style="text-align: center">
+      <h1 class="module threeD">¿Quiénes somos?</h1>
+      <h3 class="module" style="padding: 50px; ">Somos una edtech que ofrece soluciones digitales integrales centradas los usuarios. Ayudamos a las organizaciones a incrementar la cobertura del negocio y generar un vínculo más estrecho y frecuente con clientes y colaboradores internos.
+
+      </h3>
+
+    </div> 
+
+    <div class='content' id='four' style="text-align: center">
         <h1 class="blurry threeD">Nuestro foco</h1>
         <h3 class="blurry">Estamos enfocados en poner al </h3>
         <h3 class="blurry"><b class="subrayado">cliente en el centro</b></h3> 
         <h3 class="blurry">de tu negocio.</h3>
     </div>
 
-    <div class='content' id='four' style="text-align: center">
+    <div class='content' id='five' style="text-align: center">
       <h1 class="module threeD">Learning</h1>
       <h3 class="module">Cursos para clientes</h3>
       <h3 class="module">Programas de inducción</h3>
@@ -268,7 +275,7 @@ h1, h2, h3, h4, h5, h6 {
       <img class="module imageSection" src="images/tablet.svg">
     </div>
 
-    <div class='content' id='five' style="text-align: center">
+    <div class='content' id='six' style="text-align: center">
       <h1 class="module threeD">Digital Transformation</h1>
       <h3 class="module">Consutoría</h3>
       <h3 class="module">Estrategia</h3>
@@ -278,7 +285,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
 
 
-    <div class='content' id='six' style="text-align: center">
+    <div class='content' id='seven' style="text-align: center">
       <h1 class="module threeD">Omnichannel</h1>
       <h3 class="module">Apps</h3>
       <h3 class="module">Sitios web</h3>
@@ -289,7 +296,9 @@ h1, h2, h3, h4, h5, h6 {
       <img class="module imageSection" src="images/omnicanal.svg">
     </div>
 
-    <div class="content" id='seven' style="text-align: -webkit-center">
+    <div class="content" id='eight' style="text-align: -webkit-center">
+      <h1 class="module threeD">¿Qué hacemos?</h1>
+
         <div class="card-deck">
             <div class="card module" >
               <div class="card-body" style="text-align:left">
@@ -351,7 +360,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
 
 
-    <div class='content' id='eight' style="text-align: -webkit-center">
+    <div class='content' id='nine' style="text-align: -webkit-center">
         <h1 class="module threeD">¿Por qué elegirnos?</h1>
         <h2 class="module">+ de <a id="counter" class="counter-value" data-count="20">0</a> años</h2>
         <h3 class="module">de experiencia en la industria</h3>
@@ -361,7 +370,7 @@ h1, h2, h3, h4, h5, h6 {
         <h3 class="module">de satisfacción de cliente</h3>
       </div> 
 
-      <div class='content' id='nine' style="text-align: -webkit-center">
+      <div class='content' id='ten' style="text-align: -webkit-center">
           <h1 class="module threeD">Nuestros clientes</h1>
 
           <div class="card-deck" >
@@ -401,13 +410,15 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </div> 
   
-        <div class='content' id='ten' style="text-align: center">
-            <h1 class="module threeD">¿Quiénes somos?</h1>
-            <h3 class="module" style="padding: 50px; ">Somos una edtech que ofrece soluciones digitales integrales centradas los usuarios. Ayudamos a las organizaciones a incrementar la cobertura del negocio y generar un vínculo más estrecho y frecuente con clientes y colaboradores internos.
+        <div class='content' id='eleven' style="text-align: center">
+          <h1 class="module threeD">¿Te pareció interesante?</h1>
+          <h2 class="module threeD">Hagamos algo juntos</h2>
 
-            </h3>
-  
-          </div> 
+          <img class="module" style="width: 300px" src="images/email.svg">
+          <h4 class="module">Contactanos en info@onEducation.com</h4>
+
+        </div>
+
     
 
 
