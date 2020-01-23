@@ -197,7 +197,7 @@ $(document).ready(function(){
         </div>
         <div class="form-group">
           <label for="inputTelefono">Teléfono <a v-if="error.telefono" style="color: darkred">Debés ingresar tu número de teléfono</a></label>
-          <input v-model="inscripcion.telefono" @click="error.telefono=false" maxlength="30" type="phone" class="form-control" id="inputNombre" aria-describedby="city" placeholder="">
+          <input v-model="inscripcion.telefono" @click="error.telefono=false" maxlength="30" type="phone" class="form-control" id="inputPhone" aria-describedby="city" placeholder="">
         </div>
         <div class="form-group">
           <label for="inputCiudad">Ciudad <a v-if="error.ciudad" style="color: darkred">Debés ingresar la ciudad donde vives</a></label>

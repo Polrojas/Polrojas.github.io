@@ -28,11 +28,324 @@ Vue.component('inicio-arkidia',{
     }
 })
 
+Vue.component('banner-proyectos',{
+    template:`
+    <section style="margin-top: 100px">
+    <h1 class="titulo">Miles de proyectos con videos paso a paso</h1>
+    <img
+    src="images/site/challenges.svg"
+    id="challenges"
+    alt="Miles de proyectos"
+    style="padding-top: 50px; padding-bottom:50px"
+  />
+    
+  </section>
+    `
+    ,
+    data() {
+        return{
+        }
+    },
+    props:{
+    },
+    methods:{
+    },
+    computed:{  
+    }
+})
+
+
+Vue.component('footer-inicio',{
+    template:`
+    <div style="color: white; text-align: center ;background-image: url(images/site/ark-background.svg);background-size:cover; height: 600px;">
+    <h1 class="titulo" style="padding-top:150px; padding-left: 20px;padding-right:20px">"Uno aprende haciendo las
+        cosas;<br> porque aunque piense 
+        que sabe, no tiene la certeza 
+        hasta que lo intenta"</h1>
+        <p>Sófocles, Siglo 5 A.C.</p>
+  </div>
+    `
+    ,
+    data() {
+        return{
+        }
+    },
+    props:{
+    },
+    methods:{
+    },
+    computed:{  
+    }
+})
+
+Vue.component('compartir',{
+    template:`
+    <div style="text-align: center">
+    <img
+    src="images/site/compartir.svg"
+    id="challenges"
+    alt="Miles de proyectos"
+    style="width:100%; margin-top: 100px"
+  />
+    <div
+    style="
+    background-color: #ececec;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 600px"
+    ></div>
+    <img
+    src="images/site/paint-grey.svg"
+    id="challenges"
+    alt="Miles de proyectos"
+    style=" margin-left: 20px;
+    margin-right: 20px;"
+  />
+  </div>
+    `
+    ,
+    data() {
+        return{
+        }
+    },
+    props:{
+    },
+    methods:{
+    },
+    computed:{  
+    }
+})
+
+Vue.component('banner-beneficios',{
+    template:`
+    <section style="margin-top: 100px">
+            <div class="card-group" style="justify-content: center;">
+              <div class="card mb-4" style="min-width: 300px; max-width:500px;border:0px">
+                  <div class="row no-gutters" style="text-align:center">
+                    <div class="col-md-6" >
+                        <img
+                        src="images/site/inmersivo.svg"
+                        id="challenges"
+                        alt="Inmersivo"
+                        style="width:200px"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h5 class="titulo">Inmersivo</h5>
+                        <p class="card-text">Los chicos pasan de ser espectadores a protagonistas</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="card mb-4" style="min-width: 300px;max-width:500px;border:0px">
+                  <div class="row no-gutters" style="text-align:center">
+                    <div class="col-md-6" >
+                        <img
+                        src="images/site/calidad.svg"
+                        id="challenges"
+                        alt="Inmersivo"
+                        style="width:200px"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h5 class="titulo">de Calidad</h5>
+                        <p class="card-text">El contenido y la experiencia de aprendizaje es la base de todo lo que hacemos.</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="card mb-4" style="min-width: 300px;max-width:500px;border:0px">
+                  <div class="row no-gutters" style="text-align:center">
+                    <div class="col-md-6">
+                        <img
+                        src="images/site/seguro.svg"
+                        id="challenges"
+                        alt="Seguro"
+                        style="width:200px"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card-body">
+                        <h5 class="titulo">Seguro</h5>
+                        <p class="card-text">El aprendizaje de los chicos se da en un espacio protegido. Sin bullies, sin mayores.</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+        </section>
+    `
+    ,
+    data() {
+        return{
+        }
+    },
+    props:{
+    },
+    methods:{
+    },
+    computed:{  
+    }
+})
+
+Vue.component('comentarios',{
+    template:`
+    <section style="margin-top: 100px">
+    <div class="card" style="border:0px; padding:20px">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="images/site/profile.svg" style="max-width: 100px;" class="img img-rounded img-fluid"/>
+            </div>
+            <div class="col-md-10">
+                <p>
+                    <strong>Maniruzzaman Akash</strong>
+               </p>
+               <p>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+              </p>
+               <div class="clearfix"></div>
+                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="border:0px; padding:20px">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="images/site/profile.svg" style="max-width: 100px;" class="img img-rounded img-fluid"/>
+            </div>
+            <div class="col-md-10">
+                <p>
+                    <strong>Maniruzzaman Akash</strong>
+               </p>
+               <p>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+              </p>
+               <div class="clearfix"></div>
+                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="border:0px; padding:20px">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="images/site/profile.svg" style="max-width: 100px;" class="img img-rounded img-fluid"/>
+            </div>
+            <div class="col-md-10">
+                <p>
+                    <strong>Maniruzzaman Akash</strong>
+               </p>
+               <p>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+              </p>
+               <div class="clearfix"></div>
+                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+        </section>
+    `
+    ,
+    data() {
+        return{
+        }
+    },
+    props:{
+    },
+    methods:{
+    },
+    computed:{  
+    }
+})
+
+
+
+
+Vue.component('challenges',{
+    template:`
+
+    <div style="text-align: center">
+        <img
+        src="images/site/crear.svg"
+        id="challenges"
+        alt="Miles de proyectos"
+        style="width:100%; margin-top: 100px"
+      />
+        <div 
+        style="
+        background-color: #ececec;
+        padding-top: 50px;
+        padding-bottom: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+        height: 600px"
+        ></div>
+        <img
+        src="images/site/paint-grey.svg"
+        id="challenges"
+        alt="Miles de proyectos"
+        style=" margin-left: 20px;
+        margin-right: 20px;"
+      />
+      </div>
+    `
+    ,
+    data() {
+        return{
+        }
+    },
+    props:{
+    },
+    methods:{
+    },
+    computed:{  
+    }
+})
 
 
 Vue.component('categorias',{
     template:`
-    <section v-if="apiCategorias.length>0">
+    <div  style="text-align: center; margin-top: 100px">
+    <img
+    src="images/site/ver.svg"
+    id="challenges"
+    alt="Miles de proyectos"
+    style="width:100%"
+  />
+    <section v-if="apiCategorias.length>0"       style="
+    background-color: #ececec;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;">
     <h1 class="titulo">Categorías</h1>
     <div class="container">
       <div class="row" style="justify-content: center" >
@@ -46,7 +359,16 @@ Vue.component('categorias',{
         </div>
       </div>
     </div>
+
   </section>
+  <img
+  src="images/site/paint-grey.svg"
+  id="challenges"
+  alt="Miles de proyectos"
+  style=" margin-left: 20px;
+  margin-right: 20px;"
+/>
+  </div>
     `
     ,
     data() {

@@ -8,6 +8,7 @@ $dbConn =  connect($db);
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
   $evento="";
+
   if (isset($_GET['id_curso'])) // Si el campo id_curso existe es una búsqueda puntual
   {
       //Mostrar un curso particular
@@ -84,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
     $sql_padre->bindParam(':mail', $_GET['usuario']);  
     $sql_padre->setFetchMode(PDO::FETCH_ASSOC);
     $sql_padre->execute();
-    $fila_padre= $sql_padre->fetchAll();    
+    $fila_padre= $sql_padre->fetchAll();
 
     if(!empty($fila_hijo))
     {
@@ -102,7 +103,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         $respuesta=array();
 
         foreach($cursos as $row)
-        {   
+        {
+          //Cuenta los likes por curso
+          $sql = $dbConn->prepare("SELECT Count(*) as tot FROM like_curso where id_curso = :id_curso");
+          $sql->bindValue(':id_curso', $row['id_curso']);
+          $sql->execute();
+          $cant_like = $sql->fetch(PDO::FETCH_ASSOC);
+
+          //Busca que el usuario haya puesto like
+          $sql = $dbConn->prepare("SELECT * FROM like_curso 
+                                  where id_curso = :id_curso and usuario_like = :usuario_like");
+          $sql->bindValue(':id_curso', $row['id_curso']);
+          $sql->bindValue(':usuario_like', $_GET['usuario']);
+          $sql->execute();
+          $dato = $sql->fetch(PDO::FETCH_ASSOC);    
+          if(!empty($dato))
+          {
+            $ind_like = "1";
+          }
+          else
+          {
+            $ind_like ="0";
+          }
+
                   $sql = $dbConn->prepare("SELECT orden, url_imagen
                         FROM contenido_curso
                         WHERE id_curso = :id_curso");
@@ -116,12 +139,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
                   'detalle_curso' => $row['detalle_curso'],
                   'edad_desde'    => $row['edad_desde'],
                   'edad_hasta'    => $row['edad_hasta'],
-                  'likes'         => "0",
+                  'likes'         => $cant_like['tot'],
                   'comentarios'   => "0",
-
+                  'ind_like'      => $ind_like,
                   'contenido'     => $contenido             
                   );
                   array_push($respuesta, $item);
+                  $ind_like ="0";
         }
         header("HTTP/1.1 200 OK");
         echo json_encode( $respuesta  );
@@ -152,8 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
                   'detalle_curso' => $row['detalle_curso'],
                   'edad_desde'    => $row['edad_desde'],
                   'edad_hasta'    => $row['edad_hasta'],
-                  'likes'         => "0",
+                  'likes'         => $cant_like,
                   'comentarios'   => "0",
+                  'ind_like'      => $ind_like,
                   'contenido'     => $contenido
                   );
                   array_push($respuesta, $item);
@@ -194,8 +219,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
                   'detalle_curso' => $row['detalle_curso'],
                   'edad_desde'    => $row['edad_desde'],
                   'edad_hasta'    => $row['edad_hasta'],
-                  'likes'         => "0",
+                  'likes'         => $cant_like,
                   'comentarios'   => "0",
+                  'ind_like'      => $ind_like,
                   'contenido'     => $contenido
                   );
                   array_push($respuesta, $item);

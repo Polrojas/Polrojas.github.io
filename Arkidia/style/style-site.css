@@ -428,7 +428,7 @@ h2 {
 .titulo{
   font-family: 'Patua One', cursive;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 h1{
@@ -454,6 +454,11 @@ h1{
     font-family: 'Patua One', cursive;
     text-align: center;
     font-size: 20px;
+  }
+  .titulo{
+    font-family: 'Patua One', cursive;
+    text-align: center;
+    font-size: 30px;
   }
 }
 .texto-car-categoria{

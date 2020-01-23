@@ -17,13 +17,13 @@ Vue.component('cursos-categoria',{
       <div class="container">
         <div class="row" style="justify-content: center">
           <div v-for="curso in cursosPorCategoria" :key="curso.id_curso">
-            <div @click="iniciarCurso(curso)" class="card card-curso"  style="cursor: pointer">
+            <div  class="card card-curso"  >
               <div class="card-body">
                 <h4 class="card-title subtitulo">{{curso.nombre_curso}}</h4>
                 <p class="card-text">{{curso.detalle_curso}}</p>
               </div>
               <div :id="'demo'+curso.id" class="carousel slide" data-ride="carousel" >
-                <div class="carousel-inner">
+                <div @click="iniciarCurso(curso)" style="cursor: pointer" class="carousel-inner">
                   <div class="carousel-item active">
                     <img :src="curso.contenido[0].url_imagen" style="width:100%;" alt="curso.nombre_curso">
                   </div>
@@ -33,10 +33,11 @@ Vue.component('cursos-categoria',{
                 </div>
               </div>  
               <div style="padding:15px">
-                <img src="images/site/likes.svg" style="width:25px;" alt="curso.nombre">
-                <span>0</span>
+                <img v-if="curso.ind_like==0" src="images/site/likes.svg" @click="darLike(curso)" style="width:25px;" alt="curso.nombre">
+                <img v-if="curso.ind_like==1" src="images/site/liked.svg" @click="quitarLike(curso)" style="width:25px;" alt="curso.nombre">
+                <span>{{curso.likes}}</span>
                 <img src="images/site/comments.svg" style="width:25px;" alt="curso.nombre">
-                <span>0</span>
+                <span>{{curso.comentarios}}</span>
               </div>
             </div>
           </div>
@@ -88,6 +89,44 @@ Vue.component('cursos-categoria',{
               })
 
           }
+
+        },
+        quitarLike(curso){
+          fetch("ApiRes/like_curso.php?usuario=" + sessionStorage.loggedUser+"&id_curso="+curso.id_curso, {
+            method: "DELETE"
+        })
+            .then(() => {
+              curso.ind_like = 0
+              curso.likes--
+
+
+            })
+
+        },
+
+        darLike(curso){
+
+          fetch("ApiRes/like_curso.php",{
+            method: 'POST',
+            body: "usuario="+sessionStorage.loggedUser+"&id_curso="+curso.id_curso,
+            headers: new Headers({
+                'Content-Type': 'application/x-www-form-urlencoded'})
+        })
+        .then(function(response) {
+            if(response.ok) {
+                loginResponse = response.json()
+                loginResponse.then(function(result) {
+                  console.log(result)
+                  if(result.resultado == "OK"){
+                    curso.ind_like = 1
+                    curso.likes++
+                  }
+
+                })
+            } else {
+                throw "Error en la llamada Ajax"
+            }
+         })
 
         },
 
