@@ -215,14 +215,14 @@ var app = new Vue({
     }
   },
   methods: {
-    switchBeca(){
+/*    switchBeca(){
       app.beca = !app.beca
       if(app.beca){
         app.accionForm = "Inscribirme"
       }else{
         app.accionForm = "Solicitar una Beca"
       }
-    },
+    },*/
     solicitarBeca(inscripcion){
       error = false
       if(!inscripcion.nombre){
