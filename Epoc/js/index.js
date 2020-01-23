@@ -222,7 +222,7 @@ var app = new Vue({
       }else{
         app.accionForm = "Solicitar una Beca"
       }
-    },*/
+    },
     solicitarBeca(inscripcion){
       error = false
       if(!inscripcion.nombre){
@@ -298,7 +298,7 @@ var app = new Vue({
           }
        })
 
-    },
+    },*/
 
 
     myFunction(id) {
