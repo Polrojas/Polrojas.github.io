@@ -215,7 +215,7 @@ var app = new Vue({
     }
   },
   methods: {
-/*    switchBeca(){
+    switchBeca(){
       app.beca = !app.beca
       if(app.beca){
         app.accionForm = "Inscribirme"
@@ -308,7 +308,7 @@ var app = new Vue({
       } else { 
         x.className = x.className.replace(" w3-show", "");
       }
-    }*/
+    }
   },
   created: function(){
     console.log("created")
