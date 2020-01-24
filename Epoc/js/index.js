@@ -311,20 +311,15 @@ var app = new Vue({
     }
   },
   created: function(){
-    console.log("created")
-    console.log(navigator.userAgent)
+
 
     window.addEventListener("load",function (){
-      console.log("eventlistener")
 
       const loader = document.querySelector(".loader");
-      console.log("hide class")
 
       loader.className += " hidden";
     })
-    //if (navigator.userAgent.search("MSIE") & gt; = 0) {
-      // insert conditional IE code here
-  //}
+
 
   }
 });
