@@ -298,7 +298,7 @@ var app = new Vue({
           }
        })
 
-    },*/
+    },
 
 
     myFunction(id) {
@@ -308,7 +308,7 @@ var app = new Vue({
       } else { 
         x.className = x.className.replace(" w3-show", "");
       }
-    }
+    }*/
   },
   created: function(){
     console.log("created")
