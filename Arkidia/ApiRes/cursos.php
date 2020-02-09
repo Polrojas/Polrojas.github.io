@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
       echo json_encode(  $respuesta  );
       exit();   
     }
+  //Esta caso manda usuario y categoría
   }elseif(isset($_GET['usuario']) && isset($_GET['id_categoria']))
   {
     //Consuta por categorías dependiendo el usuario
@@ -163,6 +164,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         $respuesta=array();
         foreach($cursos as $row)
         {
+          //Cuenta los likes por curso
+          $sql = $dbConn->prepare("SELECT Count(*) as tot FROM like_curso where id_curso = :id_curso");
+          $sql->bindValue(':id_curso', $row['id_curso']);
+          $sql->execute();
+          $cant_like = $sql->fetch(PDO::FETCH_ASSOC);
+
+          //Busca que el usuario haya puesto like
+          $sql = $dbConn->prepare("SELECT * FROM like_curso 
+                                  where id_curso = :id_curso and usuario_like = :usuario_like");
+          $sql->bindValue(':id_curso', $row['id_curso']);
+          $sql->bindValue(':usuario_like', $_GET['usuario']);
+          $sql->execute();
+          $dato = $sql->fetch(PDO::FETCH_ASSOC);    
+          if(!empty($dato))
+          {
+            $ind_like = "1";
+          }
+          else
+          {
+            $ind_like ="0";
+          }          
                   $sql = $dbConn->prepare("SELECT orden, url_imagen
                         FROM contenido_curso
                         WHERE id_curso = :id_curso");
@@ -176,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
                   'detalle_curso' => $row['detalle_curso'],
                   'edad_desde'    => $row['edad_desde'],
                   'edad_hasta'    => $row['edad_hasta'],
-                  'likes'         => $cant_like,
+                  'likes'         => $cant_like['tot'],
                   'comentarios'   => "0",
                   'ind_like'      => $ind_like,
                   'contenido'     => $contenido
@@ -206,6 +228,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         $respuesta=array();
         foreach($cursos as $row)
         {
+          //Cuenta los likes por curso
+          $sql = $dbConn->prepare("SELECT Count(*) as tot FROM like_curso where id_curso = :id_curso");
+          $sql->bindValue(':id_curso', $row['id_curso']);
+          $sql->execute();
+          $cant_like = $sql->fetch(PDO::FETCH_ASSOC);          
                   $sql = $dbConn->prepare("SELECT orden, url_imagen
                         FROM contenido_curso
                         WHERE id_curso = :id_curso");
@@ -219,9 +246,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
                   'detalle_curso' => $row['detalle_curso'],
                   'edad_desde'    => $row['edad_desde'],
                   'edad_hasta'    => $row['edad_hasta'],
-                  'likes'         => $cant_like,
+                  'likes'         => $cant_like['tot'],
                   'comentarios'   => "0",
-                  'ind_like'      => $ind_like,
+                  'ind_like'      => "0",
                   'contenido'     => $contenido
                   );
                   array_push($respuesta, $item);

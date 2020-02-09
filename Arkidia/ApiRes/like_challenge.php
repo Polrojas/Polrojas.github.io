@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       if(empty($fila_puntaje))
       {
         $respuesta['resultado']="ERROR";
-        $respuesta['mensaje']="El evento " . $fila_puntaje['evento'] . " no existe en la tabla.";    
+        $respuesta['mensaje']="El evento " . $fila_puntaje['evento'] . " no existe en la tabla de puntaje.";    
         echo json_encode($respuesta);
         exit();
       }else
@@ -102,17 +102,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           $statement->bindParam(':fecha', $fecha_formateada);      
           $statement->execute();
           //Sumar 1 a total_likes  de challenge_alumno
-          $challenge_alumno = $dbConn->prepare("SELECT * FROM challenge_alumno where id_challenge=:id_challenge");
+          $challenge_alumno = $dbConn->prepare("SELECT * FROM challenge_alumno 
+                                                  where id_challenge=:id_challenge and usuario = :usuario");
           $challenge_alumno->bindParam(':id_challenge', $input['id_challenge']);
+          $challenge_alumno->bindParam(':usuario', $input['usuario_challenge']);
           $challenge_alumno->execute();
           $fila_challenge = $challenge_alumno->fetch(PDO::FETCH_ASSOC);
           $data=[     
             'id_challenge' => $input['id_challenge'],
+            'usuario'      => $input['usuario_challenge'],
             'total_likes' => intval($fila_challenge['total_likes']) + 1,
-          ];        
+          ];
+
           $sql = "UPDATE challenge_alumno
           SET total_likes = :total_likes
-          WHERE id_challenge = :id_challenge";
+          WHERE id_challenge = :id_challenge and usuario = :usuario";
           $challenge_alumno = $dbConn->prepare($sql);     
           $challenge_alumno->execute($data);
 
@@ -121,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           $puntaje_alumno->bindParam(':usuario', $input['usuario_like']);
           $puntaje_alumno->execute();
           $fila_puntaje = $puntaje_alumno->fetch(PDO::FETCH_ASSOC);
-          $puntos+=intval($fila_puntaje['puntaje']);          
+          $puntos+=$fila_puntaje['puntaje'];          
           $data=[     
             'usuario' => $input['usuario_like'],
             'puntaje' => $puntos,
@@ -184,10 +188,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
       $respuesta['mensaje']="Debe enviar el usuario_like por POST.";
       echo json_encode(  $respuesta  );
       exit();
+    }elseif(!isset($_GET['usuario_challenge']))
+    {
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="Debe enviar el usuario_challenge por POST.";
+      echo json_encode(  $respuesta  );
+      exit();      
     }elseif(!isset($_GET['secuencia']))
     {
       $respuesta['resultado']="ERROR";
-      $respuesta['mensaje']="Debe enviar el secuencia por POST.";
+      $respuesta['mensaje']="Debe enviar la secuencia por POST.";
       echo json_encode(  $respuesta  );
       exit();         
     }else
@@ -195,45 +205,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
       try{        
         //busca que exista en la tabla
         $consulta = $dbConn->prepare("SELECT * FROM like_challenge 
-                                        where id_challenge=:id_challenge and usuario_like=:usuario");
+                                        where id_challenge=:id_challenge and usuario_like=:usuario_like
+                                        and usuario_challenge = :usuario_challenge");
         $consulta->bindValue(':id_challenge', $_GET['id_challenge']);
-        $consulta->bindValue(':usuario', $_GET['usuario_like']);        
+        $consulta->bindValue(':usuario_like', $_GET['usuario_like']);
+        $consulta->bindValue(':usuario_challenge', $_GET['usuario_challenge']);     
         $consulta->execute();
-        $fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC); 
+        $fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
+        $usuario_challenge= $fila_consulta['usuario_challenge']; 
         if (!empty($fila_consulta)) 
         {
           //Eliminar registro en tabla de likes_challenge
           $statement = $dbConn->prepare("DELETE FROM like_challenge 
-                                          where id_challenge=:id_challenge and usuario_like=:usuario");
+                                          where id_challenge=:id_challenge and usuario_like=:usuario_like
+                                          and usuario_challenge = :usuario_challenge");
           $statement->bindValue(':id_challenge', $_GET['id_challenge']);
-          $statement->bindValue(':usuario', $_GET['usuario_like']);
+          $statement->bindValue(':usuario_like', $_GET['usuario_like']);
+          $statement->bindValue(':usuario_challenge', $_GET['usuario_challenge']);
           $statement->execute();
           //Restar 1 de total_likes en la tabla de challenge_alumno          
-          $challenge_alumno = $dbConn->prepare("SELECT * FROM challenge_alumno where id_challenge=:id_challenge");
-          $challenge_alumno->bindParam(':id_challenge', $input['id_challenge']);
+          $challenge_alumno = $dbConn->prepare("SELECT * FROM challenge_alumno 
+                                                  where id_challenge=:id_challenge and usuario = :usuario");
+          $challenge_alumno->bindParam(':id_challenge', $_GET['id_challenge']);
+          $challenge_alumno->bindParam(':usuario', $_GET['usuario_challenge']);
           $challenge_alumno->execute();
           $fila_challenge = $challenge_alumno->fetch(PDO::FETCH_ASSOC);
+          
           $data=[     
-            'id_challenge' => $input['id_challenge'],
-            'total_likes' => intval($fila_challenge['total_likes']) - 1,
+            'id_challenge' => $_GET['id_challenge'],
+            'total_likes'  => $fila_challenge['total_likes'] - 1,
+            'usuario'      => $_GET['usuario_challenge'],
           ];        
           $sql = "UPDATE challenge_alumno
           SET total_likes = :total_likes
-          WHERE id_challenge = :id_challenge";
+          WHERE id_challenge = :id_challenge and usuario = :usuario";
           $challenge_alumno = $dbConn->prepare($sql);     
           $challenge_alumno->execute($data);
           //Buscar valor del puntaje que corresponde al like
           $puntaje = $dbConn->prepare("SELECT * FROM puntaje where evento='like'");
           $puntaje->execute();
           $fila_puntaje = $puntaje->fetch(PDO::FETCH_ASSOC);
-          $valor=intval($fila_puntaje['puntaje']);
+          $valor=$fila_puntaje['puntaje'];
           //Busca el puntaje del alumno
           $puntaje_alumno = $dbConn->prepare("SELECT * FROM puntaje_alumno where usuario=:usuario");
-          $puntaje_alumno->bindParam(':usuario', $_GET['usuario']);
+          $puntaje_alumno->bindParam(':usuario', $_GET['usuario_like']);
           $puntaje_alumno->execute();
           $fila_puntaje = $puntaje_alumno->fetch(PDO::FETCH_ASSOC);
           //Restar puntaje de puntaje alumno
-          $puntos=intval($fila_puntaje['puntaje']) - $valor;          
+          $puntos=$fila_puntaje['puntaje'] - $valor;          
           $data=[     
             'usuario' => $_GET['usuario_like'],
             'puntaje' => $puntos,
@@ -248,7 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
                                           where id_challenge=:id_challenge and usuario=:usuario
                                           and secuencia=:secuencia");
           $statement->bindValue(':id_challenge', $_GET['id_challenge']);
-          $statement->bindValue(':usuario', $_GET['usuario_like']);
+          $statement->bindValue(':usuario', $usuario_challenge);
           $statement->bindValue(':secuencia', $_GET['secuencia']);
           $statement->execute();
 

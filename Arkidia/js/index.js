@@ -118,6 +118,111 @@ Vue.component('compartir',{
     }
 })
 
+Vue.component('faq',{
+  template:`
+  <div style="text-align: center">
+  <img
+  src="images/site/faq.svg"
+  id="challenges"
+  alt="Miles de proyectos"
+  style="width:100%; margin-top: 100px"
+/>
+  <div
+  style="
+  background-color: #ececec;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;"
+  >
+
+
+  <div class="accordion" id="accordionExample">
+    <div class="card" style="border:0px;background-color: #ececec;">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn titulo" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            ¿Cómo funciona Arkidia?
+          </button>
+        </h2>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+    <div class="card" style="border:0px;background-color: #ececec;">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn titulo collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            ¿Cuál es su costo?
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+    <div class="card" style="border:0px;background-color: #ececec;">
+      <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+          <button class="btn titulo collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            ¿Necesito comprar materiales?
+          </button>
+        </h2>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+    <div class="card" style="border:0px;background-color: #ececec;">
+      <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+          <button class="btn titulo collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            ¿Qué elementos de seguridad tiene Arkidia?
+          </button>
+        </h2>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+  <img
+  src="images/site/paint-grey.svg"
+  id="challenges"
+  alt="Miles de proyectos"
+  style=" margin-left: 20px;
+  margin-right: 20px;"
+/>
+</div>
+  `
+  ,
+  data() {
+      return{
+      }
+  },
+  props:{
+  },
+  methods:{
+  },
+  computed:{  
+  }
+})
+
+
 Vue.component('banner-beneficios',{
     template:`
     <section style="margin-top: 100px">
@@ -206,7 +311,7 @@ Vue.component('comentarios',{
             </div>
             <div class="col-md-10">
                 <p>
-                    <strong>Maniruzzaman Akash</strong>
+                    <strong>Pamela</strong>
                </p>
                <p>
                   <img src="images/site/star.svg" style="width:20px"/>
@@ -216,7 +321,7 @@ Vue.component('comentarios',{
                   <img src="images/site/star.svg" style="width:20px"/>
               </p>
                <div class="clearfix"></div>
-                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>Excelente plataforma para compartir con mis hijos!!</p>
 
             </div>
         </div>
@@ -230,7 +335,7 @@ Vue.component('comentarios',{
             </div>
             <div class="col-md-10">
                 <p>
-                    <strong>Maniruzzaman Akash</strong>
+                    <strong>Marcos</strong>
                </p>
                <p>
                   <img src="images/site/star.svg" style="width:20px"/>
@@ -240,7 +345,7 @@ Vue.component('comentarios',{
                   <img src="images/site/star.svg" style="width:20px"/>
               </p>
                <div class="clearfix"></div>
-                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>Me gusta mucho dibujar, y compartirlo con mis amigos y mis papás :)</p>
 
             </div>
         </div>
@@ -254,7 +359,7 @@ Vue.component('comentarios',{
             </div>
             <div class="col-md-10">
                 <p>
-                    <strong>Maniruzzaman Akash</strong>
+                    <strong>Nico</strong>
                </p>
                <p>
                   <img src="images/site/star.svg" style="width:20px"/>
@@ -264,7 +369,7 @@ Vue.component('comentarios',{
                   <img src="images/site/star.svg" style="width:20px"/>
               </p>
                <div class="clearfix"></div>
-                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>Mis hijos aprenden y si divierten al mismo tiempo. Me encanta la cantidad y calidad del contenido</p>
 
             </div>
         </div>
@@ -299,6 +404,10 @@ Vue.component('challenges',{
         alt="Miles de proyectos"
         style="width:100%; margin-top: 100px"
       />
+
+
+
+
         <div 
         style="
         background-color: #ececec;
@@ -306,8 +415,119 @@ Vue.component('challenges',{
         padding-bottom: 30px;
         margin-left: 20px;
         margin-right: 20px;
-        height: 600px"
-        ></div>
+        "
+        >
+        
+        
+        
+        <div class="container my-4">    
+
+        <!--Carousel Wrapper-->
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+
+      <!--Slides-->
+      <div class="carousel-inner" role="listbox">
+
+        <!--First slide-->
+        <div class="carousel-item active">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio1.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio2.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio3.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--/.First slide-->
+
+        <!--Second slide-->
+        <div class="carousel-item">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio4.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio5.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio6.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Second slide-->
+
+        <!--Third slide-->
+        <div class="carousel-item">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio7.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio8.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block">
+              <div class="card mb-2">
+                <img class="card-img-top" src="images/site/desafio9.jpg"
+                  alt="Card image cap">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Third slide-->
+
+      </div>
+      <!--/.Slides-->
+
+    </div>
+    <!--/.Carousel Wrapper-->
+
+
+  </div>
+        
+        
+        
+        </div>
         <img
         src="images/site/paint-grey.svg"
         id="challenges"
@@ -315,6 +535,15 @@ Vue.component('challenges',{
         style=" margin-left: 20px;
         margin-right: 20px;"
       />
+
+
+
+   
+
+
+
+
+      
       </div>
     `
     ,
@@ -558,6 +787,10 @@ Vue.component('administrador',{
 
 
 
+
+
+
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -575,85 +808,10 @@ var app = new Vue({
       mensajeErrorLogin:"",
       cambia:false,
 
+
     },
     methods:{
-        hacerLogin(login){
-            fetch("ApiRes/login.php",{
-                method: 'POST',
-                body: "usuario="+login.usuario+"&password="+login.password,
-                headers: new Headers({
-                    'Content-Type': 'application/x-www-form-urlencoded'})
-            })
-            .then(function(response) {
-                if(response.ok) {
-                    loginResponse = response.json()
-                    loginResponse.then(function(result) {
-                        if (result.resultado ==="ERROR"){
-                            sessionStorage.removeItem("typeUser")
-                            sessionStorage.removeItem("loggedUser")
-                            app.mensajeErrorLogin = result.mensaje
-                            app.loginError = true
-                            return
-                        }
 
-
-                        if (result.page==="PADRE"){
-                            window.location.href = "index.html";
-                            sessionStorage.loggedUser = login.usuario
-                            sessionStorage.loggedName = result.user
-                            sessionStorage.typeUser = result.page
-                            return
-                        }
-                        if (result.page==="HIJO"){
-                            window.location.href = "index.html";
-                            sessionStorage.loggedUser = login.usuario
-                            sessionStorage.loggedName = result.user
-                            sessionStorage.typeUser = result.page
-                            return
-                        }
-                        if (result.page==="ADMINISTRADOR"){
-                            sessionStorage.loggedUser = login.usuario
-                            sessionStorage.loggedName = result.user
-                            sessionStorage.typeUser = result.page
-                            window.location.href = "index.html"
-                            return
-                        }
-
-                    })
-                } else {
-                    throw "Error en la llamada Ajax"
-                }
-             })
-        },
-        hacerRegistro(register){
-            fetch("ApiRes/registracion.php",{
-                method: 'POST',
-                body: "nombre="+register.nombre+"&apellido="+register.apellido+"&mail="+register.correo+"&password="+register.password+"&confirmacion="+register.confirm,
-                headers: new Headers({
-                    'Content-Type': 'application/x-www-form-urlencoded'})
-            })
-            .then(function(response) {
-                app.registerError=false
-                if(response.ok) {
-                    app.registerError=false
-
-                    loginResponse = response.json()
-                    loginResponse.then(function(result) {
-                        if (result.resultado==="ERROR"){
-                            app.registerError=true
-                            app.registerMsg = result.mensaje
-                        }else{
-                        window.location.href = "SitioPadre.html";
-                        sessionStorage.loggedUser = register.correo
-                        sessionStorage.loggedName = register.nombre
-                        sessionStorage.typeUser = "PADRE"
-                    }
-                    })
-                } else {
-                    throw "Error en la llamada Ajax"
-                }
-             })
-        },
         
     },
     mounted: function(){

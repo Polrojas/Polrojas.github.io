@@ -1,5 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
 require_once "config.php";
 require_once "utils.php";
 require_once "SegCla.php";
@@ -25,16 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
             echo json_encode(  $respuesta  );
             exit();
           }else{
- 
-            $respuesta['usuario']          = $fila_hijo['usuario'];
-            $respuesta['alias']            = $fila_hijo['alias'];
-            $respuesta['usuario_padre']    = $fila_hijo['usuario_padre'];
-            $respuesta['fecha_nacimiento'] = $fila_hijo['fecha_nacimiento'];
-            $respuesta['edad']             = calculaEdad($fila_hijo['fecha_nacimiento']);
-            $respuesta['password']         = desencriptar($fila_hijo['password']);
-            $respuesta['avatar']           = $fila_hijo['avatar'];
-            echo json_encode(  $respuesta  );
-            $evento = "CONSULTA DEL HIJO: " . $_GET['usuario'];
+            if(isset($_GET['accion']) == "avatar")
+            {
+              $respuesta['avatar']           = $fila_hijo['avatar'];
+              echo json_encode(  $respuesta  );
+              
+            }else
+            {
+              $respuesta['usuario']          = $fila_hijo['usuario'];
+              $respuesta['alias']            = $fila_hijo['alias'];
+              $respuesta['usuario_padre']    = $fila_hijo['usuario_padre'];
+              $respuesta['fecha_nacimiento'] = $fila_hijo['fecha_nacimiento'];
+              $respuesta['edad']             = calculaEdad($fila_hijo['fecha_nacimiento']);
+              $respuesta['password']         = desencriptar($fila_hijo['password']);
+              $respuesta['avatar']           = $fila_hijo['avatar'];
+              echo json_encode(  $respuesta  );
+              $evento = "CONSULTA DEL HIJO: " . $_GET['usuario'];
+            }  
           }
       }catch (Exception $e){
         $e->getMessage();          

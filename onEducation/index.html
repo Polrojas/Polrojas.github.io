@@ -3,11 +3,14 @@
 <title>onEducation</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="icon.png">
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="js/bodymin-animation.min.js" type="text/javascript"></script>
 <script src="js/bodymovin.js"></script>
@@ -16,14 +19,32 @@
 
 <style>
 
+
 #navbar {
   background-color: #333;
   position: fixed;
-  top: -150px;
+  top: 0px;
   width: 100%;
   display: block;
   transition: top 0.3s;
   z-index: 100;
+  border-radius: 0px;
+  border:0px;
+  margin:0px
+
+}
+.navbar-inverse {
+  background-color: #333;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  display: block;
+  transition: top 0.3s;
+  z-index: 100;
+  border-radius: 0px;
+  border:0px;
+  margin:0px
+
 }
 
 #navbar a {
@@ -49,7 +70,7 @@
   .content {
   height:100%;
   min-height:100%;/*for mozilla*/
-  padding-top:5%;
+  padding-top:100px;
   padding-bottom:5%;
 }
 
@@ -164,11 +185,14 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(180deg, #a4f4ff31, #ffffff00);
   border: 0px;
   text-align:left;
+  display: inline-table;
+  padding:20px
   
 }
 
 .card-logo {
-  width:200px
+  width:200px;
+  display: inline-table;
 }
 
 .threeD {
@@ -283,10 +307,21 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+#navbar a{
+  font-size: 15px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 
 
+.navbar-nav {
+  margin-top:0px;
+}
 
-
+.numeros{
+  color: white;
+  display: inline;
+}
 
 
 </style>
@@ -295,10 +330,33 @@ h1, h2, h3, h4, h5, h6 {
 
 
 <body>
-    <div id="navbar" style="text-align: center">
-        <img style="width:200px; padding:20px; " src="images/logo-white.svg">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <img  style="width:200px; margin-top:10px; margin-bottom:10px; margin-left:30px" src="images/logo-white.svg">
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li data-toggle="collapse" data-target="#myNavbar"><a href="#three">Quiénes somos</a></li>
+                <li data-toggle="collapse" data-target="#myNavbar"><a href="#eight">Qué hacemos</a></li>
+                <li data-toggle="collapse" data-target="#myNavbar"><a href="#nine">Porqué elegirnos</a></li>
+                <li data-toggle="collapse" data-target="#myNavbar"><a href="#ten">Nuestros clientes</a></li>
+                <li data-toggle="collapse" data-target="#myNavbar"><a href="#eleven">Contactanos</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav> 
 
-      </div>
+
+
+        
+
+
 
     <div class='content' style="text-align:center" id='one'>
       <img class="logo-onEd" src="images/logo.svg">
@@ -421,11 +479,11 @@ h1, h2, h3, h4, h5, h6 {
 
     <div class='content' id='nine' style="text-align: -webkit-center">
         <h1 class="module threeD">¿Por qué elegirnos?</h1>
-        <h2 class="module">+ de <a id="counter" class="counter-value" data-count="20">0</a> años</h2>
+        <h2 class="module">+ de <div id="counter" class="counter-value numeros" data-count="20">0</div> años</h2>
         <h3 class="module">de experiencia en la industria</h3>
-        <h2 class="module">+ de <a id="counter" class="counter-value" data-count="50">0</a></h2>
+        <h2 class="module">+ de <div id="counter" class="counter-value numeros" data-count="50">0</div></h2>
         <h3 class="module" >proyectos implementados</h3>
-        <h2 class="module">+ de <a id="counter" class="counter-value" data-count="96">0</a>%</h2>
+        <h2 class="module">+ de <div id="counter" class="counter-value numeros" data-count="96">0</div>%</h2>
         <h3 class="module">de satisfacción de cliente</h3>
       </div> 
 
@@ -589,19 +647,7 @@ $(window).scroll(function() {
 
 });
 
-var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-var currentScrollPos = window.pageYOffset;
-if(window.pageYOffset > 300){
-  document.getElementById("navbar").style.top = "0px";
 
-
-}else{
-  document.getElementById("navbar").style.top = "-150px";
-
-}
-
-}
 
 </script>
 

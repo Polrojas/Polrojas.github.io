@@ -142,16 +142,18 @@ Vue.component('challenges',{
           <div v-for="desafio in desafios" :key="desafio.id">
             <div class="card card-curso"  style="cursor: pointer">
               <div >
-                  <img :src="desafio.url_desafio"  class="card-img" alt="categoria">
-                <h4 class="subtitulo">{{desafio.arkidian}} </h4> 
+                  <img :src="desafio.url_contenido" @click="verChallenge(desafio)" class="card-img" alt="categoria">
+                <h4 class="subtitulo">{{desafio.alias}} </h4> 
 
               </div>
 
             <div style="padding:15px">
-              <img src="images/site/likes.svg" style="width:25px;" alt="curso.nombre">
-              <span>{{desafio.likes}}</span>
+              <img v-if="desafio.ind_like==1" src="images/site/liked.svg" @click="quitarLike(desafio)" style="width:25px;" alt="curso.nombre">
+              <img v-if="desafio.ind_like==0" src="images/site/likes.svg" @click="darLike(desafio)" style="width:25px;" alt="curso.nombre">
+
+              <span>{{desafio.total_likes}}</span>
               <img src="images/site/comments.svg" style="width:25px;" alt="curso.nombre">
-              <span>{{desafio.comments}}</span>
+              <span>{{desafio.total_comentarios}}</span>
             </div>
           </div>
         </div>
@@ -186,10 +188,68 @@ Vue.component('challenges',{
   },
   methods:{
 
+    verChallenge(challenge){
+      sessionStorage.usuarioChallenge = challenge.usuario
+      sessionStorage.idChallenge = challenge.id_challenge
+      window.location.href = "challenge.html";
+    },
+
+
+    quitarLike(desafio){
+      console.log("quitarLike")
+      fetch("ApiRes/like_challenge.php?" + "usuario_like="+sessionStorage.loggedUser+"&usuario_challenge="+desafio.usuario+"&id_challenge="+desafio.id_challenge+"&secuencia=1", {
+        method: "DELETE"
+    })
+        .then(function(response)  {
+          console.log(response)
+          desafio.ind_like = 0
+          desafio.total_likes--
+
+
+        })
+
+    },
+    darLike(desafio){
+      fetch("ApiRes/like_challenge.php",{
+        method: 'POST',
+        body: "usuario_like="+sessionStorage.loggedUser+"&usuario_challenge="+desafio.usuario+"&id_challenge="+desafio.id_challenge,
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded'})
+    })
+    .then(function(response) {
+        if(response.ok) {
+            loginResponse = response.json()
+            loginResponse.then(function(result) {
+              console.log(result)
+              if(result.resultado == "OK"){
+                desafio.ind_like = 1
+                desafio.total_likes++
+              }
+
+            })
+        } else {
+            throw "Error en la llamada Ajax"
+        }
+     })
+
+    },
+    buscarDesafios(){
+      console.log(sessionStorage.idCurso)
+      fetch(
+        "ApiRes/challenge_alumno.php?id_curso=" + sessionStorage.idCurso + "&usuario=" + sessionStorage.loggedUser
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          this.desafios = data
+          
+        });
+    }
   },
   computed:{  
   },
   mounted: function(){
+    this.buscarDesafios()
     
   }
 })

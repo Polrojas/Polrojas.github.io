@@ -22,16 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
             $sql->bindValue(':nombre_nivel', $_GET['nombre_nivel']);
             $sql->execute();
             $dato=$sql->fetch(PDO::FETCH_ASSOC);
-            $evento = "Consulta el nivel ". $dato['nombre_nivel'] ;
-            header("HTTP/1.1 200 OK");
+            $evento = "Consulta el nivel ". $dato['nombre_nivel'] ;            
             if(!empty($dato)){
-               	echo json_encode(  $sql->fetchAll()  );
+              header("HTTP/1.1 200 OK");
+             	echo json_encode(  $dato  );
+              exit();
             }else
             {
-				$respuesta['resultado']="ERROR";
-				$respuesta['mensaje']="No existe el nivel en la tabla.";
-				echo json_encode(  $respuesta  );
-				exit();            	
+      				$respuesta['resultado']="ERROR";
+      				$respuesta['mensaje']="No existe el nivel en la tabla.";
+      				echo json_encode(  $respuesta  );
+      				exit();            	
             }
           }catch (Exception $e){
             $e->getMessage();          
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
             $evento = "Consulta todos los niveles existentes." ;
             header("HTTP/1.1 200 OK");
             echo json_encode(  $sql->fetchAll()  );
+            exit();
           }catch (Exception $e){
             $e->getMessage();          
             $respuesta['resultado']="ERROR";
@@ -84,7 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
             $statement->bindParam(':fecha', $fecha_formateada);
             $statement->bindParam(':evento', $evento);
             $statement->bindParam(':usuario', $usuario);          
-            $statement->execute();      
+            $statement->execute();
+            exit();     
   }else{
         $respuesta['resultado']="ERROR";
         $respuesta['mensaje']="Debe indicar el mail del administrador.";
@@ -104,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   if(empty($input))//Si no envia ningún campo por POST
   {
     $respuesta['resultado']="ERROR";
-    $respuesta['mensaje']="Debe enviar los campos usuario, nombre_nivel y puntaje_maximo para el alta.";    
+    $respuesta['mensaje']="Debe enviar los campos usuario, nombre_nivel y puntaje_maximo para el alta.";  
     echo json_encode($respuesta);
     exit();    
   //Chequeo que envíe todos los campos que necesita la API para hacer el insert
@@ -156,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       if(!empty($fila_consulta))
       {
         $respuesta['resultado']="ERROR";
-        $respuesta['mensaje']="El nivel " . $fila_consulta['nombre_nivel'] . " ya existe en la tabla.";    
+        $respuesta['mensaje']="El nivel " . $fila_consulta['nombre_nivel'] . " ya existe en la tabla.";   
         echo json_encode($respuesta);
         exit();
       }else
@@ -263,7 +266,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
           $statement->bindParam(':evento', $evento);
           $statement->bindParam(':usuario', $_GET['usuario']);          
           $statement->execute();
-
           $respuesta['resultado']="OK";
           $respuesta['mensaje']="";    
           echo json_encode($respuesta);
@@ -363,7 +365,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT')
     $statement->bindParam(':evento', $evento);
     $statement->bindParam(':usuario', $input['usuario']);          
     $statement->execute();
-
     header("HTTP/1.1 200 OK");
     $respuesta['resultado']="OK";
     $respuesta['mensaje']="";    

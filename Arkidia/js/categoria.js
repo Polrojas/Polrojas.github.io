@@ -36,8 +36,6 @@ Vue.component('cursos-categoria',{
                 <img v-if="curso.ind_like==0" src="images/site/likes.svg" @click="darLike(curso)" style="width:25px;" alt="curso.nombre">
                 <img v-if="curso.ind_like==1" src="images/site/liked.svg" @click="quitarLike(curso)" style="width:25px;" alt="curso.nombre">
                 <span>{{curso.likes}}</span>
-                <img src="images/site/comments.svg" style="width:25px;" alt="curso.nombre">
-                <span>{{curso.comentarios}}</span>
               </div>
             </div>
           </div>
@@ -105,6 +103,7 @@ Vue.component('cursos-categoria',{
         },
 
         darLike(curso){
+          if(sessionStorage.loggedUser!=null){
 
           fetch("ApiRes/like_curso.php",{
             method: 'POST',
@@ -127,10 +126,11 @@ Vue.component('cursos-categoria',{
                 throw "Error en la llamada Ajax"
             }
          })
-
+        }
         },
 
         iniciarCurso(curso){
+          if(sessionStorage.typeUser=="HIJO"){
             bodyApi = "usuario=" + sessionStorage.loggedUser + 
                         "&id_curso=" + curso.id_curso
               console.log(bodyApi)
@@ -162,6 +162,12 @@ Vue.component('cursos-categoria',{
                   }
                })
         }
+          if(sessionStorage.typeUser=="PADRE"){
+            sessionStorage.idCurso = curso.id_curso
+            window.location.href = "recomendar.html"
+
+          }
+      }
 
     },
     computed:{
