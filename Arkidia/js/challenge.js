@@ -18,11 +18,6 @@ Vue.component('challenge',{
     </div>
   </div>
 
-
-
-
-
- 
     <img :src="desafio.url_challenge" style="width:90%; margin-left:5%" >
 
 <div style="width:90%; margin-left:5%; margin-top:20px">
@@ -151,6 +146,141 @@ Vue.component('challenge',{
   })
   
 
+
+  Vue.component('mensajes',{
+    template:`
+    <div class="detailBox">
+    <div class="actionBox" >
+        <ul v-if="comentarios.length>0" style="padding-left:0px" >
+            <div v-for="(comentario,index) in comentarios" style="padding:15px">
+                <div @click="verPerfil(comentario.usuario_comentario)" style="cursor:pointer" class="commenterImage">
+                    <img :src="comentario.avatar" />
+                </div>
+                <div class="commentText">
+                    <p><b @click="verPerfil(comentario.usuario_comentario)" style="cursor:pointer">{{comentario.alias}}</b> dijo:</p>
+                    <p class="">{{comentario.comentario}}</p> <span class="date sub-text">{{comentario.fechahora}}</span>
+                    <button v-if="comentario.ind_comentario == 1" @click="eliminarComentario(comentario,index)" class="btn btn-default">Eliminar</button>
+
+                </div>
+            </div>
+
+
+        </ul>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input v-model="newComment" class="form-control" type="text" placeholder="Dejá un comentario" style="width:100%" />
+            </div>
+
+        </form>
+        <div >
+            <button @click="comentar()" class="btn btn-default">Comentar</button>
+        </div>
+    </div>
+</div>
+    `
+    ,
+    data() {
+        return{
+          newComment:"",
+          avatar:null,
+          comentarios:[{
+            usuario_comentario: null,
+            alias: null,
+            avatar: null,
+            fechahora: null,
+            comentario: null,
+            ind_comentario: null,
+            secuencia: null
+          }],
+
+        }
+    },
+    props:{
+
+    },
+    methods:{
+      verPerfil(usuario){
+        sessionStorage.profileUser = usuario
+        window.location.href = "perfil.html"
+
+      },
+      buscarHijo(usuario){
+        fetch("ApiRes/hijos.php?usuario=" + usuario+"&accion=avatar")
+        .then(response => response.json())
+        .then((data) => {
+          console.log(data)
+            this.avatar = data.avatar
+        })        
+      },
+
+      buscarComentarios() {
+
+        fetch("ApiRes/comentarios.php?id_challenge=" + sessionStorage.idChallenge 
+               + "&usuario_challenge=" + sessionStorage.usuarioChallenge
+               + "&usuario=" + sessionStorage.loggedUser)
+            .then(response => response.json())
+            .then((data) => {
+              console.log("buscar comentarios")
+                this.comentarios = data
+            })
+    },
+      eliminarComentario(comentario,index){
+
+        fetch("ApiRes/comentarios.php?id_challenge="+  sessionStorage.idChallenge +
+        "&usuario="+sessionStorage.loggedUser + 
+        "&usuario_challenge=" + sessionStorage.usuarioChallenge +
+        "&secuencia="+comentario.secuencia, {
+          method: "DELETE"
+      })
+      .then(response => response.json())
+      .then((data) => {
+        this.comentarios.splice(index,1)
+
+          console.log(data)
+
+      })
+
+      },
+      comentar(){
+        fetch("ApiRes/comentarios.php",{
+            method: 'POST',
+            body: "usuario_challenge="+sessionStorage.usuarioChallenge
+            +"&id_challenge="+sessionStorage.idChallenge
+            +"&usuario_comentario="+sessionStorage.loggedUser
+            +"&comentario="+this.newComment,
+            
+            headers: new Headers({
+                'Content-Type': 'application/x-www-form-urlencoded'})
+        })
+        .then(response => response.json())
+        .then((data) => {  
+            console.log(data)
+            nuevoComentario = {
+              usuario_comentario: sessionStorage.loggedUser,
+              alias: sessionStorage.loggedName,
+              avatar: this.avatar,
+              fechahora: "recién",
+              comentario: this.newComment,
+              ind_comentario: "1",
+              secuencia: data.comentario
+            }
+
+            this.comentarios.push(nuevoComentario)
+        })
+
+    },
+
+    },
+    computed:{  
+    },
+    mounted: function(){
+      console.log("buscarComentarios")
+      this.buscarComentarios() 
+      this.buscarHijo(sessionStorage.loggedUser)
+
+    }
+  })
+
   var app = new Vue({
       el: '#app',
       data: {
@@ -170,137 +300,27 @@ Vue.component('challenge',{
             categoria: null,
             ind_completo: null
           },
-          newComment:"",
-          avatar:null,
-          comentarios:[{
-            usuario_comentario: null,
-            alias: null,
-            avatar: null,
-            fechahora: null,
-            comentario: null,
-            ind_comentario: null,
-            secuencia: null
-          }],
 
-
-  
       },
       methods:{
-        buscarHijo(usuario){
-          fetch("ApiRes/hijos.php?usuario=" + usuario+"&accion=avatar")
-          .then(response => response.json())
-          .then((data) => {
-              this.avatar = data.avatar
-
-          })
-
-
-
-
-          //hacer GET de HIJO.PHP, pasando el usuario como parámetro, y accion = "avatar"
-          
-
-        },
-        eliminarComentario(comentario,index){
-
-          fetch("ApiRes/comentarios.php?id_challenge="+  sessionStorage.idChallenge +
-          "&usuario="+sessionStorage.loggedUser + 
-          "&usuario_challenge=" + sessionStorage.usuarioChallenge +
-          "&secuencia="+comentario.secuencia, {
-            method: "DELETE"
-        })
-        .then(response => response.json())
-        .then((data) => {
-          app.comentarios.splice(index,1)
-
-            console.log(data)
-
-        })
-
-        },
-        buscarComentarios() {
-
-          fetch("ApiRes/comentarios.php?id_challenge=" + sessionStorage.idChallenge 
-                 + "&usuario_challenge=" + sessionStorage.usuarioChallenge
-                 + "&usuario=" + sessionStorage.loggedUser)
-              .then(response => response.json())
-              .then((data) => {
-                console.log("buscar comentarios")
-
-                  console.log(data)
-                  app.comentarios = data
-                  console.log(sessionStorage.usuarioChallenge)
-
-                  console.log(sessionStorage.loggedUser)
-
-              })
-      },
-        comentar(){
-          fetch("ApiRes/comentarios.php",{
-              method: 'POST',
-              body: "usuario_challenge="+sessionStorage.usuarioChallenge
-              +"&id_challenge="+sessionStorage.idChallenge
-              +"&usuario_comentario="+sessionStorage.loggedUser
-              +"&comentario="+this.newComment,
-              
-              headers: new Headers({
-                  'Content-Type': 'application/x-www-form-urlencoded'})
-          })
-          .then(function(response) {
-            console.log(response)
-              if(response.ok) {
-                  loginResponse = response.json()
-                  loginResponse.then(function(result) {
-                    console.log(result)
-                      if (result.resultado ==="ERROR"){
-                        console.log("error al comentar")
-                      }else{
-                        nuevoComentario = {
-                          usuario_comentario: sessionStorage.loggedUser,
-                          alias: sessionStorage.loggedName,
-                          avatar: app.avatar,
-                          fechahora: "recién",
-                          comentario: app.newComment,
-                          ind_comentario: "1",
-                          secuencia: result.comentario
-                        }
-
-                        app.comentarios.push(nuevoComentario)
-                        console.log(app.comentarios)
-                      app.newComment = ""
-                      }
-    
-                  })
-              } else {
-                  throw "Error en la llamada Ajax"
-              }
-           })
-      },
-
-
           
       },
       mounted: function(){
-          if(sessionStorage.loggedUser==null){
-              this.logged=false
-          }else{
-              if(sessionStorage.typeUser=="HIJO"){
-                  this.usuarioHijo = sessionStorage.loggedName
-                  this.logged=true
-              }else{
-                  this.logged=false
-              }
-  
-          }
-          this.buscarComentarios() 
-          this.buscarHijo(sessionStorage.loggedUser)
+        if(sessionStorage.loggedUser==null){
+            this.logged=false
+        }else{
+            if(sessionStorage.typeUser=="HIJO"){
+                this.usuarioHijo = sessionStorage.loggedName
+                this.logged=true
+            }else{
+                this.logged=false
+            }
+        }
 
-          window.addEventListener("load",function (){
-              const loader = document.querySelector(".loader");
-              loader.className += " hidden";
-            })
-  
-  
+        window.addEventListener("load",function (){
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden";
+          })
       }
     })
   

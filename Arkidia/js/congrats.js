@@ -1,6 +1,8 @@
 var app = new Vue({
     el: '#app',
     data: {
+        porcentaje: "10,100",
+
       deleteHijo:'',
       apiCategorias:[],
       hijos:[],
@@ -13,6 +15,7 @@ var app = new Vue({
       curso:"",
       contenidos:[],
       puntaje:0,
+      
 
       
 
@@ -20,6 +23,22 @@ var app = new Vue({
 
     },
     methods:{
+        buscarPerfil() {
+            fetch(
+              "ApiRes/perfil_usuario.php?usuario=" +
+              sessionStorage.profileUser
+            )
+              .then(response => response.json())
+              .then(data => {
+                  this.perfil = data
+                  this.porcentaje = ((this.perfil.puntos /this.perfil.puntos_nivel)*100)+",100"
+                  console.log(data)
+  
+    
+              });
+          },
+
+
         
         buscarPuntaje(){
             var requestCategorias = new XMLHttpRequest()
@@ -110,6 +129,7 @@ var app = new Vue({
                 this.buscarPuntaje()
                 this.buscarCategorias()
                 this.buscarInscripcion()
+                this.buscarPerfil()
             }else{
                 this.logged=false
             }

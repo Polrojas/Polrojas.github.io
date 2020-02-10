@@ -43,8 +43,12 @@ Vue.component('menu-arkidia',{
               <a class="nav-link" @click="verPerfil()">Perfil</a>
               </li>
 
-              <li v-if="datamenu.logged && ( datamenu.hijo || datamenu.padre)" class="nav-item">
-              <a class="nav-link" data-toggle="modal" data-target="#notification" ><img src="./images/site/notificacion.svg" width="20px" alt="Arkidia"></img>Notificaciones</a>
+              <li v-if="datamenu.logged && ( datamenu.hijo || datamenu.padre)" class="nav-item" style="float:right; cursor:pointer">
+              <a class="nav-link" data-toggle="modal" data-target="#notification" >
+                <img v-if="notificaciones.length==0" src="./images/site/notificacion.svg" width="20px" alt="Notificacion"></img>
+                <img v-if="notificaciones.length>0" src="./images/site/notificacion-si.svg" width="20px" alt="Notificacion"></img>
+
+                Notificaciones ({{notificaciones.length}})</a>
               </li>
 
  
@@ -191,14 +195,25 @@ Vue.component('menu-arkidia',{
         <div class="modal-body">
           <h4>Notificaciones</h4>
           <div v-for="(notificacion,index) in notificaciones" style="padding:15px">
+            <div class="commenterImage" @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer">
+              <img :src="notificacion.avatarRemitente" />
+            </div>
+            <div class="commentText">
+              <p v-if="notificacion.tipo_notificacion=='comentario'"><b @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer" >{{notificacion.aliasRemitente}} </b> dijo de tu <b @click="verDesafio(notificacion)" style="cursor:pointer">desafio</b>: <br> <i>{{notificacion.mensaje}}</i></p>
+              <p v-if="notificacion.tipo_notificacion=='like'">A <b @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer">{{notificacion.aliasRemitente}}</b> le gustó tu <b @click="verDesafio(notificacion)" style="cursor:pointer">desafio</b></p>
+  
+              <span class="date sub-text">{{notificacion.fechahora}}</span>
+            </div>
+          </div>
+          <div v-for="(notificacion,index) in notificacionesVistas" style="padding:15px">
           <div class="commenterImage">
-              <img :src="notificacion.avatar" />
+            <img :src="notificacion.avatarRemitente" />
           </div>
           <div class="commentText">
-              <p>{{notificacion.texto}}</p>
-              <span class="date sub-text">{{notificacion.fecha}}</span>
+            <p>{{notificacion.mensaje}}</p>
+            <span class="date sub-text">{{notificacion.fechahora}}</span>
           </div>
-      </div>
+        </div>
 
         </div>
       </div>
@@ -224,6 +239,7 @@ Vue.component('menu-arkidia',{
           mensajeErrorLogin:"",
           cambia:false,
           notificaciones:[],
+          notificacionesVistas:[],
         }
     },
     props:{
@@ -238,6 +254,18 @@ Vue.component('menu-arkidia',{
     },
     methods:{
       verNotificaciones(){
+        fetch("ApiRes/notificaciones.php?usuario=" + sessionStorage.loggedUser)
+        .then(response => response.json())
+        .then((data) => {
+          console.log(data)
+          this.notificaciones = data.notificacionesPendientes
+          this.notificacionesVistas = data.notificacionesVistas
+        })  
+
+
+
+
+
         console.log("Ver notificaciones")
         notificacion = {
           avatar:"images/arkidians/ark3.svg",
@@ -301,6 +329,18 @@ Vue.component('menu-arkidia',{
       sessionStorage.profileUser = sessionStorage.loggedUser
       window.location.href = "perfil.html"
     },
+
+    verOtroPerfil(usuario){
+      sessionStorage.profileUser = usuario
+      window.location.href = "perfil.html"
+    },
+
+    verDesafio(notificacion){
+      sessionStorage.usuarioChallenge = notificacion.usuario
+      sessionStorage.idChallenge = notificacion.idChallenge
+      window.location.href = "challenge.html"
+    },
+
     verAprobaciones(){
       window.location.href = "aprobaciones.html"
     },

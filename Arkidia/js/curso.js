@@ -108,6 +108,7 @@ Vue.component('recorrido',{
         sessionStorage.contenido = contenido.id_contenido;
         sessionStorage.video = contenido.url_contenido;
         sessionStorage.avance = contenido.porcentaje_avance;
+        sessionStorage.curso = this.curso.id
         window.location.href = "video.html";
       },
   

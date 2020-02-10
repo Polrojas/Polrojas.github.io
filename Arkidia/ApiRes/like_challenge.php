@@ -75,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         try{
 
           $like = $dbConn->prepare("SELECT * FROM like_challenge 
-                                      where id_challenge=:id_challenge and usuario_challenge=:usuario_challenge
-                                      and usuario_like=:usuario_like");
+                                    where id_challenge=:id_challenge 
+                                    and usuario_challenge=:usuario_challenge and usuario_like=:usuario_like");
           $like->bindValue('id_challenge', $input['id_challenge']);
           $like->bindValue('usuario_challenge', $input['usuario_challenge']);
           $like->bindValue('usuario_like', $input['usuario_like']);         
@@ -140,15 +140,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             'id_challenge'      => $input['id_challenge'],
             'secuencia'         => 1,
             'usuario'           => $input['usuario_challenge'],
+            'usuario_origen'    => $input['usuario_like'],
             'tipo_notificacion' => "like",
             'texto'             => "A " . $input['usuario_like'] . " le gustó tu foto.",
             'indicador_visto'   => "N",
             'fecha'             => $fecha_formateada,
           ];        
           $sql = "INSERT INTO notificaciones
-                (id_challenge, secuencia, usuario, tipo_notificacion, texto, indicador_visto, fecha)
+                (id_challenge, secuencia, usuario, usuario_origen, tipo_notificacion, texto, indicador_visto, fecha)
                 VALUES
-                (:id_challenge, :secuencia, :usuario, :tipo_notificacion, :texto, :indicador_visto, :fecha)";
+                (:id_challenge, :secuencia, :usuario, :usuario_origen, :tipo_notificacion, :texto, :indicador_visto, :fecha)";
           $notificacion = $dbConn->prepare($sql);     
           $notificacion->execute($data);          
 
@@ -247,8 +248,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
           $fila_puntaje = $puntaje->fetch(PDO::FETCH_ASSOC);
           $valor=$fila_puntaje['puntaje'];
           //Busca el puntaje del alumno
-          $puntaje_alumno = $dbConn->prepare("SELECT * FROM puntaje_alumno where usuario=:usuario");
-          $puntaje_alumno->bindParam(':usuario', $_GET['usuario_like']);
+          $puntaje_alumno = $dbConn->prepare("SELECT * FROM puntaje_alumno 
+                  where usuario=:usuario");
+          $puntaje_alumno->bindParam(':usuario', $_GET['usuario_like']);          
           $puntaje_alumno->execute();
           $fila_puntaje = $puntaje_alumno->fetch(PDO::FETCH_ASSOC);
           //Restar puntaje de puntaje alumno

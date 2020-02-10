@@ -104,69 +104,7 @@ $dbConn =  connect($db);
           $respuesta['mensaje']=$e;
           echo json_encode(  $respuesta  ); 
         }
-        try{
-          //Sumar 1 a total_comentarios  de challenge_alumno
-          $challenge_alumno = $dbConn->prepare("SELECT * FROM challenge_alumno 
-                                                  where id_challenge=:id_challenge and usuario = :usuario");
-          $challenge_alumno->bindParam(':id_challenge', $input['id_challenge']);
-          $challenge_alumno->bindParam(':usuario', $input['usuario_challenge']);
-          $challenge_alumno->execute();
-          $fila_challenge = $challenge_alumno->fetch(PDO::FETCH_ASSOC);
-          $data=[     
-            'id_challenge' => $input['id_challenge'],
-            'usuario'      => $input['usuario_challenge'],
-            'total_comentarios' => intval($fila_challenge['total_comentarios']) + 1,
-          ];
 
-          $sql = "UPDATE challenge_alumno
-          SET total_comentarios = :total_comentarios
-          WHERE id_challenge = :id_challenge and usuario = :usuario";
-          $challenge_alumno = $dbConn->prepare($sql);     
-          $challenge_alumno->execute($data);          
-        }catch(Exception $e)
-        {
-          $e->getMessage();          
-          $respuesta['resultado']="ERROR";
-          $respuesta['mensaje']=$e;
-          echo json_encode(  $respuesta  ); 
-        }
-        try{
-          //Buscar valor del puntaje que corresponde al comentario
-          $puntaje = $dbConn->prepare("SELECT * FROM puntaje where evento='comentario'");
-          $puntaje->execute();
-          $fila_puntaje = $puntaje->fetch(PDO::FETCH_ASSOC);      
-          if(empty($fila_puntaje))
-          {
-            $respuesta['resultado']="ERROR";
-            $respuesta['mensaje']="El evento " . $fila_puntaje['evento'] . " no existe en la tabla de puntaje.";    
-            echo json_encode($respuesta);
-            exit();
-          }else
-          {
-            $puntos= intval($fila_puntaje['puntaje']); 
-          }         
-          //Actualizar el puntaje del alumno
-          $puntaje_alumno = $dbConn->prepare("SELECT * FROM puntaje_alumno where usuario=:usuario");
-          $puntaje_alumno->bindParam(':usuario', $input['usuario_comentario']);
-          $puntaje_alumno->execute();
-          $fila_puntaje = $puntaje_alumno->fetch(PDO::FETCH_ASSOC);
-          $puntos+=$fila_puntaje['puntaje'];          
-          $data=[     
-            'usuario' => $input['usuario_comentario'],
-            'puntaje' => $puntos,
-          ];        
-          $sql = "UPDATE puntaje_alumno
-          SET puntaje = :puntaje
-          WHERE usuario = :usuario";
-          $statement = $dbConn->prepare($sql);     
-          $statement->execute($data);          
-        }catch(Exception $e)
-        {
-          $e->getMessage();          
-          $respuesta['resultado']="ERROR";
-          $respuesta['mensaje']=$e;
-          echo json_encode(  $respuesta  ); 
-        }
         //Agrega el registro en el log de eventos
         $consulta = $dbConn->prepare("SELECT * FROM challenges_cursos where id_challenge=:id_challenge");
         $consulta->bindValue(':id_challenge', $input['id_challenge']);
@@ -433,6 +371,117 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT')
       $statement->execute($data);
       if($input['estado'] == "P")
       {
+        try{
+          //Sumar 1 a total_comentarios  de challenge_alumno
+          $challenge_alumno = $dbConn->prepare("SELECT * FROM challenge_alumno 
+                                                  where id_challenge=:id_challenge and usuario = :usuario");
+          $challenge_alumno->bindParam(':id_challenge', $input['id_challenge']);
+          $challenge_alumno->bindParam(':usuario', $input['usuario_challenge']);
+          $challenge_alumno->execute();
+          $fila_challenge = $challenge_alumno->fetch(PDO::FETCH_ASSOC);
+          $data=[     
+            'id_challenge' => $input['id_challenge'],
+            'usuario'      => $input['usuario_challenge'],
+            'total_comentarios' => intval($fila_challenge['total_comentarios']) + 1,
+          ];
+
+          $sql = "UPDATE challenge_alumno
+          SET total_comentarios = :total_comentarios
+          WHERE id_challenge = :id_challenge and usuario = :usuario";
+          $challenge_alumno = $dbConn->prepare($sql);     
+          $challenge_alumno->execute($data);          
+        }catch(Exception $e)
+        {
+          $e->getMessage();          
+          $respuesta['resultado']="ERROR";
+          $respuesta['mensaje']=$e;
+          echo json_encode(  $respuesta  );
+          exit();
+        }
+        try{
+          //Buscar valor del puntaje que corresponde al comentario
+          $puntaje = $dbConn->prepare("SELECT * FROM puntaje where evento='comentario'");
+          $puntaje->execute();
+          $fila_puntaje = $puntaje->fetch(PDO::FETCH_ASSOC);      
+          if(empty($fila_puntaje))
+          {
+            $respuesta['resultado']="ERROR";
+            $respuesta['mensaje']="El evento " . $fila_puntaje['evento'] . " no existe en la tabla de puntaje.";    
+            echo json_encode($respuesta);
+            exit();
+          }else
+          {
+            $puntos= intval($fila_puntaje['puntaje']); 
+          }         
+          //Actualizar el puntaje del alumno
+          $puntaje_alumno = $dbConn->prepare("SELECT * FROM puntaje_alumno where usuario=:usuario");
+          $puntaje_alumno->bindParam(':usuario', $fila_consulta['usuario_comentario']);
+          $puntaje_alumno->execute();
+          $fila_puntaje = $puntaje_alumno->fetch(PDO::FETCH_ASSOC);
+          $puntos+=$fila_puntaje['puntaje'];          
+          $data=[     
+            'usuario' => $fila_consulta['usuario_comentario'],
+            'puntaje' => $puntos,
+          ];        
+          $sql = "UPDATE puntaje_alumno
+          SET puntaje = :puntaje
+          WHERE usuario = :usuario";
+          $statement = $dbConn->prepare($sql);     
+          $statement->execute($data);          
+        }catch(Exception $e)
+        {
+          $e->getMessage();          
+          $respuesta['resultado']="ERROR";
+          $respuesta['mensaje']=$e;
+          echo json_encode(  $respuesta  ); 
+        }
+
+        
+        //Busca la última secuencia de notificación del usuario_challenge + id_challenge + tipo_comentario
+        $tipo = "comentario";
+        $consulta = $dbConn->prepare("SELECT * FROM notificaciones 
+                where id_challenge = :id_challenge and usuario = :usuario
+                and tipo_notificacion = :tipo_notificacion            
+                ORDER BY secuencia DESC LIMIT 1");
+        $consulta->bindValue(':id_challenge', $input['id_challenge']);
+        $consulta->bindValue(':usuario', $input['usuario_challenge']);
+        $consulta->bindValue(':tipo_notificacion', $tipo);
+        $consulta->execute();
+        $ultima_secuencia = $consulta->fetch(PDO::FETCH_ASSOC);
+        if(!empty($ultima_secuencia))
+        {
+          $secuencia = $ultima_secuencia['secuencia'] + 1;
+        }
+        else
+        { 
+          $secuencia = 1;
+        }        
+        //Inserta la notificación para que la vea el usuario que subió el challenge
+        try{
+          //Inserta el comentario en la tabla comentario
+          $sql = "INSERT INTO notificaciones
+                (id_challenge, secuencia, usuario, usuario_origen, tipo_notificacion, texto, indicador_visto, fecha)
+                VALUES
+                (:id_challenge, :secuencia, :usuario, :usuario_origen, :tipo_notificacion, :texto, :indicador_visto, :fecha)";
+          $indicador_visto = "N";          
+          $espacios="";
+          $statement = $dbConn->prepare($sql);          
+          $statement->bindParam(':id_challenge', $fila_consulta['id_challenge']);          
+          $statement->bindParam(':secuencia', $secuencia);
+          $statement->bindParam(':usuario', $fila_consulta['usuario_challenge']);   
+          $statement->bindParam(':usuario_origen', $fila_consulta['usuario_comentario']);
+          $statement->bindParam(':tipo_notificacion', $tipo);
+          $statement->bindParam(':texto', $fila_consulta['comentario']);
+          $statement->bindParam(':indicador_visto', $indicador_visto);
+          $statement->bindParam(':fecha', $fila_consulta['fecha']);
+          $statement->execute();
+        }catch(Exception $e)
+        {
+          $e->getMessage();          
+          $respuesta['resultado']="ERROR";
+          $respuesta['mensaje']= "Notificaciones " . $e;
+          echo json_encode(  $respuesta  ); 
+        }
         $evento = "Aprobado el comentario " . $input['id_challenge'] . " de " . $input['usuario_challenge'] .
             " secuencia " . $input['secuencia'];      
       }elseif($input['estado'] == "R")
@@ -534,6 +583,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
         $consulta->execute();
         $fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
         $usuario_challenge= $fila_consulta['usuario_challenge']; 
+        $estado_actual=$fila_consulta['estado'];
         if (!empty($fila_consulta)) 
         {
           //Pone la marca de Eliminar (E) en el registro en tabla de comentarios
@@ -556,41 +606,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
           $challenge_alumno->bindParam(':usuario', $input['usuario_challenge']);
           $challenge_alumno->execute();
           $fila_challenge = $challenge_alumno->fetch(PDO::FETCH_ASSOC);
-          
-          $data=[     
-            'id_challenge' => $_GET['id_challenge'],
-            'total_comentarios'  => $fila_challenge['total_comentarios'] - 1,
-            'usuario'      => $_GET['usuario_challenge'],
-          ];        
-          $sql = "UPDATE challenge_alumno
-          SET total_comentarios = :total_comentarios
-          WHERE id_challenge = :id_challenge and usuario = :usuario";
-          $challenge_alumno = $dbConn->prepare($sql);     
-          $challenge_alumno->execute($data);
-          //Buscar valor del puntaje que corresponde al comentario
-          $puntaje = $dbConn->prepare("SELECT * FROM puntaje where evento='comentario'");
-          $puntaje->execute();
-          $fila_puntaje = $puntaje->fetch(PDO::FETCH_ASSOC);
-          $valor=$fila_puntaje['puntaje'];
-          //Busca el puntaje del alumno
-          $puntaje_alumno = $dbConn->prepare("SELECT * FROM puntaje_alumno 
-                  where usuario=:usuario");
-          $puntaje_alumno->bindParam(':usuario', $input['usuario']);          
-          $puntaje_alumno->execute();
-          $fila_puntaje = $puntaje_alumno->fetch(PDO::FETCH_ASSOC);
-          //Restar puntaje de puntaje alumno
-          $puntos=$fila_puntaje['puntaje'] - $valor;          
-          $data=[     
-            'usuario' => $input['usuario'],
-            'puntaje' => $puntos,
-          ];        
-          $sql = "UPDATE puntaje_alumno
-          SET puntaje = :puntaje
-          WHERE usuario = :usuario";
-          $statement = $dbConn->prepare($sql);     
-          $statement->execute($data);
-          $respuesta['resultado']="OK";
-          $respuesta['mensaje']="";    
+          if($estado_actual == "P")
+          {
+            $data=[     
+              'id_challenge' => $_GET['id_challenge'],
+              'total_comentarios'  => $fila_challenge['total_comentarios'] - 1,
+              'usuario'      => $_GET['usuario_challenge'],
+            ];        
+            $sql = "UPDATE challenge_alumno
+            SET total_comentarios = :total_comentarios
+            WHERE id_challenge = :id_challenge and usuario = :usuario";
+            $challenge_alumno = $dbConn->prepare($sql);     
+            $challenge_alumno->execute($data);
+
+            //Buscar valor del puntaje que corresponde al comentario
+            $puntaje = $dbConn->prepare("SELECT * FROM puntaje where evento='comentario'");
+            $puntaje->execute();
+            $fila_puntaje = $puntaje->fetch(PDO::FETCH_ASSOC);
+            $valor=$fila_puntaje['puntaje'];
+            //Busca el puntaje del alumno
+            $puntaje_alumno = $dbConn->prepare("SELECT * FROM puntaje_alumno 
+                    where usuario=:usuario");
+            $puntaje_alumno->bindParam(':usuario', $input['usuario']);          
+            $puntaje_alumno->execute();
+            $fila_puntaje = $puntaje_alumno->fetch(PDO::FETCH_ASSOC);
+            //Restar puntaje de puntaje alumno
+            $puntos=$fila_puntaje['puntaje'] - $valor;          
+            $data=[     
+              'usuario' => $input['usuario'],
+              'puntaje' => $puntos,
+            ];        
+            $sql = "UPDATE puntaje_alumno
+            SET puntaje = :puntaje
+            WHERE usuario = :usuario";
+            $statement = $dbConn->prepare($sql);     
+            $statement->execute($data);
+            $respuesta['resultado']="OK";
+            $respuesta['mensaje']="";
+          }    
           echo json_encode($respuesta);
           header("HTTP/1.1 200 OK");
           exit();
