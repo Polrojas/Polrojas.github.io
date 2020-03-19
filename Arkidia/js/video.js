@@ -12,6 +12,7 @@ var app = new Vue({
       categoriaStyleBar:"",
       curso:"",
       contenidos:[],
+      imagen:"admin/images/imagen-challenge-dark.svg",
 
       
 
@@ -19,7 +20,60 @@ var app = new Vue({
 
     },
     methods:{
-
+        uploadImage(event, contenido) {
+            const formData = new FormData();
+            formData.append('imagen', event.target.files[0]);
+            console.log(contenido)
+      
+            const options = {
+              method: 'POST',
+              body: formData,
+              };
+              contenido.ind_completo = 1
+              app.imagen = "images/site/subiendo.svg"
+     
+          fetch("ApiRes/imagen.php", options)
+          .then(function(res){ return res.json(); })
+          .then(function(data){ 
+      
+                app.imagen = data.url
+              console.log("termino de subir")
+              console.log(data)
+      
+              bodyApi = "imagen="+data.url+"&id_curso="+sessionStorage.idCurso+"&id_challenge="+contenido.id_challenge+"&usuario_challenge=" +sessionStorage.loggedUser,
+              console.log(bodyApi)
+              fetch("ApiRes/challenge_alumno.php", {
+                method: 'POST',
+                body: bodyApi,
+                headers: new Headers({
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                })
+              })
+        
+            .then(function(response) {
+                if(response.ok) {
+                    loginResponse = response.json()
+                    loginResponse.then(function(result) {
+                      console.log(result)
+                        if (result.resultado==="ERROR"){
+                            console.log("ERROR")
+                            console.log(result.mensaje)
+                        }else{
+                          console.log("actualización de imagen")
+                          console.log(response)
+      
+                        }
+                    })
+                } else {
+                    throw "Error en la llamada Ajax"
+                }
+            })
+      
+             })
+        
+             
+          },
+      
         buscarCategorias(){
             var requestCategorias = new XMLHttpRequest()
             requestCategorias.open('GET', 'ApiRes/categorias.php?usuario='+sessionStorage.loggedUser+"&id_categoria="+sessionStorage.idCategoria, true)
@@ -61,7 +115,9 @@ var app = new Vue({
 
         },
         formatearContenidos(contenidos){
+            console.log(contenidos)
             for(i=0;i<contenidos.length;i++){
+                if(contenidos[i].id_contenido != sessionStorage.contenido){
                 if (contenidos[i].porcentaje_avance<100){
                     app.contenidos.push(contenidos[i])
                 }else if(contenidos[i].ind_completo == 0){
@@ -69,6 +125,7 @@ var app = new Vue({
 
                 }
             }
+        }
         },
 
         verVideo(contenido) {

@@ -84,13 +84,11 @@ Vue.component('restringido',{
 
                 this.mensajes = data
                 console.log(data)
-
-              
-
     
             });
 
           },
+          
           aprobarComentario(comentario,id){
             bodyApi = "usuario=" + sessionStorage.loggedUser + 
                     "&id_challenge=" + comentario.id_challenge + 
@@ -149,28 +147,26 @@ Vue.component('restringido',{
   Vue.component("desafios", {
     template: `
 <div style="margin:50px">
-<ul class="commentList">
 
-    <li v-for="(comentario,index) in mensajes">
-    <div class="commenterImage">
-        <img :src="comentario.avatar" />
+
+    <div v-for="(desafio,index) in desafios">
+    <div >
+        <img :src="desafio.url_contenido" />
     </div>
     <div class="commentText">
-        <p><b>{{comentario.alias}} </b> dijo:</p>
-        <p class="">{{comentario.comentario}}</p> <span class="date sub-text">{{comentario.fechahora}}</span>
+        <a>usuario: {{desafio.usuario}}</a>
         <button @click="aprobarDesafio(desafio,index)" class="btn btn-default">Aprobar</button>
         <button @click="rechazarDesafio(desafio,index)" class="btn btn-default">Rechazar</button>
-
-
+        <hr>
     </div>
-    </li>
-    </ul>
+    </div>
+
     </div>
   
     `,
     data() {
       return {
-            mensajes:[],
+            desafios:[],
           idCategoria: null,
           logged:false,
           registerError:false,
@@ -188,32 +184,75 @@ Vue.component('restringido',{
   
     },
     methods: {
-        buscarMensajes(){
-            this.mensajes = []
-            
-            //fetch("ApiRes/comentarios.php?usuario="+sessionStorage.loggedUser)
-            fetch("ApiRes/comentarios.php?id_challenge=17&usuario_challenge=Polito12&usuario=Polito12")
+        buscarDesafios(){
+            this.desafios = []
+            fetch("ApiRes/challenge_alumno.php?administrador="+sessionStorage.loggedUser)
             .then(response => response.json())
             .then(data => {
-              this.mensajes = [];
-              this.mensajes = data
+              this.desafios = data
+              console.log(this.desafios)
     
             });
 
           },
-          aprobarComentario(comentario,id){
-              this.mensajes.splice(id,1)
+          aprobarDesafio(desafio,id){
+            bodyApi = "usuario=" + sessionStorage.loggedUser + 
+            "&id_challenge=" + desafio.id_challenge + 
+            "&usuario_challenge=" + desafio.usuario + 
+            "&ind_aprobado=S",
+    fetch("ApiRes/challenge_alumno.php?"+bodyApi, {
+    method: 'PUT',
+    headers: new Headers({
+        'Content-Type': 'application/x-www-form-urlencoded'
+    })
+})
+    .then(response=> response.json())
+    .then(data => {
+      console.log(data)
+      this.desafios.splice(id,1)
+
+    })
+    .catch(() => {
+        console.log("error")
+    })
+
+
+
+
 
           },
-          rechazarComentario(comentario,id){
-            this.mensajes.splice(id,1)          }
+          rechazarDesafio(desafio,id){
+            bodyApi = "usuario=" + sessionStorage.loggedUser + 
+            "&id_challenge=" + desafio.id_challenge + 
+            "&usuario_challenge=" + desafio.usuario + 
+            "&ind_aprobado=R",
+    fetch("ApiRes/challenge_alumno.php?"+bodyApi, {
+    method: 'PUT',
+    headers: new Headers({
+        'Content-Type': 'application/x-www-form-urlencoded'
+    })
+})
+    .then(response=> response.json())
+    .then(data => {
+      if(data.resultado == "ERROR"){
+        console.log(data.mensaje)
+        return
+      }
+      console.log(data)
+      this.desafios.splice(id,1)
+
+    })
+    .catch(() => {
+        console.log("error")
+    })
+}
     
 
     },
     computed: {
     },
     mounted:function(){
-        this.buscarMensajes()
+        this.buscarDesafios()
     }
   });
   

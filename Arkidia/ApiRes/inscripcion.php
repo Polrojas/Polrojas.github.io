@@ -175,25 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				echo json_encode(  $respuesta  );
 				exit();
 			}
-			//Alta de puntaje inicial en cero
-			try{
-				$sql = "INSERT INTO puntaje_alumno
-				    (usuario, puntaje)
-				    VALUES
-				    (:usuario, :puntaje)";
-				$cero = "0";
-				$statement = $dbConn->prepare($sql);
-				$statement->bindParam(':usuario', $input['usuario']);
-				$statement->bindParam('puntaje', $cero);
-				$statement->execute();
-			}catch(Exception $e)
-			{
-				$e->getMessage();          
-				$respuesta['resultado']="ERROR";
-				$respuesta['mensaje']= "puntaje_alumno".$e;
-				echo json_encode(  $respuesta  );
-				exit();
-			}
+
 			$evento = "Se inscribió en el curso ".$fila_curso['nombre_curso'];
 			date_default_timezone_set('America/Argentina/Buenos_Aires');
 			$fecha_formateada = date("Y-m-d H:i:s",time());    

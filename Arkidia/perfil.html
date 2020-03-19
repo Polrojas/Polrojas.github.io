@@ -20,27 +20,10 @@
     </div>
 
     <div id="app" style="width: 100%; padding-top:100px; ">
-
-
-        <div style="text-align: center">
-            <svg class="circle-chart" style="position:fixed; z-index:1;" viewbox="0 0 33.83098862 33.83098862"
-                width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-                <circle class="circle-chart__background" stroke="#efefef" stroke-width="2" fill="none" cx="16.91549431"
-                    cy="16.91549431" r="15.91549431" />
-                <circle class="circle-chart__circle" :stroke-dasharray="porcentaje" stroke="#00acc1" stroke-width="2"
-                    stroke-linecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-
-            </svg>
-            <img :src="perfil.avatar" style="background-color:grey; border-radius:50%; width:200px"
-                class="img img-rounded img-fluid" />
-
-            <h5 class="titulo">{{perfil.alias}}</h5>
-            <p>puntos: {{perfil.puntos}}</p>
-            <p>nivel: {{perfil.nivel}}</p>
+        <challenge></challenge>
 
 
 
-        </div>
 
     </div>
 

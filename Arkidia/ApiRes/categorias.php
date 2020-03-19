@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         }      
 
       }
-      //Se registrará cuando exsita un evento ejecutado por un usuario
+      //Se registrará cuando exista un evento ejecutado por un usuario
       if($evento != "") { 
         if($_GET['usuario'] != "aplicacion")
         {

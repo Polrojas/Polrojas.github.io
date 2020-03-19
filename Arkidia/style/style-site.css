@@ -780,7 +780,7 @@ input[type=password]:placeholder {
 
 @keyframes circle-chart-fill {
   to {
-    stroke-dasharray: 0 100;
+    stroke-dasharray: 0 1000;
   }
 }
 
@@ -852,10 +852,15 @@ display:inline-block;
   display:table-cell;
 }
 .commenterImage {
-  width:30px;
+  width:48px;
   margin-right:5px;
   height:100%;
   float:left;
+}
+.image-upload > input {
+  visibility:hidden;
+  width:0;
+  height:0
 }
 .commenterImage img {
   width:100%;

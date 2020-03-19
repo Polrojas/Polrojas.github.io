@@ -343,8 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         exit();
       }else
       {
-        $respuesta['resultado']="ERROR";
-        $respuesta['mensaje']="No existe el usuario en la tabla.";
+        $respuesta = array();
         echo json_encode(  $respuesta  );
         exit();             
       }

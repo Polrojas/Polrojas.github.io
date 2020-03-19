@@ -15,9 +15,67 @@
   }
 
   function obtenerHijos(){
-    $query = $this->connect()->query('SELECT * FROM usuario_hijo');
+   
+    $query = connect($db)->query('SELECT * FROM usuario_hijo');
     return $query;
   }
+
+  function cursoCompleto($db, $id_curso, $usuario){
+    $dbConn =  connect($db); 
+    $sql = $dbConn->prepare("SELECT * FROM contenido_alumno 
+                                                WHERE id_curso = :id_curso AND usuario = :usuario");
+    $sql->bindValue(':id_curso', $id_curso);
+    $sql->bindValue(':usuario', $usuario);
+    $sql->execute();
+    $sql->setFetchMode(PDO::FETCH_ASSOC);
+    $fila_contenido = $sql->fetchAll();   
+
+    foreach($fila_contenido as $row)
+    {
+        if($row['porcentaje_avance'] == 100 || $row['porcentaje_avance'] == 99)
+        {
+          $contenido_finalizado = true;
+        }else
+        {
+          $contenido_finalizado = false;
+          break;
+        }        
+    }
+    $sql = $dbConn->prepare("SELECT * FROM challenge_alumno 
+                                                WHERE id_curso = :id_curso AND usuario = :usuario");
+    $sql->bindValue(':id_curso', $id_curso);
+    $sql->bindValue(':usuario', $usuario);
+    $sql->execute();
+    $sql->setFetchMode(PDO::FETCH_ASSOC);
+    $fila_challenge = $sql->fetchAll();
+   
+    foreach($fila_challenge as $row)
+    {
+        if($row['ind_completo'] == 1)
+        {
+          $challenge_finalizado = true;
+        }else
+        {
+          $challenge_finalizado = false;
+          break;
+        }        
+    }
+    if($contenido_finalizado == true && $challenge_finalizado == true)
+    {
+      $ind_completo = 1;
+      $data=[
+        'id_curso'    => $id_curso,
+        'usuario'     => $usuario,
+        'ind_completo'=> $ind_completo    
+      ];
+      $sql = "UPDATE curso_alumno SET ind_completo = :ind_completo 
+                                      WHERE id_curso = :id_curso AND usuario = :usuario";
+      $statement = $dbConn->prepare($sql);     
+      $statement->execute($data);      
+    }
+
+  }
+
  //Obtener parámetros para updates
  function getParams($input)
  {

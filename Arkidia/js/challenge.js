@@ -157,23 +157,26 @@ Vue.component('challenge',{
                     <img :src="comentario.avatar" />
                 </div>
                 <div class="commentText">
-                    <p><b @click="verPerfil(comentario.usuario_comentario)" style="cursor:pointer">{{comentario.alias}}</b> dijo:</p>
-                    <p class="">{{comentario.comentario}}</p> <span class="date sub-text">{{comentario.fechahora}}</span>
-                    <button v-if="comentario.ind_comentario == 1" @click="eliminarComentario(comentario,index)" class="btn btn-default">Eliminar</button>
+                    <p ><b @click="verPerfil(comentario.usuario_comentario)" style="cursor:pointer">{{comentario.alias}}</b> dijo:</p>
+                    <p style="width:70%;display:inline-table" class="">{{comentario.comentario}}</p> 
+                    <img v-if="comentario.ind_comentario == 1" src="images/site/delete.svg" @click="eliminarComentario(comentario,index)" style="width:30px; vertical-align:super; cursor:pointer" />
+
+                    <span style="display:block" class="date sub-text">{{comentario.fechahora}}</span>
+
 
                 </div>
             </div>
-
-
         </ul>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <input v-model="newComment" class="form-control" type="text" placeholder="Dejá un comentario" style="width:100%" />
+        
+            <div >
+                <textarea v-model="newComment" v-on:keyup.enter="comentar()"  type="text" placeholder="Dejá un comentario" style="width:80%" />
+                <img v-if="newComment==''" src="images/site/no-comment.svg" style="width:40px; vertical-align:super; cursor:no-drop" />
+                <img v-if="newComment>''" @click="comentar()" src="images/site/send-comment.svg" style="width:40px; vertical-align:super; cursor:pointer" />
+
             </div>
 
-        </form>
+      
         <div >
-            <button @click="comentar()" class="btn btn-default">Comentar</button>
         </div>
     </div>
 </div>
@@ -242,6 +245,8 @@ Vue.component('challenge',{
 
       },
       comentar(){
+        if(this.newComment>' '){
+          console.log(this.newComment)
         fetch("ApiRes/comentarios.php",{
             method: 'POST',
             body: "usuario_challenge="+sessionStorage.usuarioChallenge
@@ -266,8 +271,11 @@ Vue.component('challenge',{
             }
 
             this.comentarios.push(nuevoComentario)
+            this.newComment=""
         })
-
+      }else{
+        this.newComment=""
+      }
     },
 
     },

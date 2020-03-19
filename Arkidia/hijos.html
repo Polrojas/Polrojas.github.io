@@ -145,12 +145,15 @@
 
             <div class="row" style="justify-content: center">
               <div v-for="avatar in avatars" :key="avatar.imagen">
-                <div class="card" style="border:0px; border-radius: 20px; margin:5px; width:150px">
+                <div class="card" style="border:0px; border-radius: 20px; margin:5px; width:50px">
                   <button @click="nuevoHijo.avatar = avatar.imagen" style="border-radius: 20px; background:white">
                     <img :src="avatar.imagen" width="50%" height="50%" 
                       alt="Arkidia" /></button>
                 </div>
+
               </div>
+              <img v-if="nuevoHijo.avatar" v-bind:src="nuevoHijo.avatar" style="height: 250px; width:300px" class="card-img-top"
+              :alt="nuevoHijo.nombre" />
             </div>
           </div>
 
@@ -204,13 +207,17 @@ aria-hidden="true">
 
         <div class="row" style="justify-content: center">
           <div v-for="avatar in avatars" :key="avatar.imagen">
-            <div class="card" style="border:0px; border-radius: 20px; margin:5px; width:150px">
+            <div class="card" style="border:0px; border-radius: 20px; margin:5px; width:50px">
               <button @click="alterHijo.avatar = avatar.imagen" style="border-radius: 20px; background:white">
                 <img :src="avatar.imagen" width="50%" height="50%" 
                   alt="Arkidia" /></button>
             </div>
           </div>
+          <img v-bind:src="alterHijo.avatar" style="height: 250px; width:300px" class="card-img-top"
+          :alt="alterHijo.nombre" />
         </div>
+
+
       </div>
 
     </div>

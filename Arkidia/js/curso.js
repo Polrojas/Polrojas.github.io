@@ -30,14 +30,27 @@ Vue.component('recorrido',{
               </div>
             </div>
   
-            <div v-if="contenido.id_challenge" class="card" style="border:0px;cursor: pointer;border-radius: 15px" >
-                <img class="card-img" src="admin/images/challenge.jpg" style="border-radius:15px" alt="Card image">
-                <img v-if="contenido.porcentaje_avance!=100"class="card-img-dark" src="admin/images/imagen-challenge-dark.svg" style="position: absolute;" alt="Card image">
-                <img v-if="contenido.porcentaje_avance==100" class="card-img-dark" src="admin/images/imagen-challenge-dark.svg" style="position: absolute;" alt="Card image">                
+            <div v-if="contenido.id_challenge" class="card" style="border:0px;border-radius: 15px;" >
+
+              <div class="image-upload" v-if="contenido.ind_completo == 0">
+                <label for="file-input" style="display:block;cursor:pointer">
+                  <img src="admin/images/imagen-challenge-dark.svg"  alt="Card image">                
+                </label>
+                <input type="file" accept="image/*" @change="uploadImage($event,contenido)" id="file-input">
+              </div>
+
+
+
+                <img v-if="contenido.ind_completo == 1" @click="verChallenge(contenido)"  class="card-img" :src="contenido.url_contenido" style="border-radius:15px;cursor: pointer;" alt="Card image">
+                
                 <div class="card-body">
-                    <h4 class="subtitulo " :style="estilos.tituloStyle">{{contenido.detalle_challenge}}</h4>
-                    <a href="#" class="btn btn-primary">{{contenido.nombre_challenge}}</a>
-                </div>
+                    <h4 v-if="contenido.ind_completo == 0" class="subtitulo " :style="estilos.tituloStyle">{{contenido.detalle_challenge}}</h4>
+                    <h4 v-if="contenido.ind_completo == 1" class="subtitulo " :style="estilos.tituloStyle">{{contenido.nombre_challenge}}</h4>
+
+               
+               
+               
+                    </div>
               </div>
             </div>
     </main>
@@ -68,6 +81,103 @@ Vue.component('recorrido',{
   }
   },
   methods:{
+
+    verChallenge(challenge){
+      console.log(challenge)
+      sessionStorage.usuarioChallenge = sessionStorage.loggedUser
+      sessionStorage.idChallenge = challenge.id_challenge
+      window.location.href = "challenge.html";
+    },
+
+
+    uploadImage(event, contenido) {
+      const formData = new FormData();
+      formData.append('imagen', event.target.files[0]);
+
+      const options = {
+        method: 'POST',
+        body: formData,
+        };
+        contenido.ind_completo = 1
+        contenido.url_contenido = "images/site/subiendo.svg"
+
+    fetch("ApiRes/imagen.php", options)
+    .then(function(res){ return res.json(); })
+    .then(function(data){ 
+
+        contenido.url_contenido = data.url
+        console.log("termino de subir")
+        console.log(data)
+
+        bodyApi = "imagen="+data.url+"&id_curso="+sessionStorage.idCurso+"&id_challenge="+contenido.id_challenge+"&usuario_challenge=" +sessionStorage.loggedUser,
+        console.log(bodyApi)
+        fetch("ApiRes/challenge_alumno.php", {
+          method: 'POST',
+          body: bodyApi,
+          headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded'
+          })
+        })
+  
+      .then(function(response) {
+          if(response.ok) {
+              loginResponse = response.json()
+              loginResponse.then(function(result) {
+                console.log(result)
+                  if (result.resultado==="ERROR"){
+                      console.log("ERROR")
+                      console.log(result.mensaje)
+                  }else{
+                    console.log("actualización de imagen")
+                    console.log(response)
+
+                  }
+              })
+          } else {
+              throw "Error en la llamada Ajax"
+          }
+      })
+
+       })
+  
+    },
+
+    subirChallenge(contenido,imagen){
+      
+      bodyApi = "imagen="+imagen+"&id_curso="+sessionStorage.idCurso+"&id_challenge="+contenido.id_challenge+"&usuario_challenge=" +sessionStorage.loggedUser,
+      console.log(bodyApi)
+      fetch("ApiRes/challenge_alumno.php", {
+        method: 'POST',
+        body: bodyApi,
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        })
+    })
+  
+    .then(function(response) {
+        if(response.ok) {
+            loginResponse = response.json()
+            loginResponse.then(function(result) {
+              console.log(result)
+                if (result.resultado==="ERROR"){
+                    console.log("ERROR")
+                    console.log(result.mensaje)
+                }else{
+                  console.log("actualización de imagen")
+                  console.log(response)
+
+                }
+            })
+        } else {
+            throw "Error en la llamada Ajax"
+        }
+     })
+
+
+
+
+
+    },
     buscarInscripcion() {
         fetch(
           "ApiRes/inscripcion.php?usuario=" +
@@ -78,6 +188,7 @@ Vue.component('recorrido',{
         )
           .then(response => response.json())
           .then(data => {
+            console.log(data)
             this.curso.id = data.id_curso;
             this.curso.nombre = data.nombre_curso;
             this.curso.detalle = data.detalle_curso;
@@ -93,8 +204,11 @@ Vue.component('recorrido',{
           if(this.contenidos[i].porcentaje_avance == 100){
             this.contenidos[i].styleObject = { color: "#ffffff" }
           }else{
-            if(this.contenidos[i].ind_completo>0){
-              this.contenidos[i].styleObject = { color: this.categoria.color }
+            if(this.contenidos[i].ind_completo==1){
+              
+              console.log(this.contenidos[i])
+              this.contenidos[i].styleObject = { color: "#ffffff" }
+              console.log(this.categoria.colo)
             }else{
             this.contenidos[i].styleObject = { color: "#ffffff66" }
           }
@@ -117,6 +231,8 @@ Vue.component('recorrido',{
   },
   mounted: function(){
     this.buscarInscripcion();
+
+
   }
 })
 

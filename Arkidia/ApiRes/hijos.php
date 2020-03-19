@@ -252,7 +252,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $statement->bindParam(':fecha', $fecha_formateada);
       $statement->bindParam(':evento', $evento);
       $statement->bindParam(':usuario', $input['usuario_padre']);          
-      $statement->execute();      
+      $statement->execute();
+      //Alta de puntaje inicial en cero
+      try{
+        $sql = "INSERT INTO puntaje_alumno
+            (usuario, puntaje)
+            VALUES
+            (:usuario, :puntaje)";
+        $cero = "0";
+        $statement = $dbConn->prepare($sql);
+        $statement->bindParam(':usuario', $input['usuario']);
+        $statement->bindParam('puntaje', $cero);
+        $statement->execute();
+      }catch(Exception $e)
+      {
+        $e->getMessage();          
+        $respuesta['resultado']="ERROR";
+        $respuesta['mensaje']= "puntaje_alumno".$e;
+        echo json_encode(  $respuesta  );
+        exit();
+      }           
       header("HTTP/1.1 200 OK");
       $respuesta['resultado']="OK";
       $respuesta['mensaje']="";    

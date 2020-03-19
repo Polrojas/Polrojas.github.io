@@ -26,17 +26,18 @@
     </div>
 
     <div id="app">
+        <bienvenida-hijo v-if="logged && hijo"></bienvenida-hijo>
 
       <inicio-arkidia v-if="!logged"></inicio-arkidia>
       <banner-proyectos v-if="!logged"></banner-proyectos>
       <arkidians v-if="logged && padre"></arkidians>
+      <cursos-pendientes v-if="logged && hijo"></cursos-pendientes>
       <categorias v-if="(logged && (padre||hijo)) || !logged" ></categorias>
       <challenges v-if="!logged"></challenges>
       <compartir v-if="!logged"></compartir>
       <banner-beneficios v-if="!logged"></banner-beneficios>
       <comentarios v-if="!logged"></comentarios>
       <faq v-if="!logged"></faq>
-
 
      
 

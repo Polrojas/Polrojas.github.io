@@ -248,22 +248,22 @@ var app = new Vue({
                   loginResponse = response.json()
                   loginResponse.then(function(result) {
                       if (result.resultado==="ERROR"){
-                          this.errorContenido=true
-                          this.msgErrorContenido = result.mensaje
+                          app.errorContenido=true
+                          app.msgErrorContenido = result.mensaje
                           console.log(result.mensaje)
                       }else{
                         console.log(result)
-                        this.contenidos.push({
+                        app.contenidos.push({
                           nombre:contenido.nombre,
                           orden:contenido.orden,
                           URLContenido:contenido.URLContenido,
                           URLImagen: contenido.URLImagen,
                           id:result.id_contenido
                       })
-                      this.contenido.nombre = ""
-                      this.contenido.URLContenido = ""
-                      this.contenido.orden = ""
-                      this.contenido.URLImagen = ""
+                      app.contenido.nombre = ""
+                      app.contenido.URLContenido = ""
+                      app.contenido.orden = ""
+                      app.contenido.URLImagen = ""
                       }
                   })
               } else {
@@ -308,21 +308,21 @@ var app = new Vue({
                   loginResponse = response.json()
                   loginResponse.then(function(result) {
                       if (result.resultado==="ERROR"){
-                          this.errorChallenge=true
-                          this.msgErrorChallenge = result.mensaje
+                          app.errorChallenge=true
+                          app.msgErrorChallenge = result.mensaje
                           console.log(result.mensaje)
                       }else{
                         console.log(result)
-                        this.challenges.push({
+                        app.challenges.push({
                           nombre:challenge.nombre,
                           orden:challenge.orden,
                           explicacion:challenge.explicacion,
                           id:result.id_challenge
 
                       })
-                      this.challenge.nombre = ""
-                      this.challenge.orden = ""
-                      this.challenge.explicacion = ""
+                      app.challenge.nombre = ""
+                      app.challenge.orden = ""
+                      app.challenge.explicacion = ""
                       }
                   })
               } else {

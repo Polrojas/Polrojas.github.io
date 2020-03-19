@@ -71,11 +71,18 @@
 
                   <div class="container">
                         <div class="row" style="justify-content: center">
-                          <div v-for="(contenido,index) in contenidos" v-on:click="verVideo(contenido)" :key="index">
+                          <div v-for="(contenido,index) in contenidos"  :key="index">
                             <div class="card card-curso"  style="cursor: pointer">
                               <div >
-                                <img v-if="contenido.id_contenido" :src="contenido.url_imagen" class="card-curso-image" alt="Card image">
-                                <img v-if="contenido.id_challenge" src="admin/images/challenge.jpg" class="card-curso-image" alt="Card image">
+                                <img v-on:click="verVideo(contenido)" v-if="contenido.id_contenido" :src="contenido.url_imagen" class="card-curso-image" alt="Card image">
+
+                                <div class="image-upload" v-if="contenido.id_challenge">
+                                  <label for="file-input" style="display:block">
+                                    <img v-if="contenido.url_contenido==''" :src="imagen" style="width:250px">
+                                  </label>
+                                  <input type="file" accept="image/*" @change="uploadImage($event,contenido)" id="file-input">
+
+                                </div>
 
                                 <h4 class="subtitulo">{{contenido.nombre_contenido}}</h4> 
                                 <h4 class="subtitulo">{{contenido.detalle_challenge}}</h4> 

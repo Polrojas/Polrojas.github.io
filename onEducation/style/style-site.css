@@ -73,13 +73,13 @@ html>body .content {
   height:auto;
 }
 
-#one {
+#inicio {
   background: linear-gradient(180deg,#ff7e00 0%, #de2fa1 100%);
 }
 #two {
   background: linear-gradient(180deg, #de2fa1 0%,#9f23c0 100%);
 }
-#three {
+#quienes {
   background: linear-gradient(180deg, #9f23c0 0%, #172fdf 100%);
 }
 #four {
@@ -94,16 +94,16 @@ html>body .content {
 #seven {
   background: linear-gradient(180deg, #2f55f1 0%,#119ae8 100%);
 }
-#eight {
+#que {
   background: linear-gradient(180deg, #119ae8 0%,#7a4df4 100%);
 }
-#nine {
+#porque {
   background: linear-gradient(180deg, #7a4df4 0%,#cb00ff 100%);
 }
-#ten {
+#clientes {
   background: linear-gradient(180deg, #cb00ff 0%,#ff7100 100%);
 }
-#eleven {
+#contacto {
   background: linear-gradient(180deg, #ff7100 0%,#cb00ff 100%);
 }
 h1{
@@ -198,13 +198,13 @@ h1, h2, h3, h4, h5, h6 {
 } 
 
   h1 {
-    font-size: 30px;
-  }
-  h2 {
     font-size: 25px;
   }
+  h2 {
+    font-size: 20px;
+  }
   h3 {
-    font-size: 18px;
+    font-size: 15px;
     line-height:30px
 
   }
@@ -219,8 +219,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-top:-100px
   }
   .card {
-  min-width:300px;
-  max-width:300px;
+  min-width:250px;
+  max-width:250px;
   margin:20px;
   background: linear-gradient(180deg, #a4f4ff31, #ffffff00);
   border: 0px;
@@ -263,6 +263,7 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
   transition: opacity 2s;
   opacity: 0;
+  
 }
 
 

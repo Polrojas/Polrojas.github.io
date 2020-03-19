@@ -21,9 +21,7 @@ Vue.component('menu-arkidia',{
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              <li v-if="!datamenu.logged" class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#login">Iniciar sesión</a>
-              </li>
+   
               <li v-if="datamenu.logged && datamenu.admin" class="nav-item">
                 <a class="nav-link" href="admCursos.html">Administrar Cursos</a>
               </li>
@@ -33,9 +31,7 @@ Vue.component('menu-arkidia',{
               <li v-if="datamenu.logged && datamenu.admin" class="nav-item">
               <a class="nav-link" href="aprobaciones.html">Aprobaciones</a>
               </li>
-              <li v-if="datamenu.logged && datamenu.padre" class="nav-item">
-                <a class="nav-link" @click="verPerfil()">Perfil</a>
-              </li>
+
               <li v-if="datamenu.logged && datamenu.padre" class="nav-item">
                 <a class="nav-link" href="hijos.html" >Administrar Arkidians</a>
               </li>
@@ -44,11 +40,10 @@ Vue.component('menu-arkidia',{
               </li>
 
               <li v-if="datamenu.logged && ( datamenu.hijo || datamenu.padre)" class="nav-item" style="float:right; cursor:pointer">
-              <a class="nav-link" data-toggle="modal" data-target="#notification" >
+              <a class="nav-link" data-toggle="modal" @click="marcarNotificaciones()" data-target="#notification" >
                 <img v-if="notificaciones.length==0" src="./images/site/notificacion.svg" width="20px" alt="Notificacion"></img>
                 <img v-if="notificaciones.length>0" src="./images/site/notificacion-si.svg" width="20px" alt="Notificacion"></img>
-
-                Notificaciones ({{notificaciones.length}})</a>
+                Notificaciones</a> 
               </li>
 
  
@@ -186,17 +181,24 @@ Vue.component('menu-arkidia',{
   <!-- Modal Notificaciones -->
   <div
     class="modal fade"
+    style="margin-top:100px"
     id="notification"
     tabindex="-1"
     role="dialog"
   >
     <div class="modal-dialog " role="document">
+
       <div class="modal-content">
+      <div class="modal-header">
+      <h4>Notificaciones</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
         <div class="modal-body">
-          <h4>Notificaciones</h4>
           <div v-for="(notificacion,index) in notificaciones" style="padding:15px">
             <div class="commenterImage" @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer">
-              <img :src="notificacion.avatarRemitente" />
+              <img :src="notificacion.avatarRemitente" style="border-style:solid;border-color:#00bf12; background:#d8ffdb" />
             </div>
             <div class="commentText">
               <p v-if="notificacion.tipo_notificacion=='comentario'"><b @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer" >{{notificacion.aliasRemitente}} </b> dijo de tu <b @click="verDesafio(notificacion)" style="cursor:pointer">desafio</b>: <br> <i>{{notificacion.mensaje}}</i></p>
@@ -205,15 +207,21 @@ Vue.component('menu-arkidia',{
               <span class="date sub-text">{{notificacion.fechahora}}</span>
             </div>
           </div>
+
           <div v-for="(notificacion,index) in notificacionesVistas" style="padding:15px">
-          <div class="commenterImage">
-            <img :src="notificacion.avatarRemitente" />
+          <div class="commenterImage" @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer">
+            <img :src="notificacion.avatarRemitente" style="border-style:solid;border-color:#bdbdbd; background:#ececec"/>
           </div>
           <div class="commentText">
-            <p>{{notificacion.mensaje}}</p>
+            <p v-if="notificacion.tipo_notificacion=='comentario'"><b @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer" >{{notificacion.aliasRemitente}} </b> dijo de tu <b @click="verDesafio(notificacion)" style="cursor:pointer">desafio</b>: <br> <i>{{notificacion.mensaje}}</i></p>
+            <p v-if="notificacion.tipo_notificacion=='like'">A <b @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer">{{notificacion.aliasRemitente}}</b> le gustó tu <b @click="verDesafio(notificacion)" style="cursor:pointer">desafio</b></p>
+
             <span class="date sub-text">{{notificacion.fechahora}}</span>
           </div>
         </div>
+
+
+
 
         </div>
       </div>
@@ -253,11 +261,33 @@ Vue.component('menu-arkidia',{
       }
     },
     methods:{
+      marcarNotificaciones(){
+        bodyApi = "usuario=" + sessionStorage.loggedUser ,
+        fetch("ApiRes/notificaciones.php?"+bodyApi, {
+        method: 'PUT',
+        headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        })
+    })
+        .then(() => {
+   //       notificacionesTotales=[]
+   //       notificacionesTotales.push(this.notificaciones)
+   //       notificacionesTotales.push(this.notificacionesVistas)
+   //       this.notificacionesVistas=notificacionesTotales
+   //       this.notificaciones = []
+          
+        })
+        .catch(() => {
+            console.log("error")
+        })
+
+      },
+
       verNotificaciones(){
         fetch("ApiRes/notificaciones.php?usuario=" + sessionStorage.loggedUser)
         .then(response => response.json())
         .then((data) => {
-          console.log(data)
+
           this.notificaciones = data.notificacionesPendientes
           this.notificacionesVistas = data.notificacionesVistas
         })  
@@ -289,10 +319,11 @@ Vue.component('menu-arkidia',{
                 loginResponse = response.json()
                 loginResponse.then(function(result) {
                     if (result.resultado ==="ERROR"){
+                        console.log("Error de login")
                         sessionStorage.removeItem("typeUser")
                         sessionStorage.removeItem("loggedUser")
-                        app.mensajeErrorLogin = result.mensaje
-                        app.loginError = true
+                        this.mensajeErrorLogin = result.mensaje
+                        this.loginError = true
                         return
                     }
   
@@ -359,8 +390,8 @@ Vue.component('menu-arkidia',{
                 loginResponse = response.json()
                 loginResponse.then(function(result) {
                     if (result.resultado==="ERROR"){
-                        app.registerError=true
-                        app.registerMsg = result.mensaje
+                        this.registerError=true
+                        this.registerMsg = result.mensaje
                     }else{
                     window.location.href = "SitioPadre.html";
                     sessionStorage.loggedUser = register.correo

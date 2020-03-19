@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 		$indicador_visto = "S";
         $sql = $dbConn->prepare("SELECT * FROM notificaciones 
                                 WHERE usuario = :usuario AND indicador_visto = :indicador_visto 
-                                 ORDER BY fecha DESC");
+                                 ORDER BY fecha DESC LIMIT 20");
         $sql->bindValue(':usuario', $usuario);
         $sql->bindValue(':indicador_visto', $indicador_visto);
         $sql->execute();   

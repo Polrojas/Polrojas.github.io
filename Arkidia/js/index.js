@@ -8,7 +8,9 @@ Vue.component('inicio-arkidia',{
             data-aplay="true"
             data-loop="false"
         ></div>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#register" >Registrarme</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#login" >Iniciar sesión</button>
+        <br><br>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#register" >Registrarme</button>
 
         </div>
 
@@ -142,14 +144,14 @@ Vue.component('faq',{
       <div class="card-header" id="headingOne">
         <h2 class="mb-0">
           <button class="btn titulo" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            ¿Cómo funciona Arkidia?
+          ¿Que es Arkidia?
           </button>
         </h2>
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        Arkidia es una plataforma virtual de entretenimiento educativo para chicos de 6 a 13 años. Nuestra misión es estimular y potenciar el desarrollo de los niños y niñas, más allá de la escuela. Creemos que con la motivación correcta y las condiciones adecuadas siempre queremos aprender y compartir lo que aprendemos. 
         </div>
       </div>
     </div>
@@ -157,27 +159,26 @@ Vue.component('faq',{
       <div class="card-header" id="headingTwo">
         <h2 class="mb-0">
           <button class="btn titulo collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            ¿Cuál es su costo?
+          ¿Cómo funciona Arkidia?
           </button>
         </h2>
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
+        Te registras y registras a los niños y niñas que quieras (que nosotros llamamos Arkidians). Luego los Arkidians acceden a los cursos, ven los videos y comparten lo que aprendieron y crearon. Pueden hacer comentarios y dar likes a las creaciones de otros Arkidians.        </div>
       </div>
     </div>
     <div class="card" style="border:0px;background-color: #ececec;">
       <div class="card-header" id="headingThree">
         <h2 class="mb-0">
           <button class="btn titulo collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            ¿Necesito comprar materiales?
+          ¿Cuál es su costo?
           </button>
         </h2>
       </div>
       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
         <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        Por el momento Arkidia está en etapa de pruebas. Su acceso se encuentra cerrado al público en general y es solamente por invitación. Si te interesa participar en el futuro envíanos un correo a quiero@arkidia.com. 
         </div>
       </div>
     </div>
@@ -185,16 +186,37 @@ Vue.component('faq',{
       <div class="card-header" id="headingThree">
         <h2 class="mb-0">
           <button class="btn titulo collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            ¿Qué elementos de seguridad tiene Arkidia?
+          ¿Necesito comprar materiales?
           </button>
         </h2>
       </div>
       <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
         <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        Para la mayoría de los cursos, no. Intentamos que los desafíos de Arkidia puedan realizarse con objetos disponibles en los hogares.
         </div>
       </div>
     </div>
+
+    <div class="card" style="border:0px;background-color: #ececec;">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn titulo collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFour">
+        ¿Qué seguridad brinda Arkidia?
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body" style="text-align:left">
+      Nos gusta divertirnos mientras aprendemos, pero nos tomamos la seguridad y privacidad muy en serio, ya que construimos Arkidia para que sea un ambiente completamente protegido:<br>
+      (1) Reforzamos el comportamiento positivo y constructivo en todas las interacciones de los Arkidians.<br>
+      (2) Se requiere un login y el contenido no se accesible fuera de Arkidia.<br>
+      (3) Los Arkidians deben utilizar apodos. <br>
+      (4) Los comentarios y los desafíos que suben los Arkidians se aprueban antes de ser publicados.<br>
+      (5) Guardamos un registro con toda la actividad de los usuarios.<br>
+            </div>
+    </div>
+  </div>
+
   </div>
 
 
@@ -239,7 +261,7 @@ Vue.component('banner-beneficios',{
                     </div>
                     <div class="col-md-6">
                       <div class="card-body">
-                        <h5 class="titulo">Inmersivo</h5>
+                        <h5 class="titulo" style="font-size:25px" >Inmersivo</h5>
                         <p class="card-text">Los chicos pasan de ser espectadores a protagonistas</p>
                       </div>
                     </div>
@@ -258,7 +280,7 @@ Vue.component('banner-beneficios',{
                     </div>
                     <div class="col-md-6">
                       <div class="card-body">
-                        <h5 class="titulo">de Calidad</h5>
+                        <h5 class="titulo" style="font-size:25px">de Calidad</h5>
                         <p class="card-text">El contenido y la experiencia de aprendizaje es la base de todo lo que hacemos.</p>
                       </div>
                     </div>
@@ -277,7 +299,7 @@ Vue.component('banner-beneficios',{
                     </div>
                     <div class="col-md-6">
                       <div class="card-body">
-                        <h5 class="titulo">Seguro</h5>
+                        <h5 class="titulo" style="font-size:25px">Seguro</h5>
                         <p class="card-text">El aprendizaje de los chicos se da en un espacio protegido. Sin bullies, sin mayores.</p>
                       </div>
                     </div>
@@ -303,7 +325,8 @@ Vue.component('banner-beneficios',{
 Vue.component('comentarios',{
     template:`
     <section style="margin-top: 100px">
-    <div class="card" style="border:0px; padding:20px">
+ 
+<div class="card" style="border:0px; padding:20px">
     <div class="card-body">
         <div class="row">
             <div class="col-md-2">
@@ -311,7 +334,8 @@ Vue.component('comentarios',{
             </div>
             <div class="col-md-10">
                 <p>
-                    <strong>Pamela</strong>
+                    <strong>Julieta </strong>madre de una Arkidian de 9 años
+
                </p>
                <p>
                   <img src="images/site/star.svg" style="width:20px"/>
@@ -321,7 +345,32 @@ Vue.component('comentarios',{
                   <img src="images/site/star.svg" style="width:20px"/>
               </p>
                <div class="clearfix"></div>
-                <p>Excelente plataforma para compartir con mis hijos!!</p>
+                <p>Arkidia es fantástico. Saca el lado creativo de mi hija y desarrolla talentos y habilidades diferentes a los del colegio</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+   <div class="card" style="border:0px; padding:20px">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="images/site/profile.svg" style="max-width: 100px;" class="img img-rounded img-fluid"/>
+            </div>
+            <div class="col-md-10">
+                <p>
+                    <strong>Martín</strong>, abuelo de un Arkidian de 7 años
+
+               </p>
+               <p>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+                  <img src="images/site/star.svg" style="width:20px"/>
+              </p>
+               <div class="clearfix"></div>
+                <p>Exploramos con mi nieto todas las categorías, con cursos tan diversos. Hay algo para todos!!</p>
 
             </div>
         </div>
@@ -335,7 +384,7 @@ Vue.component('comentarios',{
             </div>
             <div class="col-md-10">
                 <p>
-                    <strong>Marcos</strong>
+                    <strong>María Luisa</strong>, madre de dos Arkidians de 8 y 10 años
                </p>
                <p>
                   <img src="images/site/star.svg" style="width:20px"/>
@@ -345,12 +394,14 @@ Vue.component('comentarios',{
                   <img src="images/site/star.svg" style="width:20px"/>
               </p>
                <div class="clearfix"></div>
-                <p>Me gusta mucho dibujar, y compartirlo con mis amigos y mis papás :)</p>
+                <p>Descubrí una gran manera de que usen el celular pero que después tengan que dejarlo para hacer los desafíos que proponen en los videos!!! </p>
 
             </div>
         </div>
     </div>
 </div>
+
+
 <div class="card" style="border:0px; padding:20px">
     <div class="card-body">
         <div class="row">
@@ -359,7 +410,7 @@ Vue.component('comentarios',{
             </div>
             <div class="col-md-10">
                 <p>
-                    <strong>Nico</strong>
+                    <strong>Edison y Lucrecia</strong>, padres de un Arkidian de 9 años
                </p>
                <p>
                   <img src="images/site/star.svg" style="width:20px"/>
@@ -369,7 +420,7 @@ Vue.component('comentarios',{
                   <img src="images/site/star.svg" style="width:20px"/>
               </p>
                <div class="clearfix"></div>
-                <p>Mis hijos aprenden y si divierten al mismo tiempo. Me encanta la cantidad y calidad del contenido</p>
+                <p>Desde que nuestro hijo empezó a jugar con Arkidia está más creativo en su tiempo libre, atento a lo que aprendió y a las cosas que puede compartir con otros niños. Bravo! </p>
 
             </div>
         </div>
@@ -559,11 +610,83 @@ Vue.component('challenges',{
     }
 })
 
+Vue.component('cursos-pendientes',{
+  template:`
+  <div  style="text-align: center; margin-top: 100px">
+
+  <section  style="
+  background-color: #ececec;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;">
+  <h1 class="titulo">Continuar viendo...</h1>
+
+  <div class="container">
+        <div class="row" style="justify-content: center">
+          <div v-for="curso in cursos" :key="curso.id_curso">
+            <div  class="card card-curso"  >
+              <div class="card-body">
+                <h4 class="card-title subtitulo">{{curso.nombre_curso}}</h4>
+                <p class="card-text">{{curso.detalle_curso}}</p>
+              </div>
+              <div :id="'demo'+curso.id" class="carousel slide" data-ride="carousel" >
+                <div @click="accederCurso(curso)" style="cursor: pointer" class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img :src="curso.url_imagen" style="width:100%;" alt="curso.nombre_curso">
+                  </div>
+                </div>
+              </div>  
+
+            </div>
+          </div>
+        </div>
+        </div>
+</section>
+
+</div>
+  `
+  ,
+  data() {
+      return{
+          apiCategorias:[],
+          cursos:"",
+      }
+  },
+  props:{
+  },
+  methods:{
+      buscarCursos(){
+        console.log(sessionStorage.loggedUser)
+
+          fetch("ApiRes/perfil_usuario.php?usuario="+sessionStorage.loggedUser)
+
+         .then(response => response.json() )
+        .then((data)=>{
+              this.cursos = data.cursos_pendientes
+              console.log(data)
+
+
+          })
+      },
+      accederCurso(curso){
+          console.log(curso)
+          sessionStorage.idCurso = curso.id_curso
+          window.location.href = "curso.html"
+      },
+  },
+  computed:{  
+  },
+  mounted: function(){
+      this.buscarCursos()
+
+  }
+})
 
 Vue.component('categorias',{
     template:`
     <div  style="text-align: center; margin-top: 100px">
-    <img
+    <img v-if="typeUser!='HIJO'"
     src="images/site/ver.svg"
     id="challenges"
     alt="Miles de proyectos"
@@ -603,6 +726,8 @@ Vue.component('categorias',{
     data() {
         return{
             apiCategorias:[],
+            typeUser:sessionStorage.typeUser,
+
         }
     },
     props:{
@@ -786,7 +911,45 @@ Vue.component('administrador',{
 })
 
 
+Vue.component('bienvenida-hijo',{
+  template:`
+  <section>
+    <div style="text-align:center">
+  <img :src="perfil.avatar" style="background-color:#ececec; border-radius:50%; width:200px; margin-top:100px"
+  class="img img-rounded img-fluid" />
+  <h1 class="titulo">Hola {{perfil.alias}}</h1>
+  </div>
 
+</section>
+  `
+  ,
+  data() {
+      return{
+        perfil:""
+      }
+  },
+  props:{
+  },
+  methods:{
+    buscarPerfil() {
+      fetch(
+        "ApiRes/perfil_usuario.php?usuario=" +
+        sessionStorage.loggedUser
+      )
+        .then(response => response.json())
+        .then(data => {
+            this.perfil = data
+
+
+        });
+    },
+  },
+  computed:{  
+  },
+  mounted: function(){
+    this.buscarPerfil()
+  }
+})
 
 
 
