@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 #navbar {
   background-color: #333;
@@ -304,3 +305,311 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
   display: inline;
 }
+=======
+
+#navbar {
+  background-color: #333;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  display: block;
+  transition: top 0.3s;
+  z-index: 100;
+  border-radius: 0px;
+  border:0px;
+  margin:0px
+
+}
+.navbar-inverse {
+  background-color: #333;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  display: block;
+  transition: top 0.3s;
+  z-index: 100;
+  border-radius: 0px;
+  border:0px;
+  margin:0px
+
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+
+    html,body {
+  height:100%;
+  margin:0;
+}
+  .content {
+  height:100%;
+  min-height:80%;/*for mozilla*/
+  padding-top:100px;
+  padding-bottom:5%;
+}
+
+
+.fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        background: #333;
+        padding: 2px 0;
+        color: #fff;
+        font-size: 10px;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    } 
+
+html>body .content {
+  height:auto;
+}
+
+#inicio {
+  background: linear-gradient(180deg,#ff7e00 0%, #de2fa1 100%);
+}
+#two {
+  background: linear-gradient(180deg, #de2fa1 0%,#9f23c0 100%);
+}
+#quienes {
+  background: linear-gradient(180deg, #9f23c0 0%, #172fdf 100%);
+}
+#four {
+  background: linear-gradient(180deg, #172fdf 0%, #5f17df 100%);
+}
+#five {
+  background: linear-gradient(180deg, #5f17df 0%,#4834e8 100%);
+}
+#six {
+  background: linear-gradient(180deg, #4834e8 0%,#2f55f1 100%);
+}
+#seven {
+  background: linear-gradient(180deg, #2f55f1 0%,#119ae8 100%);
+}
+#que {
+  background: linear-gradient(180deg, #119ae8 0%,#7a4df4 100%);
+}
+#porque {
+  background: linear-gradient(180deg, #7a4df4 0%,#cb00ff 100%);
+}
+#clientes {
+  background: linear-gradient(180deg, #cb00ff 0%,#ff7100 100%);
+}
+#contacto {
+  background: linear-gradient(180deg, #ff7100 0%,#cb00ff 100%);
+}
+h1{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 70px;
+}
+
+h2{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+}
+
+h3{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height:40px
+
+} 
+
+h4{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+h6{
+  margin-bottom: 20px;
+  font-size: 15px !important;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  color:white
+}
+.imageSection {
+  width:600px; 
+  padding:0px; 
+  margin-top: -300px
+  } 
+
+.card-deck{  
+  max-width:800px; 
+  place-content: center;
+  flex-flow: wrap
+}
+
+.imagen-logo{
+  width:200px
+}
+
+.card {
+  min-width:300px;
+  max-width:300px;
+  margin:20px;
+  background: linear-gradient(180deg, #a4f4ff31, #ffffff00);
+  border: 0px;
+  text-align:left;
+  display: inline-table;
+  padding:20px
+  
+}
+
+.card-logo {
+  width:200px;
+  display: inline-table;
+}
+
+.threeD {
+  font-family: 'Raleway', sans-serif;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+  transition: 1s;
+  text-shadow: 1px 2px #00000005, 2px 4px #00000005, 3px 6px #00000005, 4px 8px #00000005, 5px 10px #00000005, 6px 12px #00000005, 7px 14px #00000005, 8px 16px #00000005, 9px 18px #00000005, 10px 20px #00000005;
+}
+
+.logo-onEd{
+  width: 60%; 
+  padding: 200px 0px
+}
+
+
+@media only screen and (max-width: 600px) {
+
+  .logo-onEd{
+  width: 90%; 
+  padding: 200px 0px
+} 
+
+  h1 {
+    font-size: 25px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 15px;
+    line-height:30px
+
+  }
+  h4 {
+    font-size: 15px;
+  }
+  h6 {
+    font-size: 12px !important;
+  }
+  .imageSection{
+    width:300px;
+    margin-top:-100px
+  }
+  .card {
+  min-width:250px;
+  max-width:250px;
+  margin:20px;
+  background: linear-gradient(180deg, #a4f4ff31, #ffffff00);
+  border: 0px;
+  text-align:left;
+  
+}
+.card-logo {
+  width:100px
+}
+.imagen-logo{
+  width:100px
+}
+}
+
+.subrayado{
+  background-color: #ffffff44
+}
+.blurry {
+  position: relative;
+  transition:  filter 3s;
+  filter: blur(18px);
+}
+
+.come-in-blurry {
+  animation: come-in 1.8s ease forwards;
+  filter: blur(0px);
+}
+
+.already-visible-blurry {
+  animation-duration: 4.6s;
+}
+
+@keyframes come-in-blurry {
+
+}
+
+
+.module {
+  position: relative;
+  -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+  transition: opacity 2s;
+  opacity: 0;
+  
+}
+
+
+
+
+.come-in {
+  transform: translateY(350px);
+  animation: come-in 0.8s ease forwards;
+  opacity: 1;
+
+}
+
+
+
+.already-visible {
+  transform: translateY(350px);
+  animation-duration: 0.6s;
+}
+
+@keyframes come-in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+#navbar a{
+  font-size: 15px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+
+.navbar-nav {
+  margin-top:0px;
+}
+
+.numeros{
+  color: white;
+  display: inline;
+}
+>>>>>>> 9ae2e60a53c348d893516c54f0a626c30252bb97
