@@ -100,18 +100,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				if(!empty($fila_contenido))
 				{
 					foreach($fila_contenido as $row)
-					{				
-						$sql = "INSERT INTO contenido_alumno
-						    (id_curso, id_contenido, usuario, porcentaje_avance)
-						    VALUES
-						    (:id_curso, :id_contenido, :usuario, :porcentaje_avance)";
-						$porcentaje_avance = "0";
-						$statement = $dbConn->prepare($sql);
-						$statement->bindParam('id_curso', $row['id_curso']);
-						$statement->bindParam(':id_contenido', $row['id_contenido']);
-						$statement->bindParam(':usuario', $input['usuario']);
-						$statement->bindParam(':porcentaje_avance', $porcentaje_avance);         
-						$statement->execute();
+					{
+						if($row['url_contenido'] == "NULL")
+						{
+							$sql = "INSERT INTO contenido_alumno
+							    (id_curso, id_contenido, usuario, porcentaje_avance)
+							    VALUES
+							    (:id_curso, :id_contenido, :usuario, :porcentaje_avance)";
+							$porcentaje_avance = 100;
+							$statement = $dbConn->prepare($sql);
+							$statement->bindParam('id_curso', $row['id_curso']);
+							$statement->bindParam(':id_contenido', $row['id_contenido']);
+							$statement->bindParam(':usuario', $input['usuario']);
+							$statement->bindParam(':porcentaje_avance', $porcentaje_avance);         
+							$statement->execute();
+						}else{		
+							$sql = "INSERT INTO contenido_alumno
+							    (id_curso, id_contenido, usuario, porcentaje_avance)
+							    VALUES
+							    (:id_curso, :id_contenido, :usuario, :porcentaje_avance)";
+							$porcentaje_avance = "0";
+							$statement = $dbConn->prepare($sql);
+							$statement->bindParam('id_curso', $row['id_curso']);
+							$statement->bindParam(':id_contenido', $row['id_contenido']);
+							$statement->bindParam(':usuario', $input['usuario']);
+							$statement->bindParam(':porcentaje_avance', $porcentaje_avance);         
+							$statement->execute();
+						}
 					}
 				}else
 				{
@@ -139,20 +154,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 					foreach($fila_challenge as $row)
 					{				
 						$sql = "INSERT INTO challenge_alumno
-						    (id_curso, id_challenge, usuario, ind_completo, tipo_archivo, url_contenido, ind_aprobado, aprobador, total_likes, total_comentarios)
+						    (id_curso, id_challenge, usuario, ind_completo, tipo_archivo, fecha, url_contenido, ind_aprobado, aprobador, total_likes, total_comentarios)
 						    VALUES
-						    (:id_curso, :id_challenge, :usuario, :ind_completo, :tipo_archivo, :url_contenido, :ind_aprobado, :aprobador, :total_likes,
-						    	:total_comentarios)";
+						    (:id_curso, :id_challenge, :usuario, :ind_completo, :tipo_archivo, :fecha,
+						     :url_contenido, :ind_aprobado, :aprobador, :total_likes, :total_comentarios)";
 						$cero = "0";
 						$url_contenido="";
 						$ind_aprobado="";
 						$aprobador="";
+						$nulo = NULL;
 						$statement = $dbConn->prepare($sql);
 						$statement->bindParam(':id_curso', $input['id_curso']);        
 						$statement->bindParam(':id_challenge', $row['id_challenge']);
 						$statement->bindParam(':usuario', $input['usuario']);
 						$statement->bindParam(':ind_completo', $ind_completo);   
 						$statement->bindParam('tipo_archivo', $cero);
+						$statement->bindParam('fecha', $nulo);
 						$statement->bindParam('url_contenido', $url_contenido);
 						$statement->bindParam('ind_aprobado', $ind_aprobado);
 						$statement->bindParam('aprobador', $ind_aprobado);
@@ -177,32 +194,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			}
 
 			$evento = "Se inscribió en el curso ".$fila_curso['nombre_curso'];
-			date_default_timezone_set('America/Argentina/Buenos_Aires');
-			$fecha_formateada = date("Y-m-d H:i:s",time());    
-			//Graba registro en tabla Log
-			try{
-				$sql = "INSERT INTO log 
-				      (fecha, evento, usuario)
-				      VALUES
-				      (:fecha, :evento, :usuario)";
-				$statement = $dbConn->prepare($sql);  
-				$statement->bindParam(':fecha', $fecha_formateada);
-				$statement->bindParam(':evento', $evento);
-				$statement->bindParam(':usuario', $input['usuario']);          
-				$statement->execute();
-				header("HTTP/1.1 200 OK");
-				$respuesta['resultado']="OK";
-				$respuesta['mensaje']=""; 			
-				echo json_encode($respuesta);
-				exit();
-			}catch(Exception $e)
-			{
-				$e->getMessage();          
-				$respuesta['resultado']="ERROR";
-				$respuesta['mensaje']="log ".$e;
-				echo json_encode(  $respuesta  );
-				exit();
-			}     
+			registroLog($db, $evento, $input['usuario']);
+			//Envía respuesta
+			$respuesta['resultado']="OK";
+			$respuesta['mensaje']="";    
+			echo json_encode($respuesta);
+			header("HTTP/1.1 200 OK");
+			exit();			
 		}    
 	}
 }
@@ -441,9 +439,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
 				$statement = $dbConn->prepare("DELETE FROM puntaje_alumno WHERE usuario = :usuario");	  
 	        	$statement->bindValue(':usuario', $input['usuario']);          
 				$statement->execute();				
-			}
-
-			//Graba registro en tabla Log
+			}			
 			$consulta = $dbConn->prepare("SELECT * FROM cursos
 										WHERE id_curso = :id_curso");
 			$consulta->bindValue(':id_curso', $input['id_curso']);
@@ -451,17 +447,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
 			$fila_consulta = $consulta->fetch(PDO::FETCH_ASSOC);
 			$evento = "Eliminó la inscripción del curso ".$fila_consulta['nombre_curso'];
 			//Agrega el registro en el log de eventos    
-			date_default_timezone_set('America/Argentina/Buenos_Aires');
-			$fecha_formateada = date("Y-m-d H:i:s",time());		
-			$sql = "INSERT INTO log 
-			      (fecha, evento, usuario)
-			      VALUES
-			      (:fecha, :evento, :usuario)";
-			$statement = $dbConn->prepare($sql);  
-			$statement->bindParam(':fecha', $fecha_formateada);
-			$statement->bindParam(':evento', $evento);
-			$statement->bindParam(':usuario', $_GET['usuario']);          
-			$statement->execute();
+			registroLog($db, $evento, $_GET['usuario']);		
+
 			//Envía respuesta
 			$respuesta['resultado']="OK";
 			$respuesta['mensaje']="";    

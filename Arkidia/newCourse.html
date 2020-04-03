@@ -35,7 +35,7 @@
                         <div v-if="curso.nombre > '' && curso.categoria > ''" class="card-header card-header-primary">
                             <h4 class="card-title">{{curso.nombre}} - {{curso.detalleCreado}}</h4>
 
-                            <a class="card-category">{{curso.categoria.nombre}}</a>
+                            <a class="card-category">{{curso.categoria.descripcion}}</a>
                             <a class="estado-borrador" v-if="curso.estado==='B'">borrador</a>
                             <a class="estado-publicado" v-if="curso.estado==='P'">publicado</a>
                             <a class="estado-noCreado" v-if="curso.estado===null">aun no creado</a>
@@ -50,7 +50,7 @@
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Categoría</label>
                                             <select v-on:click = "iniciarBoton()" v-model="curso.categoria" type="text" class="form-control">
-                                                <option v-for="categoria in categorias" :value="categoria">{{categoria.nombre}}</option>
+                                                <option v-for="categoria in categorias" :value="categoria">{{categoria.descripcion}}</option>
                                             </select>
                                         </div>
                                     </div>

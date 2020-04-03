@@ -1,25 +1,26 @@
 <?php
 	include "config.php";
-	include "utils.php";
-	
+	include "utils.php";	
 	$dbConn =  connect($db);
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	$input= $_POST;
-
+	date_default_timezone_set('America/Argentina/Buenos_Aires');
+	$fecha_formateada = date("Y-m-d H:i:s",time());
 	try
 	{
 		$data=[     
 			'usuario'       => $input['usuario_challenge'],
 			'id_curso'      => $input['id_curso'],
 			'id_challenge'  => $input['id_challenge'],
+			'fecha'         => $fecha_formateada,
 			'url_contenido' => $input['imagen'],
 			'ind_aprobado'  => "N",
 			'ind_completo'  => "1"
 		];    
 		$sql = "UPDATE challenge_alumno
-		SET url_contenido = :url_contenido, ind_aprobado = :ind_aprobado, 
-			ind_completo = :ind_completo
+		SET url_contenido = :url_contenido, fecha = :fecha,
+			ind_aprobado = :ind_aprobado, ind_completo = :ind_completo
 		WHERE usuario = :usuario and id_challenge = :id_challenge and id_curso = :id_curso";
 		$statement = $dbConn->prepare($sql);     
 		$statement->execute($data);
@@ -91,9 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 											where usuario = :usuario");	        
 				$sql->bindValue(':usuario', $row['usuario']);
 				$sql->execute();	        
-				$usuario_hijo = $sql->fetch(PDO::FETCH_ASSOC);
-
-	          
+				$usuario_hijo = $sql->fetch(PDO::FETCH_ASSOC);         
 
 				if(!empty($fila_like) and $fila_like['usuario_like'] == $_GET['usuario'])	          
 				{
@@ -125,17 +124,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 	        header("HTTP/1.1 200 OK");
 	        echo json_encode($respuesta);
-
+	        
 	      }catch (Exception $e){
 	        $e->getMessage();          
 	        $respuesta['resultado']="ERROR";
 	        $respuesta['mensaje']=$e;
-	        echo json_encode(  $respuesta  );      
+	        echo json_encode(  $respuesta  );
+	        exit();     
 	      }
 	    }else{
 	      $respuesta['resultado']="ERROR";
 	      $respuesta['mensaje']="Debe completar el id_curso y usuario";
-	      echo json_encode(  $respuesta  );               
+	      echo json_encode(  $respuesta  );
+	      exit();            
 	    }
 	//Consulta puntual
 	}elseif(isset($_GET['usuario']) and isset($_GET['id_challenge']) and isset($_GET['usuario_challenge']))
@@ -190,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			else
 			{
 				$ind_like ="0";
-			}   	        
+			} 
 	        $evento = "Consulta los challenges subidos por los alumnos del curso" ;
 
 			$respuesta['usuario']           = $challenges['usuario'];
@@ -201,31 +202,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			$respuesta['detalle_curso']     = $curso['detalle_curso'];
 			$respuesta['detalle_challenge'] = $challenge_curso['detalle_challenge'];
 			$respuesta['url_challenge']     = $challenges['url_contenido'];
-			$respuesta['fechahora']         = "2020-01-25 14:24:54";
+			$respuesta['fechahora']         = $challenges['fecha'];
 			$respuesta['total_likes']       = $challenges['total_likes'];
 			$respuesta['total_comentarios'] = $challenges['total_comentarios'];
 			$respuesta['ind_like']          = $ind_like;          
 
 	        header("HTTP/1.1 200 OK");
 	        echo json_encode($respuesta);
-
+	        
 	      }catch (Exception $e){
 	        $e->getMessage();          
-	        $respuesta['resultado']="ERROR-PUTO!!";
+	        $respuesta['resultado']="ERROR";
 	        $respuesta['mensaje']=$e;
-	        echo json_encode(  $respuesta  );      
+	        echo json_encode(  $respuesta  );
+	        exit();   
 	      }
 	    }else{
 	      $respuesta['resultado']="ERROR";
 	      $respuesta['mensaje']="Debe completar el id_categoría y usuario";
-	      echo json_encode(  $respuesta  );               
+	      echo json_encode(  $respuesta  );
+	      exit();             
 	    }
 	}elseif(!isset($_GET['usuario']) and !isset($_GET['id_curso']) and isset($_GET['id_challenge']))
 	{   
 		$usuario="";
-	  $evento="";
-	  // input: id_challenge
-	  // Traerá todos los que existen para ese challenge en particular
+		$evento="";
+		// input: id_challenge
+		// Traerá todos los que existen para ese challenge en particular
 	    if(!empty($_GET['id_challenge'])) // Si el campo no está vacío
 	    {
 	      try{
@@ -267,12 +270,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	        $e->getMessage();          
 	        $respuesta['resultado']="ERROR";
 	        $respuesta['mensaje']=$e;
-	        echo json_encode(  $respuesta  );      
+	        echo json_encode(  $respuesta  );
+	        exit();      
 	      }
 	    }else{
 	      $respuesta['resultado']="ERROR";
 	      $respuesta['mensaje']="Debe completar el id_challenge";
-	      echo json_encode(  $respuesta  );               
+	      echo json_encode(  $respuesta  ); 
+	      exit();              
 	    }
 
 	}elseif(isset($_GET['administrador']))
@@ -314,17 +319,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			exit();
 		}		
 	  
-	}elseif(isset($_GET['cantidad_challenge']) ){
+	}elseif(isset($_GET['cantidad_challenge']) )
+	{
 		//input: cantidad_challenge
-		//Devuelve los últimos challenge cargados
-		//input: administrador
-		//Devuelve todos los challenge que no estén aprobados
+		//Devuelve los últimos challenge cargados, conforme a un parámetro
 		$cantidad_challenge = $_GET['cantidad_challenge'];
 		try{
-			$ind_aprobado = "N";
+			$ind_aprobado = "S";			
 			$sql = $dbConn->prepare("SELECT * FROM challenge_alumno where ind_aprobado = :ind_aprobado
-				order by ");
-			$sql->bindValue(':ind_aprobado', $ind_aprobado);
+				order by fecha DESC LIMIT $cantidad_challenge");
+			$sql->bindValue(':ind_aprobado', $ind_aprobado);			
 			$sql->execute();
 			$sql->setFetchMode(PDO::FETCH_ASSOC);
 			$challenges = $sql->fetchAll();
@@ -333,8 +337,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 			foreach($challenges as $row)
 			{
-			  //Busca que el usuario haya puesto like
-
 				$item = array(
 					'id_curso'          => $row['id_curso'],
 					'id_challenge'      => $row['id_challenge'],
@@ -346,11 +348,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 
 			header("HTTP/1.1 200 OK");
 			echo json_encode($respuesta);
-
+			
 		}catch (Exception $e){
 			$e->getMessage();          
 			$respuesta['resultado']="ERROR";
-			$respuesta['mensaje']=$e;
+			$respuesta['mensaje']= "puto " . $e;
 			echo json_encode(  $respuesta  );
 			exit();
 		}				
@@ -360,19 +362,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	if($evento != "" and $usuario != "") { 
 		if(isset($_GET['usuario']) and !empty($_GET['usuario']))
 		{
-		    date_default_timezone_set('America/Argentina/Buenos_Aires');
-		    $fecha_formateada = date("Y-m-d H:i:s",time());
-		      
-		    //Graba registro en tabla Log
-		    $sql = "INSERT INTO log 
-		    (fecha, evento, usuario)
-		    VALUES
-		    (:fecha, :evento, :usuario)";
-		    $statement = $dbConn->prepare($sql);     
-		    $statement->bindParam(':fecha', $fecha_formateada);
-		    $statement->bindParam(':evento', $evento);
-		    $statement->bindParam(':usuario', $usuario);          
-		    $statement->execute();
+			registroLog($db, $evento, $usuario);
 		}
 	}   
 	exit();
@@ -476,6 +466,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 				  exit();   
 				}elseif($fila_consulta)
 				{
+					date_default_timezone_set('America/Argentina/Buenos_Aires');
+					$fecha_formateada = date("Y-m-d H:i:s",time());
 					try
 					{
 						$ind_completo = "1";
@@ -484,12 +476,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 							'id_challenge' => $input['id_challenge'],
 							'usuario'      => $input['usuario_challenge'],
 							'ind_completo' => $ind_completo,
+							'fecha'        => $fecha_formateada,
 							'url_contenido'=> $input['url_contenido'],
 							'ind_aprobado' => $ind_aprobado,      
 						];
 						$sql = "UPDATE challenge_alumno 
-						SET ind_completo = :ind_completo, url_contenido = :url_contenido,
-							ind_aprobado = :ind_aprobado
+						SET ind_completo = :ind_completo, fecha = :fecha,
+							url_contenido = :url_contenido,	ind_aprobado = :ind_aprobado
 						WHERE id_challenge = :id_challenge and usuario = :usuario";
 						$statement = $dbConn->prepare($sql);     
 						$statement->execute($data);
@@ -544,17 +537,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 					try
 					{
 
-					  $data=[
-					    'id_challenge' => $input['id_challenge'],					    
-					    'usuario'      => $input['usuario_challenge'],
-					    'ind_aprobado' => $input['ind_aprobado'],
-					    'aprobador'	   => $usuario,		            
-					  ];
-					  $sql = "UPDATE challenge_alumno 
-					  SET ind_aprobado = :ind_aprobado, aprobador = :aprobador
-					  WHERE id_challenge = :id_challenge and usuario = :usuario";
-					  $statement = $dbConn->prepare($sql);     
-					  $statement->execute($data); 
+						$data=[
+							'id_challenge' => $input['id_challenge'],					    
+							'usuario'      => $input['usuario_challenge'],
+							'ind_aprobado' => $input['ind_aprobado'],
+							'aprobador'	   => $usuario,					    		            
+						];
+						$sql = "UPDATE challenge_alumno 
+						SET ind_aprobado = :ind_aprobado, aprobador = :aprobador
+						WHERE id_challenge = :id_challenge and usuario = :usuario";
+						$statement = $dbConn->prepare($sql);     
+						$statement->execute($data);
+
+					  //Se busca el id_curso
+						$sql = $dbConn->prepare("SELECT * FROM challenge_alumno
+								 WHERE id_challenge = :id_challenge and usuario = :usuario");
+						$sql->bindValue(':id_challenge', $input['id_challenge']);
+						$sql->bindValue(':usuario', $input['usuario_challenge']);
+						$sql->execute();
+						$fila_challenge = $sql->fetch(PDO::FETCH_ASSOC);
+						$ind_completo=1;
+						$data=[
+							'id_curso'     => $fila_challenge['id_curso'],					    
+							'usuario'      => $input['usuario_challenge'],
+							'ind_completo' => $ind_completo,	            
+						];
+						$sql = "UPDATE curso_alumno 
+						SET ind_completo = :ind_completo
+						WHERE id_curso = :id_curso and usuario = :usuario";
+						$statement = $dbConn->prepare($sql);     
+						$statement->execute($data);
+
+
+
 					}catch(Exception $e)
 					{
 					  $e->getMessage();          
@@ -618,15 +633,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 			//Graba registro en tabla Log
 			try
 			{
-				$sql = "INSERT INTO log 
-				(fecha, evento, usuario)
-				VALUES
-				(:fecha, :evento, :usuario)";
-				$statement = $dbConn->prepare($sql);  
-				$statement->bindParam(':fecha', $fecha_formateada);
-				$statement->bindParam(':evento', $evento);
-				$statement->bindParam(':usuario', $usuario);          
-				$statement->execute();
+				registroLog($db, $evento, $usuario);
 				$respuesta['resultado']="OK";
 				$respuesta['mensaje']="";    
 				echo json_encode($respuesta);

@@ -68,12 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         }   
 
         //Cursos pendientes por el usuario
+        $ind_completo=0;
         $sql = $dbConn->prepare("SELECT c.id_curso, c.nombre_curso, cont.url_imagen
             FROM curso_alumno ca
             INNER JOIN cursos c ON ca.id_curso = c.id_curso
             INNER JOIN contenido_curso cont ON ca.id_curso = cont.id_curso
-            WHERE ca.usuario = :usuario and ca.ind_completo = 0");
-        $sql->bindValue(':usuario', $usuario);        
+            WHERE ca.usuario = :usuario and ca.ind_completo = :ind_completo");
+        $sql->bindValue(':usuario', $usuario);
+        $sql->bindValue(':ind_completo', $ind_completo);     
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
         $cursos = $sql->fetchAll();
@@ -95,8 +97,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
         }   
 
 		//Busca los desafíos subidos por el usuario
-		$sql = $dbConn->prepare("SELECT id_curso, id_challenge, url_contenido from challenge_alumno where usuario = :usuario");
-		$sql->bindValue(':usuario', $usuario);        
+        $ind_completo=1;
+		$sql = $dbConn->prepare("SELECT id_curso, id_challenge, url_contenido from challenge_alumno 
+                                where usuario = :usuario and ind_completo = :ind_completo");
+		$sql->bindValue(':usuario', $usuario);
+        $sql->bindValue(':ind_completo', $ind_completo);
 		$sql->execute();
 		$sql->setFetchMode(PDO::FETCH_ASSOC);
 		$challenges = $sql->fetchAll();

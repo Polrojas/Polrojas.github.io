@@ -18,41 +18,37 @@ Vue.component('recorrido',{
     <section class="section-curso">
     <main>
       <div v-for="(contenido,index) in contenidos" :key="index" class="cont" :style="[contenido.styleObject]">
-          <div v-if="contenido.id_contenido" class="card" v-on:click="verVideo(contenido)" style="border:0px;cursor: pointer; border-radius: 15px" >
-              <img class="card-img contenido-image" :src="contenido.url_imagen" style="border-radius:10px;" alt="Card image">
-              <img v-if="contenido.porcentaje_avance!=100"  class="card-img-dark" src="admin/images/imagen-video-dark.svg" alt="Card image">
-              <img v-if="contenido.porcentaje_avance==100" class="card-img-dark" src="admin/images/imagen-video-hecho.svg" alt="Card image">                  
-              <div class="card-body">
-                  <h4 class="titulo-video" :style="estilos.tituloStyle">{{contenido.nombre_contenido}}</h4>
-                  <h5 class="card-text" :style="estilos.tituloStyle">{{contenido.porcentaje_avance}}%</h5>
-                  <img v-if="index%2 == 0" :src="'admin/images/contenido'+index+'.svg'"  width="100px"  style="float:left;margin-left:-40px;margin-bottom:-40px; margin-top:-100px" alt="Arkidia" />
-                  <img v-if="index%2 != 0" :src="'admin/images/contenido'+index+'.svg'"  width="100px"  style="float:right;margin-right:-40px;margin-bottom:-40px; margin-top:-100px" alt="Arkidia" />
-              </div>
-            </div>
+        <div v-if="contenido.id_contenido" class="card"  style="border:0px; border-radius: 15px" >
+          <img class="card-img contenido-image" :src="contenido.url_imagen" style="border-radius:10px;" alt="Card image">
+          <img v-on:click="verVideo(contenido)" v-if="contenido.porcentaje_avance!=100 && contenido.url_contenido != 'NULL' "  style="cursor: pointer" class="card-img-dark" src="admin/images/imagen-video-dark.svg" alt="Card image">
+          <img v-on:click="verVideo(contenido)" v-if="contenido.porcentaje_avance==100 && contenido.url_contenido != 'NULL' "  style="cursor: pointer" class="card-img-dark" src="admin/images/imagen-video-hecho.svg" alt="Card image">                  
+          <div class="card-body">
+            <h4 class="titulo-video" :style="estilos.tituloStyle">{{contenido.nombre_contenido}}</h4>
+            <h5 v-if="contenido.url_contenido != 'NULL'" class="card-text" :style="estilos.tituloStyle">{{contenido.porcentaje_avance}}%</h5>
+            <img v-if="index%2 == 0" :src="'admin/images/contenido'+index+'.svg'"  width="100px"  style="float:left;margin-left:-40px;margin-bottom:-40px; margin-top:-100px" alt="Arkidia" />
+            <img v-if="index%2 != 0" :src="'admin/images/contenido'+index+'.svg'"  width="100px"  style="float:right;margin-right:-40px;margin-bottom:-40px; margin-top:-100px" alt="Arkidia" />
+          </div>
+        </div>
   
-            <div v-if="contenido.id_challenge" class="card" style="border:0px;border-radius: 15px;" >
-
-              <div class="image-upload" v-if="contenido.ind_completo == 0">
-                <label for="file-input" style="display:block;cursor:pointer">
-                  <img src="admin/images/imagen-challenge-dark.svg"  alt="Card image">                
-                </label>
-                <input type="file" accept="image/*" @change="uploadImage($event,contenido)" id="file-input">
-              </div>
-
-
-
-                <img v-if="contenido.ind_completo == 1" @click="verChallenge(contenido)"  class="card-img" :src="contenido.url_contenido" style="border-radius:15px;cursor: pointer;" alt="Card image">
-                
-                <div class="card-body">
-                    <h4 v-if="contenido.ind_completo == 0" class="subtitulo " :style="estilos.tituloStyle">{{contenido.detalle_challenge}}</h4>
-                    <h4 v-if="contenido.ind_completo == 1" class="subtitulo " :style="estilos.tituloStyle">{{contenido.nombre_challenge}}</h4>
-
-               
-               
-               
-                    </div>
-              </div>
-            </div>
+        <div v-if="contenido.id_challenge" class="card" style="border:0px;border-radius: 15px;" @click="seleccionaChallenge(contenido.id_challenge)">
+          <div v-if="contenido.ind_completo == 0" class="image-upload">
+            <label :for="'file-input'+index" style="display:block;cursor:pointer">
+              <img src="admin/images/imagen-challenge-dark.svg"  alt="Card image">                
+            </label>
+            <input type="file" accept="image/*"  @change="uploadImage($event,contenido)" :id="'file-input'+index">
+          </div>
+          <img v-if="contenido.ind_completo == 1 && contenido.ind_aprobado == 'N'"  class="card-img-dark" src="images/site/pending.svg" alt="Card image">                  
+          <img v-if="contenido.ind_completo == 1 && contenido.ind_aprobado == 'N'"  class="card-img" :src="contenido.url_contenido" style="border-radius:15px;" alt="Card image">
+          <img v-if="contenido.ind_completo == 1 && contenido.ind_aprobado == 'S'" @click="verChallenge(contenido)"  class="card-img" :src="contenido.url_contenido" style="border-radius:15px;cursor: pointer;" alt="Card image">
+          <img v-if="contenido.ind_aprobado == 'P'"  class="card-img" src="images/site/loading.gif" style="border-radius:15px;" alt="loading">
+  
+          <div class="card-body">
+            <h4 v-if="contenido.ind_completo == 0" class="subtitulo " :style="estilos.tituloStyle">{{contenido.detalle_challenge}}</h4>
+            <h4 v-if="contenido.ind_completo == 1" class="subtitulo " :style="estilos.tituloStyle">{{contenido.nombre_challenge}}</h4>
+          </div>
+          
+        </div>
+      </div>
     </main>
     </section>
   </div>
@@ -91,6 +87,8 @@ Vue.component('recorrido',{
 
 
     uploadImage(event, contenido) {
+      console.log("contenidos")
+      console.log(contenido)
       const formData = new FormData();
       formData.append('imagen', event.target.files[0]);
 
@@ -99,18 +97,14 @@ Vue.component('recorrido',{
         body: formData,
         };
         contenido.ind_completo = 1
-        contenido.url_contenido = "images/site/subiendo.svg"
+        contenido.ind_aprobado = "P"
 
     fetch("ApiRes/imagen.php", options)
     .then(function(res){ return res.json(); })
     .then(function(data){ 
-
         contenido.url_contenido = data.url
-        console.log("termino de subir")
-        console.log(data)
-
+        contenido.ind_aprobado = "N"
         bodyApi = "imagen="+data.url+"&id_curso="+sessionStorage.idCurso+"&id_challenge="+contenido.id_challenge+"&usuario_challenge=" +sessionStorage.loggedUser,
-        console.log(bodyApi)
         fetch("ApiRes/challenge_alumno.php", {
           method: 'POST',
           body: bodyApi,
@@ -173,9 +167,10 @@ Vue.component('recorrido',{
         }
      })
 
-
-
-
+    },
+    seleccionaChallenge(contenido){
+      console.log("seleccionaChallenge")
+      console.log(contenido)
 
     },
     buscarInscripcion() {
@@ -208,7 +203,7 @@ Vue.component('recorrido',{
               
               console.log(this.contenidos[i])
               this.contenidos[i].styleObject = { color: "#ffffff" }
-              console.log(this.categoria.colo)
+              console.log(this.categoria.color)
             }else{
             this.contenidos[i].styleObject = { color: "#ffffff66" }
           }
@@ -255,11 +250,18 @@ Vue.component('challenges',{
     </div>
 
     <div class="container">
+
+        <div v-if="desafios.length==0">
+          <h4 class="card-title subtitulo" style="color:white">¡Subí el primer desafío para este curso!</h4>
+          <img src="images/site/subir-challenge.svg" style="max-width:300px" id="challenges" alt="sin actividad"/>
+        </div>
+
+
         <div class="row" style="justify-content: center">
           <div v-for="desafio in desafios" :key="desafio.id">
             <div class="card card-curso"  style="cursor: pointer">
               <div >
-                  <img :src="desafio.url_contenido" @click="verChallenge(desafio)" class="card-img" alt="categoria">
+                  <img :src="desafio.url_contenido" @click="verChallenge(desafio)" class="card-img" style="border-radius:15px" alt="categoria">
                 <h4 class="subtitulo">{{desafio.alias}} </h4> 
 
               </div>
@@ -357,6 +359,7 @@ Vue.component('challenges',{
       )
         .then(response => response.json())
         .then(data => {
+          console.log("Desafios")
           console.log(data)
           this.desafios = data
           
@@ -397,6 +400,19 @@ var app = new Vue({
     },
     methods:{
       buscarCategorias(){
+        fetch(
+          "ApiRes/cursos.php?id_curso=" + sessionStorage.idCurso
+        )
+          .then(response => response.json())
+          .then(data => {
+            sessionStorage.idCategoria = data.id_categoria
+
+
+          });
+
+          console.log("Categoria: " + sessionStorage.idCategoria)
+
+
         fetch(
           "ApiRes/categorias.php?usuario=" + sessionStorage.loggedUser +"&id_categoria="+sessionStorage.idCategoria
         )

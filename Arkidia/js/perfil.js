@@ -1,20 +1,32 @@
 Vue.component('challenge',{
     template:`
     <div style="text-align: center">
-    <svg class="circle-chart" style="position:absolute; z-index:1;" viewbox="0 0 33.83098862 33.83098862"
-        width="200" height="200" xmlns="http://www.w3.org/2000/svg">
 
-        <circle class="circle-chart__circle" :stroke-dasharray="porcentaje" stroke="#00acc1" stroke-width="8"
-            stroke-linecap="round" fill="none" cx="100" cy="100" r="95" />
+    <div class="row" style="justify-content: center; background:#ececec; border-radius:15px; margin:40px" >
+      <div class="card perfil-nivel">
+      <svg class="circle-chart" style="overflow:visible; position:absolute; z-index:1;" viewbox="0 0 33.83098862 33.83098862"
+      width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+      <circle class="circle-chart__circle" :stroke-dasharray="porcentajeTotal" stroke="#ffffff" stroke-width="20"
+          stroke-linecap="round" fill="none" cx="100" cy="100" r="95" />
+      <circle class="circle-chart__circle" :stroke-dasharray="porcentaje" stroke="#02a0d0" stroke-width="10"
+          stroke-linecap="round" fill="none" cx="100" cy="100" r="95" />
 
-    </svg>
-    <img :src="perfil.avatar" style="background-color:grey; border-radius:50%; width:200px"
-        class="img img-rounded img-fluid" />
+  </svg>
+  <img :src="perfil.avatar" style="background-color:#e0e0e0; border-radius:50%; width:200px; padding:20px"
+      class="img img-rounded img-fluid" />
+      </div>
 
-    <h5 class="titulo">{{perfil.alias}}</h5>
-    <p>puntos: {{perfil.puntos}}</p>
-    <p>nivel: {{perfil.nivel}}</p>
-    <p>(te faltan {{perfil.puntos_nivel - perfil.puntos}} más para el próximo nivel)</p>
+
+      <div class="card perfil-nivel">
+    <h5 class="titulo" style="display:block">{{perfil.alias}}</h5>
+    <p style="margin:0px">nivel</p>
+    <p class="subtitulo" style="font-size:18px">{{perfil.nivel}}</p>
+    <p style="margin:0px">completado</p>
+    <p class="subtitulo" style="font-size:18px">puntos: {{perfil.puntos}} / {{perfil.puntos_nivel}}  </p>
+
+      </div>
+  </div>
+
 
 
 
@@ -22,15 +34,24 @@ Vue.component('challenge',{
     background-color: #ececec;
     padding-top: 0px;
     padding-bottom: 30px;
-    margin-left: 20px;
-    margin-right: 20px;">
-    <h1 class="titulo">En progreso</h1>
+    margin-left: 40px;
+    margin-right: 40px;
+    border-radius:15px;">
+    <h1 class="titulo" style="padding-top:50px; margin-top:50px">En progreso</h1>
 
     <div class="container">
+
+    <div v-if="cursos_pendientes.length == 0" style="margin-top:30px">
+    <h4 class="card-title subtitulo">No hay actividades en progreso</h4>
+    <img src="images/site/no-progress.svg" style="max-width:300px" id="challenges" alt="sin actividad"/>
+  </div>
+
       <div class="row" style="justify-content: center" >
-        <div v-for="progreso in perfil.cursos_pendientes" :key="progreso.idCurso"  @click="accederCurso(progreso)">
+        <div v-for="progreso in cursos_pendientes" :key="progreso.idCurso"  >
           <div class="card categoria">
-            <img :src="progreso.url_imagen" width="250px" alt="Imagen" />
+            <img v-if="typeUser == 'HIJO'" @click="accederCurso(progreso)" :src="progreso.url_imagen" width="250px"  style="border-radius:15px; cursor:pointer" alt="Imagen" />
+            <img v-if="typeUser == 'PADRE'" :src="progreso.url_imagen" width="250px"  style="border-radius:15px" alt="Imagen" />
+
             <div class="card-body">
               <p >{{ progreso.nombre_curso }}</p>
             </div>
@@ -48,15 +69,24 @@ Vue.component('challenge',{
   background-color: #ececec;
   padding-top: 0px;
   padding-bottom: 30px;
-  margin-left: 20px;
-  margin-right: 20px;">
-  <h1 class="titulo">Desafíos subidos</h1>
+  margin-left: 40px;
+  margin-right: 40px;
+  border-radius:15px;">
+  <h1 class="titulo" style="padding-top:50px; margin-top:50px">Desafíos subidos</h1>
 
   <div class="container">
+
+  <div v-if="desafios_subidos.length == 0" style="margin-top:30px">
+  <h4 class="card-title subtitulo">Aún no hay desafíos subidos</h4>
+  <img src="images/site/no-challenge.svg" style="max-width:300px" id="challenges" alt="sin actividad"/>
+</div>
+
+
     <div class="row" style="justify-content: center" >
-      <div v-for="desafio in perfil.desafios_subidos" @click="accederDesafio(desafio.id_challenge)">
+      <div v-for="desafio in desafios_subidos" >
         <div v-if="desafio.url_contenido>''" class="card categoria">
-          <img :src="desafio.url_contenido" width="250px" alt="Imagen" />
+          <img v-if="typeUser == 'HIJO'" @click="accederDesafio(desafio.id_challenge)" :src="desafio.url_contenido" width="250px"  style="border-radius:15px; cursor:pointer" alt="Imagen" />
+          <img v-if="typeUser == 'PADRE'"  :src="desafio.url_contenido" width="250px"  style="border-radius:15px" alt="Imagen" />
 
         </div>
       </div>
@@ -70,14 +100,27 @@ Vue.component('challenge',{
     background-color: #ececec;
     padding-top: 0px;
     padding-bottom: 30px;
-    margin-left: 20px;
-    margin-right: 20px;">
-    <h1 class="titulo">Finalizados</h1>
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    border-radius:15px;
+    ">
+    <h1 class="titulo" style="padding-top:50px; margin-top:50px">Finalizados</h1>
     <div class="container">
+
+    <div v-if="cursos_hechos.length == 0" style="margin-top:30px">
+    <h4 class="card-title subtitulo">No hay actividades finalizadas</h4>
+    <img src="images/site/no-finished.svg" style="max-width:300px" id="challenges" alt="sin actividad"/>
+  </div>
+  
+
+    
       <div class="row" style="justify-content: center" >
-        <div v-for="progreso in perfil.cursos_hechos" :key="progreso.idCurso"  @click="accederCurso(progreso)">
+        <div v-for="progreso in cursos_hechos" :key="progreso.idCurso"  >
           <div class="card categoria">
-            <img :src="progreso.url_imagen" width="250px" alt="Imagen" />
+            <img v-if="typeUser == 'HIJO'" :src="progreso.url_imagen" @click="accederCurso(progreso)" width="250px" style="border-radius:15px; cursor:pointer" alt="Imagen" />
+            <img v-if="typeUser == 'PADRE'" :src="progreso.url_imagen" width="250px" style="border-radius:15px" alt="Imagen" />
+
             <div class="card-body">
               <p >{{ progreso.nombre_curso }}</p>
             </div>
@@ -106,7 +149,12 @@ Vue.component('challenge',{
           categoria:"",
           tituloStyle:"",
           perfil:"",
-          porcentaje: "10,100"
+          desafios_subidos:[],
+          cursos_pendientes:[],
+          cursos_hechos:[],
+          porcentaje: "10,100",
+          porcentajeTotal: "",
+          typeUser:"",
 
         }
     },
@@ -127,9 +175,14 @@ Vue.component('challenge',{
           .then(response => response.json())
           .then(data => {
               this.perfil = data
+              this.desafios_subidos = data.desafios_subidos
+              this.cursos_pendientes = data.cursos_pendientes
+              this.cursos_hechos = data.cursos_hechos
               this.porcentaje = "400,600"
+              this.porcentajeTotal = "600,600"
               this.porcentaje = ((this.perfil.puntos /this.perfil.puntos_nivel)*600)+",600"
-              console.log(this.porcentaje)
+              
+              console.log("porcentaje" + this.porcentaje)
               console.log(data)
 
           });
@@ -150,6 +203,7 @@ Vue.component('challenge',{
     computed:{  
     },
     mounted: function(){
+      this.typeUser = sessionStorage.typeUser
       this.buscarPerfil();
 
     }

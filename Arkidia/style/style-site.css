@@ -305,6 +305,39 @@ h2 {
 
 }
 
+.index-kids{
+  background-image: url(../images/site/index-background.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  text-align: -webkit-center;
+  display:table;
+  position:relative;
+  width:100%;
+
+}
+
+.index-other{
+  background-image: url(../images/site/index-other-background.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  text-align: -webkit-center;
+  display:table;
+  position:relative;
+  width:100%;
+
+}
+
+.profile-background{
+  background-image: url(../images/site/profile-background.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  text-align: -webkit-center;
+  display:table;
+  position:relative;
+  width:100%;
+
+}
+
 
 #restricted{
   background-image: url(../images/site/background-stop.svg);
@@ -369,6 +402,7 @@ h2 {
 
 }
 
+
 .categoria:hover{
   box-shadow: -1px 11px 16px 1px rgba(0,0,0,0.32);
   transition: 0.2s;
@@ -377,12 +411,119 @@ h2 {
 
 }
 
-.sombra{
+.sugerir-arkidian{
+  margin:10px;
+  border-radius: 15px !important; 
+  border: 0px !important;
+  width: 150px;
+  align-items: center;
+  transition: 0.2s;
+  z-index: 0;
+
+}
+
+.sugerir-arkidian:hover{
   box-shadow: -1px 11px 16px 1px rgba(0,0,0,0.32);
+  transition: 0.2s;
+  transform: scaleX(1.1) scaleY(1.1);
+  z-index: 1;
 
 }
 
 
+.sugerir-arkidian-hecho{
+  margin:10px;
+  border-radius: 15px !important; 
+  border: 0px !important;
+  width: 150px;
+  align-items: center;
+  transition: 0.2s;
+  z-index: 0;
+
+}
+
+.sugerir-arkidian-hecho:hover{
+  transition: 0.2s;
+  transform: scaleX(1) scaleY(1);
+  z-index: 1;
+
+}
+
+.sombra{
+  box-shadow: -1px 11px 16px 1px rgba(0,0,0,0.32);
+
+}
+.perfil-nivel{
+  border : 0px !important;
+  border-radius:15px !important;
+  padding:30px;
+  background-color: #fff0 !important
+
+}
+
+p.bubble {
+	position: relative;
+	font-size: 10px !important;
+	text-align: center;
+	line-height: 1.4em;
+  margin-top: -115px;
+  margin-bottom:81px;
+	background-color: #c7dfdc;
+	border-radius: 30px;
+	font-family: sans-serif;
+	padding: 10px;
+	font-size: large;
+}
+
+p.thought {
+	width: 300px;
+	border-radius: 200px;
+	padding: 30px;	
+}
+
+p.bubble:before,
+p.bubble:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+p.speech:before {
+	left: 30px;
+	bottom: -50px;
+	border-color: #333 transparent transparent #333;
+}
+
+p.speech:after {
+	left: 38px;
+	bottom: -20px;
+	border: 15px solid;
+	border-color: #c7dfdc transparent transparent transparent;
+}
+
+p.thought:before,
+p.thought:after {
+	left: 10px;
+	bottom: -30px;
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	border: 8px solid #333;
+	-webkit-border-radius: 28px;
+	-moz-border-radius: 28px;
+	border-radius: 28px;
+}
+
+p.thought:after {
+	width: 20px;
+	height: 20px;
+	left: 5px;
+	bottom: -40px;
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+}
 
 .card-curso{
   margin:30px;
@@ -393,6 +534,17 @@ h2 {
   transition: 0.2s;
   z-index: 0;
 }
+
+.card-desafio{
+  margin:10px;
+  border-radius: 15px !important; 
+  border: 0px !important;
+  width: 150px;
+  align-items: center;
+  transition: 0.2s;
+  z-index: 0;
+}
+
 .card-curso-image{
   border-radius:10px;
   width:400px;
@@ -413,6 +565,14 @@ h2 {
 
 
 .card-curso:hover{
+  box-shadow: -1px 11px 16px 1px rgba(0,0,0,0.32);
+  transition: 0.2s;
+  transform: scaleX(1.1) scaleY(1.1);
+  z-index: 1;
+
+}
+
+.card-desafio:hover{
   box-shadow: -1px 11px 16px 1px rgba(0,0,0,0.32);
   transition: 0.2s;
   transform: scaleX(1.1) scaleY(1.1);

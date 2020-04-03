@@ -18,7 +18,7 @@ Vue.component('challenge',{
     </div>
   </div>
 
-    <img :src="desafio.url_challenge" style="width:90%; margin-left:5%" >
+    <img :src="desafio.url_challenge" style="width:90%; margin-left:5%; border-radius:15px" >
 
 <div style="width:90%; margin-left:5%; margin-top:20px">
   <img v-if="desafio.ind_like==0" src="images/site/likes.svg" @click="darLike(desafio)" style="width:25px;" alt="curso.nombre">

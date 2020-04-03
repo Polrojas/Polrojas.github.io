@@ -1,4 +1,6 @@
 <?php
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
   include "config.php";
   //Abrir conexion a la base de datos
   function connect($db)
@@ -20,10 +22,35 @@
     return $query;
   }
 
+  function registroLog($db, $evento, $usuario){
+    $dbConn =  connect($db); 
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $fecha_formateada = date("Y-m-d H:i:s",time());    
+    //Graba registro en tabla Log
+    try{
+      $sql = "INSERT INTO log 
+            (fecha, evento, usuario)
+            VALUES
+            (:fecha, :evento, :usuario)";
+      $statement = $dbConn->prepare($sql);  
+      $statement->bindParam(':fecha', $fecha_formateada);
+      $statement->bindParam(':evento', $evento);
+      $statement->bindParam(':usuario', $usuario);          
+      $statement->execute();
+    }catch(Exception $e)
+    {
+      $e->getMessage();          
+      $respuesta['resultado']="ERROR";
+      $respuesta['mensaje']="log ".$e;
+      echo json_encode(  $respuesta  );
+      exit();
+    }         
+  }
+
   function cursoCompleto($db, $id_curso, $usuario){
     $dbConn =  connect($db); 
     $sql = $dbConn->prepare("SELECT * FROM contenido_alumno 
-                                                WHERE id_curso = :id_curso AND usuario = :usuario");
+                              WHERE id_curso = :id_curso AND usuario = :usuario");
     $sql->bindValue(':id_curso', $id_curso);
     $sql->bindValue(':usuario', $usuario);
     $sql->execute();
@@ -106,7 +133,35 @@
     }
     return $statement;
    }
-
+  //Generación aleatoria 
+  function claveAleatoria(){
+  //$longitud, $opcLetra, $opcNumero, $opcMayus, $opcEspecial, $longitud_min, $longitud_max){  
+    $opc_letras = FALSE; //  FALSE para quitar las letras
+    $opc_numeros = TRUE; // FALSE para quitar los números
+    $opc_letrasMayus = FALSE; // FALSE para quitar las letras mayúsculas
+    $opc_especiales = FALSE; // FALSE para quitar los caracteres especiales   
+    $longitud = 8;    
+         
+    $letras ="abcdefghijklmnopqrstuvwxyz";
+    $numeros = "1234567890";
+    $letrasMayus = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $especiales ="|@#~$%()=^*+[]{}-_";
+    $listado = "";
+       
+    if ($opc_letras == TRUE) {$listado .= $letras; }
+    if ($opc_numeros == TRUE) {$listado .= $numeros; }
+    if($opc_letrasMayus == TRUE) {$listado .= $letrasMayus; }
+    if($opc_especiales == TRUE) {$listado .= $especiales; }
+     
+    str_shuffle($listado); //baraja una cadena. Es creada una permutación de todas las posibles.
+    $password=array();
+    for( $i=0; $i<$longitud; $i++) {
+      str_shuffle($listado);
+      $password[$i] = $listado[rand(0,strlen($listado))];      
+    }
+    //devuelve un array con la clave nueva
+    return $password;
+  }
 //*******************************//
 //VALIDA CLAVE EN LA REGISTRACION//
 //*******************************//
@@ -176,12 +231,189 @@ function comprobar_email($email){
       return 0;
 }
 
-
-
 function calculaEdad($nacimiento){
   $cumpleanos = new DateTime($nacimiento);
   $hoy = new DateTime();
   $annos = $hoy->diff($cumpleanos);
   return $annos->y; 
+}
+
+function enviaCorreo($destinatario, $nombre){
+
+
+    require 'PHPMailer/Exception.php';
+    require 'PHPMailer/PHPMailer.php';
+    require 'PHPMailer/SMTP.php';
+    // Es el correo definido en SES.
+    $sender = 'polrojas@gmail.com';
+    $senderName = 'polrojas@gmail.com';
+
+    
+    // Es correo del destinatario
+    $recipient = $destinatario;
+
+    // SES SMTP user name.
+    $usernameSmtp = 'AKIAVBAXSKP7CR4RICAV';
+
+    // SES SMTP password.
+    $passwordSmtp = 'BGiptBA8WSpVFay5ttRhMfPteyB9nIDKQOIhHlXdolXo';
+
+    // Cofiguración del correo.
+    $configurationSet = 'ConfigSet';
+
+    // Region del servidor SES
+    $host = 'email-smtp.us-east-1.amazonaws.com';
+    $port = 587;
+
+    // Asunto
+    $subject = 'Recupero de clave de usuario';
+
+    // The plain-text body of the email
+    $bodyText =  "Casi que no lo puedo creer.";
+
+    // El formato HTML body del email
+
+
+    $bodyHtml = 
+        "
+        <h3>Hola, <b> $nombre </b>.</h3><br>
+            
+        Podrás registrar tu nueva contraseña a la ruta que te indicamos a continuación:
+        <a href=http://ec2-35-173-152-223.compute-1.amazonaws.com/formCambioClave.html>
+        https://arkidia.com.ar/formCambioClave.html
+        </a><br>
+        Una vez dentro, podrás modificar esta contraseña que te hemos asignado por otra que prefieras     para tu usuario.
+        <br><br>
+        Atentamente, El equipo de Arkidia.<br>
+        <a href=http://ec2-35-173-152-223.compute-1.amazonaws.com>
+        https://arkidi.com.ar
+        </a><br>
+        <img src=http://ec2-35-173-152-223.compute-1.amazonaws.com/images/logo.png alt=Logo Arkidia
+        width=100 height=auto>    
+        ";
+
+    $mail = new PHPMailer(); 
+
+    try {
+        // Configuración del SMTP.
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->setFrom($sender, $senderName);
+        $mail->Username   = $usernameSmtp;
+        $mail->Password   = $passwordSmtp;
+        $mail->Host       = $host;
+        $mail->Port       = $port;
+        $mail->SMTPAuth   = true;
+        $mail->SMTPSecure = 'tls';
+        //$mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet);
+
+        // Destinatario del correo.
+        $mail->addAddress($recipient);
+        // You can also add CC, BCC, and additional To recipients here.
+
+        // Especificación del mensaje.
+        $mail->isHTML(true);
+        $mail->charset    = "UTF-8";
+        $mail->Subject    = $subject;
+        $mail->Body       = $bodyHtml;      
+        $mail->AltBody    = $bodyText;        
+        $mail->Send();
+
+
+    } catch (phpmailerException $e) {
+        echo "An error occurred. {$e->errorMessage()}", PHP_EOL; //Catch errors from PHPMailer.
+    } catch (Exception $e) {
+        echo "Email not sent. {$mail->ErrorInfo}", PHP_EOL; //Catch errors from Amazon SES.
+    }
+
+}
+
+function enviaClave($destinatario, $nombre, $clave){
+
+
+    require 'PHPMailer/Exception.php';
+    require 'PHPMailer/PHPMailer.php';
+    require 'PHPMailer/SMTP.php';
+    // Es el correo definido en SES.
+    $sender = 'polrojas@gmail.com';
+    $senderName = 'polrojas@gmail.com';
+
+    
+    // Es correo del destinatario
+    $recipient = $destinatario;
+
+    // SES SMTP user name.
+    $usernameSmtp = 'AKIAVBAXSKP7CR4RICAV';
+
+    // SES SMTP password.
+    $passwordSmtp = 'BGiptBA8WSpVFay5ttRhMfPteyB9nIDKQOIhHlXdolXo';
+
+    // Cofiguración del correo.
+    $configurationSet = 'ConfigSet';
+
+    // Region del servidor SES
+    $host = 'email-smtp.us-east-1.amazonaws.com';
+    $port = 587;
+
+    // Asunto
+    $subject = 'Recupero de clave de usuario';
+
+    // The plain-text body of the email
+    $bodyText =  "Casi que no lo puedo creer.";
+
+    // El formato HTML body del email
+
+
+    $bodyHtml = 
+        "
+        <h3>Hola, <b> $nombre </b>.</h3><br>
+            
+        Para confirmar la modificación solicitada, tenés que ingresar el código que se indica a continuación en el formulario antes que sea inhabilitada a las 24 hs.<br><br>
+
+        <div align = center; border= 1px solid #369; padding = 5px;>
+          <h3>$clave</h3>
+        </div> <br><br>
+        Atentamente, El equipo de Arkidia.<br>
+        <a href=http://ec2-35-173-152-223.compute-1.amazonaws.com>
+        https://arkidi.com.ar
+        </a><br>
+        <img src=http://ec2-35-173-152-223.compute-1.amazonaws.com/images/logo.png alt=Logo Arkidia
+        width=100 height=auto>    
+        ";
+
+    $mail = new PHPMailer(); 
+
+    try {
+        // Configuración del SMTP.
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->setFrom($sender, $senderName);
+        $mail->Username   = $usernameSmtp;
+        $mail->Password   = $passwordSmtp;
+        $mail->Host       = $host;
+        $mail->Port       = $port;
+        $mail->SMTPAuth   = true;
+        $mail->SMTPSecure = 'tls';
+        //$mail->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet);
+
+        // Destinatario del correo.
+        $mail->addAddress($recipient);
+        // You can also add CC, BCC, and additional To recipients here.
+
+        // Especificación del mensaje.
+        $mail->isHTML(true);
+        $mail->charset    = "UTF-8";
+        $mail->Subject    = $subject;
+        $mail->Body       = $bodyHtml;      
+        $mail->AltBody    = $bodyText;        
+        $mail->Send();
+
+
+    } catch (phpmailerException $e) {
+        echo "An error occurred. {$e->errorMessage()}", PHP_EOL; //Catch errors from PHPMailer.
+    } catch (Exception $e) {
+        echo "Email not sent. {$mail->ErrorInfo}", PHP_EOL; //Catch errors from Amazon SES.
+    }
+
 }
 ?>

@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#app',
     data: {
         porcentaje: "10,100",
-
+      perfil:"",
       deleteHijo:'',
       apiCategorias:[],
       hijos:[],
@@ -35,13 +35,14 @@ var app = new Vue({
           body: formData,
           };
           contenido.ind_completo = 1
-          app.imagen = "images/site/subiendo.svg"
+          contenido.ind_aprobado = "P"
  
       fetch("ApiRes/imagen.php", options)
       .then(function(res){ return res.json(); })
       .then(function(data){ 
   
-          app.imagen = data.url
+          contenido.url_contenido = data.url
+          contenido.ind_aprobado = "N"
           console.log("termino de subir")
           console.log(data)
   
@@ -146,6 +147,7 @@ var app = new Vue({
                 app.curso.detalle = data.detalle_curso;
                 app.curso.ind_completo = data.ind_completo;
                 this.formatearContenidos(data.contenido.concat(data.challenge))
+                console.log(app.contenidos)
                 console.log("buscaInscripcionOk")
               });
 

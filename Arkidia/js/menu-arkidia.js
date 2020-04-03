@@ -35,7 +35,7 @@ Vue.component('menu-arkidia',{
               <li v-if="datamenu.logged && datamenu.padre" class="nav-item">
                 <a class="nav-link" href="hijos.html" >Administrar Arkidians</a>
               </li>
-              <li v-if="datamenu.logged && datamenu.hijo" class="nav-item">
+              <li v-if="datamenu.logged && datamenu.hijo" class="nav-item" style="cursor:pointer">
               <a class="nav-link" @click="verPerfil()">Perfil</a>
               </li>
 
@@ -195,6 +195,12 @@ Vue.component('menu-arkidia',{
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+        <div v-if="(notificaciones.length == 0) && (notificacionesVistas.length == 0)" style="text-align:center; margin:20px">
+          <p>No hay notificaciones</p>
+          <img src="images/site/no-challenge.svg" style="max-width:300px" id="challenges" alt="sin actividad"/>
+        </div>
+
+
         <div class="modal-body">
           <div v-for="(notificacion,index) in notificaciones" style="padding:15px">
             <div class="commenterImage" @click="verOtroPerfil(notificacion.usuarioRemitente)" style="cursor:pointer">
@@ -257,7 +263,10 @@ Vue.component('menu-arkidia',{
         admin:false,
         padre:false,
         hijo:false,
-        nombre:""
+        nombre:"",
+        mensajeErrorLogin:"",
+        loginError: false,
+
       }
     },
     methods:{
@@ -269,17 +278,7 @@ Vue.component('menu-arkidia',{
             'Content-Type': 'application/x-www-form-urlencoded'
         })
     })
-        .then(() => {
-   //       notificacionesTotales=[]
-   //       notificacionesTotales.push(this.notificaciones)
-   //       notificacionesTotales.push(this.notificacionesVistas)
-   //       this.notificacionesVistas=notificacionesTotales
-   //       this.notificaciones = []
-          
-        })
-        .catch(() => {
-            console.log("error")
-        })
+
 
       },
 
@@ -295,19 +294,11 @@ Vue.component('menu-arkidia',{
 
 
 
-
-        console.log("Ver notificaciones")
-        notificacion = {
-          avatar:"images/arkidians/ark3.svg",
-          fecha:"2020-02-08 09:53:07",
-          alias:"Pablin",
-          usuario:"Polito12",
-          texto:"A Pablo le gustó tu challenge"
-        }
-        this.notificaciones.push(notificacion)
-
       },
+
       hacerLogin(login){
+        var self = this
+
         fetch("ApiRes/login.php",{
             method: 'POST',
             body: "usuario="+login.usuario+"&password="+login.password,
@@ -319,11 +310,11 @@ Vue.component('menu-arkidia',{
                 loginResponse = response.json()
                 loginResponse.then(function(result) {
                     if (result.resultado ==="ERROR"){
-                        console.log("Error de login")
+
                         sessionStorage.removeItem("typeUser")
                         sessionStorage.removeItem("loggedUser")
-                        this.mensajeErrorLogin = result.mensaje
-                        this.loginError = true
+                        self.mensajeErrorLogin = result.mensaje
+                        self.loginError = true
                         return
                     }
   
@@ -354,6 +345,9 @@ Vue.component('menu-arkidia',{
             } else {
                 throw "Error en la llamada Ajax"
             }
+
+            this.mensajeErrorLogin = true
+            this.loginError = "Error al hacer login"
          })
     },
     verPerfil(){

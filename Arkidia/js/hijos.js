@@ -30,7 +30,13 @@ var app = new Vue({
         { imagen: "images/arkidians/ark3.svg", selected: false },
         { imagen: "images/arkidians/ark4.svg", selected: false },
         { imagen: "images/arkidians/ark5.svg", selected: false },
-        { imagen: "images/arkidians/ark6.svg", selected: false }
+        { imagen: "images/arkidians/ark6.svg", selected: false },
+        { imagen: "images/arkidians/ark7.svg", selected: false },
+        { imagen: "images/arkidians/ark8.svg", selected: false },
+        { imagen: "images/arkidians/ark9.svg", selected: false },
+        { imagen: "images/arkidians/ark10.svg", selected: false },
+        { imagen: "images/arkidians/ark11.svg", selected: false },
+        { imagen: "images/arkidians/ark12.svg", selected: false }
         ]
 
 

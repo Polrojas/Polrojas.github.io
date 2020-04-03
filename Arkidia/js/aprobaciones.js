@@ -151,7 +151,7 @@ Vue.component('restringido',{
 
     <div v-for="(desafio,index) in desafios">
     <div >
-        <img :src="desafio.url_contenido" />
+        <img :src="desafio.url_contenido" style="width:90%" />
     </div>
     <div class="commentText">
         <a>usuario: {{desafio.usuario}}</a>

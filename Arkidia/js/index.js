@@ -612,7 +612,7 @@ Vue.component('challenges',{
 
 Vue.component('cursos-pendientes',{
   template:`
-  <div  style="text-align: center; margin-top: 100px">
+  <div  style="text-align: center; margin-top: 50px">
 
   <section  style="
   background-color: #ececec;
@@ -623,6 +623,19 @@ Vue.component('cursos-pendientes',{
   <h1 class="titulo">Continuar viendo...</h1>
 
   <div class="container">
+
+  <div class="row" style="justify-content: center; display:block; margin-top:50px">
+ 
+
+    <div v-if="cursos.length == 0">
+      <h4 class="card-title subtitulo">No hay actividades en progreso</h4>
+      <img src="images/site/background-no-activity.svg" style="max-width:600px" id="challenges" alt="sin actividad"/>
+    </div>
+    
+
+
+
+
         <div class="row" style="justify-content: center">
           <div v-for="curso in cursos" :key="curso.id_curso">
             <div  class="card card-curso"  >
@@ -633,7 +646,7 @@ Vue.component('cursos-pendientes',{
               <div :id="'demo'+curso.id" class="carousel slide" data-ride="carousel" >
                 <div @click="accederCurso(curso)" style="cursor: pointer" class="carousel-inner">
                   <div class="carousel-item active">
-                    <img :src="curso.url_imagen" style="width:100%;" alt="curso.nombre_curso">
+                    <img :src="curso.url_imagen" style="width:100%;border-radius:15px" alt="curso.nombre_curso">
                   </div>
                 </div>
               </div>  
@@ -642,7 +655,19 @@ Vue.component('cursos-pendientes',{
           </div>
         </div>
         </div>
+  </div>
 </section>
+
+
+
+
+<img
+src="images/site/paint-grey.svg"
+id="challenges"
+alt="Miles de proyectos"
+style=" margin-left: 20px;
+margin-right: 20px;"
+/>
 
 </div>
   `
@@ -657,14 +682,14 @@ Vue.component('cursos-pendientes',{
   },
   methods:{
       buscarCursos(){
-        console.log(sessionStorage.loggedUser)
+        console.log("buscar Cursos")
 
           fetch("ApiRes/perfil_usuario.php?usuario="+sessionStorage.loggedUser)
 
          .then(response => response.json() )
         .then((data)=>{
               this.cursos = data.cursos_pendientes
-              console.log(data)
+              console.log(data.cursos_pendientes)
 
 
           })
@@ -683,10 +708,84 @@ Vue.component('cursos-pendientes',{
   }
 })
 
+Vue.component('ultimos-desafios',{
+  template:`
+  <div  style="text-align: center; margin-top: 100px">
+
+  <section  style="
+  background-color: #ececec;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;">
+  <h1 class="titulo">Últimos desafíos</h1>
+
+  <div class="container">
+  <div class="row" style="justify-content: center">
+    <div v-for="desafio in desafios" :key="desafio.id">
+      <div class="card card-desafio"  style="cursor: pointer">
+        <div >
+            <img :src="desafio.url_contenido" @click="verChallenge(desafio)" style="border-radius:15px; width: 150px" class="card-img" alt="categoria">
+
+        </div>
+
+
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<img
+src="images/site/paint-grey.svg"
+id="challenges"
+alt="Miles de proyectos"
+style=" margin-left: 20px;
+margin-right: 20px;"
+/>
+
+</div>
+  `
+  ,
+  data() {
+      return{
+          desafios:"",
+      }
+  },
+  props:{
+  },
+  methods:{
+    buscarDesafios(){
+      console.log(sessionStorage.idCurso)
+      fetch(
+        "ApiRes/challenge_alumno.php?cantidad_challenge=4"
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log("Ultimos desafios")
+          console.log(data)
+          this.desafios = data
+          
+        });
+    },
+    verChallenge(challenge){
+      sessionStorage.usuarioChallenge = challenge.usuario
+      sessionStorage.idChallenge = challenge.id_challenge
+      window.location.href = "challenge.html";
+    },
+  },
+  computed:{  
+  },
+  mounted: function(){
+      this.buscarDesafios()
+
+  }
+})
+
 Vue.component('categorias',{
     template:`
     <div  style="text-align: center; margin-top: 100px">
-    <img v-if="typeUser!='HIJO'"
+    <img v-if="!typeUser"
     src="images/site/ver.svg"
     id="challenges"
     alt="Miles de proyectos"
@@ -777,30 +876,20 @@ Vue.component('arkidians',{
     </section>
 
     <section v-if="resumenHijos.length>0" style="padding-top:80px"> 
-      <h1 class="titulo">Resumen</h1>
-      <div class="card mb-3 card-resumen-hijo">
-          <div v-for="resumen in resumenHijos" :key="resumen.id">
-          <div class="row ">
-            <div class="col-md-4 " style="text-align: center;">
-              <img v-bind:src="resumen.avatar" class="card-img" :alt="resumen.nickname" style="max-width:200px">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                  <h5 class="card-title subtitulo" style="text-align: left">{{resumen.nickname}}</h5>
-                  <p>BADGES</p>
-                  <div v-for="badge in resumen.badges" :key="badge.nombre">
-                    <p>{{badge.nombre}} nivel {{badge.nivel}}</p>
-                  </div>
-                  <p>ULTIMOS CURSOS</p>
-                  <div v-for="curso in resumen.ultCursos" :key="curso.nombre">
-                    <p>{{curso.nombre}} completado {{curso.porcentaje}}</p>
-                  </div>
-              </div>
-            </div>
-          </div>
+    <div class="container">
+      <div class="row" style="justify-content: center;" >
+        <div v-for="resumen in resumenHijos" :key="resumen.usuario"  @click="verPerfil(resumen.usuario)">
+          <div class="card categoria" >
+            <img :src="resumen.avatar" style="background-color:grey; border-radius:50%; width:200px; margin:10px"
+            class="img img-rounded" />
+            <h5 class="titulo">{{resumen.nickname}}</h5>
           </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
+
+
     </div>
 
     `
@@ -830,12 +919,16 @@ Vue.component('arkidians',{
                             nickname: element.alias,
                             edad: element.edad,
                             avatar: element.avatar,
-                            badges:[{nombre:"pintura",nivel:"5"},{nombre:"cocina",nivel:"2"}],
-                            ultCursos:[{nombre:"Cocina una chocotorta",porcentaje:"30%"},{nombre:"Como dibujar un dinosaurio",porcentaje:"100%"}]
-                
+                            usuario: element.usuario
                         })
                     })
                 })
+        },
+        verPerfil(usuario){
+          console.log(usuario)
+          sessionStorage.profileUser = usuario
+          window.location.href = "perfil.html"
+  
         },
     },
     computed:{  
@@ -915,9 +1008,9 @@ Vue.component('bienvenida-hijo',{
   template:`
   <section>
     <div style="text-align:center">
-  <img :src="perfil.avatar" style="background-color:#ececec; border-radius:50%; width:200px; margin-top:100px"
+  <img :src="perfil.avatar" style="background-color:#ececec; border-radius:50%; width:200px; margin-top:100px; margin-bottom:20px"
   class="img img-rounded img-fluid" />
-  <h1 class="titulo">Hola {{perfil.alias}}</h1>
+  <h1 class="titulo" style="background:#ececec; border-radius:30px; margin:auto; width:300px" >Hola {{perfil.alias}}</h1>
   </div>
 
 </section>
@@ -957,6 +1050,7 @@ Vue.component('bienvenida-hijo',{
 var app = new Vue({
     el: '#app',
     data: {
+      classIndex : "",
         logged:false,
         user:"",
         admin:false,
@@ -981,12 +1075,16 @@ var app = new Vue({
         this.padre=false
         this.admin=false
         this.hijo=false
+        this.classIndex = "index-other"
         if(sessionStorage.loggedUser>"") {
           this.logged = true
           this.nombre = sessionStorage.loggedName
           if(sessionStorage.typeUser=="ADMINISTRADOR") this.admin = true
           if(sessionStorage.typeUser=="PADRE") this.padre = true
-          if(sessionStorage.typeUser=="HIJO") this.hijo = true
+          if(sessionStorage.typeUser=="HIJO") {
+            this.classIndex = "index-kids"
+            this.hijo = true
+          }
         }
         window.addEventListener("load",function (){
             const loader = document.querySelector(".loader");

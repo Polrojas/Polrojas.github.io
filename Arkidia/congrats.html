@@ -22,7 +22,7 @@
     <div id="app" :style="categoriaStyle" >
         <div id="categoria">
 
-    <div class="row" style="width: 100%; padding:0px; border-radius:15px; margin-bottom:20px; text-align: -webkit-center;">
+    <div v-if="contenidos.length > 0" class="row" style="width: 100%; padding:0px; border-radius:15px; margin-bottom:20px; text-align: -webkit-center;">
         <div class="col-md-12">
             <h4 class="titulo" style="color: white">¡MUY BIEN!</h4> 
             <h1 class="subtitulo" style="color: white">GANASTE</h1> 
@@ -41,24 +41,39 @@
             </section>
 
           </div>
-          
-                  
-      
-
-
-
     
           <div class="col-md-12">
               <img src="images/site/winner.svg" style="width:200px" alt="categoria">
           </div>   
     </div>
 
+    <div v-if="contenidos.length == 0" class="row" style="width: 100%; padding:0px; border-radius:15px; margin-bottom:20px; text-align: -webkit-center;">
+      <div class="col-md-12">
+          <h4 class="titulo" style="color: white">Felicitaciones {{perfil.alias}}</h4> 
+          <h1 class="subtitulo" style="color: white">Terminaste la actividad</h1> 
+          <h1 v-if="puntaje==1" class="subtitulo" style="color: white">Ganaste {{puntaje}} punto</h1> 
+          <h1 v-if="puntaje>1" class="subtitulo" style="color: white"> Ganaste {{puntaje}} puntos</h1> 
+
+        </div> 
+        <div style="width: 100%">
+          <section>
+            <svg class="circle-chart" viewbox="0 0 33.83098862 33.83098862" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+              <circle class="circle-chart__background" stroke="#efefef" stroke-width="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+              <circle class="circle-chart__circle" stroke="#00acc1" stroke-width="2" :stroke-dasharray="porcentaje" stroke-linecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+            </svg>
+          </section>
+
+        </div>
+  
+        <div class="col-md-12">
+            <img :src="perfil.avatar" style="width:300px" alt="categoria">
+        </div>   
+  </div>
 
 
 
 
-
-            <div class=" mb-3 sombra" :style="categoriaStyleBar">
+            <div v-if="contenidos.length > 0" class=" mb-3 sombra" :style="categoriaStyleBar">
                     <div class="row no-gutters">
                       <div class="col-md-12">
                         <div class="card-body">
@@ -72,18 +87,23 @@
                   <div class="container">
                         <div class="row" style="justify-content: center">
                           <div v-for="(contenido,index) in contenidos"  :key="index">
-                            <div class="card card-curso"  style="cursor: pointer">
+                            <div class="card card-curso"  >
                               <div >
-                                <img v-on:click="verVideo(contenido)" v-if="contenido.id_contenido" :src="contenido.url_imagen" class="card-curso-image" alt="Card image">
+                                <img v-on:click="verVideo(contenido)" v-if="contenido.id_contenido" :src="contenido.url_imagen" class="card-curso-image" style="cursor: pointer" alt="Card image">
 
-                                <div class="image-upload" v-if="contenido.id_challenge">
-                                  <label for="file-input" style="display:block">
-                                    <img v-if="contenido.url_contenido==''" :src="imagen" style="width:250px">
+                                <div class="image-upload" v-if="contenido.ind_completo == 0" style="cursor: pointer">
+                                  <label :for="'file-input'+index" style="display:block">
+                                    <img v-if="contenido.ind_completo == 0" src="admin/images/imagen-challenge-dark.svg"  alt="Card image">                
+                     
                                   </label>
-                                  <input type="file" accept="image/*" @change="uploadImage($event,contenido)" id="file-input">
+                                  <input type="file" accept="image/*" @change="uploadImage($event,contenido)" :id="'file-input'+index">
 
                                 </div>
-
+                                <img v-if="contenido.ind_completo == 1 && contenido.ind_aprobado == 'N'"  class="card-img-dark" src="images/site/pending.svg" alt="Card image">                  
+                                <img v-if="contenido.ind_completo == 1 && contenido.ind_aprobado == 'N'"  class="card-img" :src="contenido.url_contenido" style="border-radius:15px;" alt="Card image">
+                                <img v-if="contenido.ind_completo == 1 && contenido.ind_aprobado == 'S'" @click="verChallenge(contenido)"  class="card-img" :src="contenido.url_contenido" style="border-radius:15px;cursor: pointer;" alt="Card image">
+                                <img v-if="contenido.ind_aprobado == 'P'"  class="card-img" src="images/site/loading.gif" style="border-radius:15px;" alt="loading">
+                        
                                 <h4 class="subtitulo">{{contenido.nombre_contenido}}</h4> 
                                 <h4 class="subtitulo">{{contenido.detalle_challenge}}</h4> 
 

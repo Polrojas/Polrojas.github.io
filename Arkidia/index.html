@@ -25,7 +25,7 @@
       <menu-arkidia :datamenu="datamenu"></menu-arkidia>
     </div>
 
-    <div id="app">
+    <div id="app" :class="classIndex">
         <bienvenida-hijo v-if="logged && hijo"></bienvenida-hijo>
 
       <inicio-arkidia v-if="!logged"></inicio-arkidia>
@@ -38,14 +38,7 @@
       <banner-beneficios v-if="!logged"></banner-beneficios>
       <comentarios v-if="!logged"></comentarios>
       <faq v-if="!logged"></faq>
-
-     
-
-
-
-
-      
-    
+      <ultimos-desafios v-if="logged && hijo"></ultimos-desafios>
 
 
       <footer-inicio v-if="!logged"></footer-inicio>

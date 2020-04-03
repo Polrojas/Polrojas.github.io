@@ -85,8 +85,8 @@ var app = new Vue({
           .then((data)=>{
                 data.forEach(element => {
                     this.categorias.push({
-                        id: element.id_categoria,
-                        nombre: element.descripcion}
+                        id_categoria: element.id_categoria,
+                        descripcion: element.descripcion}
                        )
                   })
             })
@@ -131,7 +131,7 @@ var app = new Vue({
         },
         crearCurso(curso){
           bodyApi = "usuario=" + sessionStorage.loggedUser + 
-                    "&id_categoria=" + curso.categoria.id + 
+                    "&id_categoria=" + curso.categoria.id_categoria + 
                     "&nombre_curso=" + curso.nombre + 
                     "&detalle_curso=" + curso.detalle + 
                     "&edad_desde=" + curso.edadDesde + 
@@ -150,18 +150,21 @@ var app = new Vue({
                   loginResponse = response.json()
                   loginResponse.then(function(result) {
                       if (result.resultado==="ERROR"){
-                          this.errorCurso=true
-                          this.msgErrorCurso = result.mensaje
+                          app.errorCurso=true
+                          app.msgErrorCurso = result.mensaje
                           console.log(result.mensaje)
                       }else{
-                        this.errorCurso=false
-                        this.msgErrorCurso = null
-                        this.curso.id = result.curso
-                        this.curso.detalleCreado = "ID# " + result.curso
-                        this.curso.estado = "B"
-                        this.curso.creado = true
-                        this.mostrarContenido=true
-                        this.mostrarChallenge=true
+                        console.log("Crear curso")
+                        console.log(result.curso)
+                        console.log(result)
+                        app.errorCurso=false
+                        app.msgErrorCurso = null
+                        app.curso.id = result.curso
+                        app.curso.detalleCreado = "ID# " + result.curso
+                        app.curso.estado = "B"
+                        app.curso.creado = true
+                        app.mostrarContenido=true
+                        app.mostrarChallenge=true
                       }
                   })
               } else {
@@ -174,7 +177,7 @@ var app = new Vue({
           this.btnGrabarCurso = document.getElementById("btnGrabarCurso");
           bodyApi = "id_curso=" + curso.id + 
                     "&usuario=" + sessionStorage.loggedUser + 
-                    "&id_categoria=" + curso.categoria.id + 
+                    "&id_categoria=" + curso.categoria.id_categoria + 
                     "&nombre_curso=" + curso.nombre + 
                     "&detalle_curso=" + curso.detalle + 
                     "&edad_desde=" + curso.edadDesde + 
@@ -369,14 +372,12 @@ var app = new Vue({
                   console.log("Ya borré")
                   console.log("voy a inscribir")
                   this.inscribir()
-
-
               })
       },
         inscribir(){
           sessionStorage.idCurso = this.curso.id
-          console.log("categoria " + this.curso.categoria.id)
-          var categoria = this.curso.categoria.id
+          console.log("categoria " + this.curso.categoria.id_categoria)
+          var categoria = this.curso.categoria.id_categoria
 
             bodyApi = "usuario=" + sessionStorage.loggedUser + 
                         "&id_curso=" + this.curso.id
@@ -414,15 +415,15 @@ var app = new Vue({
           fetch("ApiRes/cursos.php?usuario=" + sessionStorage.loggedUser+"&id_curso="+idCurso)
           .then(response => response.json() )
          .then((data)=>{
+              console.log("buscar Curso")
               console.log(data)
               this.curso.creado = true
               this.curso.detalleCreado = "ID# " + data.id_curso
               this.curso.id = data.id_curso
               this.curso.nombre = data.nombre_curso
               this.curso.detalle = data.detalle_curso
-              this.curso.categoria = this.buscarCategoria(data.id_categoria)
+              this.buscarCategoria(data.id_categoria)
               this.curso.proveedor = this.buscarProveedor(data.id_proveedor)
-
               this.curso.edadDesde = data.edad_desde
               this.curso.edadHasta = data.edad_hasta
               this.curso.estado = data.estado_curso
@@ -432,11 +433,23 @@ var app = new Vue({
            })
         },
         buscarCategoria(id){
-          for(i=0;i<this.categorias.length;i++){
-            if(this.categorias[i].id === id){
-              return(this.categorias[i])
-            }
+          var cat = {
+            id_categoria : null,
+            descripcion : null
           }
+          fetch("ApiRes/categorias.php?usuario=" + sessionStorage.loggedUser+"&id_categoria=" + id)
+          .then(response => response.json() )
+         .then((data)=>{
+           
+           console.log(data.id_categoria)
+           cat.id_categoria = data.id_categoria
+           cat.descripcion = data.descripcion
+           app.curso.categoria = cat
+
+
+
+           })
+
         },
         
         buscarProveedor(id){
