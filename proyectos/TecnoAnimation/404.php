@@ -1,1 +1,0 @@
-<h3 style="text-align: center; ">¡Ups! Esta página web no fue encontrada.<br>Puede visitar nuestra web ingresando a este <a href="http://www.tecnosoftware.com/index.html">link</a>.</h3><p><br></p><h4><br></h4><p></p>
