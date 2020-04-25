@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6 {
 .blurry {
   position: relative;
   transition:  filter 3s;
-  filter: blur(18px);
+  filter: blur(8px);
 }
 
 .come-in-blurry {
